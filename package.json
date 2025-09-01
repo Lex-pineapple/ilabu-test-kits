@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "lint:scripts": "eslint .",
     "lint:styles": "stylelint '**/*.scss'",
+    "types:check": "tsc --noEmit",
     "test": "echo No tests found"
   },
   "dependencies": {
@@ -41,5 +42,15 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2"
+  },
+  "commitlint": {
+    "extends": "@commitlint/config-conventional",
+    "rules": {
+      "body-max-line-length": [
+        2,
+        "always",
+        200
+      ]
+    }
   }
 }

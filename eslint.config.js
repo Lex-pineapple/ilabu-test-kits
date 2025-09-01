@@ -11,7 +11,7 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config([
   eslintPluginPrettierRecommended,
-  globalIgnores(["dist", "commitlint.config.js"]),
+  globalIgnores(["dist"]),
   {
     extends: [
       js.configs.recommended,
