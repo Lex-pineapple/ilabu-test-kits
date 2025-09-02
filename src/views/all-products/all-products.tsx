@@ -6,7 +6,7 @@ import { ProductCard } from "#shared/product-card";
 
 export const AllProducts = () => (
   <div>
-    <HeaderWBg />
+    <HeaderWBg m="0 0 48px 0">All Products</HeaderWBg>
     <Flex flexDirection="column" gap={6} p={3.5}>
       {cardProductData.map((item) => (
         <ProductCard {...item} />

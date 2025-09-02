@@ -95,8 +95,9 @@ const config = defineConfig({
         },
       },
       fonts: {
-        body: { value: "Roboto Variable" },
-        heading: { value: "Roboto Variable" },
+        body: { value: "Montserrat Variable" },
+        heading: { value: "Montserrat Variable" },
+        secondary: { value: "Roboto Variable" },
       },
     },
   },

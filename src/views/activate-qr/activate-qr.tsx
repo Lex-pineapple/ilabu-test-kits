@@ -23,10 +23,14 @@ export const ActivateQR = () => (
           the fields below.
         </Text>
         <QRComponent />
-        <Text textStyle="lg">Or type in your unique activation code</Text>
+        <Text fontFamily="secondary" textAlign="center" textStyle="lg">
+          Or type in your unique activation code
+        </Text>
         <Flex align="center" direction="column" gap={4}>
           <Input placeholder="enter code" />
-          <Link color="lab_red.500">Can’t find your codes?</Link>
+          <Link color="lab_red.500" fontFamily="secondary">
+            Can’t find your codes?
+          </Link>
           <Button
             disabled
             fontSize={20}

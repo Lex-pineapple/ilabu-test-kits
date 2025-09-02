@@ -2,8 +2,8 @@
   width: 203px;
   height: 203px;
   position: absolute;
-  top: -21px;
-  left: -78px;
+  top: var(--graphic-pos-x);
+  left: var(--graphic-pos-y);
   opacity: 0.7;
 
   & > div {
@@ -25,36 +25,36 @@
     &__2 {
       width: 95%;
       height: 95%;
-      top: 5px;
-      left: 5px;
+      top: 2.5%;
+      left: 2.5%;
     }
 
     &__3 {
       width: 82%;
       height: 82%;
-      top: 17px;
-      left: 18px;
+      top: 8.8%;
+      left: 8.8%;
     }
 
     &__4 {
       width: 72%;
       height: 72%;
-      top: 26px;
-      left: 29px;
+      top: 12.8%;
+      left: 12.8%;
     }
 
     &__5 {
       width: 58%;
       height: 58%;
-      top: 40px;
-      left: 43px;
+      top: 19.7%;
+      left: 21.8%;
     }
 
     &__6 {
       width: 46%;
       height: 46%;
-      top: 52px;
-      left: 56px;
+      top: 25.6%;
+      left: 27.5%;
     }
   }
 }

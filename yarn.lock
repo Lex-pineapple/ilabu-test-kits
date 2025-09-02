@@ -787,6 +787,11 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.10.tgz#a2a1e3812d14525f725d011a73eceb41fef5bc1c"
   integrity sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==
 
+"@fontsource-variable/montserrat@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/montserrat/-/montserrat-5.2.6.tgz#fa23c3e06e65dd23d0dbba03019f9b4e4a8366bc"
+  integrity sha512-1eHefcz9ZXSMjZPckKCWSYd8rLjUpmzQIsNO8DuyU0IdPvsqletPvSIJmztr0sCU6sX4EFKsSHxJWawjmROp2A==
+
 "@fontsource-variable/roboto@^5.2.6":
   version "5.2.6"
   resolved "https://registry.yarnpkg.com/@fontsource-variable/roboto/-/roboto-5.2.6.tgz#1a618f7a9c70e756214352ce2c3864d1c61001dc"
@@ -3873,7 +3878,7 @@ react-router-dom@^7.8.2:
   dependencies:
     react-router "7.8.2"
 
-react-router@7.8.2:
+react-router@7.8.2, react-router@^7.8.2:
   version "7.8.2"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-7.8.2.tgz#9d2d4147ca72832c550acc60ed688062d18f70b8"
   integrity sha512-7M2fR1JbIZ/jFWqelpvSZx+7vd7UlBTfdZqf6OSdF9g6+sfdqJDAWcak6ervbHph200ePlu+7G8LdoiC3ReyAQ==

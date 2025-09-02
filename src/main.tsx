@@ -1,4 +1,5 @@
 import "@fontsource-variable/roboto/index.css";
+import "@fontsource-variable/montserrat/index.css";
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
