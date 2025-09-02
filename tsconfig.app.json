@@ -23,9 +23,12 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
-      "@assets*": ["./src/asstes/*"],
-      "@/*": ["./src/*"],
-    } 
+      "#constants/*": ["./src/constants/*"],
+      "#theme/*": ["./src/theme/*"],
+      "#shared/*": ["./src/shared/*"],
+      "#assets/*": ["./src/assets/*"],
+      "#/*": ["./src/*"]
+    }
   },
   "include": ["src"]
 }

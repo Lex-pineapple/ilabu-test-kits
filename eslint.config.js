@@ -146,7 +146,7 @@ export default tseslint.config([
             // 3. Chakra-specific group for clarity
             ["^@chakra-ui/.*"],
             // 4. Anything not matched in another group.
-            ["^@"],
+            ["^#"],
             // 5. Style module imports
             ["^.+\\.(module.css|module.scss)$"],
             // 6. media imports
