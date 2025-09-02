@@ -27,6 +27,7 @@ export const HeaderWBg = ({ children, m, p }: HeaderWBgProps) => (
       color="white"
       position="relative"
       size="xl"
+      textAlign="center"
       textTransform="uppercase"
     >
       {children}

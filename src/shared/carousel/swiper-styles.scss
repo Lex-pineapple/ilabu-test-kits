@@ -1,0 +1,23 @@
+@use "swiper/scss";
+@use "swiper/scss/pagination";
+
+.pagination-bullet {
+  background: #f2eded;
+  display: block;
+  width: 10px;
+  height: 10px;
+}
+
+.pagination-bullet--active {
+  background: #ff2121;
+}
+
+.pagination-wrapper {
+  padding: 10px 0;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}

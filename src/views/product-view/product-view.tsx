@@ -1,8 +1,13 @@
-import { Navigate, useLoaderData } from "react-router";
+import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 
-import { Box, Flex, List, Text } from "@chakra-ui/react";
+import LiteYouTubeEmbed from "react-lite-youtube-embed";
+import { Link, Navigate, useLoaderData } from "react-router";
+
+import { Box, Container, Flex, Heading, List, Text } from "@chakra-ui/react";
 
 import type { CardExtensiveData } from "#constants/card-extensive-data";
+import { cardProductData } from "#constants/card-product-data";
+import { Carousel } from "#shared/carousel";
 import { CircleGraphic } from "#shared/circle-graphic";
 import { DescriptionBox } from "#shared/description-box";
 import { HeaderWBg } from "#shared/header-w-bg";
@@ -26,7 +31,7 @@ export const ProductView = () => {
           zIndex={-1}
         />
       </Box>
-      <Flex direction="column" gap={6} p="0 14px">
+      <Flex direction="column" gap={6} p="0 14px 36px">
         <DescriptionBox>
           <Text textStyle="md">
             {loaderData.description
@@ -75,6 +80,38 @@ export const ProductView = () => {
           </List.Root>
         </DescriptionBox>
       </Flex>
+      <Flex
+        alignItems="center"
+        justifyContent="space-between"
+        mb={9}
+        p="0 14px"
+      >
+        <Heading fontWeight="semibold">Recommended Kits</Heading>
+        <Link to="*">
+          <Text color="lab_red.500" fontWeight="semibold" textStyle="xl">
+            See all
+          </Text>
+        </Link>
+      </Flex>
+      <Carousel items={cardProductData} />
+      <HeaderWBg m="30px 0 45px" p={9}>
+        How To Take A Self Blood Test
+      </HeaderWBg>
+      <Container>
+        <LiteYouTubeEmbed
+          id="udz_I6QtbE0"
+          poster="hqdefault"
+          title="How to take a self blood test"
+        />
+        <Text
+          color="lab_red.500"
+          fontFamily="secondary"
+          mt={12}
+          textAlign="center"
+        >
+          See all Products
+        </Text>
+      </Container>
     </div>
   );
 };

@@ -1,10 +1,22 @@
-import type { ProductCardProps } from "#shared/product-card/product-card";
+import type { ColorType } from "#shared/circle-graphic/circle-graphic";
 
-export const cardProductData: ProductCardProps[] = [
+export type CardProductDataType = {
+  color: ColorType;
+  description: string;
+  descriptionMin: string;
+  price: number;
+  title: string;
+  uid: string;
+};
+
+export const cardProductData: CardProductDataType[] = [
   {
     color: "red",
     description:
       "Capillary blood tests are widely used for medical diagnostics, particularly when only a small blood sample is needed.",
+    descriptionMin:
+      "Commonly used in diagnostics when a small blood sample is required.",
+    price: 25.99,
     title: "Capillary Blood Kit",
     uid: "d6a510a5-fe59-48e9-8576-f9354dffa9b7",
   },
@@ -12,6 +24,9 @@ export const cardProductData: ProductCardProps[] = [
     color: "green",
     description:
       "Urine tests are widely used in medical diagnostics for their non-invasive nature and the valuable health information they provide.",
+    descriptionMin:
+      "Widely used in diagnostics for their non-invasiveness and valuable health data",
+    price: 41.99,
     title: "Urine Kit",
     uid: "dd32e7bf-09b5-4279-8d7a-7ff63de2b109",
   },
@@ -19,6 +34,9 @@ export const cardProductData: ProductCardProps[] = [
     color: "blue",
     description:
       "Stool tests are commonly used to diagnose and monitor various gastrointestinal conditions and infections.",
+    descriptionMin:
+      "Commonly used to diagnose and monitor various gastrointestinal conditions and infections.",
+    price: 28.99,
     title: "Stool Kit",
     uid: "9ffae799-79be-45b2-91bf-97c094131aa5",
   },
@@ -26,6 +44,9 @@ export const cardProductData: ProductCardProps[] = [
     color: "dk-gray",
     description:
       "Urogenital tests are essential for diagnosing and monitoring conditions related to the urinary and reproductive systems.",
+    descriptionMin:
+      "Urogenital tests are key for diagnosing and monitoring urinary and reproductive conditions.",
+    price: 29.99,
     title: "Urogenital Kit",
     uid: "e462c818-5ea1-4473-9f28-37e4691798c2",
   },
@@ -33,6 +54,9 @@ export const cardProductData: ProductCardProps[] = [
     color: "gray",
     description:
       "Nasal and oral swabs are often used to diagnose respiratory infections.",
+    descriptionMin:
+      "Nasal and oral swabs are often used to diagnose respiratory infections.",
+    price: 19.99,
     title: "Nasal/Oral Swab Kit",
     uid: "1e6a5307-2852-4cf0-b02a-a6fe8dc279c6",
   },
@@ -40,6 +64,9 @@ export const cardProductData: ProductCardProps[] = [
     color: "cyan",
     description:
       "Saliva tests are growing in popularity for diagnostics due to their non-invasive and easy collection.",
+    descriptionMin:
+      "Saliva tests are growing in popularity for diagnostics due to their non-invasive and easy collection.",
+    price: 105.99,
     title: "Saliva Kit",
     uid: "7c90dba1-2f3e-4166-9483-881550ffc06d",
   },
