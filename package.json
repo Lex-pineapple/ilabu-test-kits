@@ -5,13 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "yarn chakra:gen-type && tsc -b && vite build",
     "lint:scripts": "eslint .",
     "lint:styles": "stylelint '**/*.scss'",
     "types:check": "tsc --noEmit",
     "test": "echo No tests found",
     "test-related": "echo No tests found",
-    "chakra:gen-type": "chakra typegen ./src/theme/index.ts",
+    "chakra:gen-type": "chakra typegen src/theme/index.ts",
     "prepare": "husky"
   },
   "dependencies": {
