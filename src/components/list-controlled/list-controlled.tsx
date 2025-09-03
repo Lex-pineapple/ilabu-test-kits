@@ -10,6 +10,8 @@ import { removeFromArray } from "#utils/remove-from-array";
 type ListControlledProps = {
   color: ColorType;
   items: AnalysisItemType[];
+  selected: AnalysisItemType[];
+  setSelected: (item: AnalysisItemType[]) => void;
   searchQ?: string;
   sortType?: string;
 };
@@ -18,9 +20,10 @@ export const ListControlled = ({
   color,
   items,
   searchQ = "",
+  selected,
+  setSelected,
   sortType,
 }: ListControlledProps) => {
-  const [selected, setSelected] = useState<AnalysisItemType[]>([]);
   const [filtered, setFiltered] = useState<AnalysisItemType[]>(items);
 
   useEffect(() => {
@@ -40,13 +43,20 @@ export const ListControlled = ({
       setFiltered([...filtered].sort((a, b) => b.title.localeCompare(a.title)));
   }, [sortType]);
 
-  const handleSelect = (checked: boolean, item: AnalysisItemType) => {
-    const selectedIndex = selected.indexOf(item);
+  const handleSelect = (checked: boolean, title: string) => {
+    const item = filtered.find((item) => item.title === title);
+    const selectedIndex = item ? selected.indexOf(item) : -1;
     const itemExists = selectedIndex > -1;
 
-    if (!checked && itemExists)
-      setSelected(removeFromArray(selected, selectedIndex));
-    if (checked && !itemExists) setSelected([...selected, item]);
+    if (!checked && itemExists) {
+      const removedArray = removeFromArray<AnalysisItemType>(
+        selected,
+        selectedIndex,
+      );
+
+      setSelected(removedArray);
+    }
+    if (checked && !itemExists && item) setSelected([...selected, item]);
   };
 
   return (

@@ -9,9 +9,13 @@ import {
   InputGroup,
 } from "@chakra-ui/react";
 
+import { DrawerSwipeable } from "#/components/drawer-swipeable";
 import { ListControlled } from "#/components/list-controlled";
 import { SearchIcon } from "#assets/icons/search-icon";
-import type { CardProductDataType } from "#constants/card-product-data";
+import type {
+  AnalysisItemType,
+  CardProductDataType,
+} from "#constants/card-product-data";
 import { HeaderWBg } from "#shared/header-w-bg";
 import { SelectButton } from "#shared/select-button";
 
@@ -30,6 +34,8 @@ const sortKeys = createListCollection({
 
 export const SelectedKit = () => {
   const loaderData = useLoaderData<CardProductDataType>();
+  const [selected, setSelected] = useState<AnalysisItemType[]>([]);
+
   const [searchQ, setSearchQ] = useState("");
   const [sortType, setSortType] = useState<string[]>([]);
 
@@ -56,9 +62,12 @@ export const SelectedKit = () => {
           color={loaderData.color}
           items={loaderData.items}
           searchQ={searchQ}
+          selected={selected}
+          setSelected={setSelected}
           sortType={sortType[0]}
         />
       </Container>
+      <DrawerSwipeable items={selected} />
     </div>
   );
 };

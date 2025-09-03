@@ -20,7 +20,7 @@ type ListCardProps = {
   price: number;
   selected: boolean;
   title: string;
-  handleSelect: (selected: boolean, item: AnalysisItemType) => void;
+  handleSelect: (selected: boolean, title: string) => void;
 };
 
 export const ListCard = ({
@@ -35,7 +35,7 @@ export const ListCard = ({
   const handleCheck = () => {
     const checkedNew = !checked;
     setChecked(checkedNew);
-    handleSelect(checkedNew, { description, price, title });
+    handleSelect(checkedNew, title);
   };
 
   return (
