@@ -44,7 +44,7 @@ export const OrderDetails = () => (
         />
       </Stack>
       <Button disabled textTransform="uppercase">
-        Continue
+        PAY
       </Button>
     </Flex>
   </Flex>

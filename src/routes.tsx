@@ -13,6 +13,7 @@ import { Instruction } from "#/views/instruction";
 import { NotFound } from "#/views/not-found";
 import { ProductView } from "#/views/product-view";
 import { SelectedKit } from "#/views/selected-kit";
+import { SuccessfulScreen } from "#/views/successful-screen";
 import { PATHS } from "#constants/paths";
 
 export const router = createBrowserRouter([
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
       {
         element: <NotFound />,
         path: "*",
+      },
+      {
+        element: <SuccessfulScreen />,
+        path: PATHS.ordered,
       },
       {
         element: <SelectedKit />,

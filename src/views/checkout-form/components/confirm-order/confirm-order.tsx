@@ -1,6 +1,9 @@
+import { Link } from "react-router";
+
 import { Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
 import { InfoCard } from "#/views/checkout-form/components/confirm-order/components/info-card";
+import { PATHS } from "#constants/paths";
 
 const MOCK_DATA_TESTS = [
   { data: "25.99", title: "Hemoglobin A1c (HbA1c)" },
@@ -60,8 +63,15 @@ export const ConfirmOrder = () => (
       <InfoCard items={MOCK_DATA_DELIVERY} title="Delivery of biomaterials" />
       <InfoCard items={MOCK_DATA_PERSONAL_INFO} title="Perconal information" />
     </Flex>
-    <Button fontSize="xl" fontWeight="light" textTransform="uppercase" w="100%">
-      Continue
-    </Button>
+    <Link to={PATHS.ordered}>
+      <Button
+        fontSize="xl"
+        fontWeight="light"
+        textTransform="uppercase"
+        w="100%"
+      >
+        Pay
+      </Button>
+    </Link>
   </Flex>
 );

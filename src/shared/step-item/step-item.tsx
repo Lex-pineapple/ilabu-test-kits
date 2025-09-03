@@ -24,11 +24,13 @@ export const StepItem = ({
   title,
 }: StepItemProps) => (
   <Flex flexDirection={reverse ? "row-reverse" : "row"} gap={4.5} p={0}>
-    <Flex flexDirection="column">
+    <Flex flexDirection="column" gap={5}>
       <Heading fontFamily="secondary" size="2xl">
         {title}
       </Heading>
-      <Text fontWeight="medium">{description}</Text>
+      <Text fontWeight="medium" lineHeight="28px">
+        {description}
+      </Text>
     </Flex>
     <Flex
       alignItems={reverse ? "flex-start" : "flex-end"}
