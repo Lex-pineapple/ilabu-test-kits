@@ -1,5 +1,8 @@
+import { Link } from "react-router";
+
 import { Button, Container, Flex, Heading } from "@chakra-ui/react";
 
+import { PATHS } from "#constants/paths";
 import { HeaderWBg } from "#shared/header-w-bg";
 import { StepItem } from "#shared/step-item";
 import { TestTubeVisual } from "#shared/test-tube-visual";
@@ -89,14 +92,16 @@ export const Instruction = () => (
             <StepItem {...item} reverse={Boolean(idx % 2)} />
           ))}
         </Flex>
-        <Button
-          fontSize="xl"
-          fontWeight="light"
-          textTransform="uppercase"
-          w="100%"
-        >
-          Continue
-        </Button>
+        <Link to={PATHS.checkout}>
+          <Button
+            fontSize="xl"
+            fontWeight="light"
+            textTransform="uppercase"
+            w="100%"
+          >
+            Continue
+          </Button>
+        </Link>
       </Container>
     </Container>
   </Flex>

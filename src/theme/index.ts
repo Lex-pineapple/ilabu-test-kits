@@ -5,7 +5,7 @@ import {
   defineRecipe,
   defineSlotRecipe,
 } from "@chakra-ui/react";
-import { checkboxCardAnatomy } from "@chakra-ui/react/anatomy";
+import { checkboxCardAnatomy, selectAnatomy } from "@chakra-ui/react/anatomy";
 
 const buttonRecipe = defineRecipe({
   variants: {
@@ -108,6 +108,46 @@ export const checkboxCardSlotRecipe = defineSlotRecipe({
   },
 });
 
+export const selectSlotRecipe = defineSlotRecipe({
+  slots: selectAnatomy.keys(),
+  variants: {
+    variant: {
+      colored: {
+        content: {
+          bg: "#fff3f2",
+          border: "none",
+          borderBottom: "2px solid #FF2121",
+          borderRadius: "9px",
+          boxShadow: "0px 4px 14px 0px #00000040",
+          p: "12px",
+        },
+        item: {
+          borderBottom: "1px solid #FFB4B4",
+          fontSize: "14px",
+          justifyContent: "center",
+          textTransform: "uppercase",
+        },
+        trigger: {
+          _expanded: {
+            borderColor: "border.emphasized",
+          },
+
+          bg: "lab_red.50",
+          border: "none",
+          borderBottom: "2px solid #FF2121",
+          borderRadius: "8px",
+        },
+        valueText: {
+          color: "lab_grey.200",
+          fontSize: "14px",
+          fontWeight: "600",
+          textTransform: "uppercase",
+        },
+      },
+    },
+  },
+});
+
 const config = defineConfig({
   theme: {
     recipes: {
@@ -116,6 +156,7 @@ const config = defineConfig({
     },
     slotRecipes: {
       checkboxCard: checkboxCardSlotRecipe,
+      select: selectSlotRecipe,
     },
     tokens: {
       colors: {
