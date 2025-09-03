@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import { useSwipeable } from "react-swipeable";
 
 import {
@@ -13,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 import type { AnalysisItemType } from "#constants/card-product-data";
+import { PATHS } from "#constants/paths";
 import { countTotal } from "#utils/count-total";
 
 import styles from "./drawer-swipeable.module.scss";
@@ -81,9 +83,11 @@ export const DrawerSwipeable = ({ items }: DrawerSwipeableProps) => {
               </Collapsible.Content>
             </Collapsible.Root>
             <Flex alignItems="center" justifyContent="space-between" w="100%">
-              <Button fontSize="16px" p="12px 28px" textTransform="uppercase">
-                continue
-              </Button>
+              <Link to={PATHS.instruction}>
+                <Button fontSize="16px" p="12px 28px" textTransform="uppercase">
+                  continue
+                </Button>
+              </Link>
               <Flex alignItems="center" gap={2.5}>
                 <Text fontWeight="medium" textStyle="md">
                   Total:{" "}
