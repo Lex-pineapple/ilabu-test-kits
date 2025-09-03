@@ -16,6 +16,8 @@ export type CardProductDataType = {
   uid: string;
 };
 
+export const MOCK_UID = "d6a510a5-fe59-48e9-8576-f9354dffa9b7";
+
 const analysisItems: AnalysisItemType[] = [
   {
     description:

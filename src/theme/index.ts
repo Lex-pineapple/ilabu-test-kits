@@ -3,7 +3,9 @@ import {
   defaultConfig,
   defineConfig,
   defineRecipe,
+  defineSlotRecipe,
 } from "@chakra-ui/react";
+import { checkboxCardAnatomy } from "@chakra-ui/react/anatomy";
 
 const buttonRecipe = defineRecipe({
   variants: {
@@ -51,6 +53,57 @@ const inputRecipe = defineRecipe({
         borderBottom: "2px solid #FF2121",
         borderRadius: "8px",
       },
+      secondary: {
+        bg: "transparent",
+        border: "1px solid #B0B0B0",
+        borderRadius: "6px",
+        fontFamily: "secondary",
+        textStyle: "xs",
+      },
+    },
+  },
+});
+
+const checkmarkRecipe = defineRecipe({
+  variants: {
+    variant: {
+      outline: {
+        "&:is([data-state=checked], [data-state=indeterminate])": {
+          bg: "white",
+          borderColor: "colorPalette.solid",
+          color: "red",
+        },
+        bg: "white",
+        border: "none",
+        borderRadius: "50%",
+        boxShadow: "0px 0px 4px 0px #00000040",
+        h: "24px",
+        w: "24px",
+      },
+    },
+  },
+});
+
+export const checkboxCardSlotRecipe = defineSlotRecipe({
+  className: "chakra-checkbox-card",
+  slots: checkboxCardAnatomy.keys(),
+  variants: {
+    variant: {
+      surface: {
+        indicator: checkmarkRecipe.variants?.variant.outline,
+        root: {
+          _checked: {
+            bg: "white",
+            boxShadow: "0px 0px 4px 0px #00000040",
+          },
+          _disabled: {
+            bg: "bg.muted",
+          },
+          bg: "lab_grey.400",
+          border: "none",
+          borderRadius: "none",
+        },
+      },
     },
   },
 });
@@ -60,6 +113,9 @@ const config = defineConfig({
     recipes: {
       button: buttonRecipe,
       input: inputRecipe,
+    },
+    slotRecipes: {
+      checkboxCard: checkboxCardSlotRecipe,
     },
     tokens: {
       colors: {

@@ -1,11 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import { Layout } from "#/layouts/layout";
-import { HydrateFallback, productKitLoader } from "#/loaders";
+import {
+  HydrateFallback,
+  productKitLoader,
+  selectedKitLoader,
+} from "#/loaders";
 import { ActivateQR } from "#/views/activate-qr";
 import { AvailableKit } from "#/views/available-kit";
 import { NotFound } from "#/views/not-found";
 import { ProductView } from "#/views/product-view";
+import { SelectedKit } from "#/views/selected-kit";
 import { PATHS } from "#constants/paths";
 
 export const router = createBrowserRouter([
@@ -14,6 +19,11 @@ export const router = createBrowserRouter([
       {
         element: <NotFound />,
         path: "*",
+      },
+      {
+        element: <SelectedKit />,
+        loader: selectedKitLoader,
+        path: PATHS.selectedKit,
       },
       {
         element: <AvailableKit />,

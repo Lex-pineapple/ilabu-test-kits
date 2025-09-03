@@ -7,6 +7,7 @@ import { Box, Container, Flex, Heading, List, Text } from "@chakra-ui/react";
 
 import type { CardExtensiveData } from "#constants/card-extensive-data";
 import { cardProductData } from "#constants/card-product-data";
+import { PATHS } from "#constants/paths";
 import { Carousel } from "#shared/carousel";
 import { CircleGraphic } from "#shared/circle-graphic";
 import { DescriptionBox } from "#shared/description-box";
@@ -103,14 +104,16 @@ export const ProductView = () => {
           poster="hqdefault"
           title="How to take a self blood test"
         />
-        <Text
-          color="lab_red.500"
-          fontFamily="secondary"
-          mt={12}
-          textAlign="center"
-        >
-          See all Products
-        </Text>
+        <Link to={PATHS.availableKit}>
+          <Text
+            color="lab_red.500"
+            fontFamily="secondary"
+            mt={12}
+            textAlign="center"
+          >
+            See all Products
+          </Text>
+        </Link>
       </Container>
     </div>
   );

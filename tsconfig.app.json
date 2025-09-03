@@ -23,6 +23,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
+      "#utils/*": ["./src/utils/*"],
       "#constants/*": ["./src/constants/*"],
       "#theme/*": ["./src/theme/*"],
       "#shared/*": ["./src/shared/*"],
