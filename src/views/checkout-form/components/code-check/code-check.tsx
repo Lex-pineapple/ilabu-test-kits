@@ -16,7 +16,7 @@ import { useAppDispatch } from "#store/hooks";
 import { setFormState, setTubes } from "#store/slices/form-slice";
 
 export const CodeCheck = () => {
-  const [inputCount, setInputCount] = useState(1);
+  const [inputCount] = useState(1);
   const [inputData, setInputData] = useState("");
   const dispatch = useAppDispatch();
 

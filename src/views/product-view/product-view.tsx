@@ -3,7 +3,7 @@ import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 import LiteYouTubeEmbed from "react-lite-youtube-embed";
 import { Link, Navigate, useLoaderData } from "react-router";
 
-import { Box, Container, Flex, Heading, List, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, List, Text } from "@chakra-ui/react";
 
 import type { CardExtensiveDataType } from "#constants/card-extensive-data";
 import { PATHS } from "#constants/paths";
