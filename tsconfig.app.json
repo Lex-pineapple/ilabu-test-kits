@@ -23,6 +23,8 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
+      "#custom-types/*": ["./src/custom-types/*"],
+      "#store/*": ["./src/store/*"],
       "#utils/*": ["./src/utils/*"],
       "#constants/*": ["./src/constants/*"],
       "#theme/*": ["./src/theme/*"],

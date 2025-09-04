@@ -11,11 +11,19 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { PlusIcon } from "#assets/icons/plus-icon";
 import { QRIcon } from "#assets/icons/qr-icon";
+import { useAppDispatch } from "#store/hooks";
+import { setFormState, setTubes } from "#store/slices/form-slice";
 
 export const CodeCheck = () => {
   const [inputCount, setInputCount] = useState(1);
+  const [inputData, setInputData] = useState("");
+  const dispatch = useAppDispatch();
+
+  const handleButtonClick = () => {
+    dispatch(setTubes([inputData]));
+    dispatch(setFormState("orderDetails"));
+  };
 
   return (
     <Flex flexDir="column" h="100%">
@@ -32,18 +40,24 @@ export const CodeCheck = () => {
           {Array(inputCount)
             .fill(0)
             .map((_, idx) => (
-              <InputGroup endElement={<QRIcon size="lg" />}>
+              <InputGroup endElement={<QRIcon size="lg" />} key="idx">
                 <Input
                   _placeholder={{ textAlign: "start" }}
+                  onChange={(e) => setInputData(e.target.value)}
+                  onInput={(e) =>
+                    setInputData((e.target as HTMLInputElement).value)
+                  }
                   placeholder={`Container No. ${idx + 1}`}
+                  value={inputData}
                 />
               </InputGroup>
             ))}
-          <Button onClick={() => setInputCount(inputCount + 1)}>
-            Add another container code <PlusIcon size="lg" />
-          </Button>
         </Stack>
-        <Button disabled textTransform="uppercase">
+        <Button
+          disabled={!inputData}
+          onClick={handleButtonClick}
+          textTransform="uppercase"
+        >
           Continue
         </Button>
       </Flex>

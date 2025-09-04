@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import type { UseFormResetField } from "react-hook-form";
 
 import {
   CloseButton,
@@ -7,33 +7,32 @@ import {
   type InputProps,
 } from "@chakra-ui/react";
 
-export const InputClearable = (props: InputProps) => {
-  const [value, setValue] = useState("");
-  const inputRef = useRef<HTMLInputElement | null>(null);
+import type { Inputs } from "#/views/checkout-form/components/order-details/order-details";
 
-  const endElement = value ? (
+type InputClearableProps = {
+  id: "email" | "firstName" | "lastName";
+  onClear: UseFormResetField<Inputs>;
+} & InputProps;
+
+export const InputClearable = ({
+  id,
+  onClear,
+  ...props
+}: InputClearableProps) => {
+  const endElement = (
     <CloseButton
       color="lab_red.500"
       me="-2"
       onClick={() => {
-        setValue("");
-        inputRef.current?.focus();
+        onClear(id);
       }}
       size="xs"
     />
-  ) : undefined;
+  );
 
   return (
     <InputGroup endElement={endElement}>
-      <Input
-        _placeholder={{ textAlign: "start" }}
-        onChange={(e) => {
-          setValue(e.currentTarget.value);
-        }}
-        ref={inputRef}
-        value={value}
-        {...props}
-      />
+      <Input _placeholder={{ textAlign: "start" }} id={id} {...props} />
     </InputGroup>
   );
 };

@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import cn from "classnames";
+import { isMobile } from "react-device-detect";
 
-import { Input, InputGroup } from "@chakra-ui/react";
+import { Input, InputGroup, type InputProps } from "@chakra-ui/react";
 
 import { CalendarIcon } from "#assets/icons/calendar-icon";
 
 import styles from "./date-picker.module.scss";
 
-export const DatePicker = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
+export const DatePicker = (props: InputProps) => {
   const [inputActive, setInputActive] = useState(false);
   const [value, setValue] = useState("");
 
@@ -17,23 +17,22 @@ export const DatePicker = () => {
   }, [value]);
 
   return (
-    <InputGroup
-      endElement={
-        <CalendarIcon
-          onClick={() => (inputRef.current as HTMLInputElement).showPicker()}
-          size="lg"
-        />
-      }
-    >
+    <InputGroup endElement={isMobile ? <CalendarIcon size="lg" /> : undefined}>
       <Input
         className={cn(styles.date_input, {
           [styles["date_input--active"]]: inputActive,
         })}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => {
+          setValue(e.target.value);
+          props.onChange?.(e);
+        }}
+        onInput={(e) => {
+          setValue((e.target as HTMLInputElement).value);
+          props.onInput?.(e);
+        }}
         placeholder="Date of birth"
-        ref={inputRef}
         type="date"
-        value={value}
+        {...props}
       />
     </InputGroup>
   );

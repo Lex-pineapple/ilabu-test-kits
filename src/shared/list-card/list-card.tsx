@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { CheckboxCard, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
@@ -20,9 +20,14 @@ export const ListCard = ({
   description,
   handleSelect,
   price,
+  selected,
   title,
 }: ListCardProps) => {
   const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    setChecked(selected);
+  }, [selected]);
 
   const handleCheck = () => {
     const checkedNew = !checked;

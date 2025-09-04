@@ -4,6 +4,7 @@ export type AnalysisItemType = {
   description: string;
   price: number;
   title: string;
+  uid: string;
 };
 
 export type CardProductDataType = {
@@ -24,60 +25,70 @@ export const analysisItems: AnalysisItemType[] = [
       "Used for monitoring blood sugar levels, particularly in individuals with diabetes.",
     price: 25.99,
     title: "Blood Glucose Test",
+    uid: "1",
   },
   {
     description:
       "Measures the average blood glucose levels over the past 2-3 months, commonly used in diabetes management.",
     price: 125.99,
     title: "Hemoglobin A1c (HbA1c) Test",
+    uid: "2",
   },
   {
     description:
       "Assesses cholesterol levels, including total cholesterol, LDL (low-density lipoprotein), HDL (high-density lipoprotein), and triglycerides.",
     price: 75.0,
     title: "Lipid Panel",
+    uid: "3",
   },
   {
     description:
       "Provides information about the different types of cells in the blood, including red blood cells, white blood cells, and platelets.",
     price: 25.99,
     title: "Complete Blood Count (CBC)",
+    uid: "4",
   },
   {
     description:
       "Used to detect inflammation in the body, which can be a sign of infection or other medical conditions.",
     price: 35.0,
     title: "C-Reactive Protein (CRP) Test",
+    uid: "5",
   },
   {
     description:
       "Measures how long it takes for blood to clot, often used for patients on anticoagulant therapy.",
     price: 20.0,
     title: "Prothrombin Time (PT)/INR Test",
+    uid: "6",
   },
   {
     description:
       "Used to evaluate thyroid function and diagnose thyroid disorders.",
     price: 25.99,
     title: "Thyroid-Stimulating Hormone (TSH) Test",
+    uid: "7",
   },
   {
     description:
       "Measures enzymes and proteins in the blood to assess liver health.",
     price: 199.99,
     title: "Liver Function Tests (LFTs)",
+    uid: "8",
   },
   {
     description:
       "Measures lactate levels, often used in sports medicine or critical care settings.",
     price: 99.0,
     title: "Blood Lactate Test",
+    uid: "9",
   },
   {
     description:
       "Provides information about oxygen, carbon dioxide, and pH levels in the blood, often used in respiratory and critical care.",
     price: 99.0,
     title: "Blood Gas Analysis",
+    uid: "10",
   },
 ];
 

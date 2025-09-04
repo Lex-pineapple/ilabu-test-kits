@@ -5,6 +5,7 @@
     margin-right: 0.5em;
     text-transform: uppercase;
     font-weight: 600;
+    position: absolute;
   }
 
   &:focus::before,
@@ -13,7 +14,8 @@
   }
 
   &::-webkit-calendar-picker-indicator {
-    display: none;
+    // display: none;
+    background-image: url("/calendar.svg");
   }
 
   &::-webkit-datetime-edit {
