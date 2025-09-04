@@ -72,7 +72,6 @@ export const Instruction = () => (
     <HeaderWBg p={10}>Choose your test</HeaderWBg>
     <Container
       _before={{
-        // bg: "red",
         background: "url('/backgrounds/bg-instr.png') center/cover no-repeat",
         content: '""',
         display: "block",

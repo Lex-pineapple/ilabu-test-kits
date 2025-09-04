@@ -12,10 +12,8 @@ import {
 import { DrawerSwipeable } from "#/components/drawer-swipeable";
 import { ListControlled } from "#/components/list-controlled";
 import { SearchIcon } from "#assets/icons/search-icon";
-import type {
-  AnalysisItemType,
-  CardProductDataType,
-} from "#constants/card-product-data";
+import type { CardExtensiveDataType } from "#constants/card-extensive-data";
+import type { AnalysisItemType } from "#constants/card-product-data";
 import { HeaderWBg } from "#shared/header-w-bg";
 import { SelectButton } from "#shared/select-button";
 
@@ -33,7 +31,7 @@ const sortKeys = createListCollection({
 });
 
 export const SelectedKit = () => {
-  const loaderData = useLoaderData<CardProductDataType>();
+  const loaderData = useLoaderData<CardExtensiveDataType>();
   const [selected, setSelected] = useState<AnalysisItemType[]>([]);
 
   const [searchQ, setSearchQ] = useState("");
@@ -60,7 +58,7 @@ export const SelectedKit = () => {
         </Flex>
         <ListControlled
           color={loaderData.color}
-          items={loaderData.items}
+          items={loaderData.analysisItems}
           searchQ={searchQ}
           selected={selected}
           setSelected={setSelected}

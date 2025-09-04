@@ -15,6 +15,7 @@ import {
 
 import type { AnalysisItemType } from "#constants/card-product-data";
 import { PATHS } from "#constants/paths";
+import { TotalComponent } from "#shared/total-component";
 import { countTotal } from "#utils/count-total";
 
 import styles from "./drawer-swipeable.module.scss";
@@ -68,7 +69,7 @@ export const DrawerSwipeable = ({ items }: DrawerSwipeableProps) => {
             w="100%"
             {...handlers}
           >
-            <Collapsible.Root open={collapsibleOpen}>
+            <Collapsible.Root open={collapsibleOpen} w="100%">
               <Collapsible.Content>
                 <Container mb={20} p={0}>
                   <Text fontWeight="bold" mb={3}>
@@ -88,14 +89,7 @@ export const DrawerSwipeable = ({ items }: DrawerSwipeableProps) => {
                   continue
                 </Button>
               </Link>
-              <Flex alignItems="center" gap={2.5}>
-                <Text fontWeight="medium" textStyle="md">
-                  Total:{" "}
-                </Text>
-                <Text color="lab_red.500" fontWeight="medium" textStyle="2xl">
-                  € {total}
-                </Text>
-              </Flex>
+              <TotalComponent total={total} />
             </Flex>
           </ActionBar.Content>
         </ActionBar.Positioner>

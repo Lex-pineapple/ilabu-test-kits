@@ -1,5 +1,7 @@
 import { Card, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
+import { PriceText } from "#shared/price-text";
+
 type CardAnalysisProps = {
   description: string;
   price: number;
@@ -25,15 +27,8 @@ export const CardAnalysis = ({
           </Text>
         </Card.Body>
       </Container>
-      <Card.Footer p="0 10px">
-        <Text
-          color="lab_red.500"
-          fontFamily="secondary"
-          fontWeight="medium"
-          textStyle="2xl"
-        >
-          €{price}
-        </Text>
+      <Card.Footer flexBasis="180px" p="0 10px">
+        <PriceText price={price} />
       </Card.Footer>
     </Flex>
   </Card.Root>

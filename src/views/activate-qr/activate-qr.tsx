@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 
 import { QRComponent } from "#/components/qr-component";
-import { AllProducts } from "#/views/all-products";
 import { MOCK_UID } from "#constants/card-product-data";
 import { PATHS } from "#constants/paths";
 
@@ -59,7 +58,6 @@ export const ActivateQR = () => {
           </Flex>
         </Flex>
       </Container>
-      <AllProducts />
     </div>
   );
 };

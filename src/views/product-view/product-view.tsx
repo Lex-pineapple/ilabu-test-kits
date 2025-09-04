@@ -5,16 +5,15 @@ import { Link, Navigate, useLoaderData } from "react-router";
 
 import { Box, Container, Flex, Heading, List, Text } from "@chakra-ui/react";
 
-import type { CardExtensiveData } from "#constants/card-extensive-data";
-import { cardProductData } from "#constants/card-product-data";
+import type { CardExtensiveDataType } from "#constants/card-extensive-data";
 import { PATHS } from "#constants/paths";
-import { Carousel } from "#shared/carousel";
+import { CardCollapsible } from "#shared/card-collapsible";
 import { CircleGraphic } from "#shared/circle-graphic";
 import { DescriptionBox } from "#shared/description-box";
 import { HeaderWBg } from "#shared/header-w-bg";
 
 export const ProductView = () => {
-  const loaderData = useLoaderData<CardExtensiveData | undefined>();
+  const loaderData = useLoaderData<CardExtensiveDataType | undefined>();
 
   if (!loaderData) return <Navigate to="*" />;
 
@@ -80,21 +79,12 @@ export const ProductView = () => {
             ))}
           </List.Root>
         </DescriptionBox>
+        <CardCollapsible
+          description={loaderData.descriptionMin}
+          items={loaderData.analysisItems}
+          title={loaderData.title}
+        />
       </Flex>
-      <Flex
-        alignItems="center"
-        justifyContent="space-between"
-        mb={9}
-        p="0 14px"
-      >
-        <Heading fontWeight="semibold">Recommended Kits</Heading>
-        <Link to="*">
-          <Text color="lab_red.500" fontWeight="semibold" textStyle="xl">
-            See all
-          </Text>
-        </Link>
-      </Flex>
-      <Carousel items={cardProductData} />
       <HeaderWBg m="30px 0 45px" p={9}>
         How To Take A Self Blood Test
       </HeaderWBg>

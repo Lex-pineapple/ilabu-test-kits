@@ -4,6 +4,7 @@ import { Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
 import { InfoCard } from "#/views/checkout-form/components/confirm-order/components/info-card";
 import { PATHS } from "#constants/paths";
+import { TotalComponent } from "#shared/total-component";
 
 const MOCK_DATA_TESTS = [
   { data: "25.99", title: "Hemoglobin A1c (HbA1c)" },
@@ -43,19 +44,7 @@ export const ConfirmOrder = () => (
     >
       <InfoCard
         bottomElement={
-          <Flex
-            alignItems="center"
-            gap={2.5}
-            justifyContent="flex-end"
-            p="0 14px"
-          >
-            <Text fontWeight="medium" textStyle="md">
-              Total:{" "}
-            </Text>
-            <Text color="lab_red.500" fontWeight="medium" textStyle="2xl">
-              € {725.99}
-            </Text>
-          </Flex>
+          <TotalComponent justifyContent="flex-end" p="0 14px" total={725.99} />
         }
         items={MOCK_DATA_TESTS}
         title="Selected tests:"

@@ -7,7 +7,7 @@ import {
   selectedKitLoader,
 } from "#/loaders";
 import { ActivateQR } from "#/views/activate-qr";
-import { AvailableKit } from "#/views/available-kit";
+import { AllProducts } from "#/views/all-products";
 import { CheckoutForm } from "#/views/checkout-form";
 import { Instruction } from "#/views/instruction";
 import { NotFound } from "#/views/not-found";
@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
         path: PATHS.instruction,
       },
       {
-        element: <AvailableKit />,
+        element: <AllProducts />,
         path: PATHS.availableKit,
       },
       {

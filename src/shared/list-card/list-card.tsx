@@ -1,18 +1,10 @@
 import { useState } from "react";
 
-import {
-  Card,
-  CheckboxCard,
-  Container,
-  Flex,
-  Heading,
-  Listbox,
-  Text,
-} from "@chakra-ui/react";
+import { CheckboxCard, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
-import type { AnalysisItemType } from "#constants/card-product-data";
 import { CircleGraphic } from "#shared/circle-graphic";
 import type { ColorType } from "#shared/circle-graphic/circle-graphic";
+import { PriceText } from "#shared/price-text";
 
 type ListCardProps = {
   color: ColorType;
@@ -68,14 +60,7 @@ export const ListCard = ({
               </Text>
             </Flex>
             <Flex alignItems="center" justify="space-between">
-              <Text
-                color="lab_red.500"
-                fontFamily="secondary"
-                fontWeight="medium"
-                textStyle="2xl"
-              >
-                €{price}
-              </Text>
+              <PriceText price={price} />
               <CheckboxCard.Indicator />
             </Flex>
           </CheckboxCard.Description>

@@ -1,12 +1,4 @@
-import {
-  Center,
-  Container,
-  Flex,
-  Group,
-  Heading,
-  Image,
-  Text,
-} from "@chakra-ui/react";
+import { Center, Flex, Heading, Image, Text } from "@chakra-ui/react";
 
 type StepItemProps = {
   description: string;
