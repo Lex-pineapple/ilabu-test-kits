@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
+
 import { Flex } from "@chakra-ui/react";
 
 import { LogoMainIcon } from "#assets/icons/logo-main";
+import { PATHS } from "#constants/paths";
 import { BurgerButton } from "#shared/burger-button";
 
 export const Header = () => (
@@ -17,6 +20,8 @@ export const Header = () => (
     zIndex="10000"
   >
     <BurgerButton onClick={() => null} />
-    <LogoMainIcon h={29} />
+    <Link to={PATHS.root}>
+      <LogoMainIcon h={29} />
+    </Link>
   </Flex>
 );

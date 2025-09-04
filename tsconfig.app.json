@@ -23,12 +23,16 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
+      "#custom-types/*": ["./src/custom-types/*"],
+      "#store/*": ["./src/store/*"],
+      "#utils/*": ["./src/utils/*"],
       "#constants/*": ["./src/constants/*"],
       "#theme/*": ["./src/theme/*"],
       "#shared/*": ["./src/shared/*"],
       "#assets/*": ["./src/assets/*"],
       "#/*": ["./src/*"]
-    }
+    },
+    "rootDirs": [".", "./.react-router/types"]
   },
-  "include": ["src"]
+  "include": ["src", ".react-router/types/**/*"]
 }

@@ -1,0 +1,35 @@
+.date_input {
+  &::before {
+    content: attr(placeholder) !important;
+    color: var(--chakra-colors-lab_grey-200);
+    margin-right: 0.5em;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: absolute;
+  }
+
+  &:focus::before,
+  &:valid::before {
+    content: "";
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    // display: none;
+    background-image: url("/calendar.svg");
+  }
+
+  &::-webkit-datetime-edit {
+    height: 0;
+  }
+
+  &:focus,
+  &--active {
+    &::before {
+      display: none;
+    }
+
+    &::-webkit-datetime-edit {
+      height: auto;
+    }
+  }
+}

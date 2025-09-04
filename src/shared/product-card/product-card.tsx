@@ -1,4 +1,6 @@
-import { Button, Card, Flex, Heading, Link, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+
+import { Button, Card, Flex, Heading, Text } from "@chakra-ui/react";
 
 import { CircleGraphic } from "#shared/circle-graphic";
 import type { ColorType } from "#shared/circle-graphic/circle-graphic";
@@ -23,17 +25,25 @@ export const ProductCard = ({
     pl="40%"
     position="relative"
   >
-    <CircleGraphic color={color} />
+    <CircleGraphic
+      color={color}
+      positions={{
+        x: "-21px",
+        y: "-78px",
+      }}
+    />
     <Card.Header p={3.5} pb={0}>
-      <Heading size="lg">{title}</Heading>
+      <Heading fontFamily="secondary" size="lg">
+        {title}
+      </Heading>
     </Card.Header>
     <Card.Body p={3.5} pt={0}>
       <Flex direction="column" gap={2}>
-        <Text color="lab_grey.900" textStyle="xs">
+        <Text color="lab_grey.900" fontFamily="secondary" textStyle="xs">
           {description}
         </Text>
-        <Link asChild color="lab_grey.50" href={`/product/${uid}`}>
-          <Button variant="blocky" w="fit-content">
+        <Link to={`/kits/${uid}`}>
+          <Button fontFamily="secondary" variant="blocky" w="fit-content">
             Show description
           </Button>
         </Link>

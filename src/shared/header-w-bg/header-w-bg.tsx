@@ -1,6 +1,14 @@
+import type { ReactNode } from "react";
+
 import { Center, Heading } from "@chakra-ui/react";
 
-export const HeaderWBg = () => (
+type HeaderWBgProps = {
+  children: ReactNode;
+  m?: number | string;
+  p?: number | string;
+};
+
+export const HeaderWBg = ({ children, m, p }: HeaderWBgProps) => (
   <Center
     _before={{
       bg: "url('/backgrounds/bg-on-red.jpg') center/cover no-repeat",
@@ -11,17 +19,18 @@ export const HeaderWBg = () => (
       width: "100%",
     }}
     bg="#FF2121"
-    mb={12}
-    padding={5}
+    m={m}
+    padding={p ?? 5}
     position="relative"
   >
     <Heading
       color="white"
       position="relative"
       size="xl"
+      textAlign="center"
       textTransform="uppercase"
     >
-      All Products
+      {children}
     </Heading>
   </Center>
 );
