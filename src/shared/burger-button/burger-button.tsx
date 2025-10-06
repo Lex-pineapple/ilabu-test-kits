@@ -1,4 +1,3 @@
-import { useState } from "react";
 import cn from "classnames";
 
 import { Button } from "@chakra-ui/react";
@@ -6,26 +5,19 @@ import { Button } from "@chakra-ui/react";
 import styles from "./burger-button.module.scss";
 
 type BurgerButtonProps = {
+  active: boolean;
   onClick: () => void;
 };
 
-export const BurgerButton = ({ onClick }: BurgerButtonProps) => {
-  const [buttonActive, setButtonActive] = useState(false);
-
-  const handleClick = () => {
-    setButtonActive(!buttonActive);
-    onClick();
-  };
-
-  return (
-    <Button
-      className={cn(styles.root, {
-        [styles[`root--active`]]: buttonActive,
-      })}
-      minW="auto"
-      onClick={handleClick}
-      variant="ghost"
-      w="27px"
-    />
-  );
-};
+export const BurgerButton = ({ active, onClick }: BurgerButtonProps) => (
+  <Button
+    className={cn(styles.root, {
+      [styles[`root--active`]]: active,
+    })}
+    minW="auto"
+    onClick={onClick}
+    variant="ghost"
+    w="27px"
+    zIndex={10000}
+  />
+);

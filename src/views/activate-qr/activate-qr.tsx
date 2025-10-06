@@ -14,6 +14,7 @@ import {
 import { QRComponent } from "#/components/qr-component";
 import { MOCK_UID } from "#constants/card-product-data";
 import { PATHS } from "#constants/paths";
+import { ShdContainer } from "#shared/shd-container";
 
 export const ActivateQR = () => {
   const [code, setCode] = useState<string>();
@@ -24,37 +25,49 @@ export const ActivateQR = () => {
     <div>
       <Container p={3.5} pb={16} pt={9}>
         <Flex direction="column" gap={6}>
-          <Heading size="2xl" textTransform="uppercase">
-            Activate a kit
-          </Heading>
-          <Text fontWeight="light" textStyle="xl">
-            Simply scan the QR code or type in your unique activation code unto
-            the fields below.
-          </Text>
+          <ShdContainer p="22px 16px">
+            <Heading
+              fontWeight="bold"
+              pb={3}
+              size="xl"
+              textTransform="uppercase"
+            >
+              Активировать набор
+            </Heading>
+            <Text fontWeight="semibold" textStyle="sm">
+              Отсканируйте QR-код или введите уникальный{" "}
+              <Text as="span" color="lab_green.900">
+                код активации
+              </Text>{" "}
+              в поле ниже
+            </Text>
+          </ShdContainer>
           <QRComponent />
-          <Text fontFamily="secondary" textAlign="center" textStyle="lg">
-            Or type in your unique activation code
+          <Text fontWeight="semibold" textAlign="center" textStyle="sm">
+            или <br /> введите код активации
           </Text>
           <Flex align="center" direction="column" gap={4}>
             <Input
               onChange={(e) => setCode(e.target.value)}
               onInput={(e) => setCode((e.target as HTMLInputElement).value)}
-              placeholder="enter code"
+              placeholder="Введите код"
+              size="xl"
               value={code}
             />
-            <Link color="lab_red.500" fontFamily="secondary">
-              Can’t find your codes?
-            </Link>
             <Button
               disabled={!code}
-              fontSize={20}
-              fontWeight="light"
+              fontSize={14}
+              fontWeight="medium"
               onClick={() => navigate(`${PATHS._selected}/${MOCK_UID}`)}
+              size="xl"
               textTransform="uppercase"
               w="100%"
             >
-              Continue
+              Продолжить
             </Button>
+            <Link color="lab_grey.600" fontSize={14} fontWeight="medium">
+              Не нашли QR-код?
+            </Link>
           </Flex>
         </Flex>
       </Container>
