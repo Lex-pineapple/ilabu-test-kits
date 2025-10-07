@@ -23,7 +23,7 @@ export const ActivateQR = () => {
 
   return (
     <div>
-      <Container p={3.5} pb={16} pt={9}>
+      <Container p={0} pb={16} pt={9}>
         <Flex direction="column" gap={6}>
           <ShdContainer p="22px 16px">
             <Heading

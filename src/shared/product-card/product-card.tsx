@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
-import { Button, Card, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Card, Flex, Heading, Text } from "@chakra-ui/react";
 
+import { ArrowRight } from "#assets/icons/arrow-right";
 import { CircleGraphic } from "#shared/circle-graphic";
 import type { ColorType } from "#shared/circle-graphic/circle-graphic";
 
@@ -18,13 +19,7 @@ export const ProductCard = ({
   title,
   uid,
 }: ProductCardProps) => (
-  <Card.Root
-    bg="lab_grey.400"
-    borderRadius="none"
-    overflow="hidden"
-    pl="40%"
-    position="relative"
-  >
+  <Card.Root borderRadius="10" overflow="hidden" pl="35%" position="relative">
     <CircleGraphic
       color={color}
       positions={{
@@ -32,20 +27,25 @@ export const ProductCard = ({
         y: "-78px",
       }}
     />
-    <Card.Header p={3.5} pb={0}>
-      <Heading fontFamily="secondary" size="lg">
+    <Card.Header p={3.5} pb={2.5}>
+      <Heading lineHeight={"16px"} size="md">
         {title}
       </Heading>
     </Card.Header>
     <Card.Body p={3.5} pt={0}>
       <Flex direction="column" gap={2}>
-        <Text color="lab_grey.900" fontFamily="secondary" textStyle="xs">
+        <Text color="lab_grey.900" fontSize={14} lineHeight={"16px"}>
           {description}
         </Text>
         <Link to={`/kits/${uid}`}>
-          <Button fontFamily="secondary" variant="blocky" w="fit-content">
-            Show description
-          </Button>
+          <Flex alignItems="center" gap={4} justifyContent="flex-end" p={0}>
+            <Text fontSize="14px" fontWeight="medium">
+              Подробнее
+            </Text>
+            <Box bg="lab_green.900" borderRadius={10} p="2px 25px">
+              <ArrowRight size="md" />
+            </Box>
+          </Flex>
         </Link>
       </Flex>
     </Card.Body>

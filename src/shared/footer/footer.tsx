@@ -9,7 +9,6 @@ export const Footer = () => (
     justify="space-between"
     mt={2.5}
     p="10px 14px 26px"
-    position="absolute"
     width="100vw"
   >
     <LogoMainIcon h={29} />

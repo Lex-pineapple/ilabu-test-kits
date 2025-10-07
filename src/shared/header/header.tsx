@@ -11,7 +11,7 @@ import { BurgerButton } from "#shared/burger-button";
 import styles from "./header.module.scss";
 
 const LINKS = [
-  { href: "", title: "Все наборы" },
+  { href: PATHS.availableKit, title: "Все наборы" },
   { href: "", title: "Часто задаваемые вопросы" },
   { href: "", title: "Контакты" },
   { href: "", title: "Выйти" },
@@ -39,14 +39,14 @@ export const Header = () => {
             [styles.drawer_open]: open,
           })}
         >
-          <Link to={PATHS.root}>
+          <Link onClick={() => setOpen(false)} to={PATHS.root}>
             <div className={styles.header_link}>
               <LogoMainIcon h={29} />
             </div>
           </Link>
           <Flex className={styles.links} flexDir="column">
             {LINKS.map((item) => (
-              <Link to={item.href}>
+              <Link onClick={() => setOpen(false)} to={item.href}>
                 <Text color="white" textStyle="sm">
                   {item.title}
                 </Text>
