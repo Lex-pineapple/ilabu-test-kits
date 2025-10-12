@@ -1,7 +1,6 @@
-import { Box, Card, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Card, Container, Heading, Text } from "@chakra-ui/react";
 
 import { ArrowButton } from "#shared/arrow-button";
-import { PriceText } from "#shared/price-text";
 
 type CardAnalysisProps = {
   description: string;

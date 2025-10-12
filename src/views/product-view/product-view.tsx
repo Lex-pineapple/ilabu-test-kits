@@ -1,15 +1,13 @@
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 
 import LiteYouTubeEmbed from "react-lite-youtube-embed";
-import { Link, Navigate, useLoaderData } from "react-router";
+import { Navigate, useLoaderData } from "react-router";
 
 import { Box, Container, Flex, Heading, List, Text } from "@chakra-ui/react";
 
 import { CheckmarkIcon } from "#assets/icons/checkmark-icon";
 import type { CardExtensiveDataType } from "#constants/card-extensive-data";
-import { PATHS } from "#constants/paths";
 import { CardCollapsible } from "#shared/card-collapsible";
-import { HeaderWBg } from "#shared/header-w-bg";
 import { ShdContainer } from "#shared/shd-container";
 
 import styles from "./product-view.module.scss";
@@ -20,7 +18,7 @@ export const ProductView = () => {
   if (!loaderData) return <Navigate to="*" />;
 
   return (
-    <Container p={0} pt={10}>
+    <Container p={0} pb={14} pt={10}>
       <Heading pb={2} size="md" textTransform="uppercase">
         {loaderData.title}
       </Heading>

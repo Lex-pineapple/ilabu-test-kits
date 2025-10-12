@@ -25,6 +25,7 @@ export const Header = () => {
       <Flex
         align="center"
         bg="white"
+        boxShadow="0 0 10px 2px #0000000f"
         gap={7}
         h={12}
         left={0}

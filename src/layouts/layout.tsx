@@ -5,13 +5,17 @@ import { Container, Flex } from "@chakra-ui/react";
 import { Footer } from "#shared/footer";
 import { Header } from "#shared/header";
 
+import styles from "./layout.module.scss";
+
 export const Layout = () => (
   <Flex
+    className={styles.root}
     flexDir="column"
-    h="100vh"
+    h="100%"
     justifyContent="space-between"
     m="0 auto"
     maxW={500}
+    minH="100vh"
     p={0}
     pt={12}
   >

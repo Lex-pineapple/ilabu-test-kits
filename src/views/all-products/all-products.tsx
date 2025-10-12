@@ -4,7 +4,7 @@ import { cardExtensiveData } from "#constants/card-extensive-data";
 import { ProductCard } from "#shared/product-card";
 
 export const AllProducts = () => (
-  <Container p={0} pt={10}>
+  <Container p={0} pb={14} pt={10}>
     <Heading fontWeight="bold" pb={6} size="lg" textTransform="uppercase">
       Все продукты
     </Heading>
