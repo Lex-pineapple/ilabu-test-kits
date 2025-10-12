@@ -1,16 +1,9 @@
 import { useState } from "react";
 import cn from "classnames";
 
-import {
-  Card,
-  Collapsible,
-  Container,
-  Flex,
-  Heading,
-  Text,
-} from "@chakra-ui/react";
+import { Collapsible, Flex, Heading } from "@chakra-ui/react";
 
-import { ArrowDownIcon } from "#assets/icons/arrow-down";
+import { CollapsibleIcon } from "#assets/icons/collapsible-icon";
 import type { AnalysisItemType } from "#constants/card-product-data";
 import { CardAnalysis } from "#shared/card-collapsible/components/card-analysis";
 
@@ -22,44 +15,29 @@ type CardCollapsibleProps = {
   title: string;
 };
 
-export const CardCollapsible = ({
-  description,
-  items,
-  title,
-}: CardCollapsibleProps) => {
+export const CardCollapsible = ({ items }: CardCollapsibleProps) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <Collapsible.Root onClick={() => setIsOpen(!isOpen)} open={isOpen}>
+    <Collapsible.Root
+      m={"0 -14px"}
+      onClick={() => setIsOpen(!isOpen)}
+      open={isOpen}
+    >
       <Collapsible.Trigger>
-        <Card.Root bg="lab_grey.400" border="none" borderRadius="none" pl={135}>
-          <Flex alignItems="center" gap={3} p="0 14px 0 0">
-            <Container p={0}>
-              <Card.Header p="12px 0">
-                <Heading fontFamily="secondary" size="lg">
-                  {title}
-                </Heading>
-              </Card.Header>
-              <Card.Body p={0} pb={3}>
-                <Text
-                  color="lab_grey.900"
-                  fontFamily="secondary"
-                  textStyle="xs"
-                >
-                  {description}
-                </Text>
-              </Card.Body>
-            </Container>
-            <ArrowDownIcon
-              className={cn(styles.icon, {
-                [styles["icon--open"]]: isOpen,
-              })}
-              size="2xl"
-            />
-          </Flex>
-        </Card.Root>
+        <Flex alignItems="center" gap={2} p="0 14px" pb={3}>
+          <Heading size="md" textTransform="uppercase">
+            Список анализов
+          </Heading>
+          <CollapsibleIcon
+            className={cn(styles.icon, {
+              [styles["icon--open"]]: isOpen,
+            })}
+            size="sm"
+          />
+        </Flex>
       </Collapsible.Trigger>
-      <Collapsible.Content pt={2.5}>
-        <Flex direction="column" gap={2.5}>
+      <Collapsible.Content p="0 14px" pt={2.5}>
+        <Flex direction="column" gap={2.5} pb={2.5}>
           {items.map((item) => (
             <CardAnalysis {...item} />
           ))}

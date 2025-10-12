@@ -1,8 +1,6 @@
-import { Link } from "react-router-dom";
+import { Card, Flex, Heading, Text } from "@chakra-ui/react";
 
-import { Box, Card, Flex, Heading, Text } from "@chakra-ui/react";
-
-import { ArrowRight } from "#assets/icons/arrow-right";
+import { ArrowButton } from "#shared/arrow-button";
 import { CircleGraphic } from "#shared/circle-graphic";
 import type { ColorType } from "#shared/circle-graphic/circle-graphic";
 
@@ -37,16 +35,7 @@ export const ProductCard = ({
         <Text color="lab_grey.900" fontSize={14} lineHeight={"16px"}>
           {description}
         </Text>
-        <Link to={`/kits/${uid}`}>
-          <Flex alignItems="center" gap={4} justifyContent="flex-end" p={0}>
-            <Text fontSize="14px" fontWeight="medium">
-              Подробнее
-            </Text>
-            <Box bg="lab_green.900" borderRadius={10} p="2px 25px">
-              <ArrowRight size="md" />
-            </Box>
-          </Flex>
-        </Link>
+        <ArrowButton link={`/kits/${uid}`} />
       </Flex>
     </Card.Body>
   </Card.Root>

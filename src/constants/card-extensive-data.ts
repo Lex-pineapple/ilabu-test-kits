@@ -7,11 +7,12 @@ import type { ColorType } from "#shared/circle-graphic/circle-graphic";
 export type CardExtensiveDataType = {
   analysisItems: AnalysisItemType[];
   benefits: string[];
-  boxContents: [string, number][];
+  boxContents: [string, string][];
   color: ColorType;
   description: string;
   descriptionMin: string;
   imgSrc: string;
+  inputType: string;
   instructionTitle: string;
   price: number;
   title: string;
@@ -23,27 +24,26 @@ export const cardExtensiveData: CardExtensiveDataType[] = [
   {
     analysisItems: analysisItems,
     benefits: [
-      "Identification of allergens",
-      "Personalized treatment",
-      "Improvement of quality of life",
-      "Prevention of complications",
-      "Educational aspect",
+      "Неинвазивный сбор образца",
+      "Подходит для детей и взрослых",
+      "Сбор образца в комфортных для вас условиях",
+      "Удобная доставка в лабораторию",
+      "Широкий спектр анализов",
     ],
     boxContents: [
-      ["Gauze", 1],
-      ["Alcohol Pad", 1],
-      ["Bandage", 2],
-      ["Collection Card", 1],
-      ["Lancets", 3],
-      ["Biohazard Bag", 1],
-      ["Prepaid Return Label", 1],
+      ["Перчатки нитриловые смотровые", "1 уп."],
+      ["Сваб в пробирке с транспортной средой", "1 шт."],
+      ["Упаковка для образца", "1 шт."],
+      ["Пакет для отходов", "1 шт."],
+      ["Инструкция по применению", "1 шт."],
     ],
     color: "red",
     description:
-      "The Capillary Blood Kit is designed to detect allergic reactions to various allergens that may be present both indoors and outdoors. This test helps determine which substances the body is reacting to, which allows you to take appropriate measures to reduce symptoms and improve your quality of life.",
+      "Данный набор предназначен для самостоятельного взятия образцов биологического материала из носа, зева, а также отделяемого из глаз с целью проведения последующих исследований в клинико-диагностических лабораториях.\nСо списком анализов, доступных при использовании набора, вы можете ознакомиться ниже.",
     descriptionMin:
       "Тесты в слюне набирают популярность в диагностике благодаря своей неинвазивности и простоте сбора",
     imgSrc: "",
+    inputType: "Мазок из носа, зева, глаза",
     instructionTitle: "",
     price: 25.99,
     title: "Набор для самостоятельного взятия биологического материала: слюна",
@@ -56,10 +56,11 @@ export const cardExtensiveData: CardExtensiveDataType[] = [
     boxContents: [],
     color: "green",
     description:
-      "Urine tests are widely used in medical diagnostics for their non-invasive nature and the valuable health information they provide.",
+      "Данный набор предназначен для самостоятельного взятия образцов биологического материала из носа, зева, а также отделяемого из глаз с целью проведения последующих исследований в клинико-диагностических лабораториях.\nСо списком анализов, доступных при использовании набора, вы можете ознакомиться ниже.",
     descriptionMin:
       "Используется для проведения общих и биохимических анализов, диагностики инфекций и многого другого",
     imgSrc: "",
+    inputType: "Мазок из носа, зева, глаза",
     instructionTitle: "",
     price: 41.99,
     title: "Набор для самостоятельного взятия биологического материала: моча",
@@ -72,10 +73,11 @@ export const cardExtensiveData: CardExtensiveDataType[] = [
     boxContents: [],
     color: "blue",
     description:
-      "Stool tests are commonly used to diagnose and monitor various gastrointestinal conditions and infections.",
+      "Данный набор предназначен для самостоятельного взятия образцов биологического материала из носа, зева, а также отделяемого из глаз с целью проведения последующих исследований в клинико-диагностических лабораториях.\nСо списком анализов, доступных при использовании набора, вы можете ознакомиться ниже.",
     descriptionMin:
       "Используются для диагностики и контроля различных заболеваний и инфекций желудочно-кишечного тракта",
     imgSrc: "",
+    inputType: "Мазок из носа, зева, глаза",
     instructionTitle: "",
     price: 28.99,
     title: "Набор для самостоятельного взятия биологического материала: КАЛ",
@@ -88,10 +90,11 @@ export const cardExtensiveData: CardExtensiveDataType[] = [
     boxContents: [],
     color: "dk-gray",
     description:
-      "Urogenital tests are essential for diagnosing and monitoring conditions related to the urinary and reproductive systems.",
+      "Данный набор предназначен для самостоятельного взятия образцов биологического материала из носа, зева, а также отделяемого из глаз с целью проведения последующих исследований в клинико-диагностических лабораториях.\nСо списком анализов, доступных при использовании набора, вы можете ознакомиться ниже.",
     descriptionMin:
       "Набор сконструирован для простого и удобного сбора мочи у маленьких детей в домашних условиях",
     imgSrc: "",
+    inputType: "Мазок из носа, зева, глаза",
     instructionTitle: "",
     price: 29.99,
     title:
