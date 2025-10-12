@@ -5,17 +5,11 @@ import { Link } from "react-router-dom";
 import { Flex, Text } from "@chakra-ui/react";
 
 import { LogoMainIcon } from "#assets/icons/logo-main";
+import { LINKS } from "#constants/header-links";
 import { PATHS } from "#constants/paths";
 import { BurgerButton } from "#shared/burger-button";
 
 import styles from "./header.module.scss";
-
-const LINKS = [
-  { href: PATHS.availableKit, title: "Все наборы" },
-  { href: "", title: "Часто задаваемые вопросы" },
-  { href: "", title: "Контакты" },
-  { href: "", title: "Выйти" },
-];
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
