@@ -29,6 +29,7 @@ export const CardAnalysis = ({
   selected,
   testId,
   title,
+  uid,
 }: CardAnalysisProps) => {
   const [checked, setChecked] = useState(false);
 
@@ -39,7 +40,7 @@ export const CardAnalysis = ({
   const handleCheck = () => {
     const checkedNew = !checked;
     setChecked(checkedNew);
-    handleSelect(checkedNew, title);
+    handleSelect(checkedNew, uid);
   };
 
   return (

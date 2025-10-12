@@ -7,4 +7,5 @@ export const validationSchema = z.object({
   firstName: z.string().min(1),
   gender: z.array(z.string()),
   lastName: z.string().min(1),
+  middleName: z.string().min(1),
 });

@@ -1,17 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-import {
-  Button,
-  Container,
-  Flex,
-  Heading,
-  Input,
-  InputGroup,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Button, Flex, Input, InputGroup, Stack, Text } from "@chakra-ui/react";
 
 import { QRIcon } from "#assets/icons/qr-icon";
+import { TitleCard } from "#shared/title-card";
 import { useAppDispatch } from "#store/hooks";
 import { setFormState, setTubes } from "#store/slices/form-slice";
 
@@ -26,39 +19,47 @@ export const CodeCheck = () => {
   };
 
   return (
-    <Flex flexDir="column" h="100%">
-      <Container mb={9} p="0 14px">
-        <Heading mb={3.5} size="2xl" textTransform="uppercase">
-          Code check
-        </Heading>
-        <Text textStyle="xl">
-          Scan or manually enter the code from the used container
-        </Text>
-      </Container>
+    <Flex flexDir="column" h="70vh">
+      <TitleCard
+        content={
+          "Отсканируйте или введите вручную код используемого контейнера"
+        }
+        heading={"Проверка штрихкода контейнера"}
+        highlight="код"
+        mb={4}
+      />
       <Flex flexDir="column" h="100%" justifyContent="space-between">
-        <Stack gap={8} pb={8}>
+        <Stack gap={8} pb={7}>
           {Array(inputCount)
             .fill(0)
             .map((_, idx) => (
-              <InputGroup endElement={<QRIcon size="lg" />} key="idx">
+              <InputGroup
+                endElement={<QRIcon color="black" size="lg" />}
+                key="idx"
+              >
                 <Input
                   _placeholder={{ textAlign: "start" }}
                   onChange={(e) => setInputData(e.target.value)}
                   onInput={(e) =>
                     setInputData((e.target as HTMLInputElement).value)
                   }
-                  placeholder={`Container No. ${idx + 1}`}
+                  placeholder={`Контейнер №${idx + 1}`}
                   value={inputData}
                 />
               </InputGroup>
             ))}
+          <Link to={"/faq#qr-container-error"}>
+            <Text fontWeight="semibold" textStyle="sm">
+              Нужна помощь?
+            </Text>
+          </Link>
         </Stack>
         <Button
           disabled={!inputData}
           onClick={handleButtonClick}
           textTransform="uppercase"
         >
-          Continue
+          Продолжить
         </Button>
       </Flex>
     </Flex>

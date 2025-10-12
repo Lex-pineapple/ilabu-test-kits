@@ -42,8 +42,8 @@ export const ListControlled = ({
       setFiltered([...filtered].sort((a, b) => b.title.localeCompare(a.title)));
   }, [sortType]);
 
-  const handleSelect = (checked: boolean, title: string) => {
-    const item = filtered.find((item) => item.title === title);
+  const handleSelect = (checked: boolean, uid: string) => {
+    const item = filtered.find((item) => item.uid === uid);
     const selectedIndex = item ? selected.indexOf(item) : -1;
     const itemExists = selectedIndex > -1;
 

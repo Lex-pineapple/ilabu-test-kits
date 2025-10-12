@@ -21,7 +21,7 @@ export const InputClearable = ({
 }: InputClearableProps) => {
   const endElement = (
     <CloseButton
-      color="lab_red.500"
+      color="lab_green.900"
       me="-2"
       onClick={() => {
         onClear(id);

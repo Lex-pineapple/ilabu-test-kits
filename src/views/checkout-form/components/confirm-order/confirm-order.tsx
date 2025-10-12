@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router";
 
-import { Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 
 import { InfoCard } from "#/views/checkout-form/components/confirm-order/components/info-card";
 import { deliveryData, genderData } from "#constants/general";
 import { PATHS } from "#constants/paths";
+import { TitleCard } from "#shared/title-card";
 import { TotalComponent } from "#shared/total-component";
 import { useAppDispatch, useAppSelector } from "#store/hooks";
 import { getCartItems } from "#store/slices/cart-slice";
@@ -29,64 +30,54 @@ export const ConfirmOrder = () => {
 
   return (
     <Flex flexDir="column" h="100%">
-      <Container mb={9} p="0 14px">
-        <Heading mb={3.5} size="2xl" textTransform="uppercase">
-          confirm your order
-        </Heading>
-        <Text textStyle="xl">
-          Please check that your order details are correct.
-        </Text>
-      </Container>
-      <Flex
-        flexDir="column"
-        gap={8}
-        h="100%"
-        justifyContent="space-between"
-        p="0 14px 30px"
-      >
+      <TitleCard
+        content={"Проверьте, что все детали заказа верны"}
+        heading={"Подтверждение заказа"}
+        mb={8}
+      />
+      <Flex flexDir="column" gap={2.5} h="100%" justifyContent="space-between">
         <InfoCard
           bottomElement={
             <TotalComponent
-              justifyContent="flex-end"
-              p="0 14px"
+              justifyContent="center"
+              mt={2}
               total={countTotal(cartData)}
             />
           }
           items={cartData.map((item) => ({
-            data: Number(item.price).toFixed(2).toString(),
+            data: `${Number(item.price).toFixed(2)} BYN`,
             title: item.title,
           }))}
           onOrderChange={() => navigate(`${PATHS._selected}/${currKitUid}`)}
-          title="Selected tests:"
+          title="Выбранные тесты"
+          whiteSpace="nowrap"
         />
         <InfoCard
-          items={[{ data: "15.00 р", title: delivery }]}
+          items={[{ data: "15.00 BYN", title: delivery }]}
           onOrderChange={() => dispatch(setFormState("orderDetails"))}
-          title="Delivery of biomaterials"
+          title="Способ доставки"
+          whiteSpace="nowrap"
         />
         <InfoCard
+          breakWord="break-all"
           items={[
-            { data: formData.email, title: "Email:" },
-            { data: formData.firstName, title: "First name:" },
-            { data: formData.lastName, title: "Last name:" },
+            { data: formData.email, title: "Email" },
+            { data: formData.firstName, title: "Имя" },
+            { data: formData.lastName, title: "Фамилия" },
+            { data: formData.middleName, title: "Отчество" },
             {
               data: gender,
-              title: "Gender:",
+              title: "Пол",
             },
-            { data: formData.date, title: "Date of birth:" },
+            { data: formData.date, title: "Дата рождения" },
           ]}
           onOrderChange={() => dispatch(setFormState("orderDetails"))}
-          title="Perconal information"
+          title="Персональная информация"
         />
       </Flex>
       <Link to={PATHS.ordered}>
-        <Button
-          fontSize="xl"
-          fontWeight="light"
-          textTransform="uppercase"
-          w="100%"
-        >
-          Pay
+        <Button mt={9} textTransform="uppercase" w="100%">
+          Оплатить
         </Button>
       </Link>
     </Flex>

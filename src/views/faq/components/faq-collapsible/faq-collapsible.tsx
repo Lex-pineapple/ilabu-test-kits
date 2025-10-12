@@ -9,8 +9,16 @@ import { ShdContainer } from "#shared/shd-container";
 
 import styles from "./faq-collapsible.module.scss";
 
-export const FAQCollapsible = ({ content, title }: FAQDataType) => {
-  const [isOpen, setIsOpen] = useState(false);
+type FAQCollapsibleProps = {
+  open?: boolean;
+} & FAQDataType;
+
+export const FAQCollapsible = ({
+  content,
+  open,
+  title,
+}: FAQCollapsibleProps) => {
+  const [isOpen, setIsOpen] = useState(open ?? false);
 
   return (
     <Collapsible.Root

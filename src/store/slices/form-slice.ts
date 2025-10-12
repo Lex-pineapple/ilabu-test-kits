@@ -15,6 +15,7 @@ type userInfoType = {
   firstName: string;
   gender: string[];
   lastName: string;
+  middleName: string;
 };
 
 const initialState: initialStateType = {
@@ -25,6 +26,7 @@ const initialState: initialStateType = {
     firstName: "",
     gender: [],
     lastName: "",
+    middleName: "",
   },
   formState: "codeCheck",
   tubes: [],

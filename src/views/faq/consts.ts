@@ -1,5 +1,6 @@
 export type FAQDataType = {
   content: string | string[];
+  id: string;
   title: string;
 };
 
@@ -7,6 +8,7 @@ export const FAQData: FAQDataType[] = [
   {
     content:
       "QR-код размещён на коробке с торцевой стороны. Просто поверните упаковку и найдите квадратный код в чёрно-белом рисунке. Отсканируйте его камерой смартфона.",
+    id: "qr-location",
     title: "Как найти QR-код для работы с набором?",
   },
   {
@@ -15,6 +17,7 @@ export const FAQData: FAQDataType[] = [
       "Наведите камеру на QR-код так, чтобы он полностью попал в кадр",
       "На экране в районе QR-кода появится всплывающая ссылка. Нажмите на нее, чтобы перейти к инструкции.",
     ],
+    id: "qr-iphone",
     title: "Как отсканировать QR-код на устройстве iPhone?",
   },
   {
@@ -23,10 +26,12 @@ export const FAQData: FAQDataType[] = [
       "Наведите камеру на QR-код",
       "На экране появится всплывающая ссылка — нажмите на неё, чтобы открыть",
     ],
+    id: "qr-android",
     title: "Как отсканировать QR-код на устройстве Android?",
   },
   {
     content: "LALALLALLALALALLALALL ALALLALALLALALALLALLALALLALLAL ALALLALALAL",
+    id: "qr-container-error",
     title:
       "Что делать, если при сканировании штрихкода на контейнере/пробирке приложение выдает ошибку?",
   },
@@ -40,19 +45,23 @@ export const FAQData: FAQDataType[] = [
       "Исключите половые контакты за 12 часов до сдачи.",
       "Женщинам не рекомендуется сдавать анализ мочи во время менструации, а также в течение 2 суток после ее окончания.",
     ],
+    id: "urine-collection",
     title: "Как подготовиться к сбору анализа мочи?",
   },
   {
     content: "wdefrgtyu67i8i9op;lokiujhygtrfew",
+    id: "saliva-collection",
     title: "Как подготовиться к сбору анализа слюны?",
   },
   {
     content: "sqwdefrghnjmk",
+    id: "swab-cheek",
     title:
       "Как подготовиться к сбору буккального эпителия (мазок со внутренней стороны щеки)?",
   },
   {
     content: "sqdwefrgh",
+    id: "delivery",
     title: "Какие пункты самостоятельной доставки работают?",
   },
 ];

@@ -22,5 +22,5 @@ export type formStatesType = (typeof formStatesKeys)[number];
 export const CheckoutForm = () => {
   const formState = useAppSelector(getFormState);
 
-  return <Container p="30px 14px">{formStates[formState]}</Container>;
+  return <Container p="30px 0">{formStates[formState]}</Container>;
 };

@@ -155,7 +155,11 @@ export const DrawerSwipeable = () => {
               w="100%"
             >
               <TotalComponent total={total} />
-              <Link style={{ width: "100%" }} to={PATHS.instruction}>
+              <Link
+                onClick={() => setCollapsibleOpen(false)}
+                style={{ width: "100%" }}
+                to={PATHS.instruction}
+              >
                 <Button
                   fontSize="16px"
                   p="12px 28px"
