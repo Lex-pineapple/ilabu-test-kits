@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { Stack } from "@chakra-ui/react";
 
 import type { AnalysisItemType } from "#constants/card-product-data";
+import { CardAnalysis } from "#shared/card-analysis";
 import type { ColorType } from "#shared/circle-graphic/circle-graphic";
-import { ListCard } from "#shared/list-card";
 import { useAppDispatch, useAppSelector } from "#store/hooks";
 import { getCartItems, setCartItems } from "#store/slices/cart-slice";
 import { removeFromArray } from "#utils/remove-from-array";
@@ -17,7 +17,6 @@ type ListControlledProps = {
 };
 
 export const ListControlled = ({
-  color,
   items,
   searchQ = "",
   sortType,
@@ -63,11 +62,11 @@ export const ListControlled = ({
   return (
     <Stack gap={2.5}>
       {filtered.map((item) => (
-        <ListCard
+        <CardAnalysis
           {...item}
-          color={color}
+          cardType="CHECK"
           handleSelect={handleSelect}
-          key={item.title}
+          key={item.testId}
           selected={selected.includes(item)}
         />
       ))}

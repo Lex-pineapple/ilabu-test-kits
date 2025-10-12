@@ -1,6 +1,6 @@
-import { Button, Text, useSelectContext } from "@chakra-ui/react";
+import { Button, useSelectContext } from "@chakra-ui/react";
 
-import { ArrowDownIcon } from "#assets/icons/arrow-down";
+import { SortIcon } from "#assets/icons/sort-icon";
 import type { ListType } from "#shared/select-button/select-button";
 
 export const SelectTrigger = () => {
@@ -8,11 +8,14 @@ export const SelectTrigger = () => {
   const items = select.selectedItems as ListType[];
 
   return (
-    <Button variant="outline" {...select.getTriggerProps()}>
-      <Text lineClamp={1} maxW={100}>
-        {items.length ? items[0].label : "Sort by"}
-      </Text>
-      <ArrowDownIcon size="xs" />
+    <Button
+      bg="lab_green.900"
+      border="none"
+      variant="outline"
+      {...select.getTriggerProps()}
+      p={0}
+    >
+      <SortIcon color="#fff" size="lg" />
     </Button>
   );
 };

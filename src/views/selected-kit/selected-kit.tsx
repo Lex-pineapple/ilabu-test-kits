@@ -5,15 +5,14 @@ import {
   Container,
   createListCollection,
   Flex,
+  Heading,
   Input,
   InputGroup,
 } from "@chakra-ui/react";
 
 import { DrawerSwipeable } from "#/components/drawer-swipeable";
 import { ListControlled } from "#/components/list-controlled";
-import { SearchIcon } from "#assets/icons/search-icon";
 import type { CardExtensiveDataType } from "#constants/card-extensive-data";
-import { HeaderWBg } from "#shared/header-w-bg";
 import { SelectButton } from "#shared/select-button";
 
 const sortKeys = createListCollection({
@@ -36,24 +35,44 @@ export const SelectedKit = () => {
   const [sortType, setSortType] = useState<string[]>([]);
 
   return (
-    <div>
-      <HeaderWBg>{loaderData.title}</HeaderWBg>
-      <Container p="18px 14px">
-        <Flex justify="space-between" pb={6}>
-          <InputGroup maxW={170} startElement={<SearchIcon size="md" />}>
+    <Container p={0} pb={14} pt={10}>
+      <Heading pb={2} size="md" textTransform="uppercase">
+        {loaderData.title}
+      </Heading>
+      <Container p={0}>
+        <Flex justify="space-between" pb={2.5}>
+          <InputGroup maxW={170}>
             <Input
+              bg="white"
+              border="none"
+              borderRadius={15}
+              boxShadow="0 0 10px 2px #0000000f"
               onInput={(e) => setSearchQ((e.target as HTMLInputElement).value)}
-              placeholder="Search test"
+              placeholder="Найти тест"
+              textStyle="sm"
               value={searchQ}
               variant="secondary"
             />
           </InputGroup>
+          {/* TODO: update switching logic and add bottom sheet */}
           <SelectButton
             items={sortKeys}
             selected={sortType}
             setSelected={setSortType}
           />
         </Flex>
+        {/* TODO: add logic */}
+        <Input
+          bg="white"
+          border="none"
+          borderRadius={15}
+          boxShadow="0 0 10px 2px #0000000f"
+          mb={11}
+          placeholder="Выбрать исполнителя"
+          textStyle="sm"
+          value={searchQ}
+          variant="secondary"
+        />
         <ListControlled
           color={loaderData.color}
           items={loaderData.analysisItems}
@@ -62,6 +81,6 @@ export const SelectedKit = () => {
         />
       </Container>
       <DrawerSwipeable />
-    </div>
+    </Container>
   );
 };

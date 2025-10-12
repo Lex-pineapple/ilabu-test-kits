@@ -41,7 +41,11 @@ export const Header = () => {
           </Link>
           <Flex className={styles.links} flexDir="column">
             {LINKS.map((item) => (
-              <Link onClick={() => setOpen(false)} to={item.href}>
+              <Link
+                key={item.title}
+                onClick={() => setOpen(false)}
+                to={item.href}
+              >
                 <Text color="white" textStyle="sm">
                   {item.title}
                 </Text>

@@ -5,7 +5,7 @@ import { Collapsible, Flex, Heading } from "@chakra-ui/react";
 
 import { CollapsibleIcon } from "#assets/icons/collapsible-icon";
 import type { AnalysisItemType } from "#constants/card-product-data";
-import { CardAnalysis } from "#shared/card-collapsible/components/card-analysis";
+import { CardAnalysis } from "#shared/card-analysis";
 
 import styles from "./card-collapsible.module.scss";
 
@@ -39,7 +39,7 @@ export const CardCollapsible = ({ items }: CardCollapsibleProps) => {
       <Collapsible.Content p="0 14px" pt={2.5}>
         <Flex direction="column" gap={2.5} pb={2.5}>
           {items.map((item) => (
-            <CardAnalysis {...item} />
+            <CardAnalysis {...item} cardType="INFO" />
           ))}
         </Flex>
       </Collapsible.Content>

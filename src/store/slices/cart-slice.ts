@@ -15,6 +15,9 @@ const cartSlice = createSlice({
   initialState,
   name: "cart",
   reducers: {
+    clearCartItems: (state) => {
+      state.items = [];
+    },
     removeCartItems: (state, { payload }: PayloadAction<AnalysisItemType>) => {
       const idx = state.items.indexOf(payload);
       state.items = removeFromArray(state.items, idx);
@@ -28,6 +31,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { removeCartItems, setCartItems } = cartSlice.actions;
+export const { clearCartItems, removeCartItems, setCartItems } =
+  cartSlice.actions;
 export const { getCartItems } = cartSlice.selectors;
 export default cartSlice.reducer;

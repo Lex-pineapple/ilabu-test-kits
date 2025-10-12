@@ -46,7 +46,7 @@ export const cardExtensiveData: CardExtensiveDataType[] = [
     inputType: "Мазок из носа, зева, глаза",
     instructionTitle: "",
     price: 25.99,
-    title: "Набор для самостоятельного взятия биологического материала: слюна",
+    title: "Набор для самостоятельного взятия биологического материала",
     uid: "d6a510a5-fe59-48e9-8576-f9354dffa9b7",
     videoInstrustion: "",
   },

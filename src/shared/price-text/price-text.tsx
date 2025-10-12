@@ -6,12 +6,13 @@ type PriceTextProps = {
 
 export const PriceText = ({ price, ...props }: PriceTextProps) => (
   <Text
-    color="lab_red.500"
+    color="lab_green.900"
     fontFamily="secondary"
     fontWeight="medium"
     textStyle="2xl"
+    whiteSpace="nowrap"
     {...props}
   >
-    {Number(price).toFixed(2)} р.
+    {Number(price).toFixed(2)} BYN
   </Text>
 );
