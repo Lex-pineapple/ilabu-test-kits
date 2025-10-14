@@ -1,38 +1,46 @@
-import { Center, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import {
+  Center,
+  Container,
+  Flex,
+  Heading,
+  Image,
+  Text,
+} from "@chakra-ui/react";
 
 type StepItemProps = {
   description: string;
   imgSrc: string;
   step: number;
   title: string;
+  border?: boolean;
   reverse?: boolean;
 };
 
 export const StepItem = ({
+  border,
   description,
   imgSrc,
   reverse,
   step,
   title,
 }: StepItemProps) => (
-  <Flex flexDirection={reverse ? "row-reverse" : "row"} gap={4.5} p={0}>
-    <Flex flexDirection="column" gap={5}>
-      <Heading fontFamily="secondary" size="2xl">
-        {title}
-      </Heading>
-      <Text fontWeight="medium" lineHeight="28px">
-        {description}
-      </Text>
-    </Flex>
+  <Container
+    borderBottom={border ? "1px solid #00000033" : undefined}
+    flexDirection={reverse ? "row-reverse" : "row"}
+    gap={4.5}
+    p={0}
+    pb={12}
+  >
     <Flex
-      alignItems={reverse ? "flex-start" : "flex-end"}
-      flexBasis={109}
+      flexBasis={100}
       flexDirection="column"
       flexShrink={0}
+      float={reverse ? "left" : "right"}
       justifyContent="space-between"
+      width="fit-content"
     >
       <Center
-        bg="lab_red.500"
+        bg="lab_green.900"
         borderRadius="50%"
         color="white"
         fontFamily="secondary"
@@ -43,7 +51,15 @@ export const StepItem = ({
       >
         {step}
       </Center>
-      <Image objectFit="auto" src={imgSrc} />
+      <Image flexGrow="1" objectFit="auto" src={imgSrc} />
     </Flex>
-  </Flex>
+    <Container flexDirection="column" gap={5} p={0}>
+      <Heading pb={2.5} size="md">
+        {title}
+      </Heading>
+      <Text fontWeight="medium" textStyle="sm">
+        {description}
+      </Text>
+    </Container>
+  </Container>
 );

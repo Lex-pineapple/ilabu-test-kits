@@ -1,4 +1,6 @@
-import { Box, Container, Flex, Table, Text } from "@chakra-ui/react";
+import { Container, Flex, Heading, Table, Text } from "@chakra-ui/react";
+
+import { ShdContainer } from "#shared/shd-container";
 
 type TestTubeVisualItemType = {
   code: string;
@@ -10,56 +12,61 @@ type TestTubeVisualProps = {
 };
 
 export const TestTubeVisual = ({ items }: TestTubeVisualProps) => (
-  <Box bg="lab_grey.400" p={3.5}>
+  <ShdContainer p={4.5}>
+    <Heading fontWeight="bold" pb={3.5} size="md" textTransform="uppercase">
+      Пробирки/контейнеры, необходимые для выполнения выбранных вами тестов:
+    </Heading>
     <Table.Root bg="transparent">
       <Table.Header>
         <Table.Row bg="transparent">
           <Table.ColumnHeader
             border="none"
-            fontFamily="secondary"
-            fontSize="16px"
+            fontWeight="medium"
             p={0}
             pb={1.5}
+            textStyle="sm"
           >
-            Сolor of the test tube
+            Цвет крышки
           </Table.ColumnHeader>
           <Table.ColumnHeader
             border="none"
-            fontFamily="secondary"
-            fontSize="16px"
+            fontWeight="medium"
             p={0}
             pb={1.5}
-            textAlign="center"
+            textStyle="sm"
           >
-            Code
+            Код
           </Table.ColumnHeader>
         </Table.Row>
       </Table.Header>
       <Table.Body>
         {items.map((item, idx) => (
           <Table.Row bg="transparent" key={item.color}>
-            <Table.Cell border="none">
+            <Table.Cell border="none" pl={0} w={124}>
               <Container
                 bg={item.color}
+                borderRadius={10}
                 h="24px"
                 m={0}
                 p={0}
                 w="124px"
               ></Container>
             </Table.Cell>
-            <Table.Cell border="none">
-              <Flex bg="lab_grey.500" justifyContent="center">
-                <Text display="inline-block" mr="2px">
-                  {String.fromCharCode(65 + idx)}
-                </Text>
-                <Text color="white" display="inline-block">
-                  {item.code}
-                </Text>
-              </Flex>
+            <Table.Cell border="none" pl={0}>
+              <ShdContainer>
+                <Flex justifyContent="center" p="3px 0">
+                  <Text display="inline-block" fontWeight="medium" mr="2px">
+                    {String.fromCharCode(65 + idx)}
+                  </Text>
+                  <Text display="inline-block" fontWeight="medium">
+                    {item.code}
+                  </Text>
+                </Flex>
+              </ShdContainer>
             </Table.Cell>
           </Table.Row>
         ))}
       </Table.Body>
     </Table.Root>
-  </Box>
+  </ShdContainer>
 );
