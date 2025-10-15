@@ -2,7 +2,10 @@ import type { ColorType } from "#shared/circle-graphic/circle-graphic";
 
 export type AnalysisItemType = {
   description: string;
-  labName: string;
+  execLab: {
+    name: string;
+    uid: string;
+  };
   price: number;
   testId: string;
   title: string;
@@ -24,7 +27,10 @@ export const MOCK_UID = "d6a510a5-fe59-48e9-8576-f9354dffa9b7";
 export const analysisItems: AnalysisItemType[] = [
   {
     description: "Исследование генов системы артериального давления",
-    labName: "HELIX",
+    execLab: {
+      name: "HELIX",
+      uid: "12",
+    },
     price: 25.99,
     testId: "INSG41",
     title: "Анализ генов системы артериального давления",
@@ -32,7 +38,10 @@ export const analysisItems: AnalysisItemType[] = [
   },
   {
     description: "Исследование генов системы тромбообразования",
-    labName: "In vitro",
+    execLab: {
+      name: "in vitro",
+      uid: "13",
+    },
     price: 125.99,
     testId: "INSG42",
     title: "Анализ генов системы тромбообразования (гемостаза)",
@@ -41,7 +50,10 @@ export const analysisItems: AnalysisItemType[] = [
   {
     description:
       "Диагностика эффективности терапии лекарственным препаратом метотрексат",
-    labName: "HELIX",
+    execLab: {
+      name: "HELIX",
+      uid: "12",
+    },
     price: 160.0,
     testId: "INSG56",
     title: "ДНК диагностика эффективности терапии препаратом Метотрексат",
@@ -50,7 +62,10 @@ export const analysisItems: AnalysisItemType[] = [
   {
     description:
       "Диагностика эффективности терапии лекарственным препаратом метотрексат",
-    labName: "Институт генетики и цитологии НАН Беларуси",
+    execLab: {
+      name: "Институт генетики и цитологии НАН Беларуси",
+      uid: "14",
+    },
     price: 25.99,
     testId: "INSG560",
     title: "ДНК диагностика эффективности терапии препаратом Метотрексат",
@@ -59,7 +74,10 @@ export const analysisItems: AnalysisItemType[] = [
   {
     description:
       "Исследование эффективности сосудорасширяющих препаратов (донаторов азота) на основе ДНК-диагностики",
-    labName: "Институт генетики и цитологии НАН Беларуси",
+    execLab: {
+      name: "Институт генетики и цитологии НАН Беларуси",
+      uid: "14",
+    },
     price: 35.0,
     testId: "INSG55",
     title:
@@ -68,7 +86,10 @@ export const analysisItems: AnalysisItemType[] = [
   },
   {
     description: "Определение предрасположенности к костным переломам",
-    labName: "Институт генетики и цитологии НАН Беларуси",
+    execLab: {
+      name: "Институт генетики и цитологии НАН Беларуси",
+      uid: "14",
+    },
     price: 20.0,
     testId: "INSG48",
     title: "ДНК-анализ предрасположенности к остеопорозу",
@@ -77,7 +98,10 @@ export const analysisItems: AnalysisItemType[] = [
   {
     description:
       "Определение типа волокон коллагена и других факторов, влияющих на разрывы и растяжения связок и сухожилий",
-    labName: "Институт генетики и цитологии НАН Беларуси",
+    execLab: {
+      name: "Институт генетики и цитологии НАН Беларуси",
+      uid: "14",
+    },
     price: 25.99,
     testId: "INSG62",
     title:
@@ -87,7 +111,10 @@ export const analysisItems: AnalysisItemType[] = [
   {
     description:
       "Помогает определить допустимость применения оральных контрацептивов по ДНК-анализу некоторых генов",
-    labName: "Институт генетики и цитологии НАН Беларуси",
+    execLab: {
+      name: "Институт генетики и цитологии НАН Беларуси",
+      uid: "14",
+    },
     price: 199.99,
     testId: "INSG52",
     title:

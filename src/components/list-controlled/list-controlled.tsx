@@ -9,18 +9,24 @@ import { useAppDispatch, useAppSelector } from "#store/hooks";
 import { getCartItems, setCartItems } from "#store/slices/cart-slice";
 import { removeFromArray } from "#utils/remove-from-array";
 
+export type SortTypes = "nameAsc" | "nameDesc" | "priceAsc" | "priceDesc";
+
 type ListControlledProps = {
   color: ColorType;
-  items: AnalysisItemType[];
+  items: (AnalysisItemType & { disabled?: boolean })[];
+  labId?: null | string;
   searchQ?: string;
-  sortType?: string;
+  sortType?: SortTypes;
 };
 
 export const ListControlled = ({
   items,
+  labId,
   searchQ = "",
   sortType,
 }: ListControlledProps) => {
+  const [labFiltered, setLabFiltered] =
+    useState<(AnalysisItemType & { disabled?: boolean })[]>(items);
   const [filtered, setFiltered] = useState<AnalysisItemType[]>(items);
   const dispatch = useAppDispatch();
   const selected = useAppSelector(getCartItems);
@@ -28,18 +34,33 @@ export const ListControlled = ({
   useEffect(() => {
     if (searchQ)
       setFiltered(
-        items.filter((item) =>
+        labFiltered.filter((item) =>
           item.title.toUpperCase().includes(searchQ.toUpperCase()),
         ),
       );
-    else setFiltered(items);
-  }, [searchQ]);
+    else setFiltered(labFiltered);
+  }, [searchQ, labFiltered]);
 
   useEffect(() => {
-    if (sortType === "asc")
+    if (labId)
+      setLabFiltered(
+        items
+          .map((item) =>
+            item.execLab.uid === labId ? item : { ...item, disabled: true },
+          )
+          .sort((a, b) => (a.disabled ? 1 : -1)),
+      );
+  }, [labId]);
+
+  useEffect(() => {
+    if (sortType === "nameAsc")
       setFiltered([...filtered].sort((a, b) => a.title.localeCompare(b.title)));
-    if (sortType === "desc")
+    if (sortType === "nameDesc")
       setFiltered([...filtered].sort((a, b) => b.title.localeCompare(a.title)));
+    if (sortType === "priceAsc")
+      setFiltered([...filtered].sort((a, b) => a.price - b.price));
+    if (sortType === "priceDesc")
+      setFiltered([...filtered].sort((a, b) => b.price - a.price));
   }, [sortType]);
 
   const handleSelect = (checked: boolean, uid: string) => {

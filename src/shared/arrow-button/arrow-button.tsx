@@ -1,26 +1,28 @@
 import { Link } from "react-router-dom";
 
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Box, Button, type ButtonProps, Flex, Text } from "@chakra-ui/react";
 
 import { ArrowRight } from "#assets/icons/arrow-right";
 
 type ArrowButtonProps = {
+  btnType?: "FULL" | "PLAIN";
+  disabled?: boolean;
   link?: string;
-  type?: "FULL" | "PLAIN";
   onClick?: () => void;
-};
+} & ButtonProps;
 
 export const ArrowButton = ({
+  btnType = "PLAIN",
+  disabled,
   link,
   onClick,
-  type = "FULL",
 }: ArrowButtonProps) => {
   const tempElement = (
     <Flex alignItems="center" gap={4} justifyContent="flex-end" p={0}>
       <Text fontSize="14px" fontWeight="medium">
         Подробнее
       </Text>
-      {type === "FULL" ? (
+      {btnType === "FULL" ? (
         <Box bg="lab_green.900" borderRadius={10} p="2px 25px">
           <ArrowRight color="white" size="md" />
         </Box>
@@ -32,7 +34,7 @@ export const ArrowButton = ({
   return link ? (
     <Link to={link}>{tempElement}</Link>
   ) : (
-    <Button onClick={onClick} p={0} variant="ghost">
+    <Button disabled={disabled} onClick={onClick} p={0} variant="ghost">
       {tempElement}
     </Button>
   );

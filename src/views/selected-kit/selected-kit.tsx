@@ -1,38 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 
-import {
-  Container,
-  createListCollection,
-  Flex,
-  Heading,
-  Input,
-  InputGroup,
-} from "@chakra-ui/react";
+import { Container, Flex, Heading, Input, InputGroup } from "@chakra-ui/react";
 
 import { DrawerSwipeable } from "#/components/drawer-swipeable";
 import { ListControlled } from "#/components/list-controlled";
+import type { SortTypes } from "#/components/list-controlled/list-controlled";
+import { SortAlphabeticalDown } from "#assets/icons/sort-alphabetical-down";
+import { SortAlphabeticalUp } from "#assets/icons/sort-alphabetical-up";
+import { SortPriceDown } from "#assets/icons/sort-price-down";
+import { SortPriceUp } from "#assets/icons/sort-price-up";
 import type { CardExtensiveDataType } from "#constants/card-extensive-data";
 import { SelectButton } from "#shared/select-button";
+import type { ListType } from "#shared/select-button/select-button";
+import { useAppSelector } from "#store/hooks";
+import { getCartItems } from "#store/slices/cart-slice";
 
-const sortKeys = createListCollection({
-  items: [
-    {
-      label: "Ascending",
-      value: "asc",
-    },
-    {
-      label: "Descending",
-      value: "desc",
-    },
-  ],
-});
+const sortKeys = [
+  {
+    icon: <SortAlphabeticalUp size="lg" />,
+    label: "В алфавитном порядке",
+    value: "nameAsc",
+  },
+  {
+    icon: <SortAlphabeticalDown size="lg" />,
+    label: "В обратном алфавитном порядке",
+    value: "nameDesc",
+  },
+  {
+    icon: <SortPriceUp />,
+    label: "По убыванию цены",
+    value: "priceDesc",
+  },
+  {
+    icon: <SortPriceDown />,
+    label: "По возрастанию цены",
+    value: "priceAsc",
+  },
+];
 
 export const SelectedKit = () => {
   const loaderData = useLoaderData<CardExtensiveDataType>();
+  const selected = useAppSelector(getCartItems);
 
   const [searchQ, setSearchQ] = useState("");
-  const [sortType, setSortType] = useState<string[]>([]);
+  const [sortType, setSortType] = useState<null | string>(null);
+  const [execLab, setExecLab] = useState<null | string>(
+    selected.length ? selected[0].execLab.uid : null,
+  );
+  const execLabList = loaderData.analysisItems
+    .map((item) => ({
+      label: item.execLab.name,
+      value: item.execLab.uid,
+    }))
+    .reduce((acc, curr) => {
+      if (acc.some((item) => item.value === curr.value)) return acc;
+      return [...acc, curr];
+    }, [] as ListType[]);
+
+  useEffect(() => {
+    if (selected.length) setExecLab(selected[0].execLab.uid);
+  }, [selected]);
 
   return (
     <Container p={0} pb={14} pt={10}>
@@ -61,23 +89,19 @@ export const SelectedKit = () => {
             setSelected={setSortType}
           />
         </Flex>
-        {/* TODO: add logic */}
-        <Input
-          bg="white"
-          border="none"
-          borderRadius={15}
-          boxShadow="0 0 10px 2px #0000000f"
-          mb={11}
-          placeholder="Выбрать исполнителя"
-          textStyle="sm"
-          value={searchQ}
-          variant="secondary"
+        <SelectButton
+          buttonText="Выбрать исполнителя"
+          disabled={selected.length > 0}
+          items={execLabList}
+          selected={execLab}
+          setSelected={setExecLab}
         />
         <ListControlled
           color={loaderData.color}
           items={loaderData.analysisItems}
+          labId={execLab}
           searchQ={searchQ}
-          sortType={sortType[0]}
+          sortType={sortType as SortTypes}
         />
       </Container>
       <DrawerSwipeable />

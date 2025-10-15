@@ -1,14 +1,6 @@
 import { useEffect, useState } from "react";
 
-import {
-  Box,
-  Card,
-  Checkbox,
-  Container,
-  Flex,
-  Heading,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Card, Container, Heading, Text } from "@chakra-ui/react";
 
 import type { AnalysisItemType } from "#constants/card-product-data";
 import { ArrowButton } from "#shared/arrow-button";
@@ -18,13 +10,15 @@ type CardAnalysisProps = AnalysisItemType & {
   cardType: "CHECK" | "INFO";
   selected: boolean;
   handleSelect: (selected: boolean, title: string) => void;
+  disabled?: boolean;
 };
 
 export const CardAnalysis = ({
   cardType = "INFO",
   description,
+  disabled,
+  execLab,
   handleSelect,
-  labName,
   price,
   selected,
   testId,
@@ -45,11 +39,13 @@ export const CardAnalysis = ({
 
   return (
     <Card.Root
-      bg="url('/lab_apparel.svg') 10px 0 no-repeat, #fff"
+      bg={"url('/lab_apparel.svg') 10px 0 no-repeat, #fff"}
       border="none"
       borderRadius={10}
       boxShadow="0 0 10px 2px #0000000f"
+      filter={disabled ? "brightness(70%)" : "none"}
       p={4.5}
+      pointerEvents={disabled ? "none" : "auto"}
     >
       <Container p={0}>
         <Card.Header m="0 -18px" p={0} pb={2}>
@@ -68,7 +64,7 @@ export const CardAnalysis = ({
                 pt={1}
                 textStyle="xs"
               >
-                Исполнитель: {labName}
+                Исполнитель: {execLab.name}
               </Text>
             )}
           </Box>
@@ -84,12 +80,20 @@ export const CardAnalysis = ({
       </Container>
       {cardType === "CHECK" ? (
         <Card.Footer alignItems="flex-end" justifyContent="space-between" p="0">
-          <ArrowButton onClick={() => {}} type="PLAIN" />
-          <CheckboxButton checked={checked} onCheckedChange={handleCheck} />
+          <ArrowButton
+            btnType={"PLAIN" as const}
+            disabled={disabled}
+            onClick={() => {}}
+          />
+          <CheckboxButton
+            checked={checked}
+            disabled={disabled}
+            onCheckedChange={handleCheck}
+          />
         </Card.Footer>
       ) : (
         <Card.Footer justifyContent="flex-end" p="0">
-          <ArrowButton onClick={() => {}} />
+          <ArrowButton disabled={disabled} onClick={() => {}} />
         </Card.Footer>
       )}
       <Box

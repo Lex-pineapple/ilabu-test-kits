@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import { Container, Flex } from "@chakra-ui/react";
 
+import { CustomToaster } from "#/components/toaster";
 import { Footer } from "#shared/footer";
 import { Header } from "#shared/header";
 
@@ -26,5 +27,6 @@ export const Layout = () => (
       </Container>
     </div>
     <Footer />
+    <CustomToaster />
   </Flex>
 );
