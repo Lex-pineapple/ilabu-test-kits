@@ -3,6 +3,7 @@ import type { JSX } from "react";
 import { Button, RadioGroup, Stack } from "@chakra-ui/react";
 
 import { toaster } from "#/components/toaster/toaster-use";
+import { CollapsibleIcon } from "#assets/icons/collapsible-icon";
 import { SortIcon } from "#assets/icons/sort-icon";
 import { BottomSheet } from "#shared/bottom-sheet";
 
@@ -34,7 +35,8 @@ export const SelectButton = ({
           borderRadius={15}
           boxShadow="0 0 10px 2px #0000000f"
           color="black"
-          justifyContent="flex-start"
+          height="auto"
+          justifyContent="space-between"
           mb={11}
           onClick={(e) => {
             if (disabled) {
@@ -47,7 +49,7 @@ export const SelectButton = ({
               });
             }
           }}
-          p="20px 10px"
+          p={2.5}
           textAlign="left"
           whiteSpace="break-spaces"
           width="100%"
@@ -55,6 +57,7 @@ export const SelectButton = ({
           {selected
             ? items.find((item) => item.value === selected)?.label
             : buttonText}
+          <CollapsibleIcon size="sm" />
         </Button>
       ) : (
         <Button bg="lab_green.900" border="none" p={0} variant="outline">

@@ -2,7 +2,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
 
-import { Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 
 import { LogoMainIcon } from "#assets/icons/logo-main";
 import { LINKS } from "#constants/header-links";
@@ -40,17 +40,31 @@ export const Header = () => {
             </div>
           </Link>
           <Flex className={styles.links} flexDir="column">
-            {LINKS.map((item) => (
-              <Link
-                key={item.title}
-                onClick={() => setOpen(false)}
-                to={item.href}
-              >
-                <Text color="white" textStyle="sm">
-                  {item.title}
-                </Text>
-              </Link>
-            ))}
+            {LINKS.map((item) =>
+              item.href ? (
+                <Link
+                  key={item.title}
+                  onClick={() => setOpen(false)}
+                  to={item.href}
+                >
+                  <Text color="white" textStyle="sm">
+                    {item.title}
+                  </Text>
+                </Link>
+              ) : (
+                <Button
+                  _hover={{ color: "black" }}
+                  color="white"
+                  onClick={() => {
+                    setOpen(false);
+                    item.onClick?.();
+                  }}
+                  variant="ghost"
+                >
+                  <Text textStyle="sm">{item.title}</Text>
+                </Button>
+              ),
+            )}
           </Flex>
         </div>
         <BurgerButton active={open} onClick={() => setOpen(!open)} />

@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Container, Flex } from "@chakra-ui/react";
 
 import { CustomToaster } from "#/components/toaster";
+import { bottomSheetModal } from "#shared/bottom-sheet-modal";
 import { Footer } from "#shared/footer";
 import { Header } from "#shared/header";
 import { modal } from "#shared/modal";
@@ -30,5 +31,6 @@ export const Layout = () => (
     <Footer />
     <CustomToaster />
     <modal.Viewport />
+    <bottomSheetModal.Viewport />
   </Flex>
 );

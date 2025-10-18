@@ -23,6 +23,9 @@ const buttonRecipe = defineRecipe({
         h: "32px",
         p: "4px 26px",
       },
+      outline: {
+        borderRadius: 15,
+      },
       solid: {
         _disabled: {
           bgColor: "lab_grey.500",
