@@ -18,12 +18,8 @@ type CardCollapsibleProps = {
 export const CardCollapsible = ({ items }: CardCollapsibleProps) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <Collapsible.Root
-      m={"0 -14px"}
-      onClick={() => setIsOpen(!isOpen)}
-      open={isOpen}
-    >
-      <Collapsible.Trigger>
+    <Collapsible.Root m={"0 -14px"} open={isOpen}>
+      <Collapsible.Trigger onClick={() => setIsOpen(!isOpen)}>
         <Flex alignItems="center" gap={2} p="0 14px" pb={3}>
           <Heading size="md" textTransform="uppercase">
             Список анализов

@@ -166,6 +166,7 @@ const config = defineConfig({
           },
         },
         lab_green: {
+          100: { value: "#AED2CA" },
           1000: { value: "#516A67" },
           1100: { value: "#002A24" },
           50: { value: "#C1E5DD" },

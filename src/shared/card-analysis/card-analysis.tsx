@@ -5,12 +5,13 @@ import { Box, Card, Container, Heading, Text } from "@chakra-ui/react";
 import type { AnalysisItemType } from "#constants/card-product-data";
 import { ArrowButton } from "#shared/arrow-button";
 import { CheckboxButton } from "#shared/card-analysis/components/checkbox-button";
+import { modal } from "#shared/modal";
 
 type CardAnalysisProps = AnalysisItemType & {
   cardType: "CHECK" | "INFO";
-  selected: boolean;
-  handleSelect: (selected: boolean, title: string) => void;
   disabled?: boolean;
+  selected?: boolean;
+  handleSelect?: (selected: boolean, title: string) => void;
 };
 
 export const CardAnalysis = ({
@@ -28,13 +29,13 @@ export const CardAnalysis = ({
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    setChecked(selected);
+    setChecked(!!selected);
   }, [selected]);
 
   const handleCheck = () => {
     const checkedNew = !checked;
     setChecked(checkedNew);
-    handleSelect(checkedNew, uid);
+    handleSelect?.(checkedNew, uid);
   };
 
   return (
@@ -83,7 +84,14 @@ export const CardAnalysis = ({
           <ArrowButton
             btnType={"PLAIN" as const}
             disabled={disabled}
-            onClick={() => {}}
+            onClick={() =>
+              modal.open("analysis", {
+                modalData: {
+                  analysisUid: uid,
+                },
+                modalType: "ANALYSIS-ITEM",
+              })
+            }
           />
           <CheckboxButton
             checked={checked}
@@ -93,7 +101,17 @@ export const CardAnalysis = ({
         </Card.Footer>
       ) : (
         <Card.Footer justifyContent="flex-end" p="0">
-          <ArrowButton disabled={disabled} onClick={() => {}} />
+          <ArrowButton
+            disabled={disabled}
+            onClick={() =>
+              modal.open("analysis", {
+                modalData: {
+                  analysisUid: uid,
+                },
+                modalType: "ANALYSIS-ITEM",
+              })
+            }
+          />
         </Card.Footer>
       )}
       <Box

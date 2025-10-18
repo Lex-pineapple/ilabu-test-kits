@@ -5,6 +5,7 @@ import { Container, Flex } from "@chakra-ui/react";
 import { CustomToaster } from "#/components/toaster";
 import { Footer } from "#shared/footer";
 import { Header } from "#shared/header";
+import { modal } from "#shared/modal";
 
 import styles from "./layout.module.scss";
 
@@ -28,5 +29,6 @@ export const Layout = () => (
     </div>
     <Footer />
     <CustomToaster />
+    <modal.Viewport />
   </Flex>
 );
