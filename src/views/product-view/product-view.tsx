@@ -13,9 +13,7 @@ import { ShdContainer } from "#shared/shd-container";
 import styles from "./product-view.module.scss";
 
 export const ProductView = () => {
-  const loaderData = useLoaderData<CardExtensiveDataType | undefined>();
-
-  if (!loaderData) return <Navigate to="*" />;
+  const loaderData = useLoaderData<CardExtensiveDataType>();
 
   return (
     <Container p={0} pb={14} pt={10}>
