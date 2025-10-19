@@ -108,8 +108,6 @@ export const SelectedKit = () => {
           />
         </Flex>
         <SelectButton
-          buttonText="Выбрать исполнителя"
-          disabled={selected.length > 0}
           items={execLabList}
           selected={execLab}
           setSelected={setExecLab}

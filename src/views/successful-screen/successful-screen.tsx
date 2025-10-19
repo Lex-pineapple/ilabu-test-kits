@@ -1,8 +1,5 @@
-import { Map, Placemark, YMaps } from "@pbe/react-yandex-maps";
+import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
-import { Box, Container, Flex, Heading, Stack, Text } from "@chakra-ui/react";
-
-import { MapIcon } from "#assets/icons/map-icon";
 import { HeaderWBg } from "#shared/header-w-bg";
 import { ShdContainer } from "#shared/shd-container";
 import { StepItem } from "#shared/step-item";

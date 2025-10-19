@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { CloseButton, createOverlay, Drawer, Portal } from "@chakra-ui/react";
 
 import {
@@ -8,10 +6,10 @@ import {
 } from "#shared/bottom-sheet-modal/consts";
 
 type BottomSheetModalProps = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  modalData: any;
   title: string;
   type: BottomSheetModalsKeys;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  modalData?: any;
 };
 
 export const bottomSheetModal = createOverlay<BottomSheetModalProps>(

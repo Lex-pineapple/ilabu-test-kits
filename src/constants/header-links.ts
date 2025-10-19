@@ -4,7 +4,7 @@ import { bottomSheetModal } from "#shared/bottom-sheet-modal";
 export const LINKS = [
   { href: PATHS.availableKit, title: "Все наборы" },
   { href: PATHS.faq, title: "Часто задаваемые вопросы" },
-  { href: "", title: "Контакты" },
+  // { href: "", title: "Контакты" },
   {
     onClick: () => {
       bottomSheetModal.open("exit-modal", {

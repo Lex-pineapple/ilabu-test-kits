@@ -48,7 +48,7 @@ export const ListControlled = ({
           .map((item) =>
             item.execLab.uid === labId ? item : { ...item, disabled: true },
           )
-          .sort((a, b) => (a.disabled ? 1 : -1)),
+          .sort((a) => (a.disabled ? 1 : -1)),
       );
   }, [labId]);
 

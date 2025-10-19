@@ -12,9 +12,9 @@ import {
 
 import { ShdContainer } from "#shared/shd-container";
 
-type AnalysisModalProps = {
-  analysisUid: string;
-};
+// type AnalysisModalProps = {
+//   analysisUid: string;
+// };
 
 const AnalysisData = {
   analysisItems: [
@@ -47,7 +47,7 @@ const AnalysisData = {
   title: "ДНК-анализ предрасположенности к остеопорозу",
 };
 
-export const AnalysisModal = ({ analysisUid }: AnalysisModalProps) => (
+export const AnalysisModal = () => (
   // TODO: request for analysisn data
   <Container p={2} position="relative">
     <Flex flexDir="column">

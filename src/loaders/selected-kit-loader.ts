@@ -1,4 +1,4 @@
-import { type Params, redirect, useNavigate } from "react-router";
+import { type Params, redirect } from "react-router";
 
 import { cardExtensiveData } from "#constants/card-extensive-data";
 import { setCurrKitUid } from "#store/slices/main-slice";

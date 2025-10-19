@@ -1,7 +1,7 @@
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 
 import LiteYouTubeEmbed from "react-lite-youtube-embed";
-import { Navigate, useLoaderData } from "react-router";
+import { useLoaderData } from "react-router";
 
 import { Box, Container, Flex, Heading, List, Text } from "@chakra-ui/react";
 

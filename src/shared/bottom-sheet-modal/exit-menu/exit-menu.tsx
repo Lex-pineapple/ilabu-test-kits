@@ -1,4 +1,4 @@
-import { Button, Center, Flex, Stack, Text } from "@chakra-ui/react";
+import { Button, Center, Stack, Text } from "@chakra-ui/react";
 
 type ExitMenuProps = {
   onClose: () => void;

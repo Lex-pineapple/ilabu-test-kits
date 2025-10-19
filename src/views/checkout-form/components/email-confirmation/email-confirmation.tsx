@@ -1,4 +1,4 @@
-import { Button, Center, Flex, Image, PinInput, Text } from "@chakra-ui/react";
+import { Button, Center, Flex, PinInput, Text } from "@chakra-ui/react";
 
 import { TitleCard } from "#shared/title-card";
 

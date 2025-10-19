@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
-import { Button, Flex, Input, Stack, Text } from "@chakra-ui/react";
+import { Button, Flex, Stack, Text } from "@chakra-ui/react";
 
 import { LabContent } from "#/views/checkout-form/components/order-details/components/lab-content";
 import { CollapsibleIcon } from "#assets/icons/collapsible-icon";
@@ -53,7 +53,7 @@ export const OrderDetails = () => {
   const formData = useAppSelector(getFormData);
   const {
     control,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isValid },
     handleSubmit,
     register,
     resetField,
