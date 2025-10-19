@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 
 import { Container, Flex } from "@chakra-ui/react";
 
+import { ScrollToTop } from "#/components/scroll-to-top";
 import { CustomToaster } from "#/components/toaster";
 import { bottomSheetModal } from "#shared/bottom-sheet-modal";
 import { Footer } from "#shared/footer";
@@ -22,6 +23,7 @@ export const Layout = () => (
     p={0}
     pt={12}
   >
+    <ScrollToTop />
     <div>
       <Header />
       <Container p={3.5} pb={0} pt={0}>
