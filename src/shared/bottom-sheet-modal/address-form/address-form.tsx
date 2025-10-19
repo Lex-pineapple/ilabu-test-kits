@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 import { validationSchema } from "#shared/bottom-sheet-modal/address-form/validation-schema";
+import { InputError } from "#shared/input-error";
 
 const formData = {
   apartment: "",
@@ -44,7 +45,7 @@ type AddressFormProps = {
 
 export const AddressForm = ({ onClose, onFormSubmit }: AddressFormProps) => {
   const {
-    formState: { isDirty, isValid },
+    formState: { errors, isDirty, isValid },
     handleSubmit,
     register,
   } = useForm<AddressFormInputs>({
@@ -65,19 +66,31 @@ export const AddressForm = ({ onClose, onFormSubmit }: AddressFormProps) => {
       <Stack asChild gap={8}>
         <form onSubmit={onSubmit}>
           <Stack gap={2.5}>
-            <Input id="city" placeholder="Город" {...register("city")} />
-            <Input id="street" placeholder="Улица" {...register("street")} />
+            <div>
+              <Input id="city" placeholder="Город" {...register("city")} />
+              <InputError message={errors.city?.message} />
+            </div>
+            <div>
+              <Input id="street" placeholder="Улица" {...register("street")} />
+              <InputError message={errors.street?.message} />
+            </div>
             <Flex gap={2}>
-              <Input
-                id="building"
-                placeholder="Дом/Корпус"
-                {...register("building")}
-              />
-              <Input
-                id="apartment"
-                placeholder="Квартира"
-                {...register("apartment")}
-              />
+              <div>
+                <Input
+                  id="building"
+                  placeholder="Дом/Корпус"
+                  {...register("building")}
+                />
+                <InputError message={errors.building?.message} />
+              </div>
+              <div>
+                <Input
+                  id="apartment"
+                  placeholder="Квартира"
+                  {...register("apartment")}
+                />
+                <InputError message={errors.apartment?.message} />
+              </div>
             </Flex>
             <Flex gap={2}>
               <Input id="floor" placeholder="Этаж" {...register("floor")} />
@@ -87,15 +100,18 @@ export const AddressForm = ({ onClose, onFormSubmit }: AddressFormProps) => {
                 {...register("entryway")}
               />
             </Flex>
-            <InputGroup startElement="+">
-              <Input
-                id="phone"
-                placeholder="Телефон"
-                {...registerWithMask("phone", ["(375) 99 999-99-99"], {
-                  required: true,
-                })}
-              />
-            </InputGroup>
+            <div>
+              <InputGroup startElement="+">
+                <Input
+                  id="phone"
+                  placeholder="Телефон"
+                  {...registerWithMask("phone", ["(375) 99 999-99-99"], {
+                    required: true,
+                  })}
+                />
+              </InputGroup>
+              <InputError message={errors.phone?.message} />
+            </div>
             <Textarea
               autoresize
               id="commentary"

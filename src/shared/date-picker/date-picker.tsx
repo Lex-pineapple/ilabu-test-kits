@@ -3,34 +3,48 @@ import cn from "classnames";
 
 import { Input, InputGroup, type InputProps } from "@chakra-ui/react";
 
+import { InputError } from "#shared/input-error";
+
 import styles from "./date-picker.module.scss";
 
-export const DatePicker = (props: InputProps) => {
+type DatePickerProps = {
+  errorMessage?: string;
+};
+
+export const DatePicker = (props: InputProps & DatePickerProps) => {
   const [inputActive, setInputActive] = useState(false);
   const [value, setValue] = useState("");
 
   useEffect(() => {
+    setInputActive(value ? Boolean(value) : Boolean(props.value));
+  }, [value, props.value]);
+
+  useEffect(() => {
+    const value = (document?.getElementById("date") as HTMLInputElement)?.value;
     setInputActive(Boolean(value));
-  }, [value]);
+  }, []);
 
   return (
-    <InputGroup>
-      <Input
-        className={cn(styles.date_input, {
-          [styles["date_input--active"]]: inputActive,
-        })}
-        onChange={(e) => {
-          setValue(e.target.value);
-          props.onChange?.(e);
-        }}
-        onInput={(e) => {
-          setValue((e.target as HTMLInputElement).value);
-          props.onInput?.(e);
-        }}
-        placeholder="Дата рождения"
-        type="date"
-        {...props}
-      />
-    </InputGroup>
+    <div>
+      <InputGroup>
+        <Input
+          className={cn(styles.date_input, {
+            [styles["date_input--active"]]: inputActive,
+          })}
+          onChange={(e) => {
+            setValue(e.target.value);
+            props.onChange?.(e);
+          }}
+          onInput={(e) => {
+            setValue((e.target as HTMLInputElement).value);
+            props.onInput?.(e);
+          }}
+          placeholder="Дата рождения"
+          type="date"
+          {...props}
+        />
+      </InputGroup>
+      <InputError message={props.errorMessage} />
+    </div>
   );
 };

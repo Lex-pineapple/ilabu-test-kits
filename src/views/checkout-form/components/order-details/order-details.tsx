@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
-import { Button, Flex, Stack, Text } from "@chakra-ui/react";
+import { Button, Flex, Input, Stack, Text } from "@chakra-ui/react";
 
 import { LabContent } from "#/views/checkout-form/components/order-details/components/lab-content";
 import { CollapsibleIcon } from "#assets/icons/collapsible-icon";
@@ -11,6 +11,7 @@ import { bottomSheetModal } from "#shared/bottom-sheet-modal";
 import type { AddressFormInputs } from "#shared/bottom-sheet-modal/address-form/address-form";
 import { DatePicker } from "#shared/date-picker";
 import { InputClearable } from "#shared/input-clearable";
+import { InputError } from "#shared/input-error";
 import { SelectButton } from "#shared/select-button";
 import { TitleCard } from "#shared/title-card";
 import { useAppDispatch, useAppSelector } from "#store/hooks";
@@ -93,24 +94,28 @@ export const OrderDetails = () => {
         <form onSubmit={onSubmit}>
           <Stack gap={5} pb={8}>
             <InputClearable
+              errorMessage={errors.email?.message}
               id="email"
               onClear={resetField}
               placeholder="Email"
               {...register("email")}
             />
             <InputClearable
+              errorMessage={errors.firstName?.message}
               id="firstName"
               onClear={resetField}
               placeholder="Имя"
               {...register("firstName")}
             />
             <InputClearable
+              errorMessage={errors.lastName?.message}
               id="lastName"
               onClear={resetField}
               placeholder="Фамилия"
               {...register("lastName")}
             />
             <InputClearable
+              errorMessage={errors.middleName?.message}
               id="middleName"
               onClear={resetField}
               placeholder="Отчество"
@@ -120,64 +125,76 @@ export const OrderDetails = () => {
               control={control}
               name="gender"
               render={({ field }) => (
-                <SelectButton
-                  items={genderData}
-                  selected={field.value}
-                  setSelected={(value) => {
-                    field.onChange(value);
-                  }}
-                  trigger={
-                    <Button
-                      bg="white"
-                      border="none"
-                      borderBottom="3px solid #048B78"
-                      borderRadius={8}
-                      color={field.value ? "black" : "lab_grey.200"}
-                      fontWeight="semibold"
-                      justifyContent="space-between"
-                      width="100%"
-                    >
-                      {field.value
-                        ? genderData.find((item) => item.value === field.value)
-                            ?.label
-                        : "Пол"}
-                      <CollapsibleIcon width="12px" />
-                    </Button>
-                  }
-                />
+                <div>
+                  <SelectButton
+                    items={genderData}
+                    selected={field.value}
+                    setSelected={(value) => {
+                      field.onChange(value);
+                    }}
+                    trigger={
+                      <Button
+                        bg="white"
+                        border="none"
+                        borderBottom="3px solid #048B78"
+                        borderRadius={8}
+                        color={field.value ? "black" : "lab_grey.200"}
+                        fontWeight="semibold"
+                        justifyContent="space-between"
+                        width="100%"
+                      >
+                        {field.value
+                          ? genderData.find(
+                              (item) => item.value === field.value,
+                            )?.label
+                          : "Пол"}
+                        <CollapsibleIcon width="12px" />
+                      </Button>
+                    }
+                  />
+                  <InputError message={errors.gender?.message} />
+                </div>
               )}
             />
-            <DatePicker id="date" {...register("date")} />
+
+            <DatePicker
+              errorMessage={errors.date?.message}
+              id="date"
+              {...register("date")}
+            />
             <Controller
               control={control}
               name="delivery"
               render={({ field }) => (
-                <SelectButton
-                  items={deliveryData}
-                  selected={field.value}
-                  setSelected={(value) => {
-                    field.onChange(value);
-                  }}
-                  trigger={
-                    <Button
-                      bg="white"
-                      border="none"
-                      borderBottom="3px solid #048B78"
-                      borderRadius={8}
-                      color={field.value ? "black" : "lab_grey.200"}
-                      fontWeight="semibold"
-                      justifyContent="space-between"
-                      width="100%"
-                    >
-                      {field.value
-                        ? deliveryData.find(
-                            (item) => item.value === field.value,
-                          )?.label
-                        : "Доставка биоматериала"}
-                      <CollapsibleIcon width="12px" />
-                    </Button>
-                  }
-                />
+                <div>
+                  <SelectButton
+                    items={deliveryData}
+                    selected={field.value}
+                    setSelected={(value) => {
+                      field.onChange(value);
+                    }}
+                    trigger={
+                      <Button
+                        bg="white"
+                        border="none"
+                        borderBottom="3px solid #048B78"
+                        borderRadius={8}
+                        color={field.value ? "black" : "lab_grey.200"}
+                        fontWeight="semibold"
+                        justifyContent="space-between"
+                        width="100%"
+                      >
+                        {field.value
+                          ? deliveryData.find(
+                              (item) => item.value === field.value,
+                            )?.label
+                          : "Доставка биоматериала"}
+                        <CollapsibleIcon width="12px" />
+                      </Button>
+                    }
+                  />
+                  <InputError message={errors.delivery?.message} />
+                </div>
               )}
             />
             {deliveryMethod === "personal" && (
@@ -217,9 +234,7 @@ export const OrderDetails = () => {
                     />
                   )}
                 />
-                <Text color="lab_red.error" mt={2} textStyle="xs">
-                  {errors.labAdressId?.message}
-                </Text>
+                <InputError message={errors.labAdressId?.message} />
               </div>
             )}
             {deliveryMethod === "courier" && (
@@ -253,13 +268,11 @@ export const OrderDetails = () => {
                       : "Добавить адрес доставки"}
                   </Text>
                 </Button>
-                <Text color="lab_red.error" mt={2} textStyle="xs">
-                  {errors.deliveryAddress?.message}
-                </Text>
+                <InputError message={errors.deliveryAddress?.message} />
               </div>
             )}
           </Stack>
-          <Button disabled={!isDirty} type="submit" w="100%">
+          <Button type="submit" w="100%">
             Продолжить
           </Button>
         </form>

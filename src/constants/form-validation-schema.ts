@@ -2,8 +2,8 @@ import { z } from "zod";
 
 export const validationSchema = z
   .object({
-    date: z.string().min(2),
-    delivery: z.string(),
+    date: z.string().min(2, { error: "Укажите дату рождения" }),
+    delivery: z.string().min(1, { error: "Выберите способ доставки" }),
     deliveryAddress: z.optional(
       z.object({
         apartment: z.string(),
@@ -16,12 +16,12 @@ export const validationSchema = z
         street: z.string(),
       }),
     ),
-    email: z.email(),
-    firstName: z.string().min(1),
-    gender: z.string(),
+    email: z.email("Введите корректный e-mail"),
+    firstName: z.string().min(1, { error: "Имя не должно быть пустым" }),
+    gender: z.string().min(1, { error: "Выберите пол" }),
     labAdressId: z.optional(z.any()),
-    lastName: z.string().min(1),
-    middleName: z.string().min(1),
+    lastName: z.string().min(1, { error: "Фамилия не должна быть пустой" }),
+    middleName: z.string().min(1, { error: "Отчество не должно быть пустым" }),
   })
   .superRefine((val, ctx) => {
     if (
