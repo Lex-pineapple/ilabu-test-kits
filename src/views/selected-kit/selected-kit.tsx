@@ -1,13 +1,23 @@
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 
-import { Container, Flex, Heading, Input, InputGroup } from "@chakra-ui/react";
+import {
+  Button,
+  Container,
+  Flex,
+  Heading,
+  Input,
+  InputGroup,
+} from "@chakra-ui/react";
 
 import { DrawerSwipeable } from "#/components/drawer-swipeable";
 import { ListControlled } from "#/components/list-controlled";
 import type { SortTypes } from "#/components/list-controlled/list-controlled";
+import { toaster } from "#/components/toaster/toaster-use";
+import { CollapsibleIcon } from "#assets/icons/collapsible-icon";
 import { SortAlphabeticalDown } from "#assets/icons/sort-alphabetical-down";
 import { SortAlphabeticalUp } from "#assets/icons/sort-alphabetical-up";
+import { SortIcon } from "#assets/icons/sort-icon";
 import { SortPriceDown } from "#assets/icons/sort-price-down";
 import { SortPriceUp } from "#assets/icons/sort-price-up";
 import type { CardExtensiveDataType } from "#constants/card-extensive-data";
@@ -82,11 +92,19 @@ export const SelectedKit = () => {
               variant="secondary"
             />
           </InputGroup>
-          {/* TODO: update switching logic and add bottom sheet */}
           <SelectButton
             items={sortKeys}
             selected={sortType}
             setSelected={setSortType}
+            trigger={
+              <Button bg="lab_green.900" border="none" p={0} variant="outline">
+                {sortType ? (
+                  sortKeys.find((item) => item.value === sortType)?.icon
+                ) : (
+                  <SortIcon color="#fff" size="lg" />
+                )}
+              </Button>
+            }
           />
         </Flex>
         <SelectButton
@@ -95,6 +113,38 @@ export const SelectedKit = () => {
           items={execLabList}
           selected={execLab}
           setSelected={setExecLab}
+          trigger={
+            <Button
+              bg="white"
+              border="none"
+              borderRadius={15}
+              boxShadow="0 0 10px 2px #0000000f"
+              color="black"
+              height="auto"
+              justifyContent="space-between"
+              mb={11}
+              onClick={(e) => {
+                if (selected.length > 0) {
+                  e.preventDefault();
+                  toaster.create({
+                    closable: true,
+                    description:
+                      "Можно выбрать только одного исполнителя. Для выбора другого исполнителя, пожалуйста, очистите элементы из корзины",
+                    type: "error",
+                  });
+                }
+              }}
+              p={2.5}
+              textAlign="left"
+              whiteSpace="break-spaces"
+              width="100%"
+            >
+              {execLab
+                ? execLabList.find((item) => item.value === execLab)?.label
+                : "Выбрать исполнителя"}
+              <CollapsibleIcon size="sm" />
+            </Button>
+          }
         />
         <ListControlled
           color={loaderData.color}

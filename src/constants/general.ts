@@ -1,35 +1,21 @@
-import { createListCollection } from "@chakra-ui/react";
+export const genderData = [
+  {
+    label: "Женский",
+    value: "female",
+  },
+  {
+    label: "Мужской",
+    value: "male",
+  },
+];
 
-export const genderData = createListCollection({
-  items: [
-    {
-      label: "Female",
-      value: "female",
-    },
-    {
-      label: "Male",
-      value: "male",
-    },
-    {
-      label: "Other",
-      value: "other",
-    },
-  ],
-});
-
-export const deliveryData = createListCollection({
-  items: [
-    {
-      label: "Personal delivery",
-      value: "personal",
-    },
-    {
-      label: "Courier",
-      value: "courier",
-    },
-    {
-      label: "Parcel locker",
-      value: "parcel",
-    },
-  ],
-});
+export const deliveryData = [
+  {
+    label: "Самостоятельная доставка",
+    value: "personal",
+  },
+  {
+    label: "Курьерская доставка Mylab",
+    value: "courier",
+  },
+];

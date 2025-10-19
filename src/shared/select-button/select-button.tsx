@@ -1,74 +1,32 @@
-import type { JSX } from "react";
+import type { JSX, ReactNode } from "react";
 
-import { Button, RadioGroup, Stack } from "@chakra-ui/react";
+import { RadioGroup, Stack } from "@chakra-ui/react";
 
-import { toaster } from "#/components/toaster/toaster-use";
-import { CollapsibleIcon } from "#assets/icons/collapsible-icon";
-import { SortIcon } from "#assets/icons/sort-icon";
 import { BottomSheet } from "#shared/bottom-sheet";
 
-export type ListType = { label: string; value: string; icon?: JSX.Element };
+export type ListType = { value: string; icon?: JSX.Element; label?: string };
 
 type SelectButtonTypes = {
-  items: ListType[];
-  selected: null | string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  items: any[] | ListType[];
   setSelected: (value: null | string) => void;
-  buttonText?: string;
-  disabled?: boolean;
+  selected?: null | string;
+  trigger?: ReactNode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ContentElement?: (props: any) => JSX.Element;
 };
 
 export const SelectButton = ({
-  buttonText,
-  disabled,
+  ContentElement,
   items,
   selected,
   setSelected,
+  trigger,
 }: SelectButtonTypes) => (
   <BottomSheet
     primaryButton={"Применить"}
     title={"Сортировка"}
-    trigger={
-      buttonText ? (
-        <Button
-          bg="white"
-          border="none"
-          borderRadius={15}
-          boxShadow="0 0 10px 2px #0000000f"
-          color="black"
-          height="auto"
-          justifyContent="space-between"
-          mb={11}
-          onClick={(e) => {
-            if (disabled) {
-              e.preventDefault();
-              toaster.create({
-                closable: true,
-                description:
-                  "Можно выбрать только одного исполнителя. Для выбора другого исполнителя, пожалуйста, очистите элементы из корзины",
-                type: "error",
-              });
-            }
-          }}
-          p={2.5}
-          textAlign="left"
-          whiteSpace="break-spaces"
-          width="100%"
-        >
-          {selected
-            ? items.find((item) => item.value === selected)?.label
-            : buttonText}
-          <CollapsibleIcon size="sm" />
-        </Button>
-      ) : (
-        <Button bg="lab_green.900" border="none" p={0} variant="outline">
-          {selected ? (
-            items.find((item) => item.value === selected)?.icon
-          ) : (
-            <SortIcon color="#fff" size="lg" />
-          )}
-        </Button>
-      )
-    }
+    trigger={trigger}
   >
     <RadioGroup.Root
       onValueChange={(e) => setSelected(e.value)}
@@ -85,7 +43,10 @@ export const SelectButton = ({
             value={item.value}
           >
             <RadioGroup.ItemHiddenInput />
-            <RadioGroup.ItemText>{item.label}</RadioGroup.ItemText>
+            {ContentElement && <ContentElement {...item} />}
+            {item.label && (
+              <RadioGroup.ItemText>{item.label}</RadioGroup.ItemText>
+            )}
             <RadioGroup.ItemIndicator />
           </RadioGroup.Item>
         ))}

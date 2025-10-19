@@ -8,12 +8,14 @@ import {
 } from "#shared/bottom-sheet-modal/consts";
 
 type BottomSheetModalProps = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  modalData: any;
   title: string;
   type: BottomSheetModalsKeys;
 };
 
 export const bottomSheetModal = createOverlay<BottomSheetModalProps>(
-  ({ onOpenChange, title, type, ...rest }) => {
+  ({ modalData, onOpenChange, title, type, ...rest }) => {
     const Modal = BottomSheetModals[type];
 
     return (
@@ -41,6 +43,7 @@ export const bottomSheetModal = createOverlay<BottomSheetModalProps>(
                   onClose={() => {
                     onOpenChange?.({ open: false });
                   }}
+                  {...modalData}
                 />
               </Drawer.Body>
             </Drawer.Content>

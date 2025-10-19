@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import type { formStatesType } from "#/views/checkout-form/checkout-form";
+import type { AddressFormInputs } from "#shared/bottom-sheet-modal/address-form/address-form";
 
 type initialStateType = {
   formData: userInfoType;
@@ -10,25 +11,38 @@ type initialStateType = {
 
 type userInfoType = {
   date: string;
-  delivery: string[];
+  delivery: string;
   email: string;
   firstName: string;
-  gender: string[];
+  gender: string;
   lastName: string;
   middleName: string;
+  deliveryAddress?: AddressFormInputs;
+  labAdressId?: string;
 };
 
 const initialState: initialStateType = {
   formData: {
     date: "",
-    delivery: [],
+    delivery: "",
+    deliveryAddress: {
+      apartment: "",
+      building: "",
+      city: "",
+      commentary: "",
+      entryway: "",
+      floor: "",
+      phone: "",
+      street: "",
+    },
     email: "",
     firstName: "",
-    gender: [],
+    gender: "",
+    labAdressId: "",
     lastName: "",
     middleName: "",
   },
-  formState: "codeCheck",
+  formState: "orderDetails",
   tubes: [],
 };
 

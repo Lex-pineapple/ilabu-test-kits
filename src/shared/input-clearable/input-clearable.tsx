@@ -10,7 +10,7 @@ import {
 import type { Inputs } from "#/views/checkout-form/components/order-details/order-details";
 
 type InputClearableProps = {
-  id: "email" | "firstName" | "lastName";
+  id: "email" | "firstName" | "lastName" | "middleName";
   onClear: UseFormResetField<Inputs>;
 } & InputProps;
 

@@ -19,11 +19,11 @@ export const ConfirmOrder = () => {
   const currKitUid = useAppSelector(getCyrrKitUid);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const gender = genderData.items.find(
-    (item) => item.value === formData.gender[0],
+  const gender = genderData.find(
+    (item) => item.value === formData.gender,
   )?.label;
-  const deliveryInfo = deliveryData.items.find(
-    (item) => item.value === formData.delivery[0],
+  const deliveryInfo = deliveryData.find(
+    (item) => item.value === formData.delivery,
   )?.label;
   const delivery =
     deliveryInfo === "Courier" ? "Delivery by courier" : deliveryInfo;
