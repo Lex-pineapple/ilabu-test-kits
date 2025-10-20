@@ -8,18 +8,12 @@ import { PATHS } from "#constants/paths";
 import imgUrl from "#assets/qr-icon.svg";
 
 export const QRComponent = () => (
-  <Flex alignItems="center" direction="column" gap={7}>
-    <Link to={`${PATHS._selected}/${MOCK_UID}`}>
-      <Text
-        color="lab_red.500"
-        fontWeight="light"
-        textAlign="center"
-        textStyle="xl"
-        textTransform="uppercase"
-      >
-        scan qr on box
+  <Link to={`${PATHS._selected}/${MOCK_UID}`}>
+    <Flex alignItems="center" bg="lab_green.50" borderRadius={10} gap={7} p={5}>
+      <Image h={73} src={imgUrl} w={73} />
+      <Text fontWeight="semibold" textStyle="sm">
+        Отсканируйте <br /> QR-код на коробке
       </Text>
-    </Link>
-    <Image h={95} src={imgUrl} w={95} />
-  </Flex>
+    </Flex>
+  </Link>
 );

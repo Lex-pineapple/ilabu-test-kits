@@ -1,0 +1,33 @@
+.root {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 130%;
+    aspect-ratio: 1 / 1;
+    background: #f1c5c566;
+    border-radius: 50%;
+    right: 75%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background: url("/exclamation-icon.svg") no-repeat;
+    right: 40%;
+    top: 65%;
+    transform: translateY(-65%);
+  }
+}
+
+.content {
+  width: 70%;
+}

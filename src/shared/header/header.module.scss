@@ -1,0 +1,48 @@
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 48px;
+  background: #518f86;
+  width: 100%;
+  border-radius: 0 0 20px 20px;
+  transform: translateY(-400px);
+  transition: transform 0.3s ease;
+  z-index: 10000;
+
+  &_open {
+    transform: translateX(0);
+  }
+}
+
+.header_link {
+  background: linear-gradient(90deg, #b1cac9 0%, #fff 51.92%, #b1cac9 100%);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.links {
+  padding-bottom: 48px;
+}
+
+.links > * {
+  border-bottom: 1px solid white;
+  padding: 15px 0;
+  text-align: center;
+}
+
+.backdrop {
+  position: fixed;
+  width: 100%;
+  height: 0;
+  background: #00000087;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+
+  &_open {
+    height: 100%;
+    opacity: 1;
+  }
+}

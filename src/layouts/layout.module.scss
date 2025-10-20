@@ -1,0 +1,32 @@
+.root {
+  background: linear-gradient(177.14deg, #fff 4.17%, #dce8e3 85.79%);
+  position: relative;
+  background-attachment: fixed;
+  overflow-x: hidden;
+  z-index: 10;
+
+  &::before {
+    content: "";
+    position: fixed;
+    width: 341.92px;
+    height: 341.92px;
+    left: 173.04px;
+    top: -68.92px;
+    background: #87b1a2;
+    opacity: 0.1;
+    border-radius: 50%;
+  }
+
+  &::after {
+    content: "";
+    position: fixed;
+    width: 592px;
+    height: 592px;
+    left: -244px;
+    top: 288px;
+    background: #87a5b1;
+    opacity: 0.1;
+    border-radius: 50%;
+    z-index: -1;
+  }
+}

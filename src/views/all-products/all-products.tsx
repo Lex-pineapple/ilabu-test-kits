@@ -1,16 +1,17 @@
-import { Flex } from "@chakra-ui/react";
+import { Container, Flex, Heading } from "@chakra-ui/react";
 
 import { cardExtensiveData } from "#constants/card-extensive-data";
-import { HeaderWBg } from "#shared/header-w-bg";
 import { ProductCard } from "#shared/product-card";
 
 export const AllProducts = () => (
-  <div>
-    <HeaderWBg m="0 0 48px 0">All Products</HeaderWBg>
-    <Flex flexDirection="column" gap={6} p={3.5}>
+  <Container p={0} pb={14} pt={10}>
+    <Heading fontWeight="bold" pb={6} size="lg" textTransform="uppercase">
+      Все продукты
+    </Heading>
+    <Flex flexDirection="column" gap={2.5}>
       {cardExtensiveData.map((item) => (
         <ProductCard {...item} description={item.descriptionMin} />
       ))}
     </Flex>
-  </div>
+  </Container>
 );

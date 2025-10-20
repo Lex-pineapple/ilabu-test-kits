@@ -1,7 +1,9 @@
 import { Link } from "react-router";
 
-import { Button, Container, Flex, Heading } from "@chakra-ui/react";
+import { Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
+import { AlertBox } from "#/views/instruction/components/alert-box";
+import { QuoteBox } from "#/views/instruction/components/quote-box";
 import { PATHS } from "#constants/paths";
 import { HeaderWBg } from "#shared/header-w-bg";
 import { StepItem } from "#shared/step-item";
@@ -9,15 +11,15 @@ import { TestTubeVisual } from "#shared/test-tube-visual";
 
 const TestTubeInfoData = [
   {
-    code: "xxxxxxx",
+    code: "XXXXXXX",
     color: "#FF2121",
   },
   {
-    code: "xxxxxxx",
+    code: "XXXXXXX",
     color: "#F2DB09",
   },
   {
-    code: "xxxxxxx",
+    code: "XXXXXXX",
     color: "#FD3BDB",
   },
 ];
@@ -25,80 +27,98 @@ const TestTubeInfoData = [
 const stepsData = [
   {
     description:
-      "The customer should carefully pull each tube out of the container, ensuring they are removed safely and without damage.",
+      "Наденьте перчатки. Частично сорвите отслаиваемую пленку на упаковке сваба. Подготовьте ножницы и стакан (не входят в состав набора), в который можно будет поместить свабы для просушки",
     imgSrc: "/instruction/instr_1.svg",
     step: 1,
-    title: "Remove Tubes from the Container",
+    title: "Подготовьтесь к сбору биоматериала",
   },
   {
     description:
-      "Select a finger for the blood sample, typically the ring finger. Clean the area with an alcohol swab and wait for the skin to dry.",
+      "Извлеките сваб. Осторожно поместите сваб в ротовую полость не касаясь языка и зубов. Прижмите сваб к внутренней поверхности щеки. Совершайте круговые движения свабом по поверхности обеих щек не менее 30 раз (примерно 30 секунд). Поместите сваб в стакан ватным наконечником вверх для просушки.",
     imgSrc: "/instruction/instr_2.svg",
     step: 2,
-    title: "Preparing Your Finger",
+    title: "Осуществите сбор биоматериала",
   },
   {
     description:
-      "Use the lancet from the kit to make a small puncture on the side of your fingertip. Gently press the finger to produce a drop of blood.",
+      "На стикере упаковки для образца укажите ФИО, дату рождения, домашний адрес, контактный телефон, дату и время сбора материала. Просушенные свабы поместите в упаковку для образца так, чтобы мягкие концы свабов находились внутри упаковки. Ножницами отрежьте концы свабов так, чтобы они полностью поместились в упаковку для образца. Утилизируйте оставшиеся концы свабов с пробками. Снимите и утилизируйте перчатки.",
     imgSrc: "/instruction/instr_3.svg",
     step: 3,
-    title: "Pricking Your Finger",
+    title: "Упакуйте ваш образец",
   },
   {
     description:
-      "Following the kit’s guidelines, collect the drop of blood into the appropriate container. Usually, this involves touching the blood drop to a test strip or container.",
+      "При невозможности доставить в день взятия пробирку с крышкой можно хранить при комнатной температуре (+20...+25°C) или в холодильнике (+4…+8°C) до 10 дней.",
     imgSrc: "/instruction/instr_4.svg",
     step: 4,
-    title: "Collecting the Blood Sample",
-  },
-  {
-    description:
-      "Once you’ve collected the blood sample, use a clean gauze or bandage to stop any bleeding. Apply antiseptic and cover the area with a bandage.",
-    imgSrc: "/instruction/instr_5.svg",
-    step: 5,
-    title: "Caring for the Puncture Site",
+    title: "Доставьте образец в лабораторию",
   },
 ];
 
 export const Instruction = () => (
-  <Flex flexDirection="column">
-    <Container p="48px 14px 14px">
-      <Heading color="lab_red.500" mb={9} size="2xl" textTransform="uppercase">
-        It is important to collect the bm now to determine the exact time of
-        take.
-      </Heading>
+  <Flex flexDirection="column" pb={12}>
+    <Container p={0}>
+      <HeaderWBg m=" 0 -14px">Инструкиця по применению</HeaderWBg>
+      <Text fontWeight="medium" p="10px 0 27px" textStyle="sm">
+        Внимательно прочитайте инструкцию перед началом осуществления процедуры
+        самостоятельного взятия биоматериала.
+      </Text>
       <TestTubeVisual items={TestTubeInfoData} />
     </Container>
-    <HeaderWBg p={10}>Choose your test</HeaderWBg>
-    <Container
-      _before={{
-        background: "url('/backgrounds/bg-instr.png') center/cover no-repeat",
-        content: '""',
-        display: "block",
-        height: "calc(100% + 65px)",
-        left: 0,
-        margin: "0 auto",
-        position: "absolute",
-        right: 0,
-        width: "90%",
-      }}
-      height="100%"
-      p={0}
+    <Heading
+      fontWeight="bold"
+      pb={6}
+      pt={10}
+      size="md"
+      textTransform="uppercase"
     >
-      <Container p="36px 14px">
-        <Flex direction="column" gap={7} pb={20}>
-          {stepsData.map((item, idx) => (
-            <StepItem {...item} reverse={Boolean(idx % 2)} />
+      Этапы забора мазка с внутренней стороны щеки (буккальные эпителий)
+    </Heading>
+    <Container height="100%" p={0}>
+      <QuoteBox>
+        Примечание: Не ешьте, не пейте, не чистите зубы, не жуйте жвачку, не
+        целуйтесь и не курите минимум за 30 минут перед взятием биоматериала.
+        Перед процедурой рекомендуется прополоскать рот теплой водой
+      </QuoteBox>
+      <Container p={0} pt={14}>
+        <Flex direction="column" gap={10}>
+          {stepsData.slice(0, 2).map((item, idx, arr) => (
+            <StepItem
+              {...item}
+              border={idx !== arr.length - 1}
+              reverse={!(idx % 2)}
+            />
+          ))}
+        </Flex>
+        <QuoteBox mb={10}>
+          Примечание: простое прокручивание сваба в одной части щеки или
+          оставление его во рту без движения является неправильной техникой и
+          может привести к недостаточному количеству образца
+        </QuoteBox>
+        <AlertBox mb={10}>
+          Внимание! Не дотрагивайтесь до мягкого конца сваба и не кладите его на
+          поверхность в ходе всей процедуры взятия биоматериала!
+        </AlertBox>
+        <Text fontWeight="medium" mb={10} textStyle="sm">
+          Повторите все вышеописанные действия с двумя оставшимися свабами в
+          составе набора. Просушите все свабы в течение 1 часа
+        </Text>
+        <AlertBox mb={10}>
+          Внимание! Не сушить под прямыми солнечными лучами! Не сушить под
+          лампой!
+        </AlertBox>
+        <Flex direction="column" gap={10}>
+          {stepsData.slice(2, 4).map((item, idx, arr) => (
+            <StepItem
+              {...item}
+              border={idx !== arr.length - 1}
+              reverse={!(idx % 2)}
+            />
           ))}
         </Flex>
         <Link to={PATHS.checkout}>
-          <Button
-            fontSize="xl"
-            fontWeight="light"
-            textTransform="uppercase"
-            w="100%"
-          >
-            Continue
+          <Button mt={9} w="100%">
+            Оплатить
           </Button>
         </Link>
       </Container>

@@ -23,15 +23,18 @@ const buttonRecipe = defineRecipe({
         h: "32px",
         p: "4px 26px",
       },
+      outline: {
+        borderRadius: 15,
+      },
       solid: {
         _disabled: {
           bgColor: "lab_grey.500",
           color: "lab_grey.50",
           opacity: 1,
         },
-        bgColor: "lab_red.500",
-        borderBottom: "2px solid #18181B",
-        borderRadius: 8,
+        bgColor: "lab_green.900",
+        borderBottom: "3px solid #002A24",
+        borderRadius: 15,
       },
     },
   },
@@ -45,13 +48,13 @@ const inputRecipe = defineRecipe({
           color: "lab_grey.200",
           fontSize: "14px",
           fontWeight: "600",
-          textAlign: "center",
-          textTransform: "uppercase",
+          textAlign: "left",
         },
-        bg: "lab_red.50",
+        bg: "white",
         border: "none",
-        borderBottom: "2px solid #FF2121",
+        borderBottom: "3px solid #048B78",
         borderRadius: "8px",
+        boxShadow: "0 0 8px 2px #9b9c9c24",
       },
       secondary: {
         bg: "transparent",
@@ -59,6 +62,26 @@ const inputRecipe = defineRecipe({
         borderRadius: "6px",
         fontFamily: "secondary",
         textStyle: "xs",
+      },
+    },
+  },
+});
+
+const textareaRecipe = defineRecipe({
+  variants: {
+    variant: {
+      outline: {
+        _placeholder: {
+          color: "lab_grey.200",
+          fontSize: "14px",
+          fontWeight: "600",
+          textAlign: "left",
+        },
+        bg: "white",
+        border: "none",
+        borderBottom: "3px solid #048B78",
+        borderRadius: "8px",
+        boxShadow: "0 0 8px 2px #9b9c9c24",
       },
     },
   },
@@ -116,7 +139,7 @@ export const selectSlotRecipe = defineSlotRecipe({
         content: {
           bg: "#fff3f2",
           border: "none",
-          borderBottom: "2px solid #FF2121",
+          borderBottom: "3px solid #048B78",
           borderRadius: "9px",
           boxShadow: "0px 4px 14px 0px #00000040",
           p: "12px",
@@ -132,16 +155,15 @@ export const selectSlotRecipe = defineSlotRecipe({
             borderColor: "border.emphasized",
           },
 
-          bg: "lab_red.50",
+          bg: "white",
           border: "none",
-          borderBottom: "2px solid #FF2121",
+          borderBottom: "3px solid #048B78",
           borderRadius: "8px",
         },
         valueText: {
           color: "lab_grey.200",
           fontSize: "14px",
           fontWeight: "600",
-          textTransform: "uppercase",
         },
       },
     },
@@ -153,6 +175,7 @@ const config = defineConfig({
     recipes: {
       button: buttonRecipe,
       input: inputRecipe,
+      textarea: textareaRecipe,
     },
     slotRecipes: {
       checkboxCard: checkboxCardSlotRecipe,
@@ -164,6 +187,16 @@ const config = defineConfig({
           900: {
             value: "#18181B",
           },
+        },
+        lab_green: {
+          10: { value: "#E3F1EF" },
+          100: { value: "#AED2CA" },
+          1000: { value: "#516A67" },
+          1100: { value: "#002A24" },
+          50: { value: "#C1E5DD" },
+          500: { value: "#05AA96" },
+          800: { value: "#518F86" },
+          900: { value: "#309E8E" },
         },
         lab_grey: {
           200: {
@@ -178,6 +211,7 @@ const config = defineConfig({
           500: {
             value: "#BDBDBD",
           },
+          600: { value: "#606060" },
           900: {
             value: "#545454",
           },
@@ -188,6 +222,9 @@ const config = defineConfig({
           },
           500: {
             value: "#FF2121",
+          },
+          error: {
+            value: "#9E3032",
           },
         },
       },

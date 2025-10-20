@@ -21,7 +21,7 @@
 
   &::before {
     top: 0;
-    box-shadow: 0 6px 0 #ff2121;
+    box-shadow: 0 6px 0 #05aa96;
     transition:
       box-shadow 0.3s 0.15s,
       top 0.3s 0.15s,
@@ -35,6 +35,11 @@
       transform 0.3s;
   }
 
+  &--active::before,
+  &--active::after {
+    background: #fff;
+  }
+
   &--active::before {
     top: 2.5px;
     transform: rotate(45deg) translateY(5px);
@@ -42,6 +47,7 @@
     transition:
       box-shadow 0.15s,
       top 0.3s,
+      background 0.3s,
       transform 0.3s 0.15s;
   }
 
@@ -50,6 +56,7 @@
     transform: rotate(-45deg) translateY(-5px);
     transition:
       bottom 0.3s,
+      background 0.3s,
       transform 0.3s 0.15s;
   }
 }

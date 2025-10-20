@@ -1,44 +1,56 @@
-import { type ListCollection, Portal, Select, Text } from "@chakra-ui/react";
+import type { JSX, ReactNode } from "react";
 
-import { SelectTrigger } from "#shared/select-button/components/select-trigger";
+import { RadioGroup, Stack } from "@chakra-ui/react";
 
-export type ListType = { label: string; value: string };
+import { BottomSheet } from "#shared/bottom-sheet";
+
+export type ListType = { value: string; icon?: JSX.Element; label?: string };
 
 type SelectButtonTypes = {
-  items: ListCollection<ListType>;
-  selected: string[];
-  setSelected: (value: string[]) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  items: any[] | ListType[];
+  setSelected: (value: null | string) => void;
+  selected?: null | string;
+  trigger?: ReactNode;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ContentElement?: (props: any) => JSX.Element;
 };
 
 export const SelectButton = ({
+  ContentElement,
   items,
   selected,
   setSelected,
+  trigger,
 }: SelectButtonTypes) => (
-  <Select.Root
-    alignItems="flex-end"
-    collection={items}
-    defaultValue={["react"]}
-    onValueChange={(e) => setSelected(e.value)}
-    positioning={{ sameWidth: false }}
-    size="sm"
-    value={selected}
+  <BottomSheet
+    primaryButton={"Применить"}
+    title={"Сортировка"}
+    trigger={trigger}
   >
-    <Select.HiddenSelect />
-    <Select.Control>
-      <SelectTrigger />
-    </Select.Control>
-    <Portal>
-      <Select.Positioner>
-        <Select.Content minW="32">
-          {items.items.map((item) => (
-            <Select.Item item={item} key={item.value}>
-              <Text>{item.label}</Text>
-              <Select.ItemIndicator />
-            </Select.Item>
-          ))}
-        </Select.Content>
-      </Select.Positioner>
-    </Portal>
-  </Select.Root>
+    <RadioGroup.Root
+      onValueChange={(e) => setSelected(e.value)}
+      pb={7}
+      value={selected}
+      variant="outline"
+    >
+      <Stack gap={2.5}>
+        {items.map((item) => (
+          <RadioGroup.Item
+            colorPalette="teal"
+            justifyContent="space-between"
+            key={item.value}
+            value={item.value}
+          >
+            <RadioGroup.ItemHiddenInput />
+            {ContentElement && <ContentElement {...item} />}
+            {item.label && (
+              <RadioGroup.ItemText>{item.label}</RadioGroup.ItemText>
+            )}
+            <RadioGroup.ItemIndicator />
+          </RadioGroup.Item>
+        ))}
+      </Stack>
+    </RadioGroup.Root>
+  </BottomSheet>
 );

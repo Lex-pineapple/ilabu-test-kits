@@ -9,6 +9,7 @@ import {
 import { ActivateQR } from "#/views/activate-qr";
 import { AllProducts } from "#/views/all-products";
 import { CheckoutForm } from "#/views/checkout-form";
+import { FAQ } from "#/views/faq";
 import { Instruction } from "#/views/instruction";
 import { NotFound } from "#/views/not-found";
 import { ProductView } from "#/views/product-view";
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
       {
         element: <NotFound />,
         path: "*",
+      },
+      {
+        element: <FAQ />,
+        path: PATHS.faq,
       },
       {
         element: <SuccessfulScreen />,

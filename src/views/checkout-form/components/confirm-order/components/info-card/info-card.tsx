@@ -1,13 +1,9 @@
 import type { ReactElement } from "react";
 
-import {
-  Button,
-  Container,
-  Flex,
-  Heading,
-  Table,
-  Text,
-} from "@chakra-ui/react";
+import { Button, Flex, Heading, Table, Text } from "@chakra-ui/react";
+
+import { EditIcon } from "#assets/icons/edit-icon";
+import { ShdContainer } from "#shared/shd-container";
 
 import "./info-card.module.scss";
 
@@ -19,21 +15,21 @@ type InfoCard = {
   title: string;
   onOrderChange: () => void;
   bottomElement?: ReactElement;
+  breakWord?: string;
+  whiteSpace?: string;
 };
 
 export const InfoCard = ({
   bottomElement,
+  breakWord,
   items,
   onOrderChange,
   title,
+  whiteSpace,
 }: InfoCard) => (
-  <Container
-    bg="lab_red.50"
-    boxShadow="0px 0px 14px 0px #00000040"
-    p="14px 2px"
-  >
-    <Flex justifyContent="space-between" p="0 14px">
-      <Heading color="lab_red.500" size="md">
+  <ShdContainer p={5}>
+    <Flex justifyContent="space-between">
+      <Heading size="md" textTransform="uppercase">
         {title}
       </Heading>
       <Button
@@ -43,20 +39,32 @@ export const InfoCard = ({
         p={1}
         variant="ghost"
       >
-        Change
+        <EditIcon />
       </Button>
     </Flex>
     <Table.Root bg="transparent">
       <Table.Body>
         {items.map((item) => (
           <Table.Row bg="transparent" key={item.title}>
-            <Table.Cell borderBottom="1px solid #CBCBCB" minW="127px">
-              <Text fontWeight="medium" textStyle="md">
+            <Table.Cell
+              borderBottom="1px solid #CBCBCB"
+              maxW={250}
+              minW="127px"
+              pl={0}
+            >
+              <Text fontWeight="medium" textStyle="sm">
                 {item.title}
               </Text>
             </Table.Cell>
-            <Table.Cell borderBottom="1px solid #CBCBCB">
-              <Text color="lab_red.500" fontWeight="medium" textStyle="md">
+            <Table.Cell borderBottom="1px solid #CBCBCB" pr={0}>
+              <Text
+                color="lab_green.900"
+                fontWeight="medium"
+                textAlign="end"
+                textStyle="sm"
+                whiteSpace={whiteSpace}
+                wordBreak={breakWord}
+              >
                 {item.data}
               </Text>
             </Table.Cell>
@@ -65,5 +73,5 @@ export const InfoCard = ({
       </Table.Body>
     </Table.Root>
     {bottomElement}
-  </Container>
+  </ShdContainer>
 );

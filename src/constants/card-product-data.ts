@@ -2,7 +2,12 @@ import type { ColorType } from "#shared/circle-graphic/circle-graphic";
 
 export type AnalysisItemType = {
   description: string;
+  execLab: {
+    name: string;
+    uid: string;
+  };
   price: number;
+  testId: string;
   title: string;
   uid: string;
 };
@@ -21,74 +26,100 @@ export const MOCK_UID = "d6a510a5-fe59-48e9-8576-f9354dffa9b7";
 
 export const analysisItems: AnalysisItemType[] = [
   {
-    description:
-      "Used for monitoring blood sugar levels, particularly in individuals with diabetes.",
+    description: "Исследование генов системы артериального давления",
+    execLab: {
+      name: "HELIX",
+      uid: "12",
+    },
     price: 25.99,
-    title: "Blood Glucose Test",
+    testId: "INSG41",
+    title: "Анализ генов системы артериального давления",
     uid: "1",
   },
   {
-    description:
-      "Measures the average blood glucose levels over the past 2-3 months, commonly used in diabetes management.",
+    description: "Исследование генов системы тромбообразования",
+    execLab: {
+      name: "in vitro",
+      uid: "13",
+    },
     price: 125.99,
-    title: "Hemoglobin A1c (HbA1c) Test",
+    testId: "INSG42",
+    title: "Анализ генов системы тромбообразования (гемостаза)",
     uid: "2",
   },
   {
     description:
-      "Assesses cholesterol levels, including total cholesterol, LDL (low-density lipoprotein), HDL (high-density lipoprotein), and triglycerides.",
-    price: 75.0,
-    title: "Lipid Panel",
+      "Диагностика эффективности терапии лекарственным препаратом метотрексат",
+    execLab: {
+      name: "HELIX",
+      uid: "12",
+    },
+    price: 160.0,
+    testId: "INSG56",
+    title: "ДНК диагностика эффективности терапии препаратом Метотрексат",
     uid: "3",
   },
   {
     description:
-      "Provides information about the different types of cells in the blood, including red blood cells, white blood cells, and platelets.",
+      "Диагностика эффективности терапии лекарственным препаратом метотрексат",
+    execLab: {
+      name: "Институт генетики и цитологии НАН Беларуси",
+      uid: "14",
+    },
     price: 25.99,
-    title: "Complete Blood Count (CBC)",
+    testId: "INSG560",
+    title: "ДНК диагностика эффективности терапии препаратом Метотрексат",
     uid: "4",
   },
   {
     description:
-      "Used to detect inflammation in the body, which can be a sign of infection or other medical conditions.",
+      "Исследование эффективности сосудорасширяющих препаратов (донаторов азота) на основе ДНК-диагностики",
+    execLab: {
+      name: "Институт генетики и цитологии НАН Беларуси",
+      uid: "14",
+    },
     price: 35.0,
-    title: "C-Reactive Protein (CRP) Test",
+    testId: "INSG55",
+    title:
+      "ДНК диагностика эффективности терапии сосудорасширяющими препаратами из группы донаторов азота",
     uid: "5",
   },
   {
-    description:
-      "Measures how long it takes for blood to clot, often used for patients on anticoagulant therapy.",
+    description: "Определение предрасположенности к костным переломам",
+    execLab: {
+      name: "Институт генетики и цитологии НАН Беларуси",
+      uid: "14",
+    },
     price: 20.0,
-    title: "Prothrombin Time (PT)/INR Test",
+    testId: "INSG48",
+    title: "ДНК-анализ предрасположенности к остеопорозу",
     uid: "6",
   },
   {
     description:
-      "Used to evaluate thyroid function and diagnose thyroid disorders.",
+      "Определение типа волокон коллагена и других факторов, влияющих на разрывы и растяжения связок и сухожилий",
+    execLab: {
+      name: "Институт генетики и цитологии НАН Беларуси",
+      uid: "14",
+    },
     price: 25.99,
-    title: "Thyroid-Stimulating Hormone (TSH) Test",
+    testId: "INSG62",
+    title:
+      "ДНК-анализ предрасположенности к разрывам и растяжениям связок и сухожилий",
     uid: "7",
   },
   {
     description:
-      "Measures enzymes and proteins in the blood to assess liver health.",
+      "Помогает определить допустимость применения оральных контрацептивов по ДНК-анализу некоторых генов",
+    execLab: {
+      name: "Институт генетики и цитологии НАН Беларуси",
+      uid: "14",
+    },
     price: 199.99,
-    title: "Liver Function Tests (LFTs)",
+    testId: "INSG52",
+    title:
+      "ДНК-диагностика опасности тромбообразования у женщин, принимающих гормональные контрацептивы",
     uid: "8",
-  },
-  {
-    description:
-      "Measures lactate levels, often used in sports medicine or critical care settings.",
-    price: 99.0,
-    title: "Blood Lactate Test",
-    uid: "9",
-  },
-  {
-    description:
-      "Provides information about oxygen, carbon dioxide, and pH levels in the blood, often used in respiratory and critical care.",
-    price: 99.0,
-    title: "Blood Gas Analysis",
-    uid: "10",
   },
 ];
 

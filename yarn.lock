@@ -3962,6 +3962,11 @@ react-router@7.8.2, react-router@^7.8.2:
     cookie "^1.0.1"
     set-cookie-parser "^2.6.0"
 
+react-string-replace@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-string-replace/-/react-string-replace-1.1.1.tgz#8413a598c60e397fe77df3464f2889f00ba25989"
+  integrity sha512-26TUbLzLfHQ5jO5N7y3Mx88eeKo0Ml0UjCQuX4BMfOd/JX+enQqlKpL1CZnmjeBRvQE8TR+ds9j1rqx9CxhKHQ==
+
 react-swipeable@^7.0.2:
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/react-swipeable/-/react-swipeable-7.0.2.tgz#ef8858096a47144ba7060675af1cd672e00ecc12"
@@ -4555,6 +4560,11 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+use-mask-input@^3.5.2:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/use-mask-input/-/use-mask-input-3.5.2.tgz#e01677adcce092fc50cc29cab2d630bb3af907fa"
+  integrity sha512-WZSX7WEfT9TAaQuKOeO/Ic2e2X7XzUH6Wo4XeH3E9jujMP3Y/kOQJspzWzrY3PkBSQG3uwPjvEtJCEY5pwgC+Q==
 
 use-sync-external-store@^1.4.0:
   version "1.5.0"

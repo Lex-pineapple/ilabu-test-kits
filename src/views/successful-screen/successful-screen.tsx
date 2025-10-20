@@ -1,9 +1,7 @@
-import { Map, Placemark, YMaps } from "@pbe/react-yandex-maps";
+import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
-import { Container, Flex, Heading, Stack, Text } from "@chakra-ui/react";
-
-import { MapIcon } from "#assets/icons/map-icon";
 import { HeaderWBg } from "#shared/header-w-bg";
+import { ShdContainer } from "#shared/shd-container";
 import { StepItem } from "#shared/step-item";
 import { TestTubeVisual } from "#shared/test-tube-visual";
 
@@ -16,130 +14,70 @@ const TestTubeInfoData = [
 const stepsData = [
   {
     description:
-      "Following the instructions, place the sample container in the protective bag or container provided in the kit. Complete any required forms or labels with patient information.",
+      "Снимите и утилизируйте перчатки. На стикере упаковки для образца необходимо указать ФИО, дату рождения, домашний адрес, контактный телефон, дату и время сбора материала. Поместите контейнер с образцом в упаковку для образца. Промаркированы должны быть и пробирка, и упаковка для образца.",
     imgSrc: "/instruction/instr_order_1.svg",
     step: 1,
-    title: "Packaging the Sample:",
+    title: "Упакуйте ваш образец",
   },
   {
     description:
-      "After collecting the blood sample, use a clean gauze pad or bandage to stop any bleeding. Apply antiseptic and cover the puncture site with a bandage.",
+      "При невозможности немедленной доставки в МО, материал может быть сохранен при +2…+8°С в течение 12 часов.",
     imgSrc: "/instruction/instr_order_2.svg",
     step: 2,
-    title: "Shipping the Specimen",
+    title: "Доставьте образец в лабораторию",
   },
 ];
 
 export const SuccessfulScreen = () => (
-  <Container p={0}>
-    <HeaderWBg p="28px 0">Thank you, your payment was successful!</HeaderWBg>
-    <Container p={7}>
-      <Heading color="lab_red.500" mb={6} size="2xl">
-        IMPORTANT!
-      </Heading>
-      <Text textStyle="xl">
-        Place tube XYZ123 (yellow cap) and ABC456 (green cap) in an envelope and
-        give to the courier/laboratory.
-      </Text>
-    </Container>
+  <Container p={0} pb={14}>
+    <HeaderWBg m="0 -14px 32px">Спасибо, ваша оплата прошла успешно</HeaderWBg>
     <TestTubeVisual items={TestTubeInfoData} />
-    <Flex
-      bg="#F2EDED"
-      boxShadow="0px 0px 14px 0px #00000040"
-      justifyContent="space-between"
-      m="30px 0"
-      p="18px 32px"
-    >
-      <Text fontWeight="semibold">Your order number</Text>
-      <Text color="lab_red.500" fontWeight="medium">
-        А-12345
+    <Box bg="lab_green.50" m="0 -14px" mt={8} p="28px 14px">
+      <Text fontWeight="medium">
+        Номер вашего заказа:{" "}
+        <Text as="span" fontWeight="semibold">
+          А-682083
+        </Text>
       </Text>
-    </Flex>
+    </Box>
     <Container p={0}>
       <Heading
-        color="lab_red.500"
+        color="lab_green.900"
         fontWeight="bold"
-        p="20px 24px 48px"
-        size="2xl"
+        mb={7}
+        mt={7}
+        size="md"
         textTransform="uppercase"
       >
-        What to do next?
+        Что делать дальше?
       </Heading>
       <Flex direction="column" gap={7} p={3.5}>
-        {stepsData.map((item, idx) => (
-          <StepItem {...item} reverse={!(idx % 2)} />
+        {stepsData.map((item, idx, arr) => (
+          <StepItem
+            {...item}
+            border={arr.length - 1 !== idx}
+            reverse={!(idx % 2)}
+          />
         ))}
       </Flex>
     </Container>
-    <Container mb={4} p={6}>
-      <Container
-        bg="lab_red.50"
-        boxShadow="0px 0px 14px 0px #00000040"
-        p="14px"
-      >
-        <Heading color="lab_red.500" size="md">
-          Address of the laboratory
-        </Heading>
-        <Stack>
-          <Flex borderBottom="1px solid #CBCBCB" justifyContent="space-between">
-            <Stack>
-              <Text fontWeight="medium">123 Elmwood Avenue, Apt. 4B</Text>
-              <Text color="lab_red.500" fontWeight="medium">
-                10:00 - 17:00
-              </Text>
-            </Stack>
-            <MapIcon size="2xl" />
-          </Flex>
-          <Flex justifyContent="space-between">
-            <Stack>
-              <Text fontWeight="medium">456 Maple Street, Suite 200</Text>
-              <Text color="lab_red.500" fontWeight="medium">
-                10:00 - 15:00
-              </Text>
-            </Stack>
-            <MapIcon size="2xl" />
-          </Flex>
-        </Stack>
-      </Container>
-    </Container>
-    <Container p={6}>
-      <Container
-        bg="lab_red.50"
-        boxShadow="0px 0px 14px 0px #00000040"
-        p="14px"
-      >
-        <Heading color="lab_red.500" mb={3} size="md">
-          Information about the courier
-        </Heading>
-        <Stack gap={3}>
-          <Text>Shawn Reynolds</Text>
-          <Text>+1 (312) 555-7834</Text>
-          <Text color="lab_red.500">
-            The courier will contact you to clarify the address and time
-          </Text>
-        </Stack>
-      </Container>
-    </Container>
-
-    <Container
-      boxShadow="0px 0px 14px 0px #00000040"
-      m="0 auto"
-      p={0}
-      paddingInline={0}
-      w={"90%"}
+    <ShdContainer
+      bg="url('/location-img.svg') 110% -120% / 40% no-repeat, #fff"
+      p={4}
     >
-      <YMaps>
-        <Map
-          defaultState={{
-            center: [55.751574, 37.573856],
-            zoom: 5,
-          }}
-          height={"195px"}
-          width={"100%"}
-        >
-          <Placemark geometry={[55.684758, 37.738521]} />
-        </Map>
-      </YMaps>
-    </Container>
+      <Heading color="lab_green.900" maxW="70%" mb={4} size="sm">
+        Адрес лаборатории для самостоятельной доставки
+      </Heading>
+      <Text textStyle="sm">
+        <Text as="span" color="lab_green.900" fontWeight="semibold">
+          ИНВИТРО •
+        </Text>
+        <Text as="span" fontWeight="semibold">
+          {" "}
+          до 19:00
+        </Text>
+        <Text>г. Минск, ул. Есенина 60-5</Text>
+      </Text>
+    </ShdContainer>
   </Container>
 );

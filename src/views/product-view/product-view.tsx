@@ -1,110 +1,107 @@
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 
 import LiteYouTubeEmbed from "react-lite-youtube-embed";
-import { Link, Navigate, useLoaderData } from "react-router";
+import { useLoaderData } from "react-router";
 
-import { Box, Container, Flex, List, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, List, Text } from "@chakra-ui/react";
 
+import { CheckmarkIcon } from "#assets/icons/checkmark-icon";
 import type { CardExtensiveDataType } from "#constants/card-extensive-data";
-import { PATHS } from "#constants/paths";
 import { CardCollapsible } from "#shared/card-collapsible";
-import { CircleGraphic } from "#shared/circle-graphic";
-import { DescriptionBox } from "#shared/description-box";
-import { HeaderWBg } from "#shared/header-w-bg";
+import { ShdContainer } from "#shared/shd-container";
+
+import styles from "./product-view.module.scss";
 
 export const ProductView = () => {
-  const loaderData = useLoaderData<CardExtensiveDataType | undefined>();
-
-  if (!loaderData) return <Navigate to="*" />;
+  const loaderData = useLoaderData<CardExtensiveDataType>();
 
   return (
-    <div>
-      <HeaderWBg p={9}>Recommended kit</HeaderWBg>
-      <Box height={269} position="relative" w="100%">
-        <CircleGraphic
-          color={loaderData.color}
-          positions={{
-            x: "-37px",
-            y: "8px",
-          }}
-          size={356}
-          zIndex={-1}
-        />
-      </Box>
-      <Flex direction="column" gap={6} p="0 14px 36px">
-        <DescriptionBox>
-          <Text textStyle="md">
-            {loaderData.description
-              .split(new RegExp(`(${loaderData.title})`))
-              .map((item) => (
+    <Container p={0} pb={14} pt={10}>
+      <Heading pb={2} size="md" textTransform="uppercase">
+        {loaderData.title}
+      </Heading>
+      <Text fontWeight="medium" textStyle="sm">
+        {loaderData.inputType}
+      </Text>
+      <Flex direction="column" p="26px 0 36px">
+        <Box bg="lab_green.50" borderRadius={10} mb={14} p={5} pb={0}>
+          {loaderData.description.split("\n").map((item) => (
+            <Text
+              fontWeight="semibold"
+              mb={5}
+              textStyle="sm"
+              whiteSpace="pre-wrap"
+            >
+              {item}
+            </Text>
+          ))}
+        </Box>
+        <Heading pb={3} size="md" textTransform="uppercase">
+          Преимущества набора
+        </Heading>
+        <ShdContainer mb={14} p={4.5}>
+          <List.Root gap={2.5} variant="plain">
+            {loaderData.benefits.map((item) => (
+              <List.Item alignItems="center" lineHeight="34px">
+                <List.Indicator asChild>
+                  <CheckmarkIcon size="sm" />
+                </List.Indicator>
                 <Text
-                  color={item === loaderData.title ? "lab_red.500" : "black"}
-                  display="inline"
+                  fontWeight="medium"
+                  lineHeight="34px"
+                  pl={1}
+                  textStyle="sm"
                 >
                   {item}
                 </Text>
-              ))}
-          </Text>
-        </DescriptionBox>
-        <DescriptionBox>
-          <Text color="lab_red.500" textStyle="md">
-            Benefits of the Kit:
-          </Text>
-          <List.Root pl={4}>
-            {loaderData.benefits.map((item) => (
-              <List.Item _marker={{ color: "black" }} lineHeight="34px">
-                <Text lineHeight="34px" textStyle="md">
-                  {item}
+              </List.Item>
+            ))}
+          </List.Root>
+        </ShdContainer>
+        <Heading pb={3} size="md" textTransform="uppercase">
+          Что входит в состав набора
+        </Heading>
+        <ShdContainer mb={12} p={4.5}>
+          <List.Root className={styles.contents_list} variant="plain">
+            {loaderData.boxContents.map(([name, count]) => (
+              <List.Item
+                alignItems="center"
+                gap={2}
+                justifyContent="space-between"
+                lineHeight="34px"
+              >
+                <Text fontWeight="medium" lineHeight="34px" textStyle="md">
+                  {name}
+                </Text>
+                <Text
+                  color="lab_green.900"
+                  fontWeight="bold"
+                  lineHeight="34px"
+                  textStyle="md"
+                  whiteSpace="nowrap"
+                >
+                  {count}
                 </Text>
               </List.Item>
             ))}
           </List.Root>
-        </DescriptionBox>
-        <DescriptionBox>
-          <Text color="lab_red.500" textStyle="md">
-            What's in the box?
-          </Text>
-          <List.Root pl={4}>
-            {loaderData.boxContents.map(([name, count]) => (
-              <List.Item _marker={{ color: "black" }} lineHeight="34px" pr={9}>
-                <Flex justify="space-between">
-                  <Text lineHeight="34px" textStyle="md">
-                    {name}
-                  </Text>
-                  <Text color="lab_red.500" lineHeight="34px" textStyle="md">
-                    {count}
-                  </Text>
-                </Flex>
-              </List.Item>
-            ))}
-          </List.Root>
-        </DescriptionBox>
+        </ShdContainer>
         <CardCollapsible
           description={loaderData.descriptionMin}
           items={loaderData.analysisItems}
           title={loaderData.title}
         />
       </Flex>
-      <HeaderWBg m="30px 0 45px" p={9}>
-        How To Take A Self Blood Test
-      </HeaderWBg>
-      <Container>
+      <Heading pb={3} size="md" textTransform="uppercase">
+        Как самостоятельно сдать анализ
+      </Heading>
+      <Container p={0}>
         <LiteYouTubeEmbed
           id="udz_I6QtbE0"
           poster="hqdefault"
           title="How to take a self blood test"
         />
-        <Link to={PATHS.availableKit}>
-          <Text
-            color="lab_red.500"
-            fontFamily="secondary"
-            mt={12}
-            textAlign="center"
-          >
-            See all Products
-          </Text>
-        </Link>
       </Container>
-    </div>
+    </Container>
   );
 };

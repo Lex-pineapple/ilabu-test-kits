@@ -7,10 +7,10 @@ type TotalComponentProps = {
 export const TotalComponent = ({ total, ...props }: TotalComponentProps) => (
   <Flex alignItems="center" gap={2.5} {...props}>
     <Text fontWeight="medium" textStyle="md">
-      Total:{" "}
+      Итого:{" "}
     </Text>
-    <Text color="lab_red.500" fontWeight="medium" textStyle="2xl">
-      {Number(total).toFixed(2)} р.
+    <Text color="lab_green.900" fontWeight="medium" textStyle="lg">
+      {Number(total).toFixed(2)} BYN
     </Text>
   </Flex>
 );
