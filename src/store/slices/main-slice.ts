@@ -8,7 +8,7 @@ const initialState: initialStateType = {
   currKitUid: "",
 };
 
-const mainSlice = createSlice({
+export const mainSlice = createSlice({
   initialState,
   name: "main",
   reducers: {

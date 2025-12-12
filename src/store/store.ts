@@ -1,14 +1,24 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import cartReducer from "./slices/cart-slice";
-import formReducer from "./slices/form-slice";
-import mainReducer from "./slices/main-slice";
+import { authorizedApi, unautorizedApi } from "#store/api/base-api";
+import authReducer, { authSlice } from "#store/slices/auth-slice";
+import cartReducer, { cartSlice } from "#store/slices/cart-slice";
+import formReducer, { formSlice } from "#store/slices/form-slice";
+import mainReducer, { mainSlice } from "#store/slices/main-slice";
 
 const store = configureStore({
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(
+      authorizedApi.middleware,
+      unautorizedApi.middleware,
+    ),
   reducer: {
-    cart: cartReducer,
-    form: formReducer,
-    main: mainReducer,
+    [authorizedApi.reducerPath]: authorizedApi.reducer,
+    [authSlice.name]: authReducer,
+    [cartSlice.name]: cartReducer,
+    [formSlice.name]: formReducer,
+    [mainSlice.name]: mainReducer,
+    [unautorizedApi.reducerPath]: unautorizedApi.reducer,
   },
 });
 

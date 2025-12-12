@@ -11,7 +11,7 @@ const initialState: initialStateType = {
   items: [],
 };
 
-const cartSlice = createSlice({
+export const cartSlice = createSlice({
   initialState,
   name: "cart",
   reducers: {

@@ -46,7 +46,7 @@ const initialState: initialStateType = {
   tubes: [],
 };
 
-const formSlice = createSlice({
+export const formSlice = createSlice({
   initialState,
   name: "form",
   reducers: {
