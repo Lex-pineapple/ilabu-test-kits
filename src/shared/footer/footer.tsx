@@ -1,6 +1,10 @@
 import { Flex, Image, Text } from "@chakra-ui/react";
 
-export const Footer = () => (
+type FooterProps = {
+  isDesktop: boolean;
+};
+
+export const Footer = ({ isDesktop }: FooterProps) => (
   <Flex
     alignItems="center"
     bg="lab_green.1000"
@@ -8,7 +12,7 @@ export const Footer = () => (
     flexDir="column"
     gap={3}
     justifyContent="center"
-    mt={2.5}
+    mt={isDesktop ? 0 : 2.5}
     p="66px 15px 45px"
     width="100%"
   >
