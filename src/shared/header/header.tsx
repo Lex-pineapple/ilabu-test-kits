@@ -55,6 +55,7 @@ export const Header = () => {
                 <Button
                   _hover={{ color: "black" }}
                   color="white"
+                  key={item.title}
                   onClick={() => {
                     setOpen(false);
                     item.onClick?.();

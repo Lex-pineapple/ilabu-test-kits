@@ -22,7 +22,7 @@ export const TitleCard = ({
     </Heading>
     <Text fontWeight="semibold" textStyle="sm">
       {reactStringReplace(content, highlight, (match) => (
-        <Text as="span" color="lab_green.900">
+        <Text as="span" color="lab_green.900" key={content}>
           {match}
         </Text>
       ))}

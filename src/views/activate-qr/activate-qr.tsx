@@ -1,17 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 
 import { Button, Container, Flex, Input, Link, Text } from "@chakra-ui/react";
 
 import { QRComponent } from "#/components/qr-component";
-import { MOCK_UID } from "#constants/card-product-data";
-import { PATHS } from "#constants/paths";
+import { useQrCode } from "#/hooks/use-qr-code";
 import { TitleCard } from "#shared/title-card";
 
 export const ActivateQR = () => {
   const [code, setCode] = useState<string>();
-
-  const navigate = useNavigate();
+  const { onCodeSubmit } = useQrCode();
 
   return (
     <div>
@@ -40,7 +37,7 @@ export const ActivateQR = () => {
               disabled={!code}
               fontSize={14}
               fontWeight="medium"
-              onClick={() => navigate(`${PATHS._selected}/${MOCK_UID}`)}
+              onClick={() => onCodeSubmit(code as string)}
               size="xl"
               textTransform="uppercase"
               w="100%"
