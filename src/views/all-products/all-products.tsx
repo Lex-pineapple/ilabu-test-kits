@@ -2,7 +2,6 @@ import { useLoaderData } from "react-router";
 
 import { Container, Flex, Heading } from "@chakra-ui/react";
 
-import { cardExtensiveData } from "#constants/card-extensive-data";
 import { ProductCard } from "#shared/product-card";
 import type { KitMinimalType } from "#store/types/kits";
 
@@ -15,8 +14,12 @@ export const AllProducts = () => {
         Все продукты
       </Heading>
       <Flex flexDirection="column" gap={2.5}>
-        {cardExtensiveData.map((item) => (
-          <ProductCard {...item} description={item.descriptionMin} />
+        {loaderData.map((item) => (
+          <ProductCard
+            {...item}
+            description={item.description_min}
+            key={item.id}
+          />
         ))}
       </Flex>
     </Container>

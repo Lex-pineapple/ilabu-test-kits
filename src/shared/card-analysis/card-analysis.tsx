@@ -6,8 +6,9 @@ import type { AnalysisItemType } from "#constants/card-product-data";
 import { ArrowButton } from "#shared/arrow-button";
 import { CheckboxButton } from "#shared/card-analysis/components/checkbox-button";
 import { modal } from "#shared/modal";
+import type { AnalysisType } from "#store/types/analyses";
 
-type CardAnalysisProps = AnalysisItemType & {
+type CardAnalysisProps = AnalysisType & {
   cardType: "CHECK" | "INFO";
   disabled?: boolean;
   selected?: boolean;
@@ -18,13 +19,12 @@ export const CardAnalysis = ({
   cardType = "INFO",
   description,
   disabled,
-  execLab,
   handleSelect,
+  id,
+  lab_name,
   price,
   selected,
-  testId,
   title,
-  uid,
 }: CardAnalysisProps) => {
   const [checked, setChecked] = useState(false);
 
@@ -35,7 +35,7 @@ export const CardAnalysis = ({
   const handleCheck = () => {
     const checkedNew = !checked;
     setChecked(checkedNew);
-    handleSelect?.(checkedNew, uid);
+    handleSelect?.(checkedNew, id);
   };
 
   return (
@@ -54,9 +54,10 @@ export const CardAnalysis = ({
             bg={cardType === "CHECK" ? "#05aa9638" : undefined}
             p="12px 18px 0"
           >
-            <Text color="lab_grey.900" textStyle="sm">
+            {/* TODO: добавить код набора */}
+            {/* <Text color="lab_grey.900" textStyle="sm">
               {testId}
-            </Text>
+            </Text> */}
             {cardType === "CHECK" && (
               <Text
                 fontStyle="italic"
@@ -65,7 +66,7 @@ export const CardAnalysis = ({
                 pt={1}
                 textStyle="xs"
               >
-                Исполнитель: {execLab.name}
+                Исполнитель: {lab_name}
               </Text>
             )}
           </Box>
@@ -87,7 +88,7 @@ export const CardAnalysis = ({
             onClick={() =>
               modal.open("analysis", {
                 modalData: {
-                  analysisUid: uid,
+                  analysisUid: id,
                 },
                 modalType: "ANALYSIS-ITEM",
               })
@@ -106,7 +107,7 @@ export const CardAnalysis = ({
             onClick={() =>
               modal.open("analysis", {
                 modalData: {
-                  analysisUid: uid,
+                  analysisUid: id,
                 },
                 modalType: "ANALYSIS-ITEM",
               })

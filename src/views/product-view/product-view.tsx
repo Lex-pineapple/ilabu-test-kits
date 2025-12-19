@@ -6,23 +6,24 @@ import { useLoaderData } from "react-router";
 import { Box, Container, Flex, Heading, List, Text } from "@chakra-ui/react";
 
 import { CheckmarkIcon } from "#assets/icons/checkmark-icon";
-import type { CardExtensiveDataType } from "#constants/card-extensive-data";
 import { CardCollapsible } from "#shared/card-collapsible";
 import { ShdContainer } from "#shared/shd-container";
+import type { KitType } from "#store/types/kits";
 
 import styles from "./product-view.module.scss";
 
 export const ProductView = () => {
-  const loaderData = useLoaderData<CardExtensiveDataType>();
+  const loaderData = useLoaderData<KitType>();
 
   return (
     <Container p={0} pb={14} pt={10}>
       <Heading pb={2} size="md" textTransform="uppercase">
         {loaderData.title}
       </Heading>
-      <Text fontWeight="medium" textStyle="sm">
+      {/* TODO: добавить тип взятого материала в ответ */}
+      {/* <Text fontWeight="medium" textStyle="sm">
         {loaderData.inputType}
-      </Text>
+      </Text> */}
       <Flex direction="column" p="26px 0 36px">
         <Box bg="lab_green.50" borderRadius={10} mb={14} p={5} pb={0}>
           {loaderData.description.split("\n").map((item) => (
@@ -63,7 +64,7 @@ export const ProductView = () => {
         </Heading>
         <ShdContainer mb={12} p={4.5}>
           <List.Root className={styles.contents_list} variant="plain">
-            {loaderData.boxContents.map(([name, count]) => (
+            {Object.entries(loaderData.box_contents).map(([name, count]) => (
               <List.Item
                 alignItems="center"
                 gap={2}
@@ -87,21 +88,25 @@ export const ProductView = () => {
           </List.Root>
         </ShdContainer>
         <CardCollapsible
-          description={loaderData.descriptionMin}
-          items={loaderData.analysisItems}
+          description={loaderData.description_min}
+          items={loaderData.analyses}
           title={loaderData.title}
         />
       </Flex>
-      <Heading pb={3} size="md" textTransform="uppercase">
-        Как самостоятельно сдать анализ
-      </Heading>
-      <Container p={0}>
-        <LiteYouTubeEmbed
-          id="udz_I6QtbE0"
-          poster="hqdefault"
-          title="How to take a self blood test"
-        />
-      </Container>
+      {loaderData.video_url && (
+        <>
+          <Heading pb={3} size="md" textTransform="uppercase">
+            Как самостоятельно сдать анализ
+          </Heading>
+          <Container p={0}>
+            <LiteYouTubeEmbed
+              id="udz_I6QtbE0"
+              poster="hqdefault"
+              title="Как самостоятельно сдать анализ"
+            />
+          </Container>
+        </>
+      )}
     </Container>
   );
 };

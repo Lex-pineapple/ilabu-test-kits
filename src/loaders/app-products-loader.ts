@@ -8,7 +8,7 @@ export async function loader() {
 
   try {
     const response = await p.unwrap();
-    return response;
+    return response.kits;
   } catch {
     return redirect("/");
   } finally {
