@@ -14,7 +14,7 @@ export const isFetchBaseQueryError = (
   typeof error.status === "number";
 
 export const useQrCode = () => {
-  const [getToken] = useGetTokenMutation();
+  const [getToken, { isLoading }] = useGetTokenMutation();
   const navigate = useNavigate();
 
   const onCodeSubmit = async (code: string) => {
@@ -74,6 +74,7 @@ export const useQrCode = () => {
   };
 
   return {
+    isLoading,
     onCodeSubmit,
   };
 };

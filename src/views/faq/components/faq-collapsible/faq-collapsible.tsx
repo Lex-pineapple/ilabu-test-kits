@@ -15,6 +15,7 @@ type FAQCollapsibleProps = {
 
 export const FAQCollapsible = ({
   content,
+  id,
   open,
   title,
 }: FAQCollapsibleProps) => {
@@ -37,6 +38,7 @@ export const FAQCollapsible = ({
           <Text
             color="lab_green.900"
             fontWeight="medium"
+            id={id}
             textAlign="left"
             textStyle="sm"
           >

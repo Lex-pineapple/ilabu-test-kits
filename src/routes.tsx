@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import { Layout } from "#/layouts/layout";
 import {
+  appProductsLoader,
   HydrateFallback,
   productKitLoader,
   selectedKitLoader,
@@ -47,6 +48,7 @@ export const router = createBrowserRouter([
       },
       {
         element: <AllProducts />,
+        loader: appProductsLoader,
         path: PATHS.availableKit,
       },
       {

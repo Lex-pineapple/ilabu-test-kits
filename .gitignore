@@ -25,5 +25,6 @@ dist-ssr
 
 # envs
 .env.*
+.env
 
 .react-router/

@@ -23,7 +23,6 @@ export const authApi = unautorizedApi.injectEndpoints({
       },
       query: (body) => ({
         body,
-        credentials: "include",
         method: "POST",
         url: API_ENDPOINTS.LOGIN,
       }),

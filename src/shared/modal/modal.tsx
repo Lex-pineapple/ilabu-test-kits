@@ -12,7 +12,7 @@ export const modal = createOverlay<ModalProps>(
   ({ modalData, modalType, onOpenChange, ...rest }) => {
     const Modal = ModalTypes[modalType];
     return (
-      <Dialog.Root {...rest} onOpenChange={onOpenChange}>
+      <Dialog.Root {...rest} onOpenChange={onOpenChange} placement="center">
         <Portal>
           <Dialog.Backdrop />
           <Dialog.Positioner>

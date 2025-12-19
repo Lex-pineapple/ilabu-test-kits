@@ -1,14 +1,23 @@
 import { useState } from "react";
+import { Link } from "react-router";
 
-import { Button, Container, Flex, Input, Link, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Container,
+  Flex,
+  Input,
+  Link as ChakraLink,
+  Text,
+} from "@chakra-ui/react";
 
 import { QRComponent } from "#/components/qr-component";
 import { useQrCode } from "#/hooks/use-qr-code";
+import { PATHS } from "#constants/paths";
 import { TitleCard } from "#shared/title-card";
 
 export const ActivateQR = () => {
   const [code, setCode] = useState<string>();
-  const { onCodeSubmit } = useQrCode();
+  const { isLoading, onCodeSubmit } = useQrCode();
 
   return (
     <div>
@@ -37,6 +46,8 @@ export const ActivateQR = () => {
               disabled={!code}
               fontSize={14}
               fontWeight="medium"
+              loading={isLoading}
+              loadingText={"Отправляем код..."}
               onClick={() => onCodeSubmit(code as string)}
               size="xl"
               textTransform="uppercase"
@@ -44,9 +55,14 @@ export const ActivateQR = () => {
             >
               Продолжить
             </Button>
-            <Link color="lab_grey.600" fontSize={14} fontWeight="medium">
-              Не нашли QR-код?
-            </Link>
+            <ChakraLink
+              asChild
+              color="lab_grey.600"
+              fontSize={14}
+              fontWeight="medium"
+            >
+              <Link to={`${PATHS.faq}#qr-location`}>Не нашли QR-код?</Link>
+            </ChakraLink>
           </Flex>
         </Flex>
       </Container>
