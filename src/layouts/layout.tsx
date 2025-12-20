@@ -27,48 +27,45 @@ export const Layout = () => {
   return isLargerThan500 ? (
     <div>
       <Header />
-      {state === "loading" ? (
-        <Spinner />
-      ) : (
-        <>
-          <Grid templateColumns="repeat(2, 1fr)">
-            <GridItem>
-              <Center>
-                <Flex
-                  className={styles.root_mobile}
-                  flexDir="column"
-                  justifyContent="center"
-                  margin="0 auto"
-                  maxW={500}
-                  minH="100vh"
-                  p={0}
-                  pt={12}
-                >
-                  <ScrollToTop />
-                  <div>
-                    <Container p={3.5} pb={0} pt={0}>
-                      <Outlet />
-                    </Container>
-                  </div>
-                </Flex>
-              </Center>
-            </GridItem>
-            <GridItem>
-              <Box
-                bgAttachment="fixed"
-                bgImage="url('/bg-test.png')"
-                bgPos="center"
-                bgRepeat="no-repeat"
-                bgSize="cover"
-                h="100%"
-                w="100%"
-              />
-            </GridItem>
-          </Grid>
-          <Footer isDesktop={true} />
-          <CustomToaster />
-        </>
-      )}
+
+      <>
+        <Grid templateColumns="repeat(2, 1fr)">
+          <GridItem>
+            <Center>
+              <Flex
+                className={styles.root_mobile}
+                flexDir="column"
+                justifyContent="center"
+                margin="0 auto"
+                maxW={500}
+                minH="100vh"
+                p={0}
+                pt={12}
+              >
+                <ScrollToTop />
+                <div>
+                  <Container p={3.5} pb={0} pt={0}>
+                    {state === "loading" ? <Spinner /> : <Outlet />}
+                  </Container>
+                </div>
+              </Flex>
+            </Center>
+          </GridItem>
+          <GridItem>
+            <Box
+              bgAttachment="fixed"
+              bgImage="url('/bg-test.png')"
+              bgPos="center"
+              bgRepeat="no-repeat"
+              bgSize="cover"
+              h="100%"
+              w="100%"
+            />
+          </GridItem>
+        </Grid>
+        <Footer isDesktop={true} />
+        <CustomToaster />
+      </>
       <modal.Viewport />
       <bottomSheetModal.Viewport />
     </div>
