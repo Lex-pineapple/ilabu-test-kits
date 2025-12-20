@@ -9,3 +9,5 @@ export const analysesApi = unautorizedApi.injectEndpoints({
     }),
   }),
 });
+
+export const { useGetAnalysisDetailsQuery } = analysesApi;

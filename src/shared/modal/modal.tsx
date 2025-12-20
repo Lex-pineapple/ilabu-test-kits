@@ -6,13 +6,14 @@ type ModalProps = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   modalData: any;
   modalType: ModalTypesKeys;
+  placement?: "center" | "top";
 };
 
 export const modal = createOverlay<ModalProps>(
-  ({ modalData, modalType, onOpenChange, ...rest }) => {
+  ({ modalData, modalType, onOpenChange, placement = "center", ...rest }) => {
     const Modal = ModalTypes[modalType];
     return (
-      <Dialog.Root {...rest} onOpenChange={onOpenChange} placement="center">
+      <Dialog.Root {...rest} onOpenChange={onOpenChange} placement={placement}>
         <Portal>
           <Dialog.Backdrop />
           <Dialog.Positioner>

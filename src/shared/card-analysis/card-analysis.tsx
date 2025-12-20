@@ -88,9 +88,10 @@ export const CardAnalysis = ({
             onClick={() =>
               modal.open("analysis", {
                 modalData: {
-                  analysisUid: id,
+                  analysisId: id,
                 },
                 modalType: "ANALYSIS-ITEM",
+                placement: "top",
               })
             }
           />
@@ -107,9 +108,10 @@ export const CardAnalysis = ({
             onClick={() =>
               modal.open("analysis", {
                 modalData: {
-                  analysisUid: id,
+                  analysisId: id,
                 },
                 modalType: "ANALYSIS-ITEM",
+                placement: "top",
               })
             }
           />
