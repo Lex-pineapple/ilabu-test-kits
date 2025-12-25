@@ -1,4 +1,4 @@
-import type { AnalysisItemType } from "#constants/card-product-data";
+import type { AnalysisType } from "#store/types/analyses";
 
-export const countTotal = (arr: AnalysisItemType[]) =>
-  arr.reduce((acc, curr) => acc + curr.price, 0);
+export const countTotal = (arr: AnalysisType[]) =>
+  arr.reduce((acc, curr) => acc + Number(curr.price), 0);

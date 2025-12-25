@@ -3,6 +3,13 @@ export type AddressType = {
   id: string;
 };
 
+export type LabAddressesTransformedType = {
+  address: string;
+  name: string;
+  time: string;
+  value: string;
+};
+
 export type LabAddressesType = {
   addresses: AddressType[];
   lab_id: string;

@@ -22,7 +22,6 @@ import { SortPriceDown } from "#assets/icons/sort-price-down";
 import { SortPriceUp } from "#assets/icons/sort-price-up";
 import { SelectButton } from "#shared/select-button";
 import type { ListType } from "#shared/select-button/select-button";
-import { useGetLabsListQuery } from "#store/api/labs-api";
 import { useAppSelector } from "#store/hooks";
 import { getCartItems } from "#store/slices/cart-slice";
 import type { AnalysisResponse } from "#store/types/analyses";

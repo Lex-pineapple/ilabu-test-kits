@@ -118,7 +118,7 @@ export const Instruction = () => (
         </Flex>
         <Link to={PATHS.checkout}>
           <Button mt={9} w="100%">
-            Оплатить
+            Продолжить
           </Button>
         </Link>
       </Container>

@@ -16,7 +16,6 @@ import {
 } from "@chakra-ui/react";
 
 import { TrashbinIcpon } from "#assets/icons/trashbin-icon";
-import type { AnalysisItemType } from "#constants/card-product-data";
 import { PATHS } from "#constants/paths";
 import { PriceText } from "#shared/price-text";
 import { TotalComponent } from "#shared/total-component";
@@ -26,6 +25,7 @@ import {
   getCartItems,
   removeCartItems,
 } from "#store/slices/cart-slice";
+import type { AnalysisType } from "#store/types/analyses";
 import { countTotal } from "#utils/count-total";
 
 import styles from "./drawer-swipeable.module.scss";
@@ -34,7 +34,7 @@ const DrawerListItem = ({
   item,
   onDelete,
 }: {
-  item: AnalysisItemType;
+  item: AnalysisType;
   onDelete?: () => void;
 }) => (
   <List.Item p="9px 0">
@@ -135,7 +135,7 @@ export const DrawerSwipeable = () => {
                           {cartItems.map((item) => (
                             <DrawerListItem
                               item={item}
-                              key={item.uid}
+                              key={item.id}
                               onDelete={() => dispatch(removeCartItems(item))}
                             />
                           ))}

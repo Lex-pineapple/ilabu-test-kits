@@ -18,4 +18,10 @@
 - ~~В запросе `/auth/token` - помимо `access_token` позвращать `id` набора (его тип/uuid).~~
 - ~~Добавлять параметр цвета в запрос `/kits` или генерировать его случайным образом?~~ - **Генерируется случайно**
 
+- В методе `/labs/{lab_id}/addresses` в массив `addresses` добавить время работы каждой лаборатории по конкретному адресу.
+
 - Add protected routes
+- Add QR Scanning
+- Add code and auth verifying order details
+- Add token to storage?
+- State remembering

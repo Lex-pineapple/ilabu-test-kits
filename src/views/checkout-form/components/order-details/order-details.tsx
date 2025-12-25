@@ -14,7 +14,9 @@ import { InputClearable } from "#shared/input-clearable";
 import { InputError } from "#shared/input-error";
 import { SelectButton } from "#shared/select-button";
 import { TitleCard } from "#shared/title-card";
+import { useGetLabsAddressesQuery } from "#store/api/labs-api";
 import { useAppDispatch, useAppSelector } from "#store/hooks";
+import { getCurrLabId } from "#store/slices/cart-slice";
 import {
   getFormData,
   setFormData,
@@ -33,24 +35,11 @@ export type Inputs = {
   labAdressId?: string;
 };
 
-const deliveryLabsData = [
-  {
-    address: "г. Минск, ул. Газеты Звезда 23",
-    name: "ИНВИТРО",
-    time: "до 19:00",
-    value: "1",
-  },
-  {
-    address: "г. Минск, ул. Газеты Звезда 23",
-    name: "ИНВИТРО",
-    time: "до 19:00",
-    value: "2",
-  },
-];
-
 export const OrderDetails = () => {
   const dispatch = useAppDispatch();
   const formData = useAppSelector(getFormData);
+  const currLabId = useAppSelector(getCurrLabId);
+  const { data: labsList } = useGetLabsAddressesQuery(currLabId);
   const {
     control,
     formState: { errors, isValid },
@@ -76,9 +65,7 @@ export const OrderDetails = () => {
   });
 
   const getLabProps = (fieldValue: string) => {
-    const valueProps = deliveryLabsData.find(
-      (item) => item.value === fieldValue,
-    );
+    const valueProps = labsList?.find((item) => item.value === fieldValue);
     return valueProps ?? {};
   };
 
@@ -156,7 +143,6 @@ export const OrderDetails = () => {
                 </div>
               )}
             />
-
             <DatePicker
               errorMessage={errors.date?.message}
               id="date"
@@ -197,7 +183,7 @@ export const OrderDetails = () => {
                 </div>
               )}
             />
-            {deliveryMethod === "personal" && (
+            {deliveryMethod === "personal" && labsList && (
               <div>
                 <Controller
                   control={control}
@@ -205,7 +191,7 @@ export const OrderDetails = () => {
                   render={({ field }) => (
                     <SelectButton
                       ContentElement={LabContent}
-                      items={deliveryLabsData}
+                      items={labsList}
                       selected={field.value}
                       setSelected={(value) => {
                         field.onChange(value);
