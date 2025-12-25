@@ -1,15 +1,22 @@
 import { type Params, redirect } from "react-router";
 
-import { cardExtensiveData } from "#constants/card-extensive-data";
-import { setCurrKitUid } from "#store/slices/main-slice";
+import { kitsApi } from "#store/api/kits-api";
 import store from "#store/store";
 
-export const loader = ({ params }: { params: Params<"uid"> }) => {
+export const loader = async ({ params }: { params: Params<"uid"> }) => {
   const currUid = params?.uid;
-  if (currUid) store.dispatch(setCurrKitUid(currUid));
-  const foundItem = cardExtensiveData.find((item) => item.uid === currUid);
-  if (!foundItem) {
-    throw redirect("/not-found");
+  if (currUid) {
+    const p = store.dispatch(
+      kitsApi.endpoints.getKitAnalyses.initiate(currUid),
+    );
+
+    try {
+      const response = await p.unwrap();
+      return response;
+    } catch {
+      return redirect("/not-found");
+    } finally {
+      p.unsubscribe();
+    }
   }
-  return foundItem;
 };

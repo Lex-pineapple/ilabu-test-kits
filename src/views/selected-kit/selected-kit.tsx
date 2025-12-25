@@ -20,11 +20,12 @@ import { SortAlphabeticalUp } from "#assets/icons/sort-alphabetical-up";
 import { SortIcon } from "#assets/icons/sort-icon";
 import { SortPriceDown } from "#assets/icons/sort-price-down";
 import { SortPriceUp } from "#assets/icons/sort-price-up";
-import type { CardExtensiveDataType } from "#constants/card-extensive-data";
 import { SelectButton } from "#shared/select-button";
 import type { ListType } from "#shared/select-button/select-button";
+import { useGetLabsListQuery } from "#store/api/labs-api";
 import { useAppSelector } from "#store/hooks";
 import { getCartItems } from "#store/slices/cart-slice";
+import type { AnalysisResponse } from "#store/types/analyses";
 
 const sortKeys = [
   {
@@ -50,18 +51,18 @@ const sortKeys = [
 ];
 
 export const SelectedKit = () => {
-  const loaderData = useLoaderData<CardExtensiveDataType>();
+  const loaderData = useLoaderData<AnalysisResponse>();
   const selected = useAppSelector(getCartItems);
 
   const [searchQ, setSearchQ] = useState("");
   const [sortType, setSortType] = useState<null | string>(null);
   const [execLab, setExecLab] = useState<null | string>(
-    selected.length ? selected[0].execLab.uid : null,
+    selected.length ? selected[0].lab_id : null,
   );
-  const execLabList = loaderData.analysisItems
+  const execLabList = loaderData.analyses
     .map((item) => ({
-      label: item.execLab.name,
-      value: item.execLab.uid,
+      label: item.lab_name,
+      value: item.lab_id,
     }))
     .reduce((acc, curr) => {
       if (acc.some((item) => item.value === curr.value)) return acc;
@@ -69,7 +70,7 @@ export const SelectedKit = () => {
     }, [] as ListType[]);
 
   useEffect(() => {
-    if (selected.length) setExecLab(selected[0].execLab.uid);
+    if (selected.length) setExecLab(selected[0].lab_id);
   }, [selected]);
 
   return (
@@ -145,8 +146,8 @@ export const SelectedKit = () => {
           }
         />
         <ListControlled
-          color={loaderData.color}
-          items={loaderData.analysisItems}
+          color={"blue"}
+          items={loaderData.analyses}
           labId={execLab}
           searchQ={searchQ}
           sortType={sortType as SortTypes}

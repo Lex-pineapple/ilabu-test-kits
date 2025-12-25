@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import { Box, Card, Container, Heading, Text } from "@chakra-ui/react";
 
-import type { AnalysisItemType } from "#constants/card-product-data";
 import { ArrowButton } from "#shared/arrow-button";
 import { CheckboxButton } from "#shared/card-analysis/components/checkbox-button";
 import { modal } from "#shared/modal";

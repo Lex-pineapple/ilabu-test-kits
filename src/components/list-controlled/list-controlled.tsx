@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 
 import { Stack } from "@chakra-ui/react";
 
-import type { AnalysisItemType } from "#constants/card-product-data";
 import { CardAnalysis } from "#shared/card-analysis";
 import type { ColorType } from "#shared/circle-graphic/circle-graphic";
 import { useAppDispatch, useAppSelector } from "#store/hooks";
 import { getCartItems, setCartItems } from "#store/slices/cart-slice";
+import type { AnalysisType } from "#store/types/analyses";
 import { removeFromArray } from "#utils/remove-from-array";
 
 export type SortTypes = "nameAsc" | "nameDesc" | "priceAsc" | "priceDesc";
 
 type ListControlledProps = {
   color: ColorType;
-  items: (AnalysisItemType & { disabled?: boolean })[];
+  items: (AnalysisType & { disabled?: boolean })[];
   labId?: null | string;
   searchQ?: string;
   sortType?: SortTypes;
@@ -26,8 +26,8 @@ export const ListControlled = ({
   sortType,
 }: ListControlledProps) => {
   const [labFiltered, setLabFiltered] =
-    useState<(AnalysisItemType & { disabled?: boolean })[]>(items);
-  const [filtered, setFiltered] = useState<AnalysisItemType[]>(items);
+    useState<(AnalysisType & { disabled?: boolean })[]>(items);
+  const [filtered, setFiltered] = useState<AnalysisType[]>(items);
   const dispatch = useAppDispatch();
   const selected = useAppSelector(getCartItems);
 
@@ -46,7 +46,7 @@ export const ListControlled = ({
       setLabFiltered(
         items
           .map((item) =>
-            item.execLab.uid === labId ? item : { ...item, disabled: true },
+            item.lab_id === labId ? item : { ...item, disabled: true },
           )
           .sort((a) => (a.disabled ? 1 : -1)),
       );
@@ -58,18 +58,22 @@ export const ListControlled = ({
     if (sortType === "nameDesc")
       setFiltered([...filtered].sort((a, b) => b.title.localeCompare(a.title)));
     if (sortType === "priceAsc")
-      setFiltered([...filtered].sort((a, b) => a.price - b.price));
+      setFiltered(
+        [...filtered].sort((a, b) => Number(a.price) - Number(b.price)),
+      );
     if (sortType === "priceDesc")
-      setFiltered([...filtered].sort((a, b) => b.price - a.price));
+      setFiltered(
+        [...filtered].sort((a, b) => Number(b.price) - Number(a.price)),
+      );
   }, [sortType]);
 
   const handleSelect = (checked: boolean, uid: string) => {
-    const item = filtered.find((item) => item.uid === uid);
+    const item = filtered.find((item) => item.id === uid);
     const selectedIndex = item ? selected.indexOf(item) : -1;
     const itemExists = selectedIndex > -1;
 
     if (!checked && itemExists) {
-      const removedArray = removeFromArray<AnalysisItemType>(
+      const removedArray = removeFromArray<AnalysisType>(
         selected,
         selectedIndex,
       );
@@ -87,7 +91,7 @@ export const ListControlled = ({
           {...item}
           cardType="CHECK"
           handleSelect={handleSelect}
-          key={item.testId}
+          key={item.id}
           selected={selected.includes(item)}
         />
       ))}

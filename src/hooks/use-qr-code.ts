@@ -19,7 +19,8 @@ export const useQrCode = () => {
 
   const onCodeSubmit = async (code: string) => {
     const { data, error } = await getToken({ kit_item_code: code });
-    if (data?.access_token) navigate(`${PATHS._selected}/${code}`);
+    if (data?.access_token && data.kit_id)
+      navigate(`${PATHS._selected}/${data.kit_id}`);
     if (error && isFetchBaseQueryError(error)) {
       switch (error.status) {
         case 400:

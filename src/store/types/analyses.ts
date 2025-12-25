@@ -9,6 +9,7 @@ export type AnalysisType = {
   description: string;
   execution_time_days: string;
   id: string;
+  lab_id: string;
   lab_name: string;
   price: string;
   title: string;

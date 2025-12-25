@@ -1,10 +1,10 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-import type { AnalysisItemType } from "#constants/card-product-data";
+import type { AnalysisType } from "#store/types/analyses";
 import { removeFromArray } from "#utils/remove-from-array";
 
 type initialStateType = {
-  items: AnalysisItemType[];
+  items: AnalysisType[];
 };
 
 const initialState: initialStateType = {
@@ -18,11 +18,11 @@ export const cartSlice = createSlice({
     clearCartItems: (state) => {
       state.items = [];
     },
-    removeCartItems: (state, { payload }: PayloadAction<AnalysisItemType>) => {
+    removeCartItems: (state, { payload }: PayloadAction<AnalysisType>) => {
       const idx = state.items.indexOf(payload);
       state.items = removeFromArray(state.items, idx);
     },
-    setCartItems: (state, { payload }: PayloadAction<AnalysisItemType[]>) => {
+    setCartItems: (state, { payload }: PayloadAction<AnalysisType[]>) => {
       state.items = payload;
     },
   },

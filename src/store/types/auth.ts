@@ -8,6 +8,7 @@ export type AuthKitType = {
 
 export type AuthResponseType = {
   access_token: string;
+  kit_id: string;
   refresh_token: string;
 };
 
