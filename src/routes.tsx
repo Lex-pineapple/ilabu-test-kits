@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import { AuthGuard } from "#/layouts/auth-guard";
 import { Layout } from "#/layouts/layout";
 import {
   appProductsLoader,
@@ -29,23 +30,7 @@ export const router = createBrowserRouter([
         element: <FAQ />,
         path: PATHS.faq,
       },
-      {
-        element: <SuccessfulScreen />,
-        path: PATHS.ordered,
-      },
-      {
-        element: <SelectedKit />,
-        loader: selectedKitLoader,
-        path: PATHS.selectedKit,
-      },
-      {
-        element: <CheckoutForm />,
-        path: PATHS.checkout,
-      },
-      {
-        element: <Instruction />,
-        path: PATHS.instruction,
-      },
+
       {
         element: <AllProducts />,
         loader: appProductsLoader,
@@ -59,6 +44,29 @@ export const router = createBrowserRouter([
         element: <ProductView />,
         loader: productKitLoader,
         path: PATHS.product,
+      },
+      {
+        children: [
+          {
+            element: <SelectedKit />,
+            loader: selectedKitLoader,
+            path: PATHS.selectedKit,
+          },
+          {
+            element: <Instruction />,
+            path: PATHS.instruction,
+          },
+          {
+            element: <SuccessfulScreen />,
+            path: PATHS.ordered,
+          },
+
+          {
+            element: <CheckoutForm />,
+            path: PATHS.checkout,
+          },
+        ],
+        element: <AuthGuard />,
       },
     ],
     element: <Layout />,

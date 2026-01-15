@@ -14,6 +14,8 @@ import { DrawerSwipeable } from "#/components/drawer-swipeable";
 import { ListControlled } from "#/components/list-controlled";
 import type { SortTypes } from "#/components/list-controlled/list-controlled";
 import { toaster } from "#/components/toaster/toaster-use";
+import type { SelectedKitLoaderResponse } from "#/loaders/selected-kit-loader";
+import { NetworkError } from "#/views/selected-kit/components/network-error";
 import { CollapsibleIcon } from "#assets/icons/collapsible-icon";
 import { SortAlphabeticalDown } from "#assets/icons/sort-alphabetical-down";
 import { SortAlphabeticalUp } from "#assets/icons/sort-alphabetical-up";
@@ -24,7 +26,6 @@ import { SelectButton } from "#shared/select-button";
 import type { ListType } from "#shared/select-button/select-button";
 import { useAppSelector } from "#store/hooks";
 import { getCartItems } from "#store/slices/cart-slice";
-import type { AnalysisResponse } from "#store/types/analyses";
 
 const sortKeys = [
   {
@@ -50,7 +51,7 @@ const sortKeys = [
 ];
 
 export const SelectedKit = () => {
-  const loaderData = useLoaderData<AnalysisResponse>();
+  const { data, error } = useLoaderData<SelectedKitLoaderResponse>();
   const selected = useAppSelector(getCartItems);
 
   const [searchQ, setSearchQ] = useState("");
@@ -58,7 +59,7 @@ export const SelectedKit = () => {
   const [execLab, setExecLab] = useState<null | string>(
     selected.length ? selected[0].lab_id : null,
   );
-  const execLabList = loaderData.analyses
+  const execLabList = data.analyses
     .map((item) => ({
       label: item.lab_name,
       value: item.lab_id,
@@ -75,7 +76,7 @@ export const SelectedKit = () => {
   return (
     <Container p={0} pb={14} pt={10}>
       <Heading pb={2} size="md" textTransform="uppercase">
-        {loaderData.title}
+        {data.title}
       </Heading>
       <Container p={0}>
         <Flex justify="space-between" pb={2.5}>
@@ -113,11 +114,16 @@ export const SelectedKit = () => {
           setSelected={setExecLab}
           trigger={
             <Button
+              _disabled={{
+                bg: "#cfcfcf",
+                color: "#686464",
+              }}
               bg="white"
               border="none"
               borderRadius={15}
               boxShadow="0 0 10px 2px #0000000f"
               color="black"
+              disabled={error}
               height="auto"
               justifyContent="space-between"
               mb={11}
@@ -128,6 +134,7 @@ export const SelectedKit = () => {
                     closable: true,
                     description:
                       "Можно выбрать только одного исполнителя. Для выбора другого исполнителя, пожалуйста, очистите элементы из корзины",
+                    duration: 2000,
                     type: "error",
                   });
                 }
@@ -144,13 +151,17 @@ export const SelectedKit = () => {
             </Button>
           }
         />
-        <ListControlled
-          color={"blue"}
-          items={loaderData.analyses}
-          labId={execLab}
-          searchQ={searchQ}
-          sortType={sortType as SortTypes}
-        />
+        {error ? (
+          <NetworkError />
+        ) : (
+          <ListControlled
+            color={"blue"}
+            items={data.analyses}
+            labId={execLab}
+            searchQ={searchQ}
+            sortType={sortType as SortTypes}
+          />
+        )}
       </Container>
       <DrawerSwipeable />
     </Container>

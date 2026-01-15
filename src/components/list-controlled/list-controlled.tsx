@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 
 import { Stack } from "@chakra-ui/react";
 
+import { NoItemsFound } from "#/components/list-controlled/components/no-items-found";
 import { applyFilters } from "#/components/list-controlled/utils";
 import { CardAnalysis } from "#shared/card-analysis";
 import type { ColorType } from "#shared/circle-graphic/circle-graphic";
+import { useAppSelector } from "#store/hooks";
+import { getCartItems } from "#store/slices/cart-slice";
 import type { AnalysisType } from "#store/types/analyses";
 
 export type SortTypes = "nameAsc" | "nameDesc" | "priceAsc" | "priceDesc";
@@ -23,6 +26,7 @@ export const ListControlled = ({
   searchQ = "",
   sortType,
 }: ListControlledProps) => {
+  const cartItems = useAppSelector(getCartItems);
   const [displayArray, setDisplayArray] = useState<AnalysisType[]>(items);
 
   useEffect(() => {
@@ -38,11 +42,15 @@ export const ListControlled = ({
   return displayArray.length > 0 ? (
     <Stack gap={2.5}>
       {displayArray.map((item) => (
-        <CardAnalysis {...item} cardType="CHECK" key={item.id} />
+        <CardAnalysis
+          {...item}
+          cardType="CHECK"
+          key={item.id}
+          selected={cartItems.some((cartItem) => cartItem.id === item.id)}
+        />
       ))}
     </Stack>
   ) : (
-    // TODO: добавить view не найдено
-    <div>not found</div>
+    <NoItemsFound />
   );
 };

@@ -16,6 +16,7 @@ export const authApi = unautorizedApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           dispatch(setAccessToken(data.access_token));
+          localStorage.setItem("access_token", data.access_token);
         } catch (error) {
           dispatch(resetAuth());
           console.error(error);

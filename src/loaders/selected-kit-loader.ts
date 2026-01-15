@@ -1,7 +1,13 @@
-import { type Params, redirect } from "react-router";
+import { type Params } from "react-router";
 
 import { kitsApi } from "#store/api/kits-api";
 import store from "#store/store";
+import type { AnalysisResponse } from "#store/types/analyses";
+
+export type SelectedKitLoaderResponse = {
+  data: AnalysisResponse;
+  error: boolean;
+};
 
 export const loader = async ({ params }: { params: Params<"uid"> }) => {
   const currUid = params?.uid;
@@ -12,9 +18,9 @@ export const loader = async ({ params }: { params: Params<"uid"> }) => {
 
     try {
       const response = await p.unwrap();
-      return response;
+      return { data: response, error: false };
     } catch {
-      return redirect("/not-found");
+      return { data: { analyses: [], id: "", title: "" }, error: true };
     } finally {
       p.unsubscribe();
     }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Box, Card, Container, Heading, Text } from "@chakra-ui/react";
 
@@ -13,16 +13,20 @@ type CardAnalysisProps = AnalysisType & {
   cardType: "CHECK" | "INFO";
   disabled?: boolean;
   selected?: boolean;
-  handleSelect?: (selected: boolean, title: string) => void;
 };
 
 export const CardAnalysis = ({
   cardType = "INFO",
   disabled,
+  selected,
   ...rest
 }: CardAnalysisProps) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(selected ?? false);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setChecked(selected ?? false);
+  }, [selected]);
 
   const handleCheck = () => {
     const checkedNew = !checked;

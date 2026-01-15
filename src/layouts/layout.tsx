@@ -10,6 +10,7 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 
+import { AppNotification } from "#/components/app-notification";
 import { ScrollToTop } from "#/components/scroll-to-top";
 import { Spinner } from "#/components/spinner";
 import { CustomToaster } from "#/components/toaster";
@@ -26,8 +27,8 @@ export const Layout = () => {
 
   return isLargerThan500 ? (
     <div>
+      <AppNotification />
       <Header />
-
       <>
         <Grid templateColumns="repeat(2, 1fr)">
           <GridItem>
@@ -81,6 +82,7 @@ export const Layout = () => {
       p={0}
       pt={12}
     >
+      <AppNotification />
       <ScrollToTop />
       <div>
         <Header />
