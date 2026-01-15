@@ -60,7 +60,7 @@ export const OrderDetails = () => {
   const onSubmit = handleSubmit((data) => {
     if (isValid) {
       dispatch(setFormData(data));
-      dispatch(setFormState("confirmOrder"));
+      dispatch(setFormState("emailConfirm"));
     }
   });
 

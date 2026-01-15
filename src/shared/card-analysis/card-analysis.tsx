@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { Box, Card, Container, Heading, Text } from "@chakra-ui/react";
 
 import { ArrowButton } from "#shared/arrow-button";
 import { CheckboxButton } from "#shared/card-analysis/components/checkbox-button";
 import { modal } from "#shared/modal";
+import { useAppDispatch } from "#store/hooks";
+import { addItemToCart } from "#store/slices/cart-slice";
 import type { AnalysisType } from "#store/types/analyses";
 
 type CardAnalysisProps = AnalysisType & {
@@ -16,25 +18,16 @@ type CardAnalysisProps = AnalysisType & {
 
 export const CardAnalysis = ({
   cardType = "INFO",
-  description,
   disabled,
-  handleSelect,
-  id,
-  lab_name,
-  price,
-  selected,
-  title,
+  ...rest
 }: CardAnalysisProps) => {
   const [checked, setChecked] = useState(false);
-
-  useEffect(() => {
-    setChecked(!!selected);
-  }, [selected]);
+  const dispatch = useAppDispatch();
 
   const handleCheck = () => {
     const checkedNew = !checked;
     setChecked(checkedNew);
-    handleSelect?.(checkedNew, id);
+    dispatch(addItemToCart(rest));
   };
 
   return (
@@ -53,10 +46,9 @@ export const CardAnalysis = ({
             bg={cardType === "CHECK" ? "#05aa9638" : undefined}
             p="12px 18px 0"
           >
-            {/* TODO: добавить код набора */}
-            {/* <Text color="lab_grey.900" textStyle="sm">
-              {testId}
-            </Text> */}
+            <Text color="lab_grey.900" textStyle="sm">
+              {rest.article}
+            </Text>
             {cardType === "CHECK" && (
               <Text
                 fontStyle="italic"
@@ -65,17 +57,17 @@ export const CardAnalysis = ({
                 pt={1}
                 textStyle="xs"
               >
-                Исполнитель: {lab_name}
+                Исполнитель: {rest.lab_name}
               </Text>
             )}
           </Box>
         </Card.Header>
         <Card.Body p="0" pb={3}>
           <Heading lineHeight="14px" pb={2.5} size="sm">
-            {title}
+            {rest.title}
           </Heading>
           <Text fontWeight="medium" textStyle="xs">
-            {description}
+            {rest.description}
           </Text>
         </Card.Body>
       </Container>
@@ -87,7 +79,7 @@ export const CardAnalysis = ({
             onClick={() =>
               modal.open("analysis", {
                 modalData: {
-                  analysisId: id,
+                  analysisId: rest.id,
                 },
                 modalType: "ANALYSIS-ITEM",
                 placement: "top",
@@ -107,7 +99,7 @@ export const CardAnalysis = ({
             onClick={() =>
               modal.open("analysis", {
                 modalData: {
-                  analysisId: id,
+                  analysisId: rest.id,
                 },
                 modalType: "ANALYSIS-ITEM",
                 placement: "top",
@@ -124,7 +116,7 @@ export const CardAnalysis = ({
         top={6}
       >
         <Text color="white" fontWeight="semibold">
-          {Number(price).toFixed(2)} BYN
+          {Number(rest.price).toFixed(2)} BYN
         </Text>
       </Box>
     </Card.Root>

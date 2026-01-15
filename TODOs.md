@@ -19,9 +19,25 @@
 - ~~Добавлять параметр цвета в запрос `/kits` или генерировать его случайным образом?~~ - **Генерируется случайно**
 
 - В методе `/labs/{lab_id}/addresses` в массив `addresses` добавить время работы каждой лаборатории по конкретному адресу.
+- Метод POST который отправляет анализы с массивом анализов в формате 
+```
+{
+  "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "article": "string",
+  "title": "string",
+  "description": "string",
+  "price": "string",
+  "execution_time_days": "string",
+  "lab_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "lab_name": "string"
+}
+```
+и сохраняет в бд к заказу
+- метод GET - по токену получает содержимое корзины (массив анализов в предыдущем формате) И количество пробирок
 
 - Add protected routes
 - Add QR Scanning
 - Add code and auth verifying order details
 - Add token to storage?
 - State remembering
+- Как мы считаем сколько / какие пробирки?

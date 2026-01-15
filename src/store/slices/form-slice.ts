@@ -42,7 +42,7 @@ const initialState: initialStateType = {
     lastName: "",
     middleName: "",
   },
-  formState: "orderDetails",
+  formState: "codeCheck",
   tubes: [],
 };
 

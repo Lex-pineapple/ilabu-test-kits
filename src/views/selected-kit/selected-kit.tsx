@@ -69,7 +69,7 @@ export const SelectedKit = () => {
     }, [] as ListType[]);
 
   useEffect(() => {
-    if (selected.length) setExecLab(selected[0].lab_id);
+    setExecLab(selected.length ? selected[0].lab_id : null);
   }, [selected]);
 
   return (

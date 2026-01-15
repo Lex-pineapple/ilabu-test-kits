@@ -17,6 +17,18 @@ export const cartSlice = createSlice({
   initialState,
   name: "cart",
   reducers: {
+    addItemToCart: (state, { payload }: PayloadAction<AnalysisType>) => {
+      const foundItem = state.items.find((item) => item.id === payload.id);
+      if (foundItem) {
+        const idx = state.items.indexOf(payload);
+        const newArray = removeFromArray(state.items, idx);
+        state.items = newArray;
+        if (newArray.length === 0) state.selected_lab_id = "";
+      } else {
+        state.items = [...state.items, payload];
+        state.selected_lab_id = payload?.lab_id;
+      }
+    },
     clearCartItems: (state) => {
       state.items = [];
       state.selected_lab_id = "";
@@ -38,7 +50,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { clearCartItems, removeCartItems, setCartItems } =
+export const { addItemToCart, clearCartItems, removeCartItems, setCartItems } =
   cartSlice.actions;
 export const { getCartItems, getCurrLabId } = cartSlice.selectors;
 export default cartSlice.reducer;
