@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { Button, Flex, Text } from "@chakra-ui/react";
 
+import { useAuth } from "#/hooks/use-auth";
 import { LogoMainIcon } from "#assets/icons/logo-main";
 import { LINKS } from "#constants/header-links";
 import { PATHS } from "#constants/paths";
@@ -13,6 +14,7 @@ import styles from "./header.module.scss";
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
+  const { isAuthorised } = useAuth();
 
   return (
     <div>
@@ -40,7 +42,9 @@ export const Header = () => {
             </div>
           </Link>
           <Flex className={styles.links} flexDir="column">
-            {LINKS.map((item) =>
+            {LINKS.filter((item) =>
+              isAuthorised ? item : item.isAuth === false,
+            ).map((item) =>
               item.href ? (
                 <Link
                   key={item.title}
