@@ -9,6 +9,7 @@ import mainReducer, { mainSlice } from "#store/slices/main-slice";
 import notificationReducer, {
   notificationSlice,
 } from "#store/slices/notification-slice";
+import orderReducer, { orderSlice } from "#store/slices/order-slice";
 
 const store = configureStore({
   middleware: (getDefaultMiddleware) =>
@@ -24,6 +25,7 @@ const store = configureStore({
     [formSlice.name]: formReducer,
     [mainSlice.name]: mainReducer,
     [notificationSlice.name]: notificationReducer,
+    [orderSlice.name]: orderReducer,
     [unautorizedApi.reducerPath]: unautorizedApi.reducer,
   },
 });

@@ -1,15 +1,28 @@
 import { authorizedApi } from "#store/api/base-api";
 import { API_ENDPOINTS } from "#store/api/consts";
+import { resetOrderData, setOrderData } from "#store/slices/order-slice";
 import type { GeneralResponseType } from "#store/types";
 import type {
   AnalysesToLinkType,
   InstructionType,
   LinkedAnalysesResponseType,
-  OrderType,
+  OrderDetailsType,
 } from "#store/types/orders";
 
 export const addressApi = authorizedApi.injectEndpoints({
   endpoints: (build) => ({
+    getOrderData: build.query<OrderDetailsType, void>({
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setOrderData(data));
+        } catch (error) {
+          dispatch(resetOrderData());
+          console.error(error);
+        }
+      },
+      query: () => API_ENDPOINTS.ORDERS_CURRENT_PROGRESS,
+    }),
     getOrderInstructions: build.query<InstructionType, void>({
       query: () => API_ENDPOINTS.ORDERS_CURRENT_INSTRUCTIONS,
     }),
@@ -23,17 +36,18 @@ export const addressApi = authorizedApi.injectEndpoints({
         url: API_ENDPOINTS.ORDERS_CURRENT_ANALYSES,
       }),
     }),
-    postOrderDetails: build.mutation<GeneralResponseType, OrderType>({
+    postOrderDetails: build.mutation<GeneralResponseType, void>({
       query: (body) => ({
         body,
         method: "POST",
-        url: API_ENDPOINTS.ORDERS_CURRENT,
+        url: API_ENDPOINTS.ORDERS_CURRENT_PROGRESS,
       }),
     }),
   }),
 });
 
 export const {
+  useGetOrderDataQuery,
   useGetOrderInstructionsQuery,
   usePostOrderAnalysesMutation,
   usePostOrderDetailsMutation,

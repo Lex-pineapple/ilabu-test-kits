@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { type PropsWithChildren, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { Navigate, Outlet } from "react-router";
 
@@ -12,7 +12,7 @@ import {
   setNotificationVisibility,
 } from "#store/slices/notification-slice";
 
-export const AuthGuard = () => {
+export const AuthGuard = ({ children }: PropsWithChildren) => {
   const [isGuardLoading, setIsGuardLoading] = useState(true);
   const accessToken =
     useAppSelector(selectAccessToken) || localStorage.getItem("access_token");
@@ -63,5 +63,5 @@ export const AuthGuard = () => {
     return <Navigate replace to={PATHS.root} />;
   }
 
-  return <Outlet />;
+  return children;
 };
