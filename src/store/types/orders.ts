@@ -1,5 +1,4 @@
 import type { GeneralResponseType } from "#store/types";
-import type { TubeType } from "#store/types/tubes";
 
 export type AnalysesToLinkType = {
   analyses_ids: string[];
@@ -49,6 +48,27 @@ export type OrderDetailsPDType = {
   last_name: string;
   middle_name: string;
   pickup_address: PickupAddressType;
+};
+
+export type OrderDetailsRequestType = {
+  delivery_method: string;
+  dob: string;
+  email: string;
+  first_name: string;
+  gender: string;
+  last_name: string;
+  middle_name: string;
+  lab_address_id?: string;
+  pickup_address?: {
+    apartment: string;
+    building: string;
+    city: string;
+    phone: string;
+    street: string;
+    comment?: string;
+    entrance?: string;
+    floor?: string;
+  };
 };
 
 export type OrderDetailsTubeType = {

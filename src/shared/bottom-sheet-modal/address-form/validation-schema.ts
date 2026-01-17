@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const validationSchema = z.object({
-  apartment: z.string().min(2, { error: "Введите номер квартиры" }),
-  building: z.string().min(2, { error: "Введите номер дома" }),
+  apartment: z.string().min(1, { error: "Введите номер квартиры" }),
+  building: z.string().min(1, { error: "Введите номер дома" }),
   city: z.string().min(2, { error: "Введите город доставки" }),
   commentary: z.optional(z.string()),
   entryway: z.optional(z.string()),

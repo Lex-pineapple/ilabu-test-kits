@@ -23,6 +23,7 @@
     "@pbe/react-yandex-maps": "^1.2.5",
     "@reduxjs/toolkit": "^2.9.0",
     "classnames": "^2.5.1",
+    "dayjs": "^1.11.19",
     "jwt-decode": "^4.0.0",
     "lottie-react": "^2.4.1",
     "react": "^19.1.1",

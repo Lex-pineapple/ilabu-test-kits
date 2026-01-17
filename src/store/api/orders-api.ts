@@ -12,6 +12,7 @@ import type {
   AnalysesToLinkType,
   InstructionType,
   LinkedAnalysesResponseType,
+  OrderDetailsRequestType,
   OrderDetailsType,
 } from "#store/types/orders";
 
@@ -32,9 +33,9 @@ export const addressApi = authorizedApi.injectEndpoints({
                   apartment: data.personal_data.pickup_address.apartment,
                   building: data.personal_data.pickup_address.building,
                   city: data.personal_data.pickup_address.city,
-                  commentary: data.personal_data.pickup_address.comment,
-                  entryway: data.personal_data.pickup_address.entrance,
-                  floor: data.personal_data.pickup_address.floor,
+                  commentary: data.personal_data.pickup_address.comment ?? "",
+                  entryway: data.personal_data.pickup_address.entrance ?? "",
+                  floor: data.personal_data.pickup_address.floor ?? "",
                   phone: data.personal_data.pickup_address.phone,
                   street: data.personal_data.pickup_address.street,
                 },
@@ -67,11 +68,14 @@ export const addressApi = authorizedApi.injectEndpoints({
         url: API_ENDPOINTS.ORDERS_CURRENT_ANALYSES,
       }),
     }),
-    postOrderDetails: build.mutation<GeneralResponseType, void>({
+    postOrderDetails: build.mutation<
+      GeneralResponseType,
+      OrderDetailsRequestType
+    >({
       query: (body) => ({
         body,
         method: "POST",
-        url: API_ENDPOINTS.ORDERS_CURRENT_PROGRESS,
+        url: API_ENDPOINTS.ORDERS_CURRENT,
       }),
     }),
   }),

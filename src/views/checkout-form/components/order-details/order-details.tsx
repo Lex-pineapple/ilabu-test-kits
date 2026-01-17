@@ -4,6 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { Button, Flex, Stack, Text } from "@chakra-ui/react";
 
 import { LabContent } from "#/views/checkout-form/components/order-details/components/lab-content";
+import { useOrderDetails } from "#/views/checkout-form/components/order-details/use-order-retails";
 import { CollapsibleIcon } from "#assets/icons/collapsible-icon";
 import { validationSchema } from "#constants/form-validation-schema";
 import { deliveryData, genderData } from "#constants/general";
@@ -36,7 +37,7 @@ export type Inputs = {
 };
 
 export const OrderDetails = () => {
-  const dispatch = useAppDispatch();
+  const { isLoading, submitOrderDetails } = useOrderDetails();
   const formData = useAppSelector(getFormData);
   const currLabId = useAppSelector(getCurrLabId);
   const { data: labsList } = useGetLabsAddressesQuery(currLabId);
@@ -59,8 +60,7 @@ export const OrderDetails = () => {
 
   const onSubmit = handleSubmit((data) => {
     if (isValid) {
-      dispatch(setFormData(data));
-      dispatch(setFormState("emailConfirm"));
+      submitOrderDetails(data);
     }
   });
 
@@ -258,7 +258,12 @@ export const OrderDetails = () => {
               </div>
             )}
           </Stack>
-          <Button type="submit" w="100%">
+          <Button
+            loading={isLoading}
+            loadingText="Отправляем..."
+            type="submit"
+            w="100%"
+          >
             Продолжить
           </Button>
         </form>
