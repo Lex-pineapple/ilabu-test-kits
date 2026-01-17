@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
@@ -15,10 +16,30 @@ const TUBE_COLORS = {
 export const CodeCheck = () => {
   const { linkLoading, linkTubes, tubeData, tubeError } = useTubes();
   const {
-    formState: { errors, isDirty, isValid },
+    formState: { isDirty, isValid },
+    getValues,
     handleSubmit,
     register,
+    reset,
   } = useForm();
+
+  useEffect(() => {
+    const defaultTubeValues = tubeData.reduce(
+      (acc, tube) => {
+        for (let i = 0; i < tube.quantity; i++) {
+          acc[`tube_input_${i}`] = tube.codes?.[i] || "";
+        }
+        return acc;
+      },
+      {} as Record<string, string>,
+    );
+    reset(defaultTubeValues);
+  }, [tubeData.length]);
+
+  const formHasValues = () => {
+    const values = getValues();
+    return Object.values(values).some((value) => value?.trim());
+  };
 
   const onSubmit = handleSubmit(async (data) => {
     if (isValid) {
@@ -39,12 +60,12 @@ export const CodeCheck = () => {
       <form onSubmit={onSubmit}>
         <Flex flexDir="column" h="100%" justifyContent="space-between">
           <Stack gap={8} pb={7}>
-            {tubeData.map((item) => (
-              <div>
+            {tubeData.map((item, idx) => (
+              <div key={idx}>
                 <Text pb={2}>
                   {item.tube_name}. Цвет крышки:{" "}
                   {item.cap_color in TUBE_COLORS && (
-                    <Text color={item.cap_color} fontWeight={600}>
+                    <Text as="span" color={item.cap_color} fontWeight={600}>
                       {TUBE_COLORS[item.cap_color as keyof typeof TUBE_COLORS]}
                     </Text>
                   )}
@@ -73,7 +94,7 @@ export const CodeCheck = () => {
             </Link>
           </Stack>
           <Button
-            disabled={!isDirty}
+            disabled={!isDirty && !formHasValues()}
             loading={linkLoading}
             loadingText="Отправляем..."
             textTransform="uppercase"

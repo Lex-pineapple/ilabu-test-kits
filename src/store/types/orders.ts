@@ -51,10 +51,17 @@ export type OrderDetailsPDType = {
   pickup_address: PickupAddressType;
 };
 
+export type OrderDetailsTubeType = {
+  cap_color: string;
+  code: string;
+  tube_id: string;
+  tube_name: string;
+};
+
 export type OrderDetailsType = {
-  analyses: AnalysisItemFullType[];
-  personal_data: OrderDetailsPDType;
-  tubes: TubeType[];
+  analyses: AnalysisItemFullType[] | null;
+  personal_data: null | OrderDetailsPDType;
+  tubes: null | OrderDetailsTubeType[];
 };
 
 export type OrderType = {

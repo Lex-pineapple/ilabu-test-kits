@@ -12,6 +12,7 @@ import {
 export const UserInfoGuard = () => {
   const dispatch = useAppDispatch();
   const { error, isLoading } = useGetOrderDataQuery();
+
   if (isLoading) {
     return <Spinner />;
   }

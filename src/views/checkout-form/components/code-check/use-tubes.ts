@@ -4,20 +4,25 @@ import {
   useGetRequiredTubesQuery,
   useLinkTubesMutation,
 } from "#store/api/tubes-api";
-import { useAppDispatch } from "#store/hooks";
+import { useAppDispatch, useAppSelector } from "#store/hooks";
 import { setFormState } from "#store/slices/form-slice";
 import {
   setNotificationData,
   setNotificationVisibility,
 } from "#store/slices/notification-slice";
+import { selectTubesData } from "#store/slices/order-slice";
+import type { OrderDetailsTubeType } from "#store/types/orders";
 import type { TubeType } from "#store/types/tubes";
+
+type TubeCodeType = TubeType & { codes?: string[] };
 
 export const useTubes = () => {
   const dispatch = useAppDispatch();
+  const tubeDataFromApi = useAppSelector(selectTubesData);
   const { data, error, isLoading } = useGetRequiredTubesQuery();
   const [postLinkTubes, { isLoading: linkLoading }] = useLinkTubesMutation();
   const [tubeError, setTubeError] = useState<null | string>(null);
-  const [tubeData, setTubeData] = useState<TubeType[]>([]);
+  const [tubeData, setTubeData] = useState<TubeCodeType[]>([]);
 
   useEffect(() => {
     if (error) {
@@ -30,7 +35,23 @@ export const useTubes = () => {
       );
     }
     if (data) {
-      setTubeData(data.tubes);
+      let newTubeData = data.tubes;
+      if (tubeDataFromApi && tubeDataFromApi.length) {
+        const tubesReducedById = tubeDataFromApi.reduce(
+          (acc, curr) => ({
+            ...acc,
+            [curr.tube_id]: acc[curr.tube_id]
+              ? [curr.code, ...acc[curr.tube_id]]
+              : [curr.code],
+          }),
+          {} as Record<string, string[]>,
+        );
+        newTubeData = newTubeData.map((tube) => ({
+          ...tube,
+          codes: tubesReducedById[tube.tube_id] ?? [],
+        }));
+      }
+      setTubeData(newTubeData);
     }
   }, [error, data]);
 

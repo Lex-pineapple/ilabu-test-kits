@@ -6,7 +6,6 @@ import type { AddressFormInputs } from "#shared/bottom-sheet-modal/address-form/
 type initialStateType = {
   formData: userInfoType;
   formState: formStatesType;
-  tubes: string[];
 };
 
 type userInfoType = {
@@ -43,7 +42,6 @@ const initialState: initialStateType = {
     middleName: "",
   },
   formState: "codeCheck",
-  tubes: [],
 };
 
 export const formSlice = createSlice({
@@ -56,17 +54,13 @@ export const formSlice = createSlice({
     setFormState: (state, { payload }: PayloadAction<formStatesType>) => {
       state.formState = payload;
     },
-    setTubes: (state, { payload }: PayloadAction<string[]>) => {
-      state.tubes = payload;
-    },
   },
   selectors: {
     getFormData: (state) => state.formData,
     getFormState: (state) => state.formState,
-    getTubes: (state) => state.tubes,
   },
 });
 
-export const { setFormData, setFormState, setTubes } = formSlice.actions;
-export const { getFormData, getFormState, getTubes } = formSlice.selectors;
+export const { setFormData, setFormState } = formSlice.actions;
+export const { getFormData, getFormState } = formSlice.selectors;
 export default formSlice.reducer;
