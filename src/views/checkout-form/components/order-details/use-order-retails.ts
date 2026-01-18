@@ -1,9 +1,15 @@
+import { useEffect } from "react";
 import dayjs from "dayjs";
 
 import type { Inputs } from "#/views/checkout-form/components/order-details/order-details";
 import { usePostOrderDetailsMutation } from "#store/api/orders-api";
+import { useSendOtpMutation } from "#store/api/otp-api";
 import { useAppDispatch } from "#store/hooks";
-import { setFormData, setFormState } from "#store/slices/form-slice";
+import {
+  setFormData,
+  setFormState,
+  setOtpError,
+} from "#store/slices/form-slice";
 import {
   setNotificationData,
   setNotificationVisibility,
@@ -13,17 +19,27 @@ export const useOrderDetails = () => {
   const dispatch = useAppDispatch();
   const [postOrderDetails, { error, isLoading }] =
     usePostOrderDetailsMutation();
+  const [sendOtp, { isError: isOtpError, isLoading: isOtpLoading }] =
+    useSendOtpMutation();
 
-  if (error) {
-    dispatch(setNotificationVisibility(true));
-    dispatch(
-      setNotificationData({
-        description:
-          "Произошла ошибка при отправке данных заказа. Пожалуйста, попробуйте еще раз.",
-        status: "error",
-      }),
-    );
-  }
+  useEffect(() => {
+    if (error) {
+      dispatch(setNotificationVisibility(true));
+      dispatch(
+        setNotificationData({
+          description:
+            "Произошла ошибка при отправке данных заказа. Пожалуйста, попробуйте еще раз.",
+          status: "error",
+        }),
+      );
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (isOtpError) {
+      dispatch(setOtpError(true));
+    }
+  });
 
   const submitOrderDetails = async (formData: Inputs) => {
     dispatch(setFormData(formData));
@@ -53,9 +69,11 @@ export const useOrderDetails = () => {
     };
     const { data } = await postOrderDetails(orderDetails);
     if (data && data.code === 200) {
-      dispatch(setFormState("emailConfirm"));
+      const { data: otpData } = await sendOtp();
+      if (otpData && otpData.code === 200)
+        dispatch(setFormState("emailConfirm"));
     }
   };
 
-  return { isLoading, submitOrderDetails };
+  return { isLoading: isLoading || isOtpLoading, submitOrderDetails };
 };

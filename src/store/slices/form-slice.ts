@@ -1,4 +1,5 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { get } from "react-hook-form";
 
 import type { formStatesType } from "#/views/checkout-form/checkout-form";
 import type { AddressFormInputs } from "#shared/bottom-sheet-modal/address-form/address-form";
@@ -6,6 +7,7 @@ import type { AddressFormInputs } from "#shared/bottom-sheet-modal/address-form/
 type initialStateType = {
   formData: userInfoType;
   formState: formStatesType;
+  hasOtpError: boolean;
 };
 
 type userInfoType = {
@@ -42,6 +44,7 @@ const initialState: initialStateType = {
     middleName: "",
   },
   formState: "codeCheck",
+  hasOtpError: false,
 };
 
 export const formSlice = createSlice({
@@ -54,13 +57,17 @@ export const formSlice = createSlice({
     setFormState: (state, { payload }: PayloadAction<formStatesType>) => {
       state.formState = payload;
     },
+    setOtpError: (state, { payload }: PayloadAction<boolean>) => {
+      state.hasOtpError = payload;
+    },
   },
   selectors: {
     getFormData: (state) => state.formData,
     getFormState: (state) => state.formState,
+    getOtpError: (state) => state.hasOtpError,
   },
 });
 
-export const { setFormData, setFormState } = formSlice.actions;
-export const { getFormData, getFormState } = formSlice.selectors;
+export const { setFormData, setFormState, setOtpError } = formSlice.actions;
+export const { getFormData, getFormState, getOtpError } = formSlice.selectors;
 export default formSlice.reducer;

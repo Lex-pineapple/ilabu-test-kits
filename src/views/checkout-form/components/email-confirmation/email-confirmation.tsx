@@ -6,20 +6,13 @@ import { useOtp } from "#/views/checkout-form/components/email-confirmation/use-
 import { TitleCard } from "#shared/title-card";
 
 export const EmailConfirmation = () => {
-  const {
-    isConfirmLoading,
-    isError,
-    isFirstCodeLoading,
-    isLoading,
-    otp,
-    resend,
-    setOtp,
-  } = useOtp();
+  const { isConfirmLoading, isError, isLoading, otp, sendOtp, setOtp } =
+    useOtp();
 
   return (
     <Flex flexDir="column" h="70vh" justifyContent="space-between">
       {isError ? (
-        <OtpError loading={isLoading} onResend={resend} />
+        <OtpError loading={isLoading} onResend={sendOtp} />
       ) : (
         <>
           <div>
@@ -67,7 +60,7 @@ export const EmailConfirmation = () => {
           </Button>
         </>
       )}
-      {(isFirstCodeLoading || isConfirmLoading) && <Spinner />}
+      {isConfirmLoading && <Spinner />}
     </Flex>
   );
 };

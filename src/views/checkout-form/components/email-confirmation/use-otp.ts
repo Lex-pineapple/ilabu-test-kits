@@ -2,25 +2,20 @@ import { useEffect, useState } from "react";
 
 import { isFetchBaseQueryError } from "#/hooks/use-qr-code";
 import { useCofirmOtpMutation, useSendOtpMutation } from "#store/api/otp-api";
-import { useAppDispatch } from "#store/hooks";
-import { setFormState } from "#store/slices/form-slice";
+import { useAppDispatch, useAppSelector } from "#store/hooks";
+import { getOtpError, setFormState } from "#store/slices/form-slice";
 import {
   setNotificationData,
   setNotificationVisibility,
 } from "#store/slices/notification-slice";
 
 export const useOtp = () => {
+  const otpError = useAppSelector(getOtpError);
   const dispatch = useAppDispatch();
   const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
   const [sendOtp, { isError, isLoading }] = useSendOtpMutation();
-  const [firstCodeSent, setFirstCodeSent] = useState(false);
   const [confirmOtp, { error: confirmError, isLoading: isConfirmLoading }] =
     useCofirmOtpMutation();
-
-  useEffect(() => {
-    sendOtp();
-    setFirstCodeSent(true);
-  }, []);
 
   useEffect(() => {
     const confirm = async () => {
@@ -63,11 +58,10 @@ export const useOtp = () => {
 
   return {
     isConfirmLoading,
-    isError,
-    isFirstCodeLoading: isLoading && !firstCodeSent,
+    isError: otpError || isError,
     isLoading,
     otp,
-    resend: sendOtp,
+    sendOtp,
     setOtp,
   };
 };

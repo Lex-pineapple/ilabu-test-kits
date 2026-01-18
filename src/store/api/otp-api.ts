@@ -6,7 +6,8 @@ import type { OtpCodeType } from "#store/types/otp";
 export const otpApi = authorizedApi.injectEndpoints({
   endpoints: (build) => ({
     cofirmOtp: build.mutation<GeneralResponseType, OtpCodeType>({
-      query: () => ({
+      query: (body) => ({
+        body,
         method: "POST",
         url: API_ENDPOINTS.OTP_CONFIRM,
       }),
