@@ -8,6 +8,7 @@ export type NotificationDataPayload = {
 
 type NotificationData = {
   description: string;
+  id: string;
   isShowNotification: boolean;
   status: "error" | "info" | "success" | "warning" | null;
   title?: string;
@@ -15,6 +16,7 @@ type NotificationData = {
 
 const initialState: NotificationData = {
   description: "",
+  id: "",
   isShowNotification: false,
   status: null,
   title: "",
@@ -34,6 +36,7 @@ export const notificationSlice = createSlice({
       state,
       action: PayloadAction<NotificationDataPayload>,
     ) => {
+      state.id = new Date().toISOString();
       state.title = action.payload.title;
       state.description = action.payload.description;
       state.status = action.payload.status;

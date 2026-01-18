@@ -5,7 +5,7 @@ import { useAppSelector } from "#store/hooks";
 import { selectNotificationData } from "#store/slices/notification-slice";
 
 export const AppNotification = () => {
-  const { description, isShowNotification, status, title } = useAppSelector(
+  const { description, id, isShowNotification, status, title } = useAppSelector(
     selectNotificationData,
   );
 
@@ -18,6 +18,7 @@ export const AppNotification = () => {
         title,
         type: status ?? "info",
       });
-  }, [description, isShowNotification, status, title]);
+  }, [description, isShowNotification, status, title, id]);
+
   return null;
 };
