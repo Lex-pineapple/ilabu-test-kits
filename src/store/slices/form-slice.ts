@@ -8,6 +8,7 @@ type initialStateType = {
   formData: userInfoType;
   formState: formStatesType;
   hasOtpError: boolean;
+  stepsCleared: number;
 };
 
 type userInfoType = {
@@ -45,6 +46,7 @@ const initialState: initialStateType = {
   },
   formState: "codeCheck",
   hasOtpError: false,
+  stepsCleared: 0,
 };
 
 export const formSlice = createSlice({
@@ -60,14 +62,20 @@ export const formSlice = createSlice({
     setOtpError: (state, { payload }: PayloadAction<boolean>) => {
       state.hasOtpError = payload;
     },
+    setStepsCleared: (state, { payload }: PayloadAction<number>) => {
+      state.stepsCleared = payload;
+    },
   },
   selectors: {
     getFormData: (state) => state.formData,
     getFormState: (state) => state.formState,
     getOtpError: (state) => state.hasOtpError,
+    getStepsCleared: (state) => state.stepsCleared,
   },
 });
 
-export const { setFormData, setFormState, setOtpError } = formSlice.actions;
-export const { getFormData, getFormState, getOtpError } = formSlice.selectors;
+export const { setFormData, setFormState, setOtpError, setStepsCleared } =
+  formSlice.actions;
+export const { getFormData, getFormState, getOtpError, getStepsCleared } =
+  formSlice.selectors;
 export default formSlice.reducer;

@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router";
 
 import { Button, Flex } from "@chakra-ui/react";
 
 import { InfoCard } from "#/views/checkout-form/components/confirm-order/components/info-card";
+import { useFormQuery } from "#/views/checkout-form/use-form-query";
 import { deliveryData, genderData } from "#constants/general";
 import { PATHS } from "#constants/paths";
 import { TitleCard } from "#shared/title-card";
@@ -10,14 +12,15 @@ import { TotalComponent } from "#shared/total-component";
 import { useAppDispatch, useAppSelector } from "#store/hooks";
 import { getCartItems } from "#store/slices/cart-slice";
 import { getFormData, setFormState } from "#store/slices/form-slice";
-import { getCyrrKitUid } from "#store/slices/main-slice";
+import { getCurrKitUid } from "#store/slices/main-slice";
 import { countTotal } from "#utils/count-total";
 
 export const ConfirmOrder = () => {
   const formData = useAppSelector(getFormData);
   const cartData = useAppSelector(getCartItems);
-  const currKitUid = useAppSelector(getCyrrKitUid);
+  const currKitUid = useAppSelector(getCurrKitUid);
   const dispatch = useAppDispatch();
+  const { setStep, setStepCleared } = useFormQuery();
   const navigate = useNavigate();
   const gender = genderData.find(
     (item) => item.value === formData.gender,
@@ -27,6 +30,10 @@ export const ConfirmOrder = () => {
   )?.label;
   const delivery =
     deliveryInfo === "Courier" ? "Delivery by courier" : deliveryInfo;
+
+  useEffect(() => {
+    setStep(4);
+  }, []);
 
   return (
     <Flex flexDir="column" h="100%">
@@ -53,7 +60,7 @@ export const ConfirmOrder = () => {
           whiteSpace="nowrap"
         />
         <InfoCard
-          items={[{ data: "15.00 BYN", title: delivery }]}
+          items={[{ data: "33.00 BYN", title: delivery }]}
           onOrderChange={() => dispatch(setFormState("orderDetails"))}
           title="Способ доставки"
           whiteSpace="nowrap"
@@ -75,7 +82,7 @@ export const ConfirmOrder = () => {
           title="Персональная информация"
         />
       </Flex>
-      <Link to={PATHS.ordered}>
+      <Link onClick={() => setStepCleared(4)} to={PATHS.ordered}>
         <Button mt={9} textTransform="uppercase" w="100%">
           Оплатить
         </Button>

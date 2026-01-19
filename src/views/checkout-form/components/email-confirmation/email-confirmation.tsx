@@ -1,13 +1,21 @@
+import { useEffect } from "react";
+
 import { Button, Center, Flex, PinInput, Text } from "@chakra-ui/react";
 
 import { Spinner } from "#/components/spinner";
 import { OtpError } from "#/views/checkout-form/components/email-confirmation/components/otp-error";
 import { useOtp } from "#/views/checkout-form/components/email-confirmation/use-otp";
+import { useFormQuery } from "#/views/checkout-form/use-form-query";
 import { TitleCard } from "#shared/title-card";
 
 export const EmailConfirmation = () => {
   const { isConfirmLoading, isError, isLoading, otp, sendOtp, setOtp } =
     useOtp();
+  const { setStep } = useFormQuery();
+
+  useEffect(() => {
+    setStep(3);
+  }, []);
 
   return (
     <Flex flexDir="column" h="70vh" justifyContent="space-between">

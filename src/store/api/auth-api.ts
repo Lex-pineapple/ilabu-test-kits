@@ -1,6 +1,7 @@
 import { authorizedApi, unautorizedApi } from "#store/api/base-api";
 import { API_ENDPOINTS } from "#store/api/consts";
 import { resetAuth, setAccessToken } from "#store/slices/auth-slice";
+import { setCurrKitUid } from "#store/slices/main-slice";
 import type {
   AccessTokenType,
   AuthKitType,
@@ -16,6 +17,7 @@ export const authApi = unautorizedApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           dispatch(setAccessToken(data.access_token));
+          dispatch(setCurrKitUid(data.kit_id));
           localStorage.setItem("access_token", data.access_token);
         } catch (error) {
           dispatch(resetAuth());

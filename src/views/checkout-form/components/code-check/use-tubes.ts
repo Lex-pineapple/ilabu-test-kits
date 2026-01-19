@@ -55,7 +55,7 @@ export const useTubes = () => {
     }
   }, [error, data]);
 
-  const linkTubes = async (codes: string[]) => {
+  const linkTubes = async (codes: string[], onSuccess: () => void) => {
     const { data, error } = await postLinkTubes({ codes });
     if (error) {
       if ("status" in error) {
@@ -85,6 +85,7 @@ export const useTubes = () => {
       }
     }
     if (data && data.code === 200) {
+      onSuccess();
       dispatch(setFormState("orderDetails"));
     }
   };

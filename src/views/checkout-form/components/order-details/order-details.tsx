@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
@@ -5,6 +6,7 @@ import { Button, Flex, Stack, Text } from "@chakra-ui/react";
 
 import { LabContent } from "#/views/checkout-form/components/order-details/components/lab-content";
 import { useOrderDetails } from "#/views/checkout-form/components/order-details/use-order-retails";
+import { useFormQuery } from "#/views/checkout-form/use-form-query";
 import { CollapsibleIcon } from "#assets/icons/collapsible-icon";
 import { validationSchema } from "#constants/form-validation-schema";
 import { deliveryData, genderData } from "#constants/general";
@@ -41,6 +43,7 @@ export const OrderDetails = () => {
   const formData = useAppSelector(getFormData);
   const currLabId = useAppSelector(getCurrLabId);
   const { data: labsList } = useGetLabsAddressesQuery(currLabId);
+  const { setStep, setStepCleared } = useFormQuery();
   const {
     control,
     formState: { errors, isValid },
@@ -58,9 +61,13 @@ export const OrderDetails = () => {
   const deliveryMethod = watch("delivery");
   const deliveryAddress = watch("deliveryAddress");
 
+  useEffect(() => {
+    setStep(2);
+  }, []);
+
   const onSubmit = handleSubmit((data) => {
     if (isValid) {
-      submitOrderDetails(data);
+      submitOrderDetails(data, () => setStepCleared(2));
     }
   });
 

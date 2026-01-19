@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Button, Flex, Input, InputGroup, Stack, Text } from "@chakra-ui/react";
 
 import { useTubes } from "#/views/checkout-form/components/code-check/use-tubes";
+import { useFormQuery } from "#/views/checkout-form/use-form-query";
 import { QRIcon } from "#assets/icons/qr-icon";
 import { InputError } from "#shared/input-error/input-error";
 import { TitleCard } from "#shared/title-card";
@@ -15,6 +16,7 @@ const TUBE_COLORS = {
 
 export const CodeCheck = () => {
   const { linkLoading, linkTubes, tubeData, tubeError } = useTubes();
+  const { setStep, setStepCleared } = useFormQuery();
   const {
     formState: { isDirty, isValid },
     getValues,
@@ -22,6 +24,10 @@ export const CodeCheck = () => {
     register,
     reset,
   } = useForm();
+
+  useEffect(() => {
+    setStep(1);
+  }, []);
 
   useEffect(() => {
     const defaultTubeValues = tubeData.reduce(
@@ -43,7 +49,10 @@ export const CodeCheck = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     if (isValid) {
-      linkTubes(Object.values(data).map((code) => code.trim()));
+      linkTubes(
+        Object.values(data).map((code) => code.trim()),
+        () => setStepCleared(1),
+      );
     }
   });
 

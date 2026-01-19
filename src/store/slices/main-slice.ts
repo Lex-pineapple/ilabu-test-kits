@@ -17,10 +17,10 @@ export const mainSlice = createSlice({
     },
   },
   selectors: {
-    getCyrrKitUid: (state) => state.currKitUid,
+    getCurrKitUid: (state) => state.currKitUid,
   },
 });
 
 export const { setCurrKitUid } = mainSlice.actions;
-export const { getCyrrKitUid } = mainSlice.selectors;
+export const { getCurrKitUid } = mainSlice.selectors;
 export default mainSlice.reducer;

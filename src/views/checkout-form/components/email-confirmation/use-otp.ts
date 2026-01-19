@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { isFetchBaseQueryError } from "#/hooks/use-qr-code";
+import { useFormQuery } from "#/views/checkout-form/use-form-query";
 import { useCofirmOtpMutation, useSendOtpMutation } from "#store/api/otp-api";
 import { useAppDispatch, useAppSelector } from "#store/hooks";
 import { getOtpError, setFormState } from "#store/slices/form-slice";
@@ -10,6 +11,7 @@ import {
 } from "#store/slices/notification-slice";
 
 export const useOtp = () => {
+  const { setStepCleared } = useFormQuery();
   const otpError = useAppSelector(getOtpError);
   const dispatch = useAppDispatch();
   const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
@@ -21,7 +23,10 @@ export const useOtp = () => {
     const confirm = async () => {
       if (otp.join("").length === 4) {
         const { data } = await confirmOtp({ code: otp.join("") });
-        if (data && data.code === 200) dispatch(setFormState("confirmOrder"));
+        if (data && data.code === 200) {
+          setStepCleared(3);
+          dispatch(setFormState("confirmOrder"));
+        }
       }
     };
     confirm();
