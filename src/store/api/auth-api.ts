@@ -1,7 +1,7 @@
 import { authorizedApi, unautorizedApi } from "#store/api/base-api";
 import { API_ENDPOINTS } from "#store/api/consts";
 import { resetAuth, setAccessToken } from "#store/slices/auth-slice";
-import { setCurrKitUid } from "#store/slices/main-slice";
+import { setCurrKitUid, setOrderStatus } from "#store/slices/main-slice";
 import type {
   AccessTokenType,
   AuthKitType,
@@ -51,7 +51,16 @@ export const authApi = unautorizedApi.injectEndpoints({
 
 export const authAuthorizedApi = authorizedApi.injectEndpoints({
   endpoints: (build) => ({
-    verifyToken: build.mutation<VerifyTokenType, void>({
+    verifyToken: build.query<VerifyTokenType, void>({
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(setOrderStatus(data.order_status));
+        } catch (error) {
+          dispatch(setOrderStatus(""));
+          console.error(error);
+        }
+      },
       query: () => ({
         method: "POST",
         url: API_ENDPOINTS.VERIFY_TOKEN,
@@ -60,5 +69,5 @@ export const authAuthorizedApi = authorizedApi.injectEndpoints({
   }),
 });
 
-export const { useVerifyTokenMutation } = authAuthorizedApi;
+export const { useVerifyTokenQuery } = authAuthorizedApi;
 export const { useGetTokenMutation, useRefreshTokenMutation } = authApi;

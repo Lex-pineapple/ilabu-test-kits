@@ -11,7 +11,6 @@ import {
   setNotificationVisibility,
 } from "#store/slices/notification-slice";
 import { selectTubesData } from "#store/slices/order-slice";
-import type { OrderDetailsTubeType } from "#store/types/orders";
 import type { TubeType } from "#store/types/tubes";
 
 type TubeCodeType = TubeType & { codes?: string[] };
@@ -55,7 +54,7 @@ export const useTubes = () => {
     }
   }, [error, data]);
 
-  const linkTubes = async (codes: string[], onSuccess: () => void) => {
+  const linkTubes = async (codes: string[]) => {
     const { data, error } = await postLinkTubes({ codes });
     if (error) {
       if ("status" in error) {
@@ -85,7 +84,6 @@ export const useTubes = () => {
       }
     }
     if (data && data.code === 200) {
-      onSuccess();
       dispatch(setFormState("orderDetails"));
     }
   };

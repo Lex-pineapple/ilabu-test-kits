@@ -14,7 +14,7 @@ export const EmailConfirmation = () => {
   const { setStep } = useFormQuery();
 
   useEffect(() => {
-    setStep(3);
+    setStep(2);
   }, []);
 
   return (

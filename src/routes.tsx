@@ -18,6 +18,7 @@ import { NotFound } from "#/views/not-found";
 import { ProductView } from "#/views/product-view";
 import { SelectedKit } from "#/views/selected-kit";
 import { SuccessfulScreen } from "#/views/successful-screen";
+import { Tubes } from "#/views/tubes";
 import { PATHS } from "#constants/paths";
 
 export const router = createBrowserRouter([
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
           {
             element: <CheckoutForm />,
             path: PATHS.checkout,
+          },
+          {
+            element: <Tubes />,
+            path: PATHS.tubes,
           },
         ],
         element: (

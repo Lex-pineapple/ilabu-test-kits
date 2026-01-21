@@ -32,7 +32,7 @@ export const ConfirmOrder = () => {
     deliveryInfo === "Courier" ? "Delivery by courier" : deliveryInfo;
 
   useEffect(() => {
-    setStep(4);
+    setStep(3);
   }, []);
 
   return (
@@ -82,7 +82,7 @@ export const ConfirmOrder = () => {
           title="Персональная информация"
         />
       </Flex>
-      <Link onClick={() => setStepCleared(4)} to={PATHS.ordered}>
+      <Link onClick={() => setStepCleared(2)} to={PATHS.ordered}>
         <Button mt={9} textTransform="uppercase" w="100%">
           Оплатить
         </Button>

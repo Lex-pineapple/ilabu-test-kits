@@ -1,5 +1,4 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { get } from "react-hook-form";
 
 import type { formStatesType } from "#/views/checkout-form/checkout-form";
 import type { AddressFormInputs } from "#shared/bottom-sheet-modal/address-form/address-form";
@@ -44,7 +43,7 @@ const initialState: initialStateType = {
     lastName: "",
     middleName: "",
   },
-  formState: "codeCheck",
+  formState: "orderDetails",
   hasOtpError: false,
   stepsCleared: 0,
 };

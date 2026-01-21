@@ -1,11 +1,11 @@
 import { type PropsWithChildren, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-import { Navigate, Outlet } from "react-router";
+import { Navigate } from "react-router";
 
 import { Spinner } from "#/components/spinner";
 import { useAuth } from "#/hooks/use-auth";
 import { PATHS } from "#constants/paths";
-import { useVerifyTokenMutation } from "#store/api/auth-api";
+import { useVerifyTokenQuery } from "#store/api/auth-api";
 import { useAppDispatch, useAppSelector } from "#store/hooks";
 import { selectAccessToken } from "#store/slices/auth-slice";
 import {
@@ -14,14 +14,8 @@ import {
 } from "#store/slices/notification-slice";
 
 export const AuthGuard = ({ children }: PropsWithChildren) => {
-  const [
-    verifyOrder,
-    {
-      // data: orderVerificationData,
-      error: orderVerificationError,
-      isLoading: isVerificationLoading,
-    },
-  ] = useVerifyTokenMutation();
+  const { error: orderVerificationError, isLoading: isVerificationLoading } =
+    useVerifyTokenQuery();
   const [isGuardLoading, setIsGuardLoading] = useState(true);
   const accessToken =
     useAppSelector(selectAccessToken) || localStorage.getItem("access_token");
@@ -29,10 +23,6 @@ export const AuthGuard = ({ children }: PropsWithChildren) => {
   const { logout } = useAuth();
   // const [refreshToken, { error: refreshError, isLoading: refreshLoading }] =
   // useRefreshTokenMutation();
-
-  useEffect(() => {
-    verifyOrder();
-  }, []);
 
   useEffect(() => {
     // TODO: decode token and get .exp to check if token is expired

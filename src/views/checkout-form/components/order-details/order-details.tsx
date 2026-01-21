@@ -62,12 +62,12 @@ export const OrderDetails = () => {
   const deliveryAddress = watch("deliveryAddress");
 
   useEffect(() => {
-    setStep(2);
+    setStep(1);
   }, []);
 
   const onSubmit = handleSubmit((data) => {
     if (isValid) {
-      submitOrderDetails(data, () => setStepCleared(2));
+      submitOrderDetails(data, () => setStepCleared(1));
     }
   });
 
