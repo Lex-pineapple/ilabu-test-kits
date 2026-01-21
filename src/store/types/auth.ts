@@ -1,3 +1,5 @@
+import type { OrderStatusType } from "#store/slices/main-slice";
+
 export type AccessTokenType = {
   access_token: string;
 };
@@ -18,5 +20,5 @@ export type RefreshTokenType = {
 
 export type VerifyTokenType = {
   access_token: string;
-  order_status: string;
+  order_status: OrderStatusType;
 };

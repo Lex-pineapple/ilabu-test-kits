@@ -57,7 +57,7 @@ export const authAuthorizedApi = authorizedApi.injectEndpoints({
           const { data } = await queryFulfilled;
           dispatch(setOrderStatus(data.order_status));
         } catch (error) {
-          dispatch(setOrderStatus(""));
+          dispatch(setOrderStatus(null));
           console.error(error);
         }
       },

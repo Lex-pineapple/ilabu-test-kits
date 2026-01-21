@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router";
 
-import { useAppDispatch, useAppSelector } from "#store/hooks";
-import { getStepsCleared, setStepsCleared } from "#store/slices/form-slice";
+import { useAppSelector } from "#store/hooks";
+import { getStepsCleared } from "#store/slices/form-slice";
 
 const getOrderedStep = (stepsCleared: number, step: number) => {
   if (step > stepsCleared + 1) {
@@ -12,13 +12,11 @@ const getOrderedStep = (stepsCleared: number, step: number) => {
 
 export const useFormQuery = () => {
   const stepsCleared = useAppSelector(getStepsCleared);
-  const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const currStep = searchParams.get("step");
 
   return {
     setStep: (step: number) => setSearchParams({ step: step.toString() }),
-    setStepCleared: (step: number) => dispatch(setStepsCleared(step)),
     step: currStep ? getOrderedStep(stepsCleared, Number(currStep)) : null,
   };
 };

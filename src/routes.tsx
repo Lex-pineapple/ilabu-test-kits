@@ -60,7 +60,7 @@ export const router = createBrowserRouter([
           },
           {
             element: <SuccessfulScreen />,
-            path: PATHS.ordered,
+            path: PATHS.orderSuccess,
           },
 
           {

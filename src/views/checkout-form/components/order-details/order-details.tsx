@@ -43,7 +43,7 @@ export const OrderDetails = () => {
   const formData = useAppSelector(getFormData);
   const currLabId = useAppSelector(getCurrLabId);
   const { data: labsList } = useGetLabsAddressesQuery(currLabId);
-  const { setStep, setStepCleared } = useFormQuery();
+  const { setStep } = useFormQuery();
   const {
     control,
     formState: { errors, isValid },
@@ -67,7 +67,9 @@ export const OrderDetails = () => {
 
   const onSubmit = handleSubmit((data) => {
     if (isValid) {
-      submitOrderDetails(data, () => setStepCleared(1));
+      submitOrderDetails(data, () => {
+        setStep(2);
+      });
     }
   });
 

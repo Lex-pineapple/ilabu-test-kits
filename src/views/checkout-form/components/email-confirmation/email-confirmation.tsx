@@ -62,6 +62,24 @@ export const EmailConfirmation = () => {
                 </PinInput.Control>
               </PinInput.Root>
             </Center>
+
+            <Center>
+              <Button
+                borderBottom="1px solid"
+                borderStyle="dashed"
+                color="#0404138c"
+                h="fit-content"
+                m={0}
+                onClick={() => sendOtp()}
+                outlineOffset="10px"
+                p={0}
+                textAlign="center"
+                variant="plain"
+                w="fit-content"
+              >
+                Выслать код заново
+              </Button>
+            </Center>
           </div>
           <Button textTransform="uppercase" w="100%">
             Открыть почту

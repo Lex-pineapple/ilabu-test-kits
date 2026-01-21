@@ -19,6 +19,7 @@ import type {
 export const addressApi = authorizedApi.injectEndpoints({
   endpoints: (build) => ({
     getOrderData: build.query<OrderDetailsType, void>({
+      // eslint-disable-next-line complexity
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
@@ -27,24 +28,25 @@ export const addressApi = authorizedApi.injectEndpoints({
           if (data.personal_data)
             dispatch(
               setFormData({
-                date: data.personal_data.dob,
-                delivery: data.personal_data.delivery_method,
+                date: data.personal_data?.dob ?? "",
+                delivery: data.personal_data.delivery_method ?? "",
                 deliveryAddress: {
-                  apartment: data.personal_data.pickup_address.apartment,
-                  building: data.personal_data.pickup_address.building,
-                  city: data.personal_data.pickup_address.city,
-                  commentary: data.personal_data.pickup_address.comment ?? "",
-                  entryway: data.personal_data.pickup_address.entrance ?? "",
-                  floor: data.personal_data.pickup_address.floor ?? "",
-                  phone: data.personal_data.pickup_address.phone,
-                  street: data.personal_data.pickup_address.street,
+                  apartment:
+                    data.personal_data?.pickup_address?.apartment ?? "",
+                  building: data.personal_data?.pickup_address?.building ?? "",
+                  city: data.personal_data?.pickup_address?.city ?? "",
+                  commentary: data.personal_data?.pickup_address?.comment ?? "",
+                  entryway: data.personal_data?.pickup_address?.entrance ?? "",
+                  floor: data.personal_data?.pickup_address?.floor ?? "",
+                  phone: data.personal_data?.pickup_address?.phone ?? "",
+                  street: data.personal_data?.pickup_address?.street ?? "",
                 },
-                email: data.personal_data.email,
-                firstName: data.personal_data.first_name,
-                gender: data.personal_data.gender,
-                labAdressId: data.personal_data.lab_address_id,
-                lastName: data.personal_data.last_name,
-                middleName: data.personal_data.middle_name,
+                email: data.personal_data?.email ?? "",
+                firstName: data.personal_data?.first_name ?? "",
+                gender: data.personal_data?.gender ?? "",
+                labAdressId: data.personal_data?.lab_address_id ?? "",
+                lastName: data.personal_data?.last_name ?? "",
+                middleName: data.personal_data?.middle_name ?? "",
               }),
             );
           dispatch(setTubeData(data.tubes));

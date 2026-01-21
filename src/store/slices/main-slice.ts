@@ -1,13 +1,20 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
+export type OrderStatusType =
+  | "ANALYSES_SELECTED"
+  | "DETAILS_FILLED"
+  | "NEW"
+  | "PAYMENT_PAID"
+  | "TUBES_LINKED";
+
 type initialStateType = {
   currKitUid: string;
-  orderStatus: string;
+  orderStatus: null | OrderStatusType;
 };
 
 const initialState: initialStateType = {
   currKitUid: "",
-  orderStatus: "",
+  orderStatus: null,
 };
 
 export const mainSlice = createSlice({
@@ -17,7 +24,10 @@ export const mainSlice = createSlice({
     setCurrKitUid: (state, { payload }: PayloadAction<string>) => {
       state.currKitUid = payload;
     },
-    setOrderStatus: (state, { payload }: PayloadAction<string>) => {
+    setOrderStatus: (
+      state,
+      { payload }: PayloadAction<null | OrderStatusType>,
+    ) => {
       state.orderStatus = payload;
     },
   },

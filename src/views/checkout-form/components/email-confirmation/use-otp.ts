@@ -11,7 +11,7 @@ import {
 } from "#store/slices/notification-slice";
 
 export const useOtp = () => {
-  const { setStepCleared } = useFormQuery();
+  const { setStep } = useFormQuery();
   const otpError = useAppSelector(getOtpError);
   const dispatch = useAppDispatch();
   const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
@@ -24,7 +24,7 @@ export const useOtp = () => {
       if (otp.join("").length === 4) {
         const { data } = await confirmOtp({ code: otp.join("") });
         if (data && data.code === 200) {
-          setStepCleared(3);
+          setStep(3);
           dispatch(setFormState("confirmOrder"));
         }
       }

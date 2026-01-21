@@ -20,7 +20,7 @@ export const ConfirmOrder = () => {
   const cartData = useAppSelector(getCartItems);
   const currKitUid = useAppSelector(getCurrKitUid);
   const dispatch = useAppDispatch();
-  const { setStep, setStepCleared } = useFormQuery();
+  const { setStep } = useFormQuery();
   const navigate = useNavigate();
   const gender = genderData.find(
     (item) => item.value === formData.gender,
@@ -82,7 +82,7 @@ export const ConfirmOrder = () => {
           title="Персональная информация"
         />
       </Flex>
-      <Link onClick={() => setStepCleared(2)} to={PATHS.ordered}>
+      <Link to={PATHS.orderSuccess}>
         <Button mt={9} textTransform="uppercase" w="100%">
           Оплатить
         </Button>

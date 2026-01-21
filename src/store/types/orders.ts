@@ -39,15 +39,15 @@ export type LinkedAnalysesResponseType = GeneralResponseType & {
 };
 
 export type OrderDetailsPDType = {
-  delivery_method: "courier" | "personal";
-  dob: string;
-  email: string;
-  first_name: string;
-  gender: "female" | "male";
-  lab_address_id: string;
-  last_name: string;
-  middle_name: string;
-  pickup_address: PickupAddressType;
+  delivery_method: "courier" | "personal" | null;
+  dob: null | string;
+  email: null | string;
+  first_name: null | string;
+  gender: "female" | "male" | null;
+  lab_address_id: null | string;
+  last_name: null | string;
+  middle_name: null | string;
+  pickup_address: null | PickupAddressType;
 };
 
 export type OrderDetailsRequestType = {
