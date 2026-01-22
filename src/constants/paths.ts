@@ -5,6 +5,7 @@ export const PATHS = {
   faq: "/faq",
   instruction: "/instruction",
   orderError: "/order_error",
+  orderPaid: "/order_paid",
   orderSuccess: "/order_success",
   product: "/kits/:uid",
   root: "/",

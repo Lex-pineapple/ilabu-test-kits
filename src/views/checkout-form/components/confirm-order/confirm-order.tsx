@@ -82,7 +82,7 @@ export const ConfirmOrder = () => {
           title="Персональная информация"
         />
       </Flex>
-      <Link to={PATHS.orderSuccess}>
+      <Link to={PATHS.orderPaid}>
         <Button mt={9} textTransform="uppercase" w="100%">
           Оплатить
         </Button>

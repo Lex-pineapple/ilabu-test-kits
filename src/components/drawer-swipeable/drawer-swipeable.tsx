@@ -96,7 +96,7 @@ export const DrawerSwipeable = () => {
   useEffect(() => {
     if (isSuccess) {
       setCollapsibleOpen(false);
-      navigate(PATHS.instruction);
+      navigate(PATHS.checkout);
     }
   }, [isSuccess]);
 

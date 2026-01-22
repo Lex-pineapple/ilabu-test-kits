@@ -10,13 +10,13 @@ import {
 import type { GeneralResponseType } from "#store/types";
 import type {
   AnalysesToLinkType,
-  InstructionType,
+  InstructionResponseType,
   LinkedAnalysesResponseType,
   OrderDetailsRequestType,
   OrderDetailsType,
 } from "#store/types/orders";
 
-export const addressApi = authorizedApi.injectEndpoints({
+export const ordersApi = authorizedApi.injectEndpoints({
   endpoints: (build) => ({
     getOrderData: build.query<OrderDetailsType, void>({
       // eslint-disable-next-line complexity
@@ -57,7 +57,7 @@ export const addressApi = authorizedApi.injectEndpoints({
       },
       query: () => API_ENDPOINTS.ORDERS_CURRENT_PROGRESS,
     }),
-    getOrderInstructions: build.query<InstructionType, void>({
+    getOrderInstructions: build.query<InstructionResponseType, void>({
       query: () => API_ENDPOINTS.ORDERS_CURRENT_INSTRUCTIONS,
     }),
     postOrderAnalyses: build.mutation<
@@ -88,4 +88,4 @@ export const {
   useGetOrderInstructionsQuery,
   usePostOrderAnalysesMutation,
   usePostOrderDetailsMutation,
-} = addressApi;
+} = ordersApi;

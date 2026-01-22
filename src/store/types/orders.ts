@@ -17,6 +17,10 @@ export type AnalysisItemFullType = {
   title: string;
 };
 
+export type InstructionResponseType = {
+  instructions: InstructionType[];
+};
+
 export type InstructionStepType = {
   description: string;
   step: 0;
@@ -24,14 +28,12 @@ export type InstructionStepType = {
 };
 
 export type InstructionType = {
-  instructions: {
-    context: string;
-    id: string;
-    note: string;
-    resource_link: string;
-    steps: InstructionStepType[];
-    title: string;
-  }[];
+  context: string;
+  id: string;
+  note: string;
+  resource_link: string;
+  steps: InstructionStepType[];
+  title: string;
 };
 
 export type LinkedAnalysesResponseType = GeneralResponseType & {

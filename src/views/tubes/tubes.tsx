@@ -13,7 +13,9 @@ import {
 } from "@chakra-ui/react";
 
 import { useTubes } from "#/views/tubes/use-tubes";
+import { ArrowRight } from "#assets/icons/arrow-right";
 import { QRIcon } from "#assets/icons/qr-icon";
+import { PATHS } from "#constants/paths";
 import { InputError } from "#shared/input-error";
 import { TitleCard } from "#shared/title-card";
 
@@ -57,6 +59,11 @@ export const Tubes = () => {
 
   return (
     <Container p="30px 0">
+      <Link to={PATHS.instruction}>
+        <Button mb={4} variant="ghost">
+          <ArrowRight transform="rotate(180deg)" /> К инструкции
+        </Button>
+      </Link>
       <Flex flexDir="column" h="70vh">
         <TitleCard
           content={

@@ -6,6 +6,7 @@ import { UserInfoGuard } from "#/layouts/order-info-guard";
 import {
   appProductsLoader,
   HydrateFallback,
+  instructionLoader,
   productKitLoader,
   selectedKitLoader,
 } from "#/loaders";
@@ -15,6 +16,8 @@ import { CheckoutForm } from "#/views/checkout-form";
 import { FAQ } from "#/views/faq";
 import { Instruction } from "#/views/instruction";
 import { NotFound } from "#/views/not-found";
+import { OrderError } from "#/views/order-error";
+import { OrderPaid } from "#/views/order-paid";
 import { ProductView } from "#/views/product-view";
 import { SelectedKit } from "#/views/selected-kit";
 import { SuccessfulScreen } from "#/views/successful-screen";
@@ -56,7 +59,16 @@ export const router = createBrowserRouter([
           },
           {
             element: <Instruction />,
+            loader: instructionLoader,
             path: PATHS.instruction,
+          },
+          {
+            element: <OrderError />,
+            path: PATHS.orderError,
+          },
+          {
+            element: <OrderPaid />,
+            path: PATHS.orderPaid,
           },
           {
             element: <SuccessfulScreen />,
