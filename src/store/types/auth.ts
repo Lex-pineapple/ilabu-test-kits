@@ -2,6 +2,7 @@ import type { OrderStatusType } from "#store/slices/main-slice";
 
 export type AccessTokenType = {
   access_token: string;
+  refresh_token: string;
 };
 
 export type AuthKitType = {

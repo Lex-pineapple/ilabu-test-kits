@@ -19,7 +19,10 @@ export const authApi = unautorizedApi.injectEndpoints({
           dispatch(setAccessToken(data.access_token));
           dispatch(setCurrKitUid(data.kit_id));
           localStorage.setItem("access_token", data.access_token);
+          localStorage.setItem("refresh_token", data.refresh_token);
         } catch (error) {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
           dispatch(resetAuth());
           console.error(error);
         }
@@ -34,8 +37,12 @@ export const authApi = unautorizedApi.injectEndpoints({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          setAccessToken(data.access_token);
+          dispatch(setAccessToken(data.access_token));
+          localStorage.setItem("access_token", data.access_token);
+          localStorage.setItem("refresh_token", data.refresh_token);
         } catch (error) {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("refresh_token");
           dispatch(resetAuth());
           console.error(error);
         }
