@@ -10,14 +10,28 @@ type ModalProps = {
 };
 
 export const modal = createOverlay<ModalProps>(
-  ({ modalData, modalType, onOpenChange, placement = "center", ...rest }) => {
+  ({
+    modalData,
+    modalType,
+    onOpenChange,
+    open,
+    placement = "center",
+    ...rest
+  }) => {
     const Modal = ModalTypes[modalType];
     return (
-      <Dialog.Root {...rest} onOpenChange={onOpenChange} placement={placement}>
+      <Dialog.Root
+        {...rest}
+        lazyMount
+        onOpenChange={onOpenChange}
+        open={open}
+        placement={placement}
+        size={modalType === "QR" ? "full" : undefined}
+      >
         <Portal>
           <Dialog.Backdrop />
           <Dialog.Positioner>
-            <Dialog.Content borderRadius={20} ml={2} mr={2}>
+            <Dialog.Content>
               <Dialog.Header>
                 {modalData?.modalTitle && (
                   <Dialog.Title>{modalData.modalTitle}</Dialog.Title>
@@ -32,6 +46,7 @@ export const modal = createOverlay<ModalProps>(
                   onClose={() => {
                     onOpenChange?.({ open: false });
                   }}
+                  open={open}
                   {...modalData}
                 />
               </Dialog.Body>

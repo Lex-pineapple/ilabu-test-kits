@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Link } from "react-router";
 
 import {
   Button,
   Container,
   Flex,
+  Group,
   Input,
   InputGroup,
   Stack,
@@ -17,15 +18,26 @@ import { ArrowRight } from "#assets/icons/arrow-right";
 import { QRIcon } from "#assets/icons/qr-icon";
 import { PATHS } from "#constants/paths";
 import { InputError } from "#shared/input-error";
+import { modal } from "#shared/modal";
 import { TitleCard } from "#shared/title-card";
 
 const TUBE_COLORS = {
   red: "красный",
 };
 
+const tubeDataMock = [
+  {
+    cap_color: "red",
+    quantity: 3,
+    tube_id: "12345",
+    tube_name: "lala",
+  },
+];
+
 export const Tubes = () => {
   const { linkLoading, linkTubes, tubeData, tubeError } = useTubes();
   const {
+    control,
     formState: { isDirty, isValid },
     getValues,
     handleSubmit,
@@ -76,7 +88,7 @@ export const Tubes = () => {
         <form onSubmit={onSubmit}>
           <Flex flexDir="column" h="100%" justifyContent="space-between">
             <Stack gap={8} pb={7}>
-              {tubeData.map((item, idx) => (
+              {tubeDataMock.map((item, idx) => (
                 <div key={idx}>
                   <Text pb={2}>
                     {item.tube_name}. Цвет крышки:{" "}
@@ -93,17 +105,39 @@ export const Tubes = () => {
                   {Array(item.quantity)
                     .fill(0)
                     .map((_, idx) => (
-                      <InputGroup
-                        endElement={<QRIcon color="black" size="lg" />}
-                        key={idx}
-                        pb={1.5}
-                      >
-                        <Input
-                          _placeholder={{ textAlign: "start" }}
-                          placeholder={`Контейнер №${idx + 1}`}
-                          {...register(`tube_input_${idx}`)}
-                        />
-                      </InputGroup>
+                      <Controller
+                        control={control}
+                        name={`tube_input_${idx}`}
+                        render={({ field }) => (
+                          <Group attached key={idx} pb={1.5} w="100%">
+                            <Input
+                              _placeholder={{ textAlign: "start" }}
+                              placeholder={`Контейнер №${idx + 1}`}
+                              {...field}
+                            />
+                            <Button
+                              bg="white"
+                              borderBottom="3px solid #048B78"
+                              borderEndEndRadius="8px"
+                              onClick={() =>
+                                modal.open("QR", {
+                                  modalData: {
+                                    onSuccess: (code: string) =>
+                                      field.onChange(code),
+                                    subTitle:
+                                      "QR-код находится на пробирке с соответствуюшей крышкой",
+                                    title: "Отсканируйте QR-код",
+                                  },
+                                  modalType: "QR",
+                                })
+                              }
+                              variant="plain"
+                            >
+                              <QRIcon color="black" size="lg" />
+                            </Button>
+                          </Group>
+                        )}
+                      />
                     ))}
                 </div>
               ))}

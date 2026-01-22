@@ -18,6 +18,6 @@ export const BurgerButton = ({ active, onClick }: BurgerButtonProps) => (
     onClick={onClick}
     variant="ghost"
     w="27px"
-    zIndex={10000}
+    zIndex={1399}
   />
 );

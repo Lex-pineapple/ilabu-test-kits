@@ -30,7 +30,11 @@ export const ActivateQR = () => {
             heading={"Активировать набор"}
             highlight="код активации"
           />
-          <QRComponent />
+          <QRComponent
+            onScanSuccess={(code: string) => {
+              setCode(code);
+            }}
+          />
           <Text fontWeight="semibold" textAlign="center" textStyle="sm">
             или <br /> введите код активации
           </Text>

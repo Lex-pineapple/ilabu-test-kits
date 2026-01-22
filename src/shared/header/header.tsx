@@ -29,7 +29,7 @@ export const Header = () => {
         position="fixed"
         top={0}
         w="100%"
-        zIndex={10000}
+        zIndex={1399}
       >
         <div
           className={classNames(styles.drawer, {
