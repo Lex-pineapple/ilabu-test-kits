@@ -3,8 +3,8 @@ import { Container, Flex, Heading, Table, Text } from "@chakra-ui/react";
 import { ShdContainer } from "#shared/shd-container";
 
 type TestTubeVisualItemType = {
+  cap_color: string;
   code: string;
-  color: string;
 };
 
 type TestTubeVisualProps = {
@@ -41,10 +41,10 @@ export const TestTubeVisual = ({ items }: TestTubeVisualProps) => (
       </Table.Header>
       <Table.Body>
         {items.map((item, idx) => (
-          <Table.Row bg="transparent" key={item.color}>
+          <Table.Row bg="transparent" key={item.cap_color}>
             <Table.Cell border="none" pl={0} w={124}>
               <Container
-                bg={item.color}
+                bg={item.cap_color}
                 borderRadius={10}
                 h="24px"
                 m={0}
@@ -55,9 +55,9 @@ export const TestTubeVisual = ({ items }: TestTubeVisualProps) => (
             <Table.Cell border="none" pl={0}>
               <ShdContainer>
                 <Flex justifyContent="center" p="3px 0">
-                  <Text display="inline-block" fontWeight="medium" mr="2px">
+                  {/* <Text display="inline-block" fontWeight="medium" mr="2px">
                     {String.fromCharCode(65 + idx)}
-                  </Text>
+                  </Text> */}
                   <Text display="inline-block" fontWeight="medium">
                     {item.code}
                   </Text>

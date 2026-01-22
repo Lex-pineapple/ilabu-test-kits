@@ -10,16 +10,16 @@ import type { InstructionType } from "#store/types/orders";
 
 const TestTubeInfoData = [
   {
+    cap_color: "#FF2121",
     code: "XXXXXXX",
-    color: "#FF2121",
   },
   {
+    cap_color: "#F2DB09",
     code: "XXXXXXX",
-    color: "#F2DB09",
   },
   {
+    cap_color: "#FD3BDB",
     code: "XXXXXXX",
-    color: "#FD3BDB",
   },
 ];
 

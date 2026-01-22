@@ -108,3 +108,9 @@ export type PickupAddressType = {
   phone: string;
   street: string;
 };
+
+export type SuccessDataType = {
+  address: string;
+  lab_name: string;
+  tubes: OrderDetailsTubeType[];
+};

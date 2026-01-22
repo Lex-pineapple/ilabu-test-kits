@@ -9,6 +9,7 @@ import {
   instructionLoader,
   productKitLoader,
   selectedKitLoader,
+  successfulScreenLoader,
 } from "#/loaders";
 import { ActivateQR } from "#/views/activate-qr";
 import { AllProducts } from "#/views/all-products";
@@ -72,6 +73,7 @@ export const router = createBrowserRouter([
           },
           {
             element: <SuccessfulScreen />,
+            loader: successfulScreenLoader,
             path: PATHS.orderSuccess,
           },
 

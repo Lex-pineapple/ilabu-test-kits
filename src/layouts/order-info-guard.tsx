@@ -12,12 +12,12 @@ import {
 
 export const UserInfoGuard = () => {
   const dispatch = useAppDispatch();
-  const { isLoading: isOrderVerifyLoading } = useOrderVerify();
+  // const { isLoading: isOrderVerifyLoading } = useOrderVerify();
   const { error, isLoading } = useGetOrderDataQuery();
 
-  if (isLoading || isOrderVerifyLoading) {
-    return <Spinner />;
-  }
+  // if (isLoading || isOrderVerifyLoading) {
+  //   return <Spinner />;
+  // }
   if (error) {
     dispatch(setNotificationVisibility(true));
     dispatch(
