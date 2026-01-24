@@ -4,13 +4,21 @@ import { Button, Center, Flex, PinInput, Text } from "@chakra-ui/react";
 
 import { Spinner } from "#/components/spinner";
 import { OtpError } from "#/views/checkout-form/components/email-confirmation/components/otp-error";
+import { Timer } from "#/views/checkout-form/components/email-confirmation/components/timer";
 import { useOtp } from "#/views/checkout-form/components/email-confirmation/use-otp";
 import { useFormQuery } from "#/views/checkout-form/use-form-query";
 import { TitleCard } from "#shared/title-card";
 
 export const EmailConfirmation = () => {
-  const { isConfirmLoading, isError, isLoading, otp, sendOtp, setOtp } =
-    useOtp();
+  const {
+    isConfirmLoading,
+    isError,
+    isLoading,
+    isSendSuccess,
+    otp,
+    sendOtp,
+    setOtp,
+  } = useOtp();
   const { setStep } = useFormQuery();
 
   useEffect(() => {
@@ -63,23 +71,11 @@ export const EmailConfirmation = () => {
               </PinInput.Root>
             </Center>
 
-            <Center>
-              <Button
-                borderBottom="1px solid"
-                borderStyle="dashed"
-                color="#0404138c"
-                h="fit-content"
-                m={0}
-                onClick={() => sendOtp()}
-                outlineOffset="10px"
-                p={0}
-                textAlign="center"
-                variant="plain"
-                w="fit-content"
-              >
-                Выслать код заново
-              </Button>
-            </Center>
+            <Timer
+              isSendError={isError}
+              isSendSuccess={isSendSuccess}
+              onResend={() => sendOtp()}
+            />
           </div>
           <Button textTransform="uppercase" w="100%">
             Открыть почту

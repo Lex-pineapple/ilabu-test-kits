@@ -43,6 +43,9 @@ export const cartSlice = createSlice({
       state.items = payload;
       state.selected_lab_id = payload[0]?.lab_id;
     },
+    setCurrLabId: (state, { payload }: PayloadAction<string>) => {
+      state.selected_lab_id = payload;
+    },
   },
   selectors: {
     getCartItems: (state) => state.items,
@@ -50,7 +53,12 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addItemToCart, clearCartItems, removeCartItems, setCartItems } =
-  cartSlice.actions;
+export const {
+  addItemToCart,
+  clearCartItems,
+  removeCartItems,
+  setCartItems,
+  setCurrLabId,
+} = cartSlice.actions;
 export const { getCartItems, getCurrLabId } = cartSlice.selectors;
 export default cartSlice.reducer;

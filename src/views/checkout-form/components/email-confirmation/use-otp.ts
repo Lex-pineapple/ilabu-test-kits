@@ -15,7 +15,7 @@ export const useOtp = () => {
   const otpError = useAppSelector(getOtpError);
   const dispatch = useAppDispatch();
   const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
-  const [sendOtp, { isError, isLoading }] = useSendOtpMutation();
+  const [sendOtp, { data, isError, isLoading }] = useSendOtpMutation();
   const [confirmOtp, { error: confirmError, isLoading: isConfirmLoading }] =
     useCofirmOtpMutation();
 
@@ -65,6 +65,7 @@ export const useOtp = () => {
     isConfirmLoading,
     isError: otpError || isError,
     isLoading,
+    isSendSuccess: !!data,
     otp,
     sendOtp,
     setOtp,

@@ -16,10 +16,6 @@ export const UserInfoGuard = () => {
   // const { isLoading: isOrderVerifyLoading } = useOrderVerify();
   const { error, isLoading } = useGetOrderDataQuery();
 
-  // if (isLoading || isOrderVerifyLoading) {
-  //   return <Spinner />;
-  // }
-
   useEffect(() => {
     if (error) {
       dispatch(setNotificationVisibility(true));
@@ -32,6 +28,10 @@ export const UserInfoGuard = () => {
       );
     }
   }, [error]);
+
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   if (error) {
     return <Navigate to={PATHS.root} />;

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 import { PATHS } from "#constants/paths";
 import {
@@ -28,6 +28,7 @@ export const useAuth = () => {
   const [getToken, { isLoading }] = useGetTokenMutation();
   const [updateRefreshToken] = useRefreshTokenMutation();
   const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("access_token");
   const isAuthorised = !!localStorage.getItem("access_token");
@@ -51,7 +52,7 @@ export const useAuth = () => {
         getTokenExpireTime(data.access_token) ?? oneMinute * 9;
 
       setTimeout(loadUserFromStorage, tokenExpireTime - oneMinute);
-      if (window.location.pathname.includes("/")) {
+      if (pathname === "/") {
         if (kitId) navigate(`${PATHS._selected}/${kitId}`);
       }
     }
@@ -75,7 +76,7 @@ export const useAuth = () => {
         await getRefreshToken(refreshToken);
       } else if (refreshToken) {
         setTimeout(loadUserFromStorage, tokenExpireTime - oneMinute);
-        if (window.location.pathname.includes("/")) {
+        if (pathname === "/") {
           if (kitId) navigate(`${PATHS._selected}/${kitId}`);
         }
       } else {

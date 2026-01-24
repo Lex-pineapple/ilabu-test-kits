@@ -14,7 +14,7 @@ export const labsApi = unautorizedApi.injectEndpoints({
         return response.addresses.map((lab) => ({
           address: lab.address,
           name: response.lab_name,
-          time: "КРУГЛОСУТОЧНО",
+          time: lab.working_hours,
           value: lab.id,
         }));
       },

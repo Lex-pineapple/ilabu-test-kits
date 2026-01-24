@@ -1,6 +1,7 @@
 export type AddressType = {
   address: string;
   id: string;
+  working_hours: string;
 };
 
 export type LabAddressesTransformedType = {

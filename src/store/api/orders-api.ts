@@ -1,6 +1,6 @@
 import { authorizedApi } from "#store/api/base-api";
 import { API_ENDPOINTS } from "#store/api/consts";
-import { setCartItems } from "#store/slices/cart-slice";
+import { setCartItems, setCurrLabId } from "#store/slices/cart-slice";
 import { setFormData } from "#store/slices/form-slice";
 import {
   resetOrderData,
@@ -24,7 +24,10 @@ export const ordersApi = authorizedApi.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           dispatch(setOrderData(data));
-          if (data.analyses) dispatch(setCartItems(data.analyses));
+          if (data.analyses) {
+            dispatch(setCartItems(data.analyses));
+            dispatch(setCurrLabId(data.analyses[0].lab_id));
+          }
           if (data.personal_data)
             dispatch(
               setFormData({
