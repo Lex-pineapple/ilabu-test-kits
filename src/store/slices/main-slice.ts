@@ -3,6 +3,7 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 export type OrderStatusType =
   | "ANALYSES_SELECTED"
   | "DETAILS_FILLED"
+  | "EMAIL_CONFIRMED"
   | "NEW"
   | "PAYMENT_PAID"
   | "TUBES_LINKED";

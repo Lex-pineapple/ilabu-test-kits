@@ -12,3 +12,5 @@ export const paymentsApi = authorizedApi.injectEndpoints({
     }),
   }),
 });
+
+export const { useCreatePaymentSessionMutation } = paymentsApi;

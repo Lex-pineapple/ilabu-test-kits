@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router";
 import { Button, Flex } from "@chakra-ui/react";
 
 import { InfoCard } from "#/views/checkout-form/components/confirm-order/components/info-card";
+import { usePayment } from "#/views/checkout-form/components/confirm-order/use-payment";
 import { useFormQuery } from "#/views/checkout-form/use-form-query";
 import { deliveryData, genderData } from "#constants/general";
 import { PATHS } from "#constants/paths";
@@ -19,6 +20,7 @@ export const ConfirmOrder = () => {
   const formData = useAppSelector(getFormData);
   const cartData = useAppSelector(getCartItems);
   const currKitUid = useAppSelector(getCurrKitUid);
+  const { isLoading, onPayClick } = usePayment();
   const dispatch = useAppDispatch();
   const { setStep } = useFormQuery();
   const navigate = useNavigate();
@@ -34,6 +36,10 @@ export const ConfirmOrder = () => {
   useEffect(() => {
     setStep(3);
   }, []);
+
+  const onPayOrderClick = () => {
+    onPayClick();
+  };
 
   return (
     <Flex flexDir="column" h="100%">
@@ -82,11 +88,16 @@ export const ConfirmOrder = () => {
           title="Персональная информация"
         />
       </Flex>
-      <Link to={PATHS.orderPaid}>
-        <Button mt={9} textTransform="uppercase" w="100%">
-          Оплатить
-        </Button>
-      </Link>
+      <Button
+        loading={isLoading}
+        loadingText="Переходим к опалте..."
+        mt={9}
+        onClick={onPayOrderClick}
+        textTransform="uppercase"
+        w="100%"
+      >
+        Оплатить
+      </Button>
     </Flex>
   );
 };

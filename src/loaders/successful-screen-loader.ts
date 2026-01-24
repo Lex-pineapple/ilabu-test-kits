@@ -8,12 +8,22 @@ import {
 } from "#store/slices/notification-slice";
 import store from "#store/store";
 
-export async function loader() {
+const ORDER_QUERY = "wsb_order_num";
+
+type LoaderArgs = {
+  request: {
+    url: string;
+  };
+};
+
+export async function loader({ request }: LoaderArgs) {
+  const url = new URL(request.url);
+  const orderId = url.searchParams.get(ORDER_QUERY);
   const p = store.dispatch(ordersApi.endpoints.getOrderData.initiate());
 
   try {
     const response = await p.unwrap();
-    return { tubes: response.tubes };
+    return { orderId, tubes: response.tubes };
   } catch {
     store.dispatch(setNotificationVisibility(true));
     store.dispatch(

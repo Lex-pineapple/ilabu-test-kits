@@ -112,5 +112,6 @@ export type PickupAddressType = {
 export type SuccessDataType = {
   address: string;
   lab_name: string;
+  orderId: string;
   tubes: OrderDetailsTubeType[];
 };

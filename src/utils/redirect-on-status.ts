@@ -24,6 +24,10 @@ export const redirectPathOnStatus = ({
       onFormStatus("emailConfirm");
       onRedirect(`${PATHS.checkout}`);
       break;
+    case "EMAIL_CONFIRMED":
+      onFormStatus("confirmOrder");
+      onRedirect(`${PATHS.checkout}`);
+      break;
     case "NEW":
       onRedirect(`${PATHS._selected}/${currUid}`);
       break;

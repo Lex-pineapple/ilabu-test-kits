@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router";
 
 import { Button, Center, Flex, PinInput, Text } from "@chakra-ui/react";
 
@@ -7,6 +8,8 @@ import { OtpError } from "#/views/checkout-form/components/email-confirmation/co
 import { Timer } from "#/views/checkout-form/components/email-confirmation/components/timer";
 import { useOtp } from "#/views/checkout-form/components/email-confirmation/use-otp";
 import { useFormQuery } from "#/views/checkout-form/use-form-query";
+import { ArrowRight } from "#assets/icons/arrow-right";
+import { PATHS } from "#constants/paths";
 import { TitleCard } from "#shared/title-card";
 
 export const EmailConfirmation = () => {
@@ -32,6 +35,11 @@ export const EmailConfirmation = () => {
       ) : (
         <>
           <div>
+            <Link to={`${PATHS.checkout}?step=1`}>
+              <Button mb={4} variant="ghost">
+                <ArrowRight transform="rotate(180deg)" /> Назад
+              </Button>
+            </Link>
             <TitleCard
               content={
                 "Мы отправили письмо-подтверждение на ваш e-mail. Перейдите по ссылке либо введите код из письма вручную"

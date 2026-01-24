@@ -24,8 +24,8 @@ export const useOtp = () => {
       if (otp.join("").length === 4) {
         const { data } = await confirmOtp({ code: otp.join("") });
         if (data && data.code === 200) {
-          setStep(3);
           dispatch(setFormState("confirmOrder"));
+          setStep(3);
         }
       }
     };

@@ -24,20 +24,22 @@ const stepsData = [
 ];
 
 export const SuccessfulScreen = () => {
-  const { tubes } = useLoaderData<SuccessDataType>();
+  const { orderId, tubes } = useLoaderData<SuccessDataType>();
 
   return (
     <Container p={0} pb={14}>
       <HeaderWBg m="0 -14px 32px">Спасибо, заказ оформлен успешно!</HeaderWBg>
       {tubes && <TestTubeVisual items={tubes} />}
-      <Box bg="lab_green.50" m="0 -14px" mt={8} p="28px 14px">
-        <Text fontWeight="medium">
-          Номер вашего заказа:{" "}
-          <Text as="span" fontWeight="semibold">
-            А-682083
+      {orderId && (
+        <Box bg="lab_green.50" m="0 -14px" mt={8} p="28px 14px">
+          <Text fontWeight="medium">
+            Номер вашего заказа:{" "}
+            <Text as="span" fontWeight="semibold">
+              {orderId}
+            </Text>
           </Text>
-        </Text>
-      </Box>
+        </Box>
+      )}
       <Container p={0}>
         <Heading
           color="lab_green.900"

@@ -13,7 +13,7 @@ import {
 
 export const UserInfoGuard = () => {
   const dispatch = useAppDispatch();
-  // const { isLoading: isOrderVerifyLoading } = useOrderVerify();
+  const { isLoading: isOrderVerifyLoading } = useOrderVerify();
   const { error, isLoading } = useGetOrderDataQuery();
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export const UserInfoGuard = () => {
     }
   }, [error]);
 
-  if (isLoading) {
+  if (isLoading || isOrderVerifyLoading) {
     return <Spinner text="Получение информации по заказу" />;
   }
 
