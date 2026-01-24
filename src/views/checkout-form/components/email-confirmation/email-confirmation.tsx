@@ -82,7 +82,7 @@ export const EmailConfirmation = () => {
           </Button>
         </>
       )}
-      {isConfirmLoading && <Spinner />}
+      {isConfirmLoading && <Spinner text="Отправка кода" />}
     </Flex>
   );
 };

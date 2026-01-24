@@ -30,7 +30,7 @@ export const UserInfoGuard = () => {
   }, [error]);
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner text="Получение информации по заказу" />;
   }
 
   if (error) {

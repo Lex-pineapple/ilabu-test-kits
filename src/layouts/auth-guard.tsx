@@ -41,7 +41,7 @@ export const AuthGuard = ({ children }: PropsWithChildren) => {
   }, [accessToken]);
 
   if (isAuthorizing) {
-    return <Spinner />;
+    return <Spinner text="Авторизация" />;
   }
 
   if (!accessToken) {
