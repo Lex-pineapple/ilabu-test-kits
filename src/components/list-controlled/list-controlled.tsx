@@ -46,6 +46,7 @@ export const ListControlled = ({
           {...item}
           cardType="CHECK"
           key={item.id}
+          searchQuery={searchQ}
           selected={cartItems.some((cartItem) => cartItem.id === item.id)}
         />
       ))}

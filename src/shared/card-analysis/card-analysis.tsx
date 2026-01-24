@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 
-import { Box, Card, Container, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Card,
+  Container,
+  Heading,
+  Highlight,
+  Text,
+} from "@chakra-ui/react";
 
 import { ArrowButton } from "#shared/arrow-button";
 import { CheckboxButton } from "#shared/card-analysis/components/checkbox-button";
@@ -12,12 +19,14 @@ import type { AnalysisType } from "#store/types/analyses";
 type CardAnalysisProps = AnalysisType & {
   cardType: "CHECK" | "INFO";
   disabled?: boolean;
+  searchQuery?: string;
   selected?: boolean;
 };
 
 export const CardAnalysis = ({
   cardType = "INFO",
   disabled,
+  searchQuery,
   selected,
   ...rest
 }: CardAnalysisProps) => {
@@ -68,10 +77,15 @@ export const CardAnalysis = ({
         </Card.Header>
         <Card.Body p="0" pb={3}>
           <Heading lineHeight="14px" pb={2.5} size="sm">
-            {rest.title}
+            <Highlight
+              query={searchQuery ?? ""}
+              styles={{ bg: "lab_green.50", px: "0.5" }}
+            >
+              {rest.title}
+            </Highlight>
           </Heading>
           <Text fontWeight="medium" textStyle="xs">
-            {rest.description}
+            <Highlight query={searchQuery ?? ""}>{rest.description}</Highlight>
           </Text>
         </Card.Body>
       </Container>
