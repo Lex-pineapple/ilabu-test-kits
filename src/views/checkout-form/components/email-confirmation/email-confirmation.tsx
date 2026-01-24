@@ -77,9 +77,6 @@ export const EmailConfirmation = () => {
               onResend={() => sendOtp()}
             />
           </div>
-          <Button textTransform="uppercase" w="100%">
-            Открыть почту
-          </Button>
         </>
       )}
       {isConfirmLoading && <Spinner text="Отправка кода" />}
