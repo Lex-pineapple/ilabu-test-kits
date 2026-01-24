@@ -85,7 +85,12 @@ export const CardAnalysis = ({
             </Highlight>
           </Heading>
           <Text fontWeight="medium" textStyle="xs">
-            <Highlight query={searchQuery ?? ""}>{rest.description}</Highlight>
+            <Highlight
+              query={searchQuery ?? ""}
+              styles={{ bg: "lab_green.50", px: "0.5" }}
+            >
+              {rest.description}
+            </Highlight>
           </Text>
         </Card.Body>
       </Container>
