@@ -13,7 +13,7 @@ export const API_ENDPOINTS = {
   PAYMENT_NOTIFY: "/payments/notify",
   PAYMENT_SESSION: "/payments/current/session",
   PAYMENT_SUCCESS: "/payments/success",
-  REFRESH_TOKEN: "/auth/token",
+  REFRESH_TOKEN: "/auth/token/refresh",
   TUBES: "/tubes/link",
   TUBES_REQ: "/tubes/required",
   VERIFY_TOKEN: "/auth/token/verify",

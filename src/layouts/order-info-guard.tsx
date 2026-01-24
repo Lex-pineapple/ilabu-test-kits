@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router";
 
 import { Spinner } from "#/components/spinner";
@@ -18,15 +19,21 @@ export const UserInfoGuard = () => {
   // if (isLoading || isOrderVerifyLoading) {
   //   return <Spinner />;
   // }
+
+  useEffect(() => {
+    if (error) {
+      dispatch(setNotificationVisibility(true));
+      dispatch(
+        setNotificationData({
+          description:
+            "Произошла ошибка при получении информации о заказе. Пожалуйста, попробуйте снова.",
+          status: "error",
+        }),
+      );
+    }
+  }, [error]);
+
   if (error) {
-    dispatch(setNotificationVisibility(true));
-    dispatch(
-      setNotificationData({
-        description:
-          "Произошла ошибка при получении информации о заказе. Пожалуйста, попробуйте снова.",
-        status: "error",
-      }),
-    );
     return <Navigate to={PATHS.root} />;
   }
 

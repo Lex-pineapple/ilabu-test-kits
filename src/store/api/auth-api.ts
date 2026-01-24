@@ -1,6 +1,5 @@
 import { authorizedApi, unautorizedApi } from "#store/api/base-api";
 import { API_ENDPOINTS } from "#store/api/consts";
-import { resetAuth, setAccessToken } from "#store/slices/auth-slice";
 import { setCurrKitUid, setOrderStatus } from "#store/slices/main-slice";
 import type {
   AccessTokenType,
@@ -16,14 +15,14 @@ export const authApi = unautorizedApi.injectEndpoints({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          dispatch(setAccessToken(data.access_token));
           dispatch(setCurrKitUid(data.kit_id));
+          localStorage.setItem("kit_id", data.kit_id);
           localStorage.setItem("access_token", data.access_token);
           localStorage.setItem("refresh_token", data.refresh_token);
         } catch (error) {
+          localStorage.removeItem("kit_id");
           localStorage.removeItem("access_token");
           localStorage.removeItem("refresh_token");
-          dispatch(resetAuth());
           console.error(error);
         }
       },
@@ -34,16 +33,14 @@ export const authApi = unautorizedApi.injectEndpoints({
       }),
     }),
     refreshToken: build.mutation<AccessTokenType, RefreshTokenType>({
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+      async onQueryStarted(_, { queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          dispatch(setAccessToken(data.access_token));
           localStorage.setItem("access_token", data.access_token);
           localStorage.setItem("refresh_token", data.refresh_token);
         } catch (error) {
           localStorage.removeItem("access_token");
           localStorage.removeItem("refresh_token");
-          dispatch(resetAuth());
           console.error(error);
         }
       },

@@ -2,7 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { authorizedApi, unautorizedApi } from "#store/api/base-api";
 import { appErrorMiddleware } from "#store/middleware/app-error-middleware";
-import authReducer, { authSlice } from "#store/slices/auth-slice";
 import cartReducer, { cartSlice } from "#store/slices/cart-slice";
 import formReducer, { formSlice } from "#store/slices/form-slice";
 import mainReducer, { mainSlice } from "#store/slices/main-slice";
@@ -20,7 +19,6 @@ const store = configureStore({
     ),
   reducer: {
     [authorizedApi.reducerPath]: authorizedApi.reducer,
-    [authSlice.name]: authReducer,
     [cartSlice.name]: cartReducer,
     [formSlice.name]: formReducer,
     [mainSlice.name]: mainReducer,

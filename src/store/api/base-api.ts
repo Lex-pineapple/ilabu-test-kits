@@ -13,10 +13,8 @@ export const unautorizedApi = createApi({
 export const authorizedApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl,
-    prepareHeaders: (headers, { getState }) => {
-      const token =
-        (getState() as AppState).auth.accessToken ||
-        localStorage.getItem("access_token");
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem("access_token");
       if (token) headers.set("Authorization", `Bearer ${token}`);
       return headers;
     },

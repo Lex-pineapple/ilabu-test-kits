@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Outlet, useNavigation } from "react-router-dom";
 
 import {
@@ -22,7 +23,9 @@ import { modal } from "#shared/modal";
 import styles from "./layout.module.scss";
 
 export const Layout = () => {
-  const [isLargerThan500] = useMediaQuery(["(min-width: 500px)"]);
+  const [isLargerThan500] = useMediaQuery(["(min-width: 500px)"], {
+    ssr: false,
+  });
   const { state } = useNavigation();
 
   return isLargerThan500 ? (
