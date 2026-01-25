@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
@@ -6,7 +5,6 @@ import { Button, Flex, Stack, Text } from "@chakra-ui/react";
 
 import { LabContent } from "#/views/checkout-form/components/order-details/components/lab-content";
 import { useOrderDetails } from "#/views/checkout-form/components/order-details/use-order-retails";
-import { useFormQuery } from "#/views/checkout-form/use-form-query";
 import { CollapsibleIcon } from "#assets/icons/collapsible-icon";
 import { validationSchema } from "#constants/form-validation-schema";
 import { deliveryData, genderData } from "#constants/general";
@@ -18,13 +16,9 @@ import { InputError } from "#shared/input-error";
 import { SelectButton } from "#shared/select-button";
 import { TitleCard } from "#shared/title-card";
 import { useGetLabsAddressesQuery } from "#store/api/labs-api";
-import { useAppDispatch, useAppSelector } from "#store/hooks";
+import { useAppSelector } from "#store/hooks";
 import { getCurrLabId } from "#store/slices/cart-slice";
-import {
-  getFormData,
-  setFormData,
-  setFormState,
-} from "#store/slices/form-slice";
+import { getFormData } from "#store/slices/form-slice";
 
 export type Inputs = {
   date: string;
@@ -43,7 +37,6 @@ export const OrderDetails = () => {
   const formData = useAppSelector(getFormData);
   const currLabId = useAppSelector(getCurrLabId);
   const { data: labsList } = useGetLabsAddressesQuery(currLabId);
-  const { setStep } = useFormQuery();
   const {
     control,
     formState: { errors, isValid },
@@ -61,15 +54,9 @@ export const OrderDetails = () => {
   const deliveryMethod = watch("delivery");
   const deliveryAddress = watch("deliveryAddress");
 
-  useEffect(() => {
-    setStep(1);
-  }, []);
-
   const onSubmit = handleSubmit((data) => {
     if (isValid) {
-      submitOrderDetails(data, () => {
-        setStep(2);
-      });
+      submitOrderDetails(data);
     }
   });
 

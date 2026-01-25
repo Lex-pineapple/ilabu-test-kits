@@ -1,11 +1,9 @@
-import { useEffect } from "react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 import { Button, Flex } from "@chakra-ui/react";
 
 import { InfoCard } from "#/views/checkout-form/components/confirm-order/components/info-card";
 import { usePayment } from "#/views/checkout-form/components/confirm-order/use-payment";
-import { useFormQuery } from "#/views/checkout-form/use-form-query";
 import { deliveryData, genderData } from "#constants/general";
 import { PATHS } from "#constants/paths";
 import { TitleCard } from "#shared/title-card";
@@ -22,7 +20,6 @@ export const ConfirmOrder = () => {
   const currKitUid = useAppSelector(getCurrKitUid);
   const { isLoading, onPayClick } = usePayment();
   const dispatch = useAppDispatch();
-  const { setStep } = useFormQuery();
   const navigate = useNavigate();
   const gender = genderData.find(
     (item) => item.value === formData.gender,
@@ -32,10 +29,6 @@ export const ConfirmOrder = () => {
   )?.label;
   const delivery =
     deliveryInfo === "Courier" ? "Delivery by courier" : deliveryInfo;
-
-  useEffect(() => {
-    setStep(3);
-  }, []);
 
   const onPayOrderClick = () => {
     onPayClick();

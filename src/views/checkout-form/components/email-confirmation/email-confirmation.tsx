@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link } from "react-router";
 
 import { Button, Center, Flex, PinInput, Text } from "@chakra-ui/react";
@@ -7,10 +6,11 @@ import { Spinner } from "#/components/spinner";
 import { OtpError } from "#/views/checkout-form/components/email-confirmation/components/otp-error";
 import { Timer } from "#/views/checkout-form/components/email-confirmation/components/timer";
 import { useOtp } from "#/views/checkout-form/components/email-confirmation/use-otp";
-import { useFormQuery } from "#/views/checkout-form/use-form-query";
 import { ArrowRight } from "#assets/icons/arrow-right";
 import { PATHS } from "#constants/paths";
 import { TitleCard } from "#shared/title-card";
+import { useAppDispatch } from "#store/hooks";
+import { setFormState } from "#store/slices/form-slice";
 
 export const EmailConfirmation = () => {
   const {
@@ -22,11 +22,7 @@ export const EmailConfirmation = () => {
     sendOtp,
     setOtp,
   } = useOtp();
-  const { setStep } = useFormQuery();
-
-  useEffect(() => {
-    setStep(2);
-  }, []);
+  const dispatch = useAppDispatch();
 
   return (
     <Flex flexDir="column" h="70vh" justifyContent="space-between">
@@ -35,11 +31,13 @@ export const EmailConfirmation = () => {
       ) : (
         <>
           <div>
-            <Link to={`${PATHS.checkout}?step=1`}>
-              <Button mb={4} variant="ghost">
-                <ArrowRight transform="rotate(180deg)" /> Назад
-              </Button>
-            </Link>
+            <Button
+              mb={4}
+              onClick={() => dispatch(setFormState("orderDetails"))}
+              variant="ghost"
+            >
+              <ArrowRight transform="rotate(180deg)" /> Назад
+            </Button>
             <TitleCard
               content={
                 "Мы отправили письмо-подтверждение на ваш e-mail. Перейдите по ссылке либо введите код из письма вручную"

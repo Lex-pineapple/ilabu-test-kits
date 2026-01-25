@@ -73,8 +73,7 @@ export const DrawerSwipeable = () => {
   const dispatch = useAppDispatch();
   const [total, setTotal] = useState(countTotal(cartItems));
   const [collapsibleOpen, setCollapsibleOpen] = useState(false);
-  const [postAnalyses, { isLoading, isSuccess }] =
-    usePostOrderAnalysesMutation();
+  const [postAnalyses, { isLoading }] = usePostOrderAnalysesMutation();
   const handlers = useSwipeable({
     onSwipedDown: () => setCollapsibleOpen(false),
     onSwipedUp: () => setCollapsibleOpen(true),
@@ -93,18 +92,16 @@ export const DrawerSwipeable = () => {
     if (cartItems.length === 0) document.body.style.overflow = "unset";
   }, [cartItems]);
 
-  useEffect(() => {
-    if (isSuccess) {
-      setCollapsibleOpen(false);
-      navigate(PATHS.checkout);
-    }
-  }, [isSuccess]);
-
-  const onContinueClick = () => {
+  const onContinueClick = async () => {
     const analysesToUpload = {
       analyses_ids: cartItems.map((item) => item.id),
     };
-    postAnalyses(analysesToUpload);
+    const { data } = await postAnalyses(analysesToUpload);
+
+    if (data && data.code === 200) {
+      setCollapsibleOpen(false);
+      navigate(PATHS.checkout);
+    }
   };
 
   return (

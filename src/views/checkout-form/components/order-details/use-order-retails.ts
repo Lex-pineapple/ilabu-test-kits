@@ -41,10 +41,7 @@ export const useOrderDetails = () => {
     }
   });
 
-  const submitOrderDetails = async (
-    formData: Inputs,
-    onSuccess: () => void,
-  ) => {
+  const submitOrderDetails = async (formData: Inputs) => {
     dispatch(setFormData(formData));
     const orderDetails = {
       delivery_method: formData.delivery,
@@ -74,7 +71,6 @@ export const useOrderDetails = () => {
     if (data && data.code === 200) {
       const { data: otpData } = await sendOtp();
       if (otpData && otpData.code === 200) {
-        onSuccess();
         dispatch(setFormState("emailConfirm"));
       }
     }

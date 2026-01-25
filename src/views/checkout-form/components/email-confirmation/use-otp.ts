@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-import { useFormQuery } from "#/views/checkout-form/use-form-query";
 import { useCofirmOtpMutation, useSendOtpMutation } from "#store/api/otp-api";
 import { useAppDispatch, useAppSelector } from "#store/hooks";
 import { getOtpError, setFormState } from "#store/slices/form-slice";
@@ -11,7 +10,6 @@ import {
 import { isFetchBaseQueryError } from "#utils/is-fetch-base-query-error";
 
 export const useOtp = () => {
-  const { setStep } = useFormQuery();
   const otpError = useAppSelector(getOtpError);
   const dispatch = useAppDispatch();
   const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
@@ -25,7 +23,6 @@ export const useOtp = () => {
         const { data } = await confirmOtp({ code: otp.join("") });
         if (data && data.code === 200) {
           dispatch(setFormState("confirmOrder"));
-          setStep(3);
         }
       }
     };

@@ -3,6 +3,7 @@ import { redirect } from "react-router";
 import { allowedPathsMap } from "#constants/allowed-paths-map";
 import { PATHS } from "#constants/paths";
 import { authApi, authAuthorizedApi } from "#store/api/auth-api";
+import { setFormState } from "#store/slices/form-slice";
 import {
   setNotificationData,
   setNotificationVisibility,
@@ -26,7 +27,12 @@ export async function loader({ request }: LoaderArgs) {
     const isAllowedPath = pathByStatus.allowedPaths.some((path) =>
       pathname.match(path),
     );
-    if (!isAllowedPath) return redirect(pathByStatus.defaultPath);
+
+    store.dispatch(setFormState(pathByStatus.defaultFormState));
+    if (!isAllowedPath) {
+      return redirect(pathByStatus.defaultPath);
+    }
+    return "ok";
   } catch {
     store.dispatch(setNotificationVisibility(true));
     store.dispatch(
