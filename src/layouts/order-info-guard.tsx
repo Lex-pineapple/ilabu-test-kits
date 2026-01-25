@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Navigate, Outlet } from "react-router";
 
 import { Spinner } from "#/components/spinner";
-import { useOrderVerify } from "#/hooks/use-order-verify";
+// import { useOrderVerify } from "#/hooks/use-order-verify";
 import { PATHS } from "#constants/paths";
 import { useGetOrderDataQuery } from "#store/api/orders-api";
 import { useAppDispatch } from "#store/hooks";
@@ -13,7 +13,6 @@ import {
 
 export const UserInfoGuard = () => {
   const dispatch = useAppDispatch();
-  const { isLoading: isOrderVerifyLoading } = useOrderVerify();
   const { error, isLoading } = useGetOrderDataQuery();
 
   useEffect(() => {
@@ -29,7 +28,7 @@ export const UserInfoGuard = () => {
     }
   }, [error]);
 
-  if (isLoading || isOrderVerifyLoading) {
+  if (isLoading) {
     return <Spinner text="Получение информации по заказу" />;
   }
 

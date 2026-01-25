@@ -7,6 +7,7 @@ import {
   appProductsLoader,
   HydrateFallback,
   instructionLoader,
+  orderStatusLoader,
   productKitLoader,
   selectedKitLoader,
   successfulScreenLoader,
@@ -36,7 +37,6 @@ export const router = createBrowserRouter([
         element: <FAQ />,
         path: PATHS.faq,
       },
-
       {
         element: <AllProducts />,
         loader: appProductsLoader,
@@ -54,36 +54,41 @@ export const router = createBrowserRouter([
       {
         children: [
           {
-            element: <SelectedKit />,
-            loader: selectedKitLoader,
-            path: PATHS.selectedKit,
-          },
-          {
-            element: <Instruction />,
-            loader: instructionLoader,
-            path: PATHS.instruction,
-          },
-          {
-            element: <OrderError />,
-            path: PATHS.orderError,
-          },
-          {
-            element: <OrderPaid />,
-            path: PATHS.orderPaid,
-          },
-          {
-            element: <SuccessfulScreen />,
-            loader: successfulScreenLoader,
-            path: PATHS.orderSuccess,
-          },
+            children: [
+              {
+                element: <SelectedKit />,
+                loader: selectedKitLoader,
+                path: PATHS.selectedKit,
+              },
+              {
+                element: <Instruction />,
+                loader: instructionLoader,
+                path: PATHS.instruction,
+              },
+              {
+                element: <OrderError />,
+                path: PATHS.orderError,
+              },
+              {
+                element: <OrderPaid />,
+                path: PATHS.orderPaid,
+              },
+              {
+                element: <SuccessfulScreen />,
+                loader: successfulScreenLoader,
+                path: PATHS.orderSuccess,
+              },
 
-          {
-            element: <CheckoutForm />,
-            path: PATHS.checkout,
-          },
-          {
-            element: <Tubes />,
-            path: PATHS.tubes,
+              {
+                element: <CheckoutForm />,
+                path: PATHS.checkout,
+              },
+              {
+                element: <Tubes />,
+                path: PATHS.tubes,
+              },
+            ],
+            loader: orderStatusLoader,
           },
         ],
         element: (

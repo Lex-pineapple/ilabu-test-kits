@@ -55,7 +55,7 @@ export const authApi = unautorizedApi.injectEndpoints({
 
 export const authAuthorizedApi = authorizedApi.injectEndpoints({
   endpoints: (build) => ({
-    verifyToken: build.mutation<VerifyTokenType, void>({
+    verifyToken: build.query<VerifyTokenType, void>({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
@@ -73,5 +73,5 @@ export const authAuthorizedApi = authorizedApi.injectEndpoints({
   }),
 });
 
-export const { useVerifyTokenMutation } = authAuthorizedApi;
+export const { useVerifyTokenQuery } = authAuthorizedApi;
 export const { useGetTokenMutation, useRefreshTokenMutation } = authApi;
