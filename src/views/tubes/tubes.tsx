@@ -8,7 +8,6 @@ import {
   Flex,
   Group,
   Input,
-  InputGroup,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -41,7 +40,6 @@ export const Tubes = () => {
     formState: { isDirty, isValid },
     getValues,
     handleSubmit,
-    register,
     reset,
   } = useForm();
 

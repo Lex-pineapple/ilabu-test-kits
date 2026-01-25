@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
+import { PATHS } from "#constants/paths";
 import {
   useGetRequiredTubesQuery,
   useLinkTubesMutation,
@@ -22,6 +24,7 @@ export const useTubes = () => {
   const [postLinkTubes, { isLoading: linkLoading }] = useLinkTubesMutation();
   const [tubeError, setTubeError] = useState<null | string>(null);
   const [tubeData, setTubeData] = useState<TubeCodeType[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (error) {
@@ -84,7 +87,7 @@ export const useTubes = () => {
       }
     }
     if (data && data.code === 200) {
-      dispatch(setFormState("orderDetails"));
+      navigate(PATHS.orderSuccess);
     }
   };
 

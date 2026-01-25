@@ -5,3 +5,9 @@ export const FORM_STEP_ORDER: Record<formStatesType, number> = {
   emailConfirm: 2,
   orderDetails: 1,
 };
+
+export const formOrder: formStatesType[] = [
+  "orderDetails",
+  "emailConfirm",
+  "confirmOrder",
+];

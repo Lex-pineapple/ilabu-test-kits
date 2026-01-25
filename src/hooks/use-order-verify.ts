@@ -1,25 +1,63 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 import { useAuth } from "#/hooks/use-auth";
-import { FORM_STEP_ORDER } from "#constants/form-steps-order";
 import { PATHS } from "#constants/paths";
-import { useVerifyTokenQuery } from "#store/api/auth-api";
-import { useAppDispatch, useAppSelector } from "#store/hooks";
-import { setFormState, setStepsCleared } from "#store/slices/form-slice";
-import { getCurrKitUid } from "#store/slices/main-slice";
+import { useVerifyTokenMutation } from "#store/api/auth-api";
+import { useAppDispatch } from "#store/hooks";
+import { type OrderStatusType } from "#store/slices/main-slice";
 import {
   setNotificationData,
   setNotificationVisibility,
 } from "#store/slices/notification-slice";
-import { redirectPathOnStatus } from "#utils/redirect-on-status";
+
+type AllowedPathType = {
+  allowedPaths: string[];
+  defaultPath: string;
+};
+
+const allowedPathsMap: Record<OrderStatusType, AllowedPathType> = {
+  ANALYSES_SELECTED: {
+    allowedPaths: [PATHS._selected, `${PATHS.checkout}?step=1`],
+    defaultPath: `${PATHS.checkout}?step=1`,
+  },
+  DETAILS_FILLED: {
+    allowedPaths: [
+      PATHS._selected,
+      `${PATHS.checkout}?step=1`,
+      `${PATHS.checkout}?step=2`,
+    ],
+    defaultPath: `${PATHS.checkout}?step=2`,
+  },
+  EMAIL_CONFIRMED: {
+    allowedPaths: [
+      PATHS._selected,
+      `${PATHS.checkout}?step=1`,
+      `${PATHS.checkout}?step=3`,
+      PATHS.orderError,
+    ],
+    defaultPath: `${PATHS.checkout}?step=3`,
+  },
+  NEW: {
+    allowedPaths: [PATHS._selected],
+    defaultPath: PATHS._selected,
+  },
+  PAYMENT_PAID: {
+    allowedPaths: [PATHS.instruction, PATHS.orderPaid, PATHS.tubes],
+    defaultPath: PATHS.orderPaid,
+  },
+  TUBES_LINKED: {
+    allowedPaths: [PATHS.orderSuccess],
+    defaultPath: PATHS.orderSuccess,
+  },
+};
 
 export const useOrderVerify = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { logout } = useAuth();
-  const currOrderUid = useAppSelector(getCurrKitUid);
-  const { data, error, isLoading } = useVerifyTokenQuery();
+  const [getVeryStatus, { error, isLoading }] = useVerifyTokenMutation();
 
   useEffect(() => {
     if (error) {
@@ -37,18 +75,18 @@ export const useOrderVerify = () => {
   }, [error]);
 
   useEffect(() => {
-    if (data) {
-      redirectPathOnStatus({
-        currUid: currOrderUid,
-        onFormStatus: (formState) => {
-          dispatch(setFormState(formState));
-          dispatch(setStepsCleared(FORM_STEP_ORDER[formState] - 1));
-        },
-        onRedirect: (path) => navigate(path, { replace: true }),
-        status: data.order_status,
-      });
-    }
-  }, [data]);
+    const setPathnameByStatus = async () => {
+      const { data } = await getVeryStatus();
+      if (data) {
+        const pathByStatus = allowedPathsMap[data.order_status];
+        const isAllowedPath = pathByStatus.allowedPaths.some((path) =>
+          pathname.match(path),
+        );
+        if (!isAllowedPath) navigate(pathByStatus.defaultPath);
+      }
+    };
+    setPathnameByStatus();
+  }, [pathname]);
 
   return { isLoading };
 };
