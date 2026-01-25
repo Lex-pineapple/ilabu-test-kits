@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
+import Animate from "react-smooth";
 
 import { Button, Flex, Stack, Text } from "@chakra-ui/react";
 
@@ -66,128 +67,52 @@ export const OrderDetails = () => {
   };
 
   return (
-    <Flex flexDir="column" h="100%">
-      <TitleCard
-        content={"Заполните детали для оформления вашего заказа"}
-        heading={"Детали заказа"}
-        highlight="заказа"
-        mb={5}
-      />
-      <Flex flexDir="column" h="100%" justifyContent="space-between">
-        <form onSubmit={onSubmit}>
-          <Stack gap={5} pb={8}>
-            <InputClearable
-              errorMessage={errors.email?.message}
-              id="email"
-              onClear={resetField}
-              placeholder="Email"
-              {...register("email")}
-            />
-            <InputClearable
-              errorMessage={errors.firstName?.message}
-              id="firstName"
-              onClear={resetField}
-              placeholder="Имя"
-              {...register("firstName")}
-            />
-            <InputClearable
-              errorMessage={errors.lastName?.message}
-              id="lastName"
-              onClear={resetField}
-              placeholder="Фамилия"
-              {...register("lastName")}
-            />
-            <InputClearable
-              errorMessage={errors.middleName?.message}
-              id="middleName"
-              onClear={resetField}
-              placeholder="Отчество"
-              {...register("middleName")}
-            />
-            <Controller
-              control={control}
-              name="gender"
-              render={({ field }) => (
-                <div>
-                  <SelectButton
-                    items={genderData}
-                    selected={field.value}
-                    setSelected={(value) => {
-                      field.onChange(value);
-                    }}
-                    trigger={
-                      <Button
-                        bg="white"
-                        border="none"
-                        borderBottom="3px solid #048B78"
-                        borderRadius={8}
-                        color={field.value ? "black" : "lab_grey.200"}
-                        fontWeight="semibold"
-                        justifyContent="space-between"
-                        width="100%"
-                      >
-                        {field.value
-                          ? genderData.find(
-                              (item) => item.value === field.value,
-                            )?.label
-                          : "Пол"}
-                        <CollapsibleIcon width="12px" />
-                      </Button>
-                    }
-                  />
-                  <InputError message={errors.gender?.message} />
-                </div>
-              )}
-            />
-            <DatePicker
-              errorMessage={errors.date?.message}
-              id="date"
-              {...register("date")}
-            />
-            <Controller
-              control={control}
-              name="delivery"
-              render={({ field }) => (
-                <div>
-                  <SelectButton
-                    items={deliveryData}
-                    selected={field.value}
-                    setSelected={(value) => {
-                      field.onChange(value);
-                    }}
-                    trigger={
-                      <Button
-                        bg="white"
-                        border="none"
-                        borderBottom="3px solid #048B78"
-                        borderRadius={8}
-                        color={field.value ? "black" : "lab_grey.200"}
-                        fontWeight="semibold"
-                        justifyContent="space-between"
-                        width="100%"
-                      >
-                        {field.value
-                          ? deliveryData.find(
-                              (item) => item.value === field.value,
-                            )?.label
-                          : "Доставка биоматериала"}
-                        <CollapsibleIcon width="12px" />
-                      </Button>
-                    }
-                  />
-                  <InputError message={errors.delivery?.message} />
-                </div>
-              )}
-            />
-            {deliveryMethod === "personal" && labsList && (
-              <div>
-                <Controller
-                  control={control}
-                  name="labAdressId"
-                  render={({ field }) => (
+    <Animate attributeName="opacity" from="0" to="1">
+      <Flex flexDir="column" h="100%">
+        <TitleCard
+          content={"Заполните детали для оформления вашего заказа"}
+          heading={"Детали заказа"}
+          highlight="заказа"
+          mb={5}
+        />
+        <Flex flexDir="column" h="100%" justifyContent="space-between">
+          <form onSubmit={onSubmit}>
+            <Stack gap={5} pb={8}>
+              <InputClearable
+                errorMessage={errors.email?.message}
+                id="email"
+                onClear={resetField}
+                placeholder="Email"
+                {...register("email")}
+              />
+              <InputClearable
+                errorMessage={errors.firstName?.message}
+                id="firstName"
+                onClear={resetField}
+                placeholder="Имя"
+                {...register("firstName")}
+              />
+              <InputClearable
+                errorMessage={errors.lastName?.message}
+                id="lastName"
+                onClear={resetField}
+                placeholder="Фамилия"
+                {...register("lastName")}
+              />
+              <InputClearable
+                errorMessage={errors.middleName?.message}
+                id="middleName"
+                onClear={resetField}
+                placeholder="Отчество"
+                {...register("middleName")}
+              />
+              <Controller
+                control={control}
+                name="gender"
+                render={({ field }) => (
+                  <div>
                     <SelectButton
-                      ContentElement={LabContent}
-                      items={labsList}
+                      items={genderData}
                       selected={field.value}
                       setSelected={(value) => {
                         field.onChange(value);
@@ -200,70 +125,148 @@ export const OrderDetails = () => {
                           borderRadius={8}
                           color={field.value ? "black" : "lab_grey.200"}
                           fontWeight="semibold"
-                          height="auto"
                           justifyContent="space-between"
-                          padding="5px 10px"
                           width="100%"
                         >
-                          {field.value ? (
-                            <LabContent {...getLabProps(field.value)} />
-                          ) : (
-                            "Адрес пункта обработки"
-                          )}
+                          {field.value
+                            ? genderData.find(
+                                (item) => item.value === field.value,
+                              )?.label
+                            : "Пол"}
                           <CollapsibleIcon width="12px" />
                         </Button>
                       }
                     />
-                  )}
-                />
-                <InputError message={errors.labAdressId?.message} />
-              </div>
-            )}
-            {deliveryMethod === "courier" && (
-              <div>
-                <Button
-                  bg="white"
-                  border="none"
-                  borderBottom="3px solid #048B78"
-                  borderRadius={8}
-                  color={deliveryAddress?.street ? "black" : "lab_grey.200"}
-                  fontWeight="semibold"
-                  justifyContent="space-between"
-                  onClick={() => {
-                    bottomSheetModal.open("address_form", {
-                      modalData: {
-                        onFormSubmit: (formData: AddressFormInputs) => {
-                          setValue("deliveryAddress", formData);
-                          trigger();
+                    <InputError message={errors.gender?.message} />
+                  </div>
+                )}
+              />
+              <DatePicker
+                errorMessage={errors.date?.message}
+                id="date"
+                {...register("date")}
+              />
+              <Controller
+                control={control}
+                name="delivery"
+                render={({ field }) => (
+                  <div>
+                    <SelectButton
+                      items={deliveryData}
+                      selected={field.value}
+                      setSelected={(value) => {
+                        field.onChange(value);
+                      }}
+                      trigger={
+                        <Button
+                          bg="white"
+                          border="none"
+                          borderBottom="3px solid #048B78"
+                          borderRadius={8}
+                          color={field.value ? "black" : "lab_grey.200"}
+                          fontWeight="semibold"
+                          justifyContent="space-between"
+                          width="100%"
+                        >
+                          {field.value
+                            ? deliveryData.find(
+                                (item) => item.value === field.value,
+                              )?.label
+                            : "Доставка биоматериала"}
+                          <CollapsibleIcon width="12px" />
+                        </Button>
+                      }
+                    />
+                    <InputError message={errors.delivery?.message} />
+                  </div>
+                )}
+              />
+              {deliveryMethod === "personal" && labsList && (
+                <div>
+                  <Controller
+                    control={control}
+                    name="labAdressId"
+                    render={({ field }) => (
+                      <SelectButton
+                        ContentElement={LabContent}
+                        items={labsList}
+                        selected={field.value}
+                        setSelected={(value) => {
+                          field.onChange(value);
+                        }}
+                        trigger={
+                          <Button
+                            bg="white"
+                            border="none"
+                            borderBottom="3px solid #048B78"
+                            borderRadius={8}
+                            color={field.value ? "black" : "lab_grey.200"}
+                            fontWeight="semibold"
+                            height="auto"
+                            justifyContent="space-between"
+                            padding="5px 10px"
+                            width="100%"
+                          >
+                            {field.value ? (
+                              <LabContent {...getLabProps(field.value)} />
+                            ) : (
+                              "Адрес пункта обработки"
+                            )}
+                            <CollapsibleIcon width="12px" />
+                          </Button>
+                        }
+                      />
+                    )}
+                  />
+                  <InputError message={errors.labAdressId?.message} />
+                </div>
+              )}
+              {deliveryMethod === "courier" && (
+                <div>
+                  <Button
+                    bg="white"
+                    border="none"
+                    borderBottom="3px solid #048B78"
+                    borderRadius={8}
+                    color={deliveryAddress?.street ? "black" : "lab_grey.200"}
+                    fontWeight="semibold"
+                    justifyContent="space-between"
+                    onClick={() => {
+                      bottomSheetModal.open("address_form", {
+                        modalData: {
+                          onFormSubmit: (formData: AddressFormInputs) => {
+                            setValue("deliveryAddress", formData);
+                            trigger();
+                          },
                         },
-                      },
-                      title: "Выберите адрес доставки",
-                      type: "ADDRESS_FORM",
-                    });
-                  }}
-                  truncate
-                  width="100%"
-                >
-                  <Text truncate>
-                    {deliveryAddress?.street
-                      ? `${deliveryAddress.city}, ${deliveryAddress.street}, ${deliveryAddress.building}, ${deliveryAddress.apartment}`
-                      : "Добавить адрес доставки"}
-                  </Text>
-                </Button>
-                <InputError message={errors.deliveryAddress?.message} />
-              </div>
-            )}
-          </Stack>
-          <Button
-            loading={isLoading}
-            loadingText="Отправляем..."
-            type="submit"
-            w="100%"
-          >
-            Продолжить
-          </Button>
-        </form>
+                        title: "Выберите адрес доставки",
+                        type: "ADDRESS_FORM",
+                      });
+                    }}
+                    truncate
+                    width="100%"
+                  >
+                    <Text truncate>
+                      {deliveryAddress?.street
+                        ? `${deliveryAddress.city}, ${deliveryAddress.street}, ${deliveryAddress.building}, ${deliveryAddress.apartment}`
+                        : "Добавить адрес доставки"}
+                    </Text>
+                  </Button>
+                  <InputError message={errors.deliveryAddress?.message} />
+                </div>
+              )}
+            </Stack>
+            <Button
+              loading={isLoading}
+              loadingText="Отправляем..."
+              type="submit"
+              w="100%"
+            >
+              Продолжить
+            </Button>
+          </form>
+        </Flex>
       </Flex>
-    </Flex>
+    </Animate>
   );
 };
