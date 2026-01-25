@@ -87,7 +87,7 @@ export const useTubes = () => {
       }
     }
     if (data && data.code === 200) {
-      navigate(PATHS.orderSuccess);
+      navigate(PATHS.orderSuccess, { viewTransition: true });
     }
   };
 

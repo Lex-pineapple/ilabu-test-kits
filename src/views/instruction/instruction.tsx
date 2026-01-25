@@ -58,7 +58,7 @@ export const Instruction = () => {
               />
             ))}
           </Flex>
-          <Link to={PATHS.tubes}>
+          <Link to={PATHS.tubes} viewTransition>
             <Button mt={9} w="100%">
               Понятно
             </Button>

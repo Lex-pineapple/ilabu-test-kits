@@ -16,10 +16,11 @@ import { ShdContainer } from "#shared/shd-container";
 export const AnalysisContentSkeleton = () => (
   <Container p={2} position="relative">
     <Flex flexDir="column">
-      <Text color="lab_grey.900" textStyle="sm">
+      <Text as="div" color="lab_grey.900" textStyle="sm">
         <SkeletonText noOfLines={1} w="30%" />
       </Text>
       <Heading
+        as="div"
         lineHeight="14px"
         pb={4}
         pt={5}
@@ -33,21 +34,21 @@ export const AnalysisContentSkeleton = () => (
       <Text color="lab_green.500" fontWeight="medium" pb={1.5}>
         Исполнитель:
       </Text>
-      <Text fontWeight="semibold" pb={4}>
+      <Text as="div" fontWeight="semibold" pb={4}>
         <SkeletonText />
       </Text>
       <hr />
       <Text color="lab_green.500" fontWeight="medium" pb={1.5} pt={2.5}>
         Тип материала:
       </Text>
-      <Text fontWeight="semibold" pb={4}>
+      <Text as="div" fontWeight="semibold" pb={4}>
         <SkeletonText noOfLines={2} />
       </Text>
       <hr />
       <Text color="lab_green.500" fontWeight="medium" pb={1.5} pt={2.5}>
         Срок исполнения (не учитывает день взятия):
       </Text>
-      <Text fontWeight="semibold">
+      <Text as="div" fontWeight="semibold">
         <SkeletonText noOfLines={1} />
       </Text>
     </ShdContainer>
@@ -71,8 +72,10 @@ export const AnalysisContentSkeleton = () => (
       </Text>
       {[0, 0, 0].map((_, idx) => (
         <Text
+          as="div"
           bg={idx % 2 ? "lab_green.50" : "lab_green.100"}
           fontWeight="medium"
+          key={idx}
           p={2.5}
         >
           <SkeletonText />

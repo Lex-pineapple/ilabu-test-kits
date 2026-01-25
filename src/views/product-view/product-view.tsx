@@ -26,9 +26,10 @@ export const ProductView = () => {
       </Text> */}
       <Flex direction="column" p="26px 0 36px">
         <Box bg="lab_green.50" borderRadius={10} mb={14} p={5} pb={0}>
-          {loaderData.description.split("\n").map((item) => (
+          {loaderData.description.split("\n").map((item, idx) => (
             <Text
               fontWeight="semibold"
+              key={idx}
               mb={5}
               textStyle="sm"
               whiteSpace="pre-wrap"
@@ -42,8 +43,8 @@ export const ProductView = () => {
         </Heading>
         <ShdContainer mb={14} p={4.5}>
           <List.Root gap={2.5} variant="plain">
-            {loaderData.benefits.map((item) => (
-              <List.Item alignItems="center" lineHeight="34px">
+            {loaderData.benefits.map((item, idx) => (
+              <List.Item alignItems="center" key={idx} lineHeight="34px">
                 <List.Indicator asChild>
                   <CheckmarkIcon size="sm" />
                 </List.Indicator>
@@ -69,6 +70,7 @@ export const ProductView = () => {
                 alignItems="center"
                 gap={2}
                 justifyContent="space-between"
+                key={name}
                 lineHeight="34px"
               >
                 <Text fontWeight="medium" lineHeight="34px" textStyle="md">

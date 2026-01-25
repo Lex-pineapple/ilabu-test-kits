@@ -35,7 +35,7 @@ export const CardCollapsible = ({ items }: CardCollapsibleProps) => {
       <Collapsible.Content p="0 14px" pt={2.5}>
         <Flex direction="column" gap={2.5} pb={2.5}>
           {items.map((item) => (
-            <CardAnalysis {...item} cardType="INFO" />
+            <CardAnalysis {...item} cardType="INFO" key={item.id} />
           ))}
         </Flex>
       </Collapsible.Content>

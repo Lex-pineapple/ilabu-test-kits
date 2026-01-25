@@ -13,7 +13,7 @@ export const OrderPaid = () => (
       <Text color="gray.600" fontSize="lg" maxW="md" mb={8}>
         Остался один шаг - сбор биологического образца на дому!
       </Text>
-      <Link to={PATHS.instruction}>
+      <Link to={PATHS.instruction} viewTransition>
         <Button colorScheme="green" px={8} size="lg">
           Перейти к сбору образца
         </Button>

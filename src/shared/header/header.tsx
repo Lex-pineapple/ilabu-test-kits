@@ -36,7 +36,7 @@ export const Header = () => {
             [styles.drawer_open]: open,
           })}
         >
-          <Link onClick={() => setOpen(false)} to={PATHS.root}>
+          <Link onClick={() => setOpen(false)} to={PATHS.root} viewTransition>
             <div className={styles.header_link}>
               <LogoMainIcon h={29} />
             </div>
@@ -50,6 +50,7 @@ export const Header = () => {
                   key={item.title}
                   onClick={() => setOpen(false)}
                   to={item.href}
+                  viewTransition
                 >
                   <Text color="white" textStyle="sm">
                     {item.title}
@@ -73,7 +74,7 @@ export const Header = () => {
           </Flex>
         </div>
         <BurgerButton active={open} onClick={() => setOpen(!open)} />
-        <Link to={PATHS.root}>
+        <Link to={PATHS.root} viewTransition>
           <LogoMainIcon h={29} />
         </Link>
       </Flex>

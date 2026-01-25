@@ -54,7 +54,11 @@ export const ConfirmOrder = () => {
             data: `${Number(item.price).toFixed(2)} BYN`,
             title: item.title,
           }))}
-          onOrderChange={() => navigate(`${PATHS._selected}/${currKitUid}`)}
+          onOrderChange={() =>
+            navigate(`${PATHS._selected}/${currKitUid}`, {
+              viewTransition: true,
+            })
+          }
           title="Выбранные тесты"
           whiteSpace="nowrap"
         />

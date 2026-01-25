@@ -11,7 +11,7 @@ type SpinnerProps = {
 };
 
 export const Spinner = ({ text = "Загрузка" }: SpinnerProps) => (
-  <Box bg="#f5feff" inset="0" p={6} pos="fixed">
+  <Box backdropFilter="blur(10px)" bg="#ffffff4a" inset="0" p={6} pos="fixed">
     <Center flexDirection="column" h="full">
       <Lottie animationData={mylabAnimation} loop />
       <Text className={styles.text} textStyle="xl">

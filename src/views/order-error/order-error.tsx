@@ -13,7 +13,7 @@ export const OrderError = () => (
       <Text color="gray.600" fontSize="lg" maxW="md" mb={8}>
         Повторите оплату.
       </Text>
-      <Link to={`${PATHS.checkout}?step=3`}>
+      <Link to={`${PATHS.checkout}?step=3`} viewTransition>
         <Button colorScheme="red" px={8} size="lg">
           Вернуться к подтверждению заказа
         </Button>

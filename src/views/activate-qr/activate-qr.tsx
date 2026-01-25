@@ -65,7 +65,9 @@ export const ActivateQR = () => {
               fontSize={14}
               fontWeight="medium"
             >
-              <Link to={`${PATHS.faq}#qr-location`}>Не нашли QR-код?</Link>
+              <Link to={`${PATHS.faq}#qr-location`} viewTransition>
+                Не нашли QR-код?
+              </Link>
             </ChakraLink>
           </Flex>
         </Flex>

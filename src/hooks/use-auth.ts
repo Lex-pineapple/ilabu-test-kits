@@ -53,7 +53,8 @@ export const useAuth = () => {
 
       setTimeout(loadUserFromStorage, tokenExpireTime - oneMinute);
       if (pathname === "/") {
-        if (kitId) navigate(`${PATHS._selected}/${kitId}`);
+        if (kitId)
+          navigate(`${PATHS._selected}/${kitId}`, { viewTransition: true });
       }
     }
     if (error) logout();
@@ -77,7 +78,8 @@ export const useAuth = () => {
       } else if (refreshToken) {
         setTimeout(loadUserFromStorage, tokenExpireTime - oneMinute);
         if (pathname === "/") {
-          if (kitId) navigate(`${PATHS._selected}/${kitId}`);
+          if (kitId)
+            navigate(`${PATHS._selected}/${kitId}`, { viewTransition: true });
         }
       } else {
         logout();
@@ -91,7 +93,8 @@ export const useAuth = () => {
     const { data, error } = await getToken({ kit_item_code: code });
     if (data) {
       scheduleRefreshToken(data.access_token);
-      if (withRedirect) navigate(`${PATHS._selected}/${data.kit_id}`);
+      if (withRedirect)
+        navigate(`${PATHS._selected}/${data.kit_id}`, { viewTransition: true });
       return { errorMessage: "" };
     }
     if (error && isFetchBaseQueryError(error)) {
@@ -110,7 +113,7 @@ export const useAuth = () => {
   };
 
   const logout = () => {
-    navigate(PATHS.root);
+    navigate(PATHS.root, { viewTransition: true });
     dispatch(resetOrderData());
     localStorage.removeItem("access_token");
     localStorage.removeItem("refresh_token");

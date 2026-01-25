@@ -31,7 +31,7 @@ export const modal = createOverlay<ModalProps>(
         <Portal>
           <Dialog.Backdrop />
           <Dialog.Positioner>
-            <Dialog.Content>
+            <Dialog.Content borderRadius="25px">
               <Dialog.Header>
                 {modalData?.modalTitle && (
                   <Dialog.Title>{modalData.modalTitle}</Dialog.Title>

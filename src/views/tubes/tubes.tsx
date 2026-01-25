@@ -69,7 +69,7 @@ export const Tubes = () => {
 
   return (
     <Container p="30px 0">
-      <Link to={PATHS.instruction}>
+      <Link to={PATHS.instruction} viewTransition>
         <Button mb={4} variant="ghost">
           <ArrowRight transform="rotate(180deg)" /> К инструкции
         </Button>
@@ -139,7 +139,7 @@ export const Tubes = () => {
                     ))}
                 </div>
               ))}
-              <Link to={"/faq#qr-container-error"}>
+              <Link to={"/faq#qr-container-error"} viewTransition>
                 <Text fontWeight="semibold" textStyle="sm">
                   Нужна помощь?
                 </Text>

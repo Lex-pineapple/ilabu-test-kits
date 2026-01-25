@@ -100,7 +100,7 @@ export const DrawerSwipeable = () => {
 
     if (data && data.code === 200) {
       setCollapsibleOpen(false);
-      navigate(PATHS.checkout);
+      navigate(PATHS.checkout, { viewTransition: true });
     }
   };
 

@@ -18,7 +18,7 @@ export const ArrowButton = ({
   onClick,
 }: ArrowButtonProps) => {
   const tempElement = (
-    <Flex alignItems="center" gap={4} justifyContent="flex-end" p={0}>
+    <Flex alignItems="center" gap={4} justifyContent="flex-end" p="0 10px">
       <Text fontSize="14px" fontWeight="medium">
         Подробнее
       </Text>
@@ -32,9 +32,17 @@ export const ArrowButton = ({
     </Flex>
   );
   return link ? (
-    <Link to={link}>{tempElement}</Link>
+    <Link to={link} viewTransition>
+      {tempElement}
+    </Link>
   ) : (
-    <Button disabled={disabled} onClick={onClick} p={0} variant="ghost">
+    <Button
+      borderRadius="10px"
+      disabled={disabled}
+      onClick={onClick}
+      p={0}
+      variant="ghost"
+    >
       {tempElement}
     </Button>
   );
