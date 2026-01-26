@@ -86,7 +86,7 @@ export const Tubes = () => {
         <form onSubmit={onSubmit}>
           <Flex flexDir="column" h="100%" justifyContent="space-between">
             <Stack gap={8} pb={7}>
-              {tubeDataMock.map((item, idx) => (
+              {tubeData.map((item, idx) => (
                 <div key={idx}>
                   <Text pb={2}>
                     {item.tube_name}. Цвет крышки:{" "}

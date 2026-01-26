@@ -8,8 +8,8 @@ import { Timer } from "#/views/checkout-form/components/email-confirmation/compo
 import { useOtp } from "#/views/checkout-form/components/email-confirmation/use-otp";
 import { ArrowRight } from "#assets/icons/arrow-right";
 import { TitleCard } from "#shared/title-card";
-import { useAppDispatch } from "#store/hooks";
-import { setFormState } from "#store/slices/form-slice";
+import { useAppDispatch, useAppSelector } from "#store/hooks";
+import { getFormData, setFormState } from "#store/slices/form-slice";
 
 export const EmailConfirmation = () => {
   const {
@@ -22,6 +22,7 @@ export const EmailConfirmation = () => {
     setOtp,
   } = useOtp();
   const dispatch = useAppDispatch();
+  const formData = useAppSelector(getFormData);
 
   return (
     <Animate attributeName="opacity" from="0" to="1">
@@ -39,9 +40,7 @@ export const EmailConfirmation = () => {
                 <ArrowRight transform="rotate(180deg)" /> Назад
               </Button>
               <TitleCard
-                content={
-                  "Мы отправили письмо-подтверждение на ваш e-mail. Перейдите по ссылке либо введите код из письма вручную"
-                }
+                content={`Мы отправили письмо-подтверждение на ваш e-mail${formData.email ? ` - ${formData.email}` : ""}. Перейдите по ссылке либо введите код из письма вручную`}
                 heading={"Подтверждение email"}
                 highlight="e-mail"
                 mb={8}
