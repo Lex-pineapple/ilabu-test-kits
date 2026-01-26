@@ -57,7 +57,8 @@ export const OrderDetails = () => {
 
   const onSubmit = handleSubmit((data) => {
     if (isValid) {
-      submitOrderDetails(data);
+      const oldEmail = formData.email;
+      submitOrderDetails(data, oldEmail === data.email);
     }
   });
 

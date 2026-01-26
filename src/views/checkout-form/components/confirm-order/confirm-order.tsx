@@ -12,13 +12,12 @@ import { TotalComponent } from "#shared/total-component";
 import { useAppDispatch, useAppSelector } from "#store/hooks";
 import { getCartItems } from "#store/slices/cart-slice";
 import { getFormData, setFormState } from "#store/slices/form-slice";
-import { getCurrKitUid } from "#store/slices/main-slice";
 import { countTotal } from "#utils/count-total";
 
 export const ConfirmOrder = () => {
   const formData = useAppSelector(getFormData);
   const cartData = useAppSelector(getCartItems);
-  const currKitUid = useAppSelector(getCurrKitUid);
+  const currKitUid = localStorage.getItem("kit_id");
   const { isLoading, onPayClick } = usePayment();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();

@@ -25,7 +25,7 @@ import { SortPriceUp } from "#assets/icons/sort-price-up";
 import { SelectButton } from "#shared/select-button";
 import type { ListType } from "#shared/select-button/select-button";
 import { useAppSelector } from "#store/hooks";
-import { getCartItems } from "#store/slices/cart-slice";
+import { getCartItems, getCurrLabId } from "#store/slices/cart-slice";
 
 const sortKeys = [
   {
@@ -53,6 +53,8 @@ const sortKeys = [
 export const SelectedKit = () => {
   const { data, error } = useLoaderData<SelectedKitLoaderResponse>();
   const selected = useAppSelector(getCartItems);
+  const labIdFromStore = useAppSelector(getCurrLabId);
+  const [initialLabId, setInitalLabId] = useState(labIdFromStore);
 
   const [searchQ, setSearchQ] = useState("");
   const [sortType, setSortType] = useState<null | string>(null);
@@ -68,6 +70,10 @@ export const SelectedKit = () => {
       if (acc.some((item) => item.value === curr.value)) return acc;
       return [...acc, curr];
     }, [] as ListType[]);
+
+  useEffect(() => {
+    setInitalLabId(labIdFromStore);
+  }, []);
 
   useEffect(() => {
     setExecLab(selected.length ? selected[0].lab_id : null);
@@ -163,7 +169,7 @@ export const SelectedKit = () => {
           />
         )}
       </Container>
-      <DrawerSwipeable />
+      <DrawerSwipeable oldLabId={initialLabId} />
     </Container>
   );
 };

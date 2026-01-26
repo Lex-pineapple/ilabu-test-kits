@@ -29,6 +29,11 @@ import {
   getCartItems,
   removeCartItems,
 } from "#store/slices/cart-slice";
+import {
+  getFormData,
+  setFormData,
+  setFormState,
+} from "#store/slices/form-slice";
 import type { AnalysisType } from "#store/types/analyses";
 import { countTotal } from "#utils/count-total";
 
@@ -67,8 +72,13 @@ const DrawerListItem = ({
   </List.Item>
 );
 
-export const DrawerSwipeable = () => {
+type DrawerSwipeableProps = {
+  oldLabId: string;
+};
+
+export const DrawerSwipeable = ({ oldLabId }: DrawerSwipeableProps) => {
   const navigate = useNavigate();
+  const formdata = useAppSelector(getFormData);
   const cartItems = useAppSelector(getCartItems);
   const dispatch = useAppDispatch();
   const [total, setTotal] = useState(countTotal(cartItems));
@@ -96,10 +106,15 @@ export const DrawerSwipeable = () => {
     const analysesToUpload = {
       analyses_ids: cartItems.map((item) => item.id),
     };
+    const newLabId = cartItems[0].lab_id;
     const { data } = await postAnalyses(analysesToUpload);
 
     if (data && data.code === 200) {
       setCollapsibleOpen(false);
+      if (newLabId !== oldLabId) {
+        dispatch(setFormState("orderDetails"));
+        dispatch(setFormData({ ...formdata, labAdressId: "" }));
+      }
       navigate(PATHS.checkout, { viewTransition: true });
     }
   };
