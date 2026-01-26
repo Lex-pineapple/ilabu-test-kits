@@ -1,4 +1,5 @@
 import type { GeneralResponseType } from "#store/types";
+import type { LabAddressesTransformedType } from "#store/types/labs";
 
 export type AnalysesToLinkType = {
   analyses_ids: string[];
@@ -86,6 +87,10 @@ export type OrderDetailsType = {
   tubes: null | OrderDetailsTubeType[];
 };
 
+export type OrderNNumberResponseType = {
+  order_number: string;
+};
+
 export type OrderType = {
   delivery_method: "courier" | "personal";
   dob: string;
@@ -110,8 +115,7 @@ export type PickupAddressType = {
 };
 
 export type SuccessDataType = {
-  address: string;
-  lab_name: string;
+  labAddressData: LabAddressesTransformedType;
   orderId: string;
   tubes: OrderDetailsTubeType[];
 };

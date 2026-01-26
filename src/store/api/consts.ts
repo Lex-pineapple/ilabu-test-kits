@@ -6,6 +6,7 @@ export const API_ENDPOINTS = {
   ORDERS_CURRENT: "/orders/current/submit-details",
   ORDERS_CURRENT_ANALYSES: "/orders/current/link-analyses",
   ORDERS_CURRENT_INSTRUCTIONS: "/orders/current/instructions",
+  ORDERS_CURRENT_NUMBER: "/orders/current/number",
   ORDERS_CURRENT_PROGRESS: "/orders/current/progress",
   OTP: "/otp/send",
   OTP_CONFIRM: "/otp/confirm",

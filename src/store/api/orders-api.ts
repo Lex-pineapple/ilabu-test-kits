@@ -14,6 +14,7 @@ import type {
   LinkedAnalysesResponseType,
   OrderDetailsRequestType,
   OrderDetailsType,
+  OrderNNumberResponseType,
 } from "#store/types/orders";
 
 export const ordersApi = authorizedApi.injectEndpoints({
@@ -63,6 +64,9 @@ export const ordersApi = authorizedApi.injectEndpoints({
     getOrderInstructions: build.query<InstructionResponseType, void>({
       query: () => API_ENDPOINTS.ORDERS_CURRENT_INSTRUCTIONS,
     }),
+    getOrderNumber: build.query<OrderNNumberResponseType, void>({
+      query: () => API_ENDPOINTS.ORDERS_CURRENT_NUMBER,
+    }),
     postOrderAnalyses: build.mutation<
       LinkedAnalysesResponseType,
       AnalysesToLinkType
@@ -89,6 +93,7 @@ export const ordersApi = authorizedApi.injectEndpoints({
 export const {
   useGetOrderDataQuery,
   useGetOrderInstructionsQuery,
+  useGetOrderNumberQuery,
   usePostOrderAnalysesMutation,
   usePostOrderDetailsMutation,
 } = ordersApi;

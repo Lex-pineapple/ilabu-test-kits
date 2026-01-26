@@ -6,7 +6,7 @@ import { HeaderWBg } from "#shared/header-w-bg";
 import { ShdContainer } from "#shared/shd-container";
 import { StepItem } from "#shared/step-item";
 import { TestTubeVisual } from "#shared/test-tube-visual";
-import type { OrderDetailsType, SuccessDataType } from "#store/types/orders";
+import type { SuccessDataType } from "#store/types/orders";
 
 const stepsData = [
   {
@@ -24,7 +24,7 @@ const stepsData = [
 ];
 
 export const SuccessfulScreen = () => {
-  const { orderId, tubes } = useLoaderData<SuccessDataType>();
+  const { labAddressData, orderId, tubes } = useLoaderData<SuccessDataType>();
 
   return (
     <Container p={0} pb={14}>
@@ -65,20 +65,20 @@ export const SuccessfulScreen = () => {
         bg="url('/location-img.svg') 110% -120% / 40% no-repeat, #fff"
         p={4}
       >
-        {/* {personal_data?.delivery_method === "personal" ? (
+        {labAddressData ? (
           <>
             <Heading color="lab_green.900" maxW="70%" mb={4} size="sm">
               Адрес лаборатории для самостоятельной доставки
             </Heading>
             <Text textStyle="sm">
               <Text as="span" color="lab_green.900" fontWeight="semibold">
-                {personal_data.} •
+                {labAddressData.name} •
               </Text>
               <Text as="span" fontWeight="semibold">
                 {" "}
-                до 19:00
+                {labAddressData.time}
               </Text>
-              <Text>г. Минск, ул. Есенина 60-5</Text>
+              <Text>{labAddressData.address}</Text>
             </Text>
           </>
         ) : (
@@ -91,7 +91,7 @@ export const SuccessfulScreen = () => {
               доставки
             </Text>
           </>
-        )} */}
+        )}
       </ShdContainer>
     </Container>
   );

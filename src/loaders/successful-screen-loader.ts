@@ -8,22 +8,38 @@ import {
 } from "#store/slices/notification-slice";
 import store from "#store/store";
 
-const ORDER_QUERY = "wsb_order_num";
-
-type LoaderArgs = {
-  request: {
-    url: string;
-  };
-};
-
-export async function loader({ request }: LoaderArgs) {
-  const url = new URL(request.url);
-  const orderId = url.searchParams.get(ORDER_QUERY);
+export async function loader() {
   const p = store.dispatch(ordersApi.endpoints.getOrderData.initiate());
+  const p2 = store.dispatch(ordersApi.endpoints.getOrderNumber.initiate());
 
   try {
     const response = await p.unwrap();
-    return { orderId, tubes: response.tubes };
+    const response2 = await p2.unwrap();
+
+    const labId = response?.analyses?.[0].lab_id;
+    const labAddressId = response.personal_data?.lab_address_id;
+
+    if (labId) {
+      const p3 = store.dispatch(
+        labsApi.endpoints.getLabsAddresses.initiate(labId),
+      );
+      const response3 = await p3.unwrap();
+      const labAddressData = response3.find(
+        ({ value }) => value === labAddressId,
+      );
+
+      return {
+        labAddressData,
+        orderId: response2.order_number,
+        tubes: response.tubes,
+      };
+    }
+
+    return {
+      labAddressData: null,
+      orderId: response2.order_number,
+      tubes: response.tubes,
+    };
   } catch {
     store.dispatch(setNotificationVisibility(true));
     store.dispatch(

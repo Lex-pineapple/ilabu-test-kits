@@ -61,13 +61,13 @@ export const router = createBrowserRouter([
                 path: PATHS.selectedKit,
               },
               {
+                element: <OrderError />,
+                path: PATHS.orderError,
+              },
+              {
                 element: <Instruction />,
                 loader: instructionLoader,
                 path: PATHS.instruction,
-              },
-              {
-                element: <OrderError />,
-                path: PATHS.orderError,
               },
               {
                 element: <OrderPaid />,
@@ -78,7 +78,6 @@ export const router = createBrowserRouter([
                 loader: successfulScreenLoader,
                 path: PATHS.orderSuccess,
               },
-
               {
                 element: <CheckoutForm />,
                 path: PATHS.checkout,
