@@ -9,49 +9,51 @@ import type {
   VerifyTokenType,
 } from "#store/types/auth";
 
-export const authApi = unautorizedApi.injectEndpoints({
-  endpoints: (build) => ({
-    getToken: build.mutation<AuthResponseType, AuthKitType>({
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(setCurrKitUid(data.kit_id));
-          localStorage.setItem("kit_id", data.kit_id);
-          localStorage.setItem("access_token", data.access_token);
-          localStorage.setItem("refresh_token", data.refresh_token);
-        } catch (error) {
-          localStorage.removeItem("kit_id");
-          localStorage.removeItem("access_token");
-          localStorage.removeItem("refresh_token");
-          console.error(error);
-        }
-      },
-      query: (body) => ({
-        body,
-        method: "POST",
-        url: API_ENDPOINTS.LOGIN,
+export const authApi = unautorizedApi
+  .enhanceEndpoints({ addTagTypes: ["Token"] })
+  .injectEndpoints({
+    endpoints: (build) => ({
+      getToken: build.mutation<AuthResponseType, AuthKitType>({
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          try {
+            const { data } = await queryFulfilled;
+            dispatch(setCurrKitUid(data.kit_id));
+            localStorage.setItem("kit_id", data.kit_id);
+            localStorage.setItem("access_token", data.access_token);
+            localStorage.setItem("refresh_token", data.refresh_token);
+          } catch (error) {
+            localStorage.removeItem("kit_id");
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("refresh_token");
+            console.error(error);
+          }
+        },
+        query: (body) => ({
+          body,
+          method: "POST",
+          url: API_ENDPOINTS.LOGIN,
+        }),
+      }),
+      refreshToken: build.mutation<AccessTokenType, RefreshTokenType>({
+        async onQueryStarted(_, { queryFulfilled }) {
+          try {
+            const { data } = await queryFulfilled;
+            localStorage.setItem("access_token", data.access_token);
+            localStorage.setItem("refresh_token", data.refresh_token);
+          } catch (error) {
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("refresh_token");
+            console.error(error);
+          }
+        },
+        query: (body) => ({
+          body,
+          method: "POST",
+          url: API_ENDPOINTS.REFRESH_TOKEN,
+        }),
       }),
     }),
-    refreshToken: build.mutation<AccessTokenType, RefreshTokenType>({
-      async onQueryStarted(_, { queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          localStorage.setItem("access_token", data.access_token);
-          localStorage.setItem("refresh_token", data.refresh_token);
-        } catch (error) {
-          localStorage.removeItem("access_token");
-          localStorage.removeItem("refresh_token");
-          console.error(error);
-        }
-      },
-      query: (body) => ({
-        body,
-        method: "POST",
-        url: API_ENDPOINTS.REFRESH_TOKEN,
-      }),
-    }),
-  }),
-});
+  });
 
 export const authAuthorizedApi = authorizedApi.injectEndpoints({
   endpoints: (build) => ({

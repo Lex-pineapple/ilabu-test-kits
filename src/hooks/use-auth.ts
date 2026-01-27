@@ -43,7 +43,9 @@ export const useAuth = () => {
     if (data && data.order_status) {
       const navigationData = allowedPathsMap[data.order_status];
       dispatch(setFormState(navigationData.defaultFormState));
-      navigate(navigationData.defaultPath, { viewTransition: true });
+      if (navigationData.defaultPath === PATHS._selected)
+        navigate(`${PATHS._selected}/${kit_id}`, { viewTransition: true });
+      else navigate(navigationData.defaultPath, { viewTransition: true });
     } else {
       navigate(`${PATHS._selected}/${kit_id}`, { viewTransition: true });
     }
@@ -108,6 +110,7 @@ export const useAuth = () => {
   };
 
   const login = async ({ code, withRedirect = true }: TLoginProps) => {
+    logout(true);
     const { data, error } = await getToken({ kit_item_code: code });
     if (data) {
       scheduleRefreshToken(data.access_token);
@@ -131,10 +134,11 @@ export const useAuth = () => {
     return { errorMessage: "" };
   };
 
-  const logout = () => {
-    navigate(PATHS.root, { viewTransition: true });
-    dispatch(resetOrderData());
+  const logout = (shallow?: boolean) => {
+    if (!shallow) navigate(PATHS.root, { viewTransition: true });
+    dispatch({ type: "USER_LOGOUT" });
     localStorage.removeItem("access_token");
+    localStorage.removeItem("kit_id");
     localStorage.removeItem("refresh_token");
   };
 

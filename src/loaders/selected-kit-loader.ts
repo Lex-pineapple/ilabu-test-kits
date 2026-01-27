@@ -1,5 +1,6 @@
-import { type Params } from "react-router";
+import { type Params, redirect } from "react-router";
 
+import { PATHS } from "#constants/paths";
 import { kitsApi } from "#store/api/kits-api";
 import store from "#store/store";
 import type { AnalysisResponse } from "#store/types/analyses";
@@ -10,19 +11,24 @@ export type SelectedKitLoaderResponse = {
 };
 
 export const loader = async ({ params }: { params: Params<"uid"> }) => {
+  const currUidFromStore = localStorage.getItem("kit_id");
   const currUid = params?.uid;
   if (currUid) {
-    const p = store.dispatch(
-      kitsApi.endpoints.getKitAnalyses.initiate(currUid),
-    );
+    if (currUid === currUidFromStore) {
+      const p = store.dispatch(
+        kitsApi.endpoints.getKitAnalyses.initiate(currUid),
+      );
 
-    try {
-      const response = await p.unwrap();
-      return { data: response, error: false };
-    } catch {
-      return { data: { analyses: [], id: "", title: "" }, error: true };
-    } finally {
-      p.unsubscribe();
+      try {
+        const response = await p.unwrap();
+        return { data: response, error: false };
+      } catch {
+        return { data: { analyses: [], id: "", title: "" }, error: true };
+      } finally {
+        p.unsubscribe();
+      }
+    } else {
+      return redirect("/not-found");
     }
   }
 };

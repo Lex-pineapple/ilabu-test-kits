@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { type Action, combineReducers, configureStore } from "@reduxjs/toolkit";
 
 import { authorizedApi, unautorizedApi } from "#store/api/base-api";
 import { appErrorMiddleware } from "#store/middleware/app-error-middleware";
@@ -10,6 +10,27 @@ import notificationReducer, {
 } from "#store/slices/notification-slice";
 import orderReducer, { orderSlice } from "#store/slices/order-slice";
 
+const appReducer = combineReducers({
+  [authorizedApi.reducerPath]: authorizedApi.reducer,
+  [cartSlice.name]: cartReducer,
+  [formSlice.name]: formReducer,
+  [mainSlice.name]: mainReducer,
+  [notificationSlice.name]: notificationReducer,
+  [orderSlice.name]: orderReducer,
+  [unautorizedApi.reducerPath]: unautorizedApi.reducer,
+});
+
+const rootReducer = (
+  state: ReturnType<typeof appReducer> | undefined,
+  action: Action,
+) => {
+  if (action.type === "USER_LOGOUT") {
+    return appReducer(undefined, action);
+  }
+
+  return appReducer(state, action);
+};
+
 const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -17,15 +38,7 @@ const store = configureStore({
       authorizedApi.middleware,
       unautorizedApi.middleware,
     ),
-  reducer: {
-    [authorizedApi.reducerPath]: authorizedApi.reducer,
-    [cartSlice.name]: cartReducer,
-    [formSlice.name]: formReducer,
-    [mainSlice.name]: mainReducer,
-    [notificationSlice.name]: notificationReducer,
-    [orderSlice.name]: orderReducer,
-    [unautorizedApi.reducerPath]: unautorizedApi.reducer,
-  },
+  reducer: rootReducer,
 });
 
 export default store;

@@ -27,7 +27,7 @@ export const ordersApi = authorizedApi.injectEndpoints({
           dispatch(setOrderData(data));
           if (data.analyses) {
             dispatch(setCartItems(data.analyses));
-            dispatch(setCurrLabId(data.analyses[0].lab_id));
+            dispatch(setCurrLabId(data.analyses[0]?.lab_id ?? ""));
           }
           if (data.personal_data)
             dispatch(

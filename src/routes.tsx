@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 
 import { AuthGuard } from "#/layouts/auth-guard";
 import { Layout } from "#/layouts/layout";
-import { UserInfoGuard } from "#/layouts/order-info-guard";
 import {
   appProductsLoader,
   HydrateFallback,
@@ -90,11 +89,7 @@ export const router = createBrowserRouter([
             loader: orderStatusLoader,
           },
         ],
-        element: (
-          <AuthGuard>
-            <UserInfoGuard />
-          </AuthGuard>
-        ),
+        element: <AuthGuard />,
       },
     ],
     element: <Layout />,

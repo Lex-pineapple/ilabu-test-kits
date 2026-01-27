@@ -33,10 +33,6 @@ export const CardAnalysis = ({
   const [checked, setChecked] = useState(selected ?? false);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    setChecked(selected ?? false);
-  }, [selected]);
-
   const handleCheck = () => {
     const checkedNew = !checked;
     setChecked(checkedNew);

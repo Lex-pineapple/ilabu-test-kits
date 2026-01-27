@@ -1,5 +1,5 @@
-import { type PropsWithChildren, useEffect, useState } from "react";
-import { Navigate } from "react-router";
+import { useEffect } from "react";
+import { Navigate, Outlet } from "react-router";
 
 import { Spinner } from "#/components/spinner";
 import { useAuth } from "#/hooks/use-auth";
@@ -10,7 +10,7 @@ import {
   setNotificationVisibility,
 } from "#store/slices/notification-slice";
 
-export const AuthGuard = ({ children }: PropsWithChildren) => {
+export const AuthGuard = () => {
   const dispatch = useAppDispatch();
   const {
     accessToken,
@@ -48,5 +48,5 @@ export const AuthGuard = ({ children }: PropsWithChildren) => {
     return <Navigate replace to={PATHS.root} />;
   }
 
-  return children;
+  return <Outlet />;
 };

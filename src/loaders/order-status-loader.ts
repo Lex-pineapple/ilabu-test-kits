@@ -3,6 +3,7 @@ import { redirect } from "react-router";
 import { allowedPathsMap } from "#constants/allowed-paths-map";
 import { PATHS } from "#constants/paths";
 import { authApi, authAuthorizedApi } from "#store/api/auth-api";
+import { ordersApi } from "#store/api/orders-api";
 import { setFormState } from "#store/slices/form-slice";
 import {
   setNotificationData,
@@ -18,9 +19,12 @@ type LoaderArgs = {
 
 export async function loader({ request }: LoaderArgs) {
   const p = store.dispatch(authAuthorizedApi.endpoints.verifyToken.initiate());
+  const p2 = store.dispatch(ordersApi.endpoints.getOrderData.initiate());
+  const kitId = localStorage.getItem("kit_id");
 
   try {
     const response = await p.unwrap();
+    const response2 = await p2.unwrap();
 
     const pathname = new URL(request.url).pathname;
     const pathByStatus = allowedPathsMap[response.order_status];
@@ -30,15 +34,17 @@ export async function loader({ request }: LoaderArgs) {
 
     store.dispatch(setFormState(pathByStatus.defaultFormState));
     if (!isAllowedPath) {
+      if (pathByStatus.defaultPath === PATHS._selected)
+        return redirect(`${PATHS._selected}/${kitId}`);
       return redirect(pathByStatus.defaultPath);
     }
-    return "ok";
+    return { ...response2 };
   } catch {
     store.dispatch(setNotificationVisibility(true));
     store.dispatch(
       setNotificationData({
         description:
-          "Ошибка получения статуса заказа. Пожалуйста, введите код набора.",
+          "Произошла ошибка при получении информации о заказе. Пожалуйста, попробуйте снова.",
         status: "error",
       }),
     );
