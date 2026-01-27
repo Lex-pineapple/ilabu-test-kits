@@ -24,15 +24,6 @@ const TUBE_COLORS = {
   red: "красный",
 };
 
-const tubeDataMock = [
-  {
-    cap_color: "red",
-    quantity: 3,
-    tube_id: "12345",
-    tube_name: "lala",
-  },
-];
-
 export const Tubes = () => {
   const { linkLoading, linkTubes, tubeData, tubeError } = useTubes();
   const {

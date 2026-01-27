@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useSwipeable } from "react-swipeable";
 
 import {
@@ -8,7 +8,6 @@ import {
   CloseButton,
   Collapsible,
   Container,
-  DialogBackdrop,
   Flex,
   List,
   Portal,
@@ -17,7 +16,6 @@ import {
 } from "@chakra-ui/react";
 
 import { LoadingBackdrop } from "#/components/drawer-swipeable/loading-backdrop";
-import { Spinner } from "#/components/spinner";
 import { TrashbinIcpon } from "#assets/icons/trashbin-icon";
 import { PATHS } from "#constants/paths";
 import { PriceText } from "#shared/price-text";

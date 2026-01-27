@@ -40,7 +40,7 @@ export const TestTubeVisual = ({ items }: TestTubeVisualProps) => (
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {items.map((item, idx) => (
+        {items.map((item) => (
           <Table.Row bg="transparent" key={item.cap_color}>
             <Table.Cell border="none" pl={0} w={124}>
               <Container

@@ -32,8 +32,8 @@ export const orderSlice = createSlice({
   name: "order",
   reducers: {
     resetOrderData: () => initialState,
-    setOrderData: (state, action: PayloadAction<OrderDetailsType>) => {
-      state = action.payload;
+    setOrderData: (_state, action: PayloadAction<OrderDetailsType>) => {
+      _state = action.payload;
     },
     setTubeData: (state, action: PayloadAction<OrderDetailsType["tubes"]>) => {
       state.tubes = action.payload;

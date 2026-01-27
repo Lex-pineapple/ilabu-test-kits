@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import type { AppState } from "#/types/store";
-
 const baseUrl = import.meta.env.VITE_MAIN_API;
 
 export const unautorizedApi = createApi({
