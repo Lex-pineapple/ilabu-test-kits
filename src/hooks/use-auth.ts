@@ -9,7 +9,6 @@ import {
 } from "#store/api/auth-api";
 import { useAppDispatch } from "#store/hooks";
 import { setFormState } from "#store/slices/form-slice";
-import { resetOrderData } from "#store/slices/order-slice";
 import { getTokenExpireTime } from "#utils/get-token-expire-time";
 import { isFetchBaseQueryError } from "#utils/is-fetch-base-query-error";
 

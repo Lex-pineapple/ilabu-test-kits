@@ -7,11 +7,21 @@ type LabContentProps = {
 };
 
 export const LabContent = ({ address, name, time }: LabContentProps) => (
-  <Flex flexDir="column">
+  <Flex flexDir="column" w="100%">
     <Group>
-      <Text color="lab_green.900" fontWeight="medium">{`${name} • `}</Text>
+      <Text
+        color="lab_green.900"
+        fontWeight="medium"
+        textAlign="left"
+        textWrap="auto"
+      >
+        {name}
+      </Text>
+      <Text> • </Text>
       <Text fontWeight="semibold">{time}</Text>
     </Group>
-    <Text fontWeight="medium">{address}</Text>
+    <Text fontWeight="medium" textAlign="left">
+      {address}
+    </Text>
   </Flex>
 );

@@ -1,6 +1,5 @@
 import { type Params, redirect } from "react-router";
 
-import { PATHS } from "#constants/paths";
 import { kitsApi } from "#store/api/kits-api";
 import store from "#store/store";
 import type { AnalysisResponse } from "#store/types/analyses";

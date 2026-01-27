@@ -2,7 +2,7 @@ import { redirect } from "react-router";
 
 import { allowedPathsMap } from "#constants/allowed-paths-map";
 import { PATHS } from "#constants/paths";
-import { authApi, authAuthorizedApi } from "#store/api/auth-api";
+import { authAuthorizedApi } from "#store/api/auth-api";
 import { ordersApi } from "#store/api/orders-api";
 import { setFormState } from "#store/slices/form-slice";
 import {
