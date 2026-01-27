@@ -73,5 +73,6 @@ export const authAuthorizedApi = authorizedApi.injectEndpoints({
   }),
 });
 
-export const { useVerifyTokenQuery } = authAuthorizedApi;
+export const { useLazyVerifyTokenQuery, useVerifyTokenQuery } =
+  authAuthorizedApi;
 export const { useGetTokenMutation, useRefreshTokenMutation } = authApi;

@@ -1,11 +1,14 @@
 import { useLocation, useNavigate } from "react-router";
 
+import { allowedPathsMap } from "#constants/allowed-paths-map";
 import { PATHS } from "#constants/paths";
 import {
   useGetTokenMutation,
+  useLazyVerifyTokenQuery,
   useRefreshTokenMutation,
 } from "#store/api/auth-api";
 import { useAppDispatch } from "#store/hooks";
+import { setFormState } from "#store/slices/form-slice";
 import { resetOrderData } from "#store/slices/order-slice";
 import { getTokenExpireTime } from "#utils/get-token-expire-time";
 import { isFetchBaseQueryError } from "#utils/is-fetch-base-query-error";
@@ -32,6 +35,19 @@ export const useAuth = () => {
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("access_token");
   const isAuthorised = !!localStorage.getItem("access_token");
+  const [verifyToken, { isLoading: verifyTokenLoading }] =
+    useLazyVerifyTokenQuery();
+
+  const navigateToPathOnStatus = async (kit_id: string) => {
+    const { data } = await verifyToken();
+    if (data && data.order_status) {
+      const navigationData = allowedPathsMap[data.order_status];
+      dispatch(setFormState(navigationData.defaultFormState));
+      navigate(navigationData.defaultPath, { viewTransition: true });
+    } else {
+      navigate(`${PATHS._selected}/${kit_id}`, { viewTransition: true });
+    }
+  };
 
   const checkIsTokenExpired = (accessToken: null | string) => {
     if (!accessToken) return true;
@@ -53,8 +69,9 @@ export const useAuth = () => {
 
       setTimeout(loadUserFromStorage, tokenExpireTime - oneMinute);
       if (pathname === "/") {
-        if (kitId)
-          navigate(`${PATHS._selected}/${kitId}`, { viewTransition: true });
+        if (kitId) {
+          await navigateToPathOnStatus(kitId);
+        }
       }
     }
     if (error) logout();
@@ -78,8 +95,9 @@ export const useAuth = () => {
       } else if (refreshToken) {
         setTimeout(loadUserFromStorage, tokenExpireTime - oneMinute);
         if (pathname === "/") {
-          if (kitId)
-            navigate(`${PATHS._selected}/${kitId}`, { viewTransition: true });
+          if (kitId) {
+            await navigateToPathOnStatus(kitId);
+          }
         }
       } else {
         logout();
@@ -93,8 +111,9 @@ export const useAuth = () => {
     const { data, error } = await getToken({ kit_item_code: code });
     if (data) {
       scheduleRefreshToken(data.access_token);
-      if (withRedirect)
-        navigate(`${PATHS._selected}/${data.kit_id}`, { viewTransition: true });
+      if (withRedirect) {
+        await navigateToPathOnStatus(data.kit_id);
+      }
       return { errorMessage: "" };
     }
     if (error && isFetchBaseQueryError(error)) {
@@ -123,7 +142,7 @@ export const useAuth = () => {
     accessToken,
     checkIsTokenExpired,
     isAuthorised,
-    isAuthorizing: isLoading,
+    isAuthorizing: isLoading || verifyTokenLoading,
     loadUserFromStorage,
     login,
     logout,
