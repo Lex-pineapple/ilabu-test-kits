@@ -21,7 +21,7 @@ export const ExitMenu = ({ onClose }: ExitMenuProps) => {
         pb={10}
         textAlign="center"
       >
-        это аннулирует ваш прогресс работы с набором
+        Это аннулирует ваш прогресс работы с набором
       </Text>
       <Stack pb={8} w="100%">
         <Button onClick={onClose}>Вернуться</Button>

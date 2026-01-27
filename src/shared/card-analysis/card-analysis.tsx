@@ -30,12 +30,9 @@ export const CardAnalysis = ({
   selected,
   ...rest
 }: CardAnalysisProps) => {
-  const [checked, setChecked] = useState(selected ?? false);
   const dispatch = useAppDispatch();
 
   const handleCheck = () => {
-    const checkedNew = !checked;
-    setChecked(checkedNew);
     dispatch(addItemToCart(rest));
   };
 
@@ -106,7 +103,7 @@ export const CardAnalysis = ({
             }
           />
           <CheckboxButton
-            checked={checked}
+            checked={selected}
             disabled={disabled}
             onCheckedChange={handleCheck}
           />

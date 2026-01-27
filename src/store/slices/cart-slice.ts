@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 import type { AnalysisType } from "#store/types/analyses";
-import { removeFromArray } from "#utils/remove-from-array";
+import { removeFromObjectArray } from "#utils/remove-from-object-array";
 
 type initialStateType = {
   items: AnalysisType[];
@@ -20,8 +20,7 @@ export const cartSlice = createSlice({
     addItemToCart: (state, { payload }: PayloadAction<AnalysisType>) => {
       const foundItem = state.items.find((item) => item.id === payload.id);
       if (foundItem) {
-        const idx = state.items.indexOf(payload);
-        const newArray = removeFromArray(state.items, idx);
+        const newArray = removeFromObjectArray(state.items, foundItem.id);
         state.items = newArray;
         if (newArray.length === 0) state.selected_lab_id = "";
       } else {
@@ -34,8 +33,7 @@ export const cartSlice = createSlice({
       state.selected_lab_id = "";
     },
     removeCartItems: (state, { payload }: PayloadAction<AnalysisType>) => {
-      const idx = state.items.indexOf(payload);
-      const newArray = removeFromArray(state.items, idx);
+      const newArray = removeFromObjectArray(state.items, payload.id);
       state.items = newArray;
       if (newArray.length === 0) state.selected_lab_id = "";
     },

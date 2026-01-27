@@ -41,15 +41,20 @@ export const ListControlled = ({
 
   return displayArray.length > 0 ? (
     <Stack gap={2.5}>
-      {displayArray.map((item) => (
-        <CardAnalysis
-          {...item}
-          cardType="CHECK"
-          key={item.id}
-          searchQuery={searchQ}
-          selected={cartItems.some((cartItem) => cartItem.id === item.id)}
-        />
-      ))}
+      {displayArray.map((item) => {
+        const itemSelected = cartItems.some(
+          (cartItem) => cartItem.id === item.id,
+        );
+        return (
+          <CardAnalysis
+            {...item}
+            cardType="CHECK"
+            key={item.id}
+            searchQuery={searchQ}
+            selected={itemSelected}
+          />
+        );
+      })}
     </Stack>
   ) : (
     <NoItemsFound />
