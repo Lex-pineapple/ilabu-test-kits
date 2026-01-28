@@ -15,17 +15,8 @@ import {
 
 import { validationSchema } from "#shared/bottom-sheet-modal/address-form/validation-schema";
 import { InputError } from "#shared/input-error";
-
-const formData = {
-  apartment: "",
-  building: "",
-  city: "",
-  commentary: "",
-  entryway: "",
-  floor: "",
-  phone: "",
-  street: "",
-};
+import { useAppSelector } from "#store/hooks";
+import { getFormData } from "#store/slices/form-slice";
 
 export type AddressFormInputs = {
   apartment: string;
@@ -44,12 +35,15 @@ type AddressFormProps = {
 };
 
 export const AddressForm = ({ onClose, onFormSubmit }: AddressFormProps) => {
+  const addressFromStore = useAppSelector(getFormData).deliveryAddress;
   const {
     formState: { errors, isDirty, isValid },
+    getValues,
     handleSubmit,
     register,
   } = useForm<AddressFormInputs>({
-    defaultValues: formData,
+    defaultValues: addressFromStore,
+    mode: "onChange",
     resolver: zodResolver(validationSchema),
   });
   const registerWithMask = useHookFormMask(register);
@@ -60,6 +54,11 @@ export const AddressForm = ({ onClose, onFormSubmit }: AddressFormProps) => {
       onClose();
     }
   });
+
+  const formHasValues = () => {
+    const values = getValues();
+    return Object.values(values).some((value) => value?.trim());
+  };
 
   return (
     <Container p={0}>
@@ -126,7 +125,11 @@ export const AddressForm = ({ onClose, onFormSubmit }: AddressFormProps) => {
               33.00 BYN
             </Text>
           </Flex>
-          <Button disabled={!isDirty} type="submit" w="100%">
+          <Button
+            disabled={!isDirty && !formHasValues()}
+            type="submit"
+            w="100%"
+          >
             Продолжить
           </Button>
         </form>

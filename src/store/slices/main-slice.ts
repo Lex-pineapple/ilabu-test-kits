@@ -1,26 +1,43 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
+export type OrderStatusType =
+  | "ANALYSES_SELECTED"
+  | "DETAILS_FILLED"
+  | "EMAIL_CONFIRMED"
+  | "NEW"
+  | "PAYMENT_PAID"
+  | "TUBES_LINKED";
+
 type initialStateType = {
   currKitUid: string;
+  orderStatus: null | OrderStatusType;
 };
 
 const initialState: initialStateType = {
   currKitUid: "",
+  orderStatus: null,
 };
 
-const mainSlice = createSlice({
+export const mainSlice = createSlice({
   initialState,
   name: "main",
   reducers: {
     setCurrKitUid: (state, { payload }: PayloadAction<string>) => {
       state.currKitUid = payload;
     },
+    setOrderStatus: (
+      state,
+      { payload }: PayloadAction<null | OrderStatusType>,
+    ) => {
+      state.orderStatus = payload;
+    },
   },
   selectors: {
-    getCyrrKitUid: (state) => state.currKitUid,
+    getCurrKitUid: (state) => state.currKitUid,
+    getOrderStatus: (state) => state.orderStatus,
   },
 });
 
-export const { setCurrKitUid } = mainSlice.actions;
-export const { getCyrrKitUid } = mainSlice.selectors;
+export const { setCurrKitUid, setOrderStatus } = mainSlice.actions;
+export const { getCurrKitUid, getOrderStatus } = mainSlice.selectors;
 export default mainSlice.reducer;

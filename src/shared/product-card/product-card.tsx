@@ -6,16 +6,16 @@ import type { ColorType } from "#shared/circle-graphic/circle-graphic";
 
 export type ProductCardProps = {
   description: string;
+  id: string;
   title: string;
-  uid: string;
   color?: ColorType;
 };
 
 export const ProductCard = ({
   color = "red",
   description,
+  id,
   title,
-  uid,
 }: ProductCardProps) => (
   <Card.Root borderRadius="10" overflow="hidden" pl="35%" position="relative">
     <CircleGraphic
@@ -35,7 +35,7 @@ export const ProductCard = ({
         <Text color="lab_grey.900" fontSize={14} lineHeight={"16px"}>
           {description}
         </Text>
-        <ArrowButton link={`/kits/${uid}`} />
+        <ArrowButton link={`/kits/${id}`} />
       </Flex>
     </Card.Body>
   </Card.Root>

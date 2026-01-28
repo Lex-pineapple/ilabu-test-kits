@@ -1,17 +1,23 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
-import { Button, Container, Flex, Input, Link, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Container,
+  Flex,
+  Input,
+  Link as ChakraLink,
+  Text,
+} from "@chakra-ui/react";
 
 import { QRComponent } from "#/components/qr-component";
-import { MOCK_UID } from "#constants/card-product-data";
+import { useQrCode } from "#/hooks/use-qr-code";
 import { PATHS } from "#constants/paths";
 import { TitleCard } from "#shared/title-card";
 
 export const ActivateQR = () => {
   const [code, setCode] = useState<string>();
-
-  const navigate = useNavigate();
+  const { isLoading, onCodeSubmit } = useQrCode();
 
   return (
     <div>
@@ -24,7 +30,11 @@ export const ActivateQR = () => {
             heading={"Активировать набор"}
             highlight="код активации"
           />
-          <QRComponent />
+          <QRComponent
+            onScanSuccess={(code: string) => {
+              setCode(code);
+            }}
+          />
           <Text fontWeight="semibold" textAlign="center" textStyle="sm">
             или <br /> введите код активации
           </Text>
@@ -40,16 +50,25 @@ export const ActivateQR = () => {
               disabled={!code}
               fontSize={14}
               fontWeight="medium"
-              onClick={() => navigate(`${PATHS._selected}/${MOCK_UID}`)}
+              loading={isLoading}
+              loadingText={"Отправляем код..."}
+              onClick={() => onCodeSubmit(code as string)}
               size="xl"
               textTransform="uppercase"
               w="100%"
             >
               Продолжить
             </Button>
-            <Link color="lab_grey.600" fontSize={14} fontWeight="medium">
-              Не нашли QR-код?
-            </Link>
+            <ChakraLink
+              asChild
+              color="lab_grey.600"
+              fontSize={14}
+              fontWeight="medium"
+            >
+              <Link to={`${PATHS.faq}#qr-location`} viewTransition>
+                Не нашли QR-код?
+              </Link>
+            </ChakraLink>
           </Flex>
         </Flex>
       </Container>

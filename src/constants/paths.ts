@@ -4,8 +4,11 @@ export const PATHS = {
   checkout: "/checkout",
   faq: "/faq",
   instruction: "/instruction",
-  ordered: "/order_success",
+  orderError: "/order_error",
+  orderPaid: "/order_paid",
+  orderSuccess: "/order_success",
   product: "/kits/:uid",
   root: "/",
   selectedKit: "/selected/:uid",
+  tubes: "/tubes",
 };

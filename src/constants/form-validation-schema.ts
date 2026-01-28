@@ -1,8 +1,15 @@
 import { z } from "zod";
 
+import { isDOBValid } from "#utils/is-dob-valid";
+
 export const validationSchema = z
   .object({
-    date: z.string().min(2, { error: "Укажите дату рождения" }),
+    date: z
+      .string()
+      .min(2, { error: "Укажите дату рождения" })
+      .refine((date) => isDOBValid(date), {
+        message: "Возраст должен быть от 18 до 100 лет",
+      }),
     delivery: z.string().min(1, { error: "Выберите способ доставки" }),
     deliveryAddress: z.optional(
       z.object({

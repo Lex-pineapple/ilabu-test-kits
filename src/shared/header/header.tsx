@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import { Button, Flex, Text } from "@chakra-ui/react";
 
+import { useAuth } from "#/hooks/use-auth";
 import { LogoMainIcon } from "#assets/icons/logo-main";
 import { LINKS } from "#constants/header-links";
 import { PATHS } from "#constants/paths";
@@ -13,6 +14,7 @@ import styles from "./header.module.scss";
 
 export const Header = () => {
   const [open, setOpen] = useState(false);
+  const { isAuthorised } = useAuth();
 
   return (
     <div>
@@ -27,25 +29,28 @@ export const Header = () => {
         position="fixed"
         top={0}
         w="100%"
-        zIndex={10000}
+        zIndex={1399}
       >
         <div
           className={classNames(styles.drawer, {
             [styles.drawer_open]: open,
           })}
         >
-          <Link onClick={() => setOpen(false)} to={PATHS.root}>
+          <Link onClick={() => setOpen(false)} to={PATHS.root} viewTransition>
             <div className={styles.header_link}>
               <LogoMainIcon h={29} />
             </div>
           </Link>
           <Flex className={styles.links} flexDir="column">
-            {LINKS.map((item) =>
+            {LINKS.filter((item) =>
+              isAuthorised ? item : item.isAuth === false,
+            ).map((item) =>
               item.href ? (
                 <Link
                   key={item.title}
                   onClick={() => setOpen(false)}
                   to={item.href}
+                  viewTransition
                 >
                   <Text color="white" textStyle="sm">
                     {item.title}
@@ -55,6 +60,7 @@ export const Header = () => {
                 <Button
                   _hover={{ color: "black" }}
                   color="white"
+                  key={item.title}
                   onClick={() => {
                     setOpen(false);
                     item.onClick?.();
@@ -68,7 +74,7 @@ export const Header = () => {
           </Flex>
         </div>
         <BurgerButton active={open} onClick={() => setOpen(!open)} />
-        <Link to={PATHS.root}>
+        <Link to={PATHS.root} viewTransition>
           <LogoMainIcon h={29} />
         </Link>
       </Flex>

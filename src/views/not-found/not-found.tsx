@@ -16,7 +16,7 @@ export const NotFound = () => (
       Страница не найдена, <br /> проверьте ваш запрос и попробуйте <br />
       еще раз
     </Text>
-    <Link to={PATHS.root}>
+    <Link to={PATHS.root} viewTransition>
       <Button w="100%">Вернуться на главную</Button>
     </Link>
   </Container>

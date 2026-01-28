@@ -1,41 +1,37 @@
-import { useEffect, useState } from "react";
+import {
+  Box,
+  Card,
+  Container,
+  Heading,
+  Highlight,
+  Text,
+} from "@chakra-ui/react";
 
-import { Box, Card, Container, Heading, Text } from "@chakra-ui/react";
-
-import type { AnalysisItemType } from "#constants/card-product-data";
 import { ArrowButton } from "#shared/arrow-button";
 import { CheckboxButton } from "#shared/card-analysis/components/checkbox-button";
 import { modal } from "#shared/modal";
+import { useAppDispatch } from "#store/hooks";
+import { addItemToCart } from "#store/slices/cart-slice";
+import type { AnalysisType } from "#store/types/analyses";
 
-type CardAnalysisProps = AnalysisItemType & {
+type CardAnalysisProps = AnalysisType & {
   cardType: "CHECK" | "INFO";
   disabled?: boolean;
+  searchQuery?: string;
   selected?: boolean;
-  handleSelect?: (selected: boolean, title: string) => void;
 };
 
 export const CardAnalysis = ({
   cardType = "INFO",
-  description,
   disabled,
-  execLab,
-  handleSelect,
-  price,
+  searchQuery,
   selected,
-  testId,
-  title,
-  uid,
+  ...rest
 }: CardAnalysisProps) => {
-  const [checked, setChecked] = useState(false);
-
-  useEffect(() => {
-    setChecked(!!selected);
-  }, [selected]);
+  const dispatch = useAppDispatch();
 
   const handleCheck = () => {
-    const checkedNew = !checked;
-    setChecked(checkedNew);
-    handleSelect?.(checkedNew, uid);
+    dispatch(addItemToCart(rest));
   };
 
   return (
@@ -55,7 +51,7 @@ export const CardAnalysis = ({
             p="12px 18px 0"
           >
             <Text color="lab_grey.900" textStyle="sm">
-              {testId}
+              {rest.article}
             </Text>
             {cardType === "CHECK" && (
               <Text
@@ -65,17 +61,27 @@ export const CardAnalysis = ({
                 pt={1}
                 textStyle="xs"
               >
-                Исполнитель: {execLab.name}
+                Исполнитель: {rest.lab_name}
               </Text>
             )}
           </Box>
         </Card.Header>
         <Card.Body p="0" pb={3}>
           <Heading lineHeight="14px" pb={2.5} size="sm">
-            {title}
+            <Highlight
+              query={searchQuery ?? ""}
+              styles={{ bg: "lab_green.50", px: "0.5" }}
+            >
+              {rest.title}
+            </Highlight>
           </Heading>
           <Text fontWeight="medium" textStyle="xs">
-            {description}
+            <Highlight
+              query={searchQuery ?? ""}
+              styles={{ bg: "lab_green.50", px: "0.5" }}
+            >
+              {rest.description}
+            </Highlight>
           </Text>
         </Card.Body>
       </Container>
@@ -87,14 +93,15 @@ export const CardAnalysis = ({
             onClick={() =>
               modal.open("analysis", {
                 modalData: {
-                  analysisUid: uid,
+                  analysisId: rest.id,
                 },
                 modalType: "ANALYSIS-ITEM",
+                placement: "top",
               })
             }
           />
           <CheckboxButton
-            checked={checked}
+            checked={selected}
             disabled={disabled}
             onCheckedChange={handleCheck}
           />
@@ -106,9 +113,10 @@ export const CardAnalysis = ({
             onClick={() =>
               modal.open("analysis", {
                 modalData: {
-                  analysisUid: uid,
+                  analysisId: rest.id,
                 },
                 modalType: "ANALYSIS-ITEM",
+                placement: "top",
               })
             }
           />
@@ -122,7 +130,7 @@ export const CardAnalysis = ({
         top={6}
       >
         <Text color="white" fontWeight="semibold">
-          {Number(price).toFixed(2)} BYN
+          {Number(rest.price).toFixed(2)} BYN
         </Text>
       </Box>
     </Card.Root>

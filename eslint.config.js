@@ -98,6 +98,7 @@ export default tseslint.config([
       "perfectionist/sort-named-imports": [
         "error",
         {
+          ignoreAlias: true,
           type: "alphabetical",
         },
       ],
@@ -132,6 +133,7 @@ export default tseslint.config([
         "error",
         {
           endOfLine: "auto",
+          trailingComma: "all",
         },
       ],
       "simple-import-sort/exports": "error",
