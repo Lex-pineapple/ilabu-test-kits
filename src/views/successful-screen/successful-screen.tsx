@@ -9,21 +9,6 @@ import { StepItem } from "#shared/step-item";
 import { TestTubeVisual } from "#shared/test-tube-visual";
 import type { SuccessDataType } from "#store/types/orders";
 
-const stepsData = [
-  {
-    description:
-      "Снимите и утилизируйте перчатки. На стикере упаковки для образца необходимо указать ФИО, дату рождения, домашний адрес, контактный телефон, дату и время сбора материала. Поместите контейнер с образцом в упаковку для образца. Промаркированы должны быть и пробирка, и упаковка для образца.",
-    step: 1,
-    title: "Упакуйте ваш образец",
-  },
-  {
-    description:
-      "При невозможности немедленной доставки в МО, материал может быть сохранен при +2…+8°С в течение 12 часов.",
-    step: 2,
-    title: "Доставьте образец в лабораторию",
-  },
-];
-
 export const SuccessfulScreen = () => {
   const { instruction, labAddressData, orderId, tubes } =
     useLoaderData<SuccessDataType>();
