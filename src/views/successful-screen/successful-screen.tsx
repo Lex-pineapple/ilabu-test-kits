@@ -25,7 +25,8 @@ const stepsData = [
 ];
 
 export const SuccessfulScreen = () => {
-  const { labAddressData, orderId, tubes } = useLoaderData<SuccessDataType>();
+  const { instruction, labAddressData, orderId, tubes } =
+    useLoaderData<SuccessDataType>();
   const { logout } = useAuth();
 
   return (
@@ -54,13 +55,21 @@ export const SuccessfulScreen = () => {
           Что делать дальше?
         </Heading>
         <Flex direction="column" gap={7} p={3.5}>
-          {stepsData.map((item, idx, arr) => (
-            <StepItem
-              {...item}
-              border={arr.length - 1 !== idx}
-              side={idx % 2 ? "right" : "left"}
-            />
-          ))}
+          <StepItem
+            border
+            description={instruction}
+            side={"right"}
+            step={1}
+            title={
+              "Храните образец в соответствии с правилами хранения, указанными в инструкции."
+            }
+          />
+          <StepItem
+            border={false}
+            side={"left"}
+            step={2}
+            title={"Доставьте образец в лабораторию."}
+          />
         </Flex>
       </Container>
       <ShdContainer

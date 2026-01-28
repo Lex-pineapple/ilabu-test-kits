@@ -11,10 +11,17 @@ import store from "#store/store";
 export async function loader() {
   const p = store.dispatch(ordersApi.endpoints.getOrderData.initiate());
   const p2 = store.dispatch(ordersApi.endpoints.getOrderNumber.initiate());
+  const p3 = store.dispatch(
+    ordersApi.endpoints.getOrderInstructions.initiate(),
+  );
 
   try {
     const response = await p.unwrap();
     const response2 = await p2.unwrap();
+    const response3 = await p3.unwrap();
+    const instructionArray = response3.instructions[0].steps;
+    const instruction =
+      instructionArray[instructionArray.length - 1]?.description;
 
     const labId = response?.analyses?.[0].lab_id;
     const labAddressId = response.personal_data?.lab_address_id;
@@ -29,6 +36,7 @@ export async function loader() {
       );
 
       return {
+        instruction,
         labAddressData,
         orderId: response2.order_number,
         tubes: response.tubes,
@@ -36,6 +44,7 @@ export async function loader() {
     }
 
     return {
+      instruction,
       labAddressData: null,
       orderId: response2.order_number,
       tubes: response.tubes,
