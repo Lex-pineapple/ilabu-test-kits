@@ -4,14 +4,14 @@ import type { GeneralResponseType } from "#store/types";
 import type { RequiredTubesType, TubesCodesType } from "#store/types/tubes";
 
 export const tubesApi = authorizedApi
-  .enhanceEndpoints({ addTagTypes: ["OrderProgress"] })
+  .enhanceEndpoints({ addTagTypes: ["OrderProgress", "OrderStatus"] })
   .injectEndpoints({
     endpoints: (build) => ({
       getRequiredTubes: build.query<RequiredTubesType, void>({
         query: () => API_ENDPOINTS.TUBES_REQ,
       }),
       linkTubes: build.mutation<GeneralResponseType, TubesCodesType>({
-        invalidatesTags: ["OrderProgress"],
+        invalidatesTags: ["OrderProgress", "OrderStatus"],
         query: (body) => ({
           body,
           method: "POST",

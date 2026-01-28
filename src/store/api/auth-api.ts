@@ -55,25 +55,28 @@ export const authApi = unautorizedApi
     }),
   });
 
-export const authAuthorizedApi = authorizedApi.injectEndpoints({
-  endpoints: (build) => ({
-    verifyToken: build.query<VerifyTokenType, void>({
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        try {
-          const { data } = await queryFulfilled;
-          dispatch(setOrderStatus(data.order_status));
-        } catch (error) {
-          dispatch(setOrderStatus(null));
-          console.error(error);
-        }
-      },
-      query: () => ({
-        method: "POST",
-        url: API_ENDPOINTS.VERIFY_TOKEN,
+export const authAuthorizedApi = authorizedApi
+  .enhanceEndpoints({ addTagTypes: ["OrderStatus"] })
+  .injectEndpoints({
+    endpoints: (build) => ({
+      verifyToken: build.query<VerifyTokenType, void>({
+        async onQueryStarted(_, { dispatch, queryFulfilled }) {
+          try {
+            const { data } = await queryFulfilled;
+            dispatch(setOrderStatus(data.order_status));
+          } catch (error) {
+            dispatch(setOrderStatus(null));
+            console.error(error);
+          }
+        },
+        providesTags: ["OrderStatus"],
+        query: () => ({
+          method: "POST",
+          url: API_ENDPOINTS.VERIFY_TOKEN,
+        }),
       }),
     }),
-  }),
-});
+  });
 
 export const { useLazyVerifyTokenQuery, useVerifyTokenQuery } =
   authAuthorizedApi;

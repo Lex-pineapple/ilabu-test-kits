@@ -18,7 +18,7 @@ import type {
 } from "#store/types/orders";
 
 export const ordersApi = authorizedApi
-  .enhanceEndpoints({ addTagTypes: ["OrderProgress"] })
+  .enhanceEndpoints({ addTagTypes: ["OrderProgress", "OrderStatus"] })
   .injectEndpoints({
     endpoints: (build) => ({
       getOrderData: build.query<OrderDetailsType, void>({
@@ -77,6 +77,7 @@ export const ordersApi = authorizedApi
         LinkedAnalysesResponseType,
         AnalysesToLinkType
       >({
+        invalidatesTags: ["OrderProgress", "OrderStatus"],
         query: (body) => ({
           body,
           method: "POST",
@@ -87,6 +88,7 @@ export const ordersApi = authorizedApi
         GeneralResponseType,
         OrderDetailsRequestType
       >({
+        invalidatesTags: ["OrderProgress", "OrderStatus"],
         query: (body) => ({
           body,
           method: "POST",
