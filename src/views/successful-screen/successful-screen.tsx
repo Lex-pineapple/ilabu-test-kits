@@ -1,7 +1,8 @@
 import { useLoaderData } from "react-router";
 
-import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
+import { useAuth } from "#/hooks/use-auth";
 import { HeaderWBg } from "#shared/header-w-bg";
 import { ShdContainer } from "#shared/shd-container";
 import { StepItem } from "#shared/step-item";
@@ -25,6 +26,7 @@ const stepsData = [
 
 export const SuccessfulScreen = () => {
   const { labAddressData, orderId, tubes } = useLoaderData<SuccessDataType>();
+  const { logout } = useAuth();
 
   return (
     <Container p={0} pb={14}>
@@ -63,6 +65,7 @@ export const SuccessfulScreen = () => {
       </Container>
       <ShdContainer
         bg="url('/location-img.svg') 110% -120% / 40% no-repeat, #fff"
+        mb={8}
         p={4}
       >
         {labAddressData ? (
@@ -93,6 +96,9 @@ export const SuccessfulScreen = () => {
           </>
         )}
       </ShdContainer>
+      <Button onClick={() => logout()} width="100%">
+        Вернуться на главную
+      </Button>
     </Container>
   );
 };
