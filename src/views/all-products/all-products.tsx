@@ -2,8 +2,18 @@ import { useLoaderData } from "react-router";
 
 import { Container, Flex, Heading } from "@chakra-ui/react";
 
+import type { ColorType } from "#shared/circle-graphic/circle-graphic";
 import { ProductCard } from "#shared/product-card";
 import type { KitMinimalType } from "#store/types/kits";
+
+const colorsArray: ColorType[] = [
+  "blue",
+  "cyan",
+  "dk-gray",
+  "gray",
+  "green",
+  "red",
+];
 
 export const AllProducts = () => {
   const loaderData = useLoaderData<KitMinimalType[]>();
@@ -14,9 +24,10 @@ export const AllProducts = () => {
         Все продукты
       </Heading>
       <Flex flexDirection="column" gap={2.5}>
-        {loaderData.map((item) => (
+        {loaderData.map((item, idx) => (
           <ProductCard
             {...item}
+            color={colorsArray[idx]}
             description={item.description_min}
             key={item.id}
           />
