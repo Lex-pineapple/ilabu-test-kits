@@ -21,7 +21,12 @@ import { modal } from "#shared/modal";
 import { TitleCard } from "#shared/title-card";
 
 const TUBE_COLORS = {
+  blue: "синий",
+  green: "зеленый",
+  orange: "оранжевый",
   red: "красный",
+  white: "белый",
+  yellow: "желтый",
 };
 
 export const Tubes = () => {
@@ -38,7 +43,7 @@ export const Tubes = () => {
     const defaultTubeValues = tubeData.reduce(
       (acc, tube) => {
         for (let i = 0; i < tube.quantity; i++) {
-          acc[`tube_input_${i}`] = tube.codes?.[i] || "";
+          acc[`tube_input_${i}_${tube.tube_id}`] = tube.codes?.[i] || "";
         }
         return acc;
       },
@@ -96,7 +101,7 @@ export const Tubes = () => {
                     .map((_, idx) => (
                       <Controller
                         control={control}
-                        name={`tube_input_${idx}`}
+                        name={`tube_input_${idx}_${item.tube_id}`}
                         render={({ field }) => (
                           <Group attached key={idx} pb={1.5} w="100%">
                             <Input

@@ -1,30 +1,18 @@
 import { useLoaderData } from "react-router";
 
-import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Heading, Text } from "@chakra-ui/react";
 
+import { useAuth } from "#/hooks/use-auth";
 import { HeaderWBg } from "#shared/header-w-bg";
 import { ShdContainer } from "#shared/shd-container";
 import { StepItem } from "#shared/step-item";
 import { TestTubeVisual } from "#shared/test-tube-visual";
 import type { SuccessDataType } from "#store/types/orders";
 
-const stepsData = [
-  {
-    description:
-      "Снимите и утилизируйте перчатки. На стикере упаковки для образца необходимо указать ФИО, дату рождения, домашний адрес, контактный телефон, дату и время сбора материала. Поместите контейнер с образцом в упаковку для образца. Промаркированы должны быть и пробирка, и упаковка для образца.",
-    step: 1,
-    title: "Упакуйте ваш образец",
-  },
-  {
-    description:
-      "При невозможности немедленной доставки в МО, материал может быть сохранен при +2…+8°С в течение 12 часов.",
-    step: 2,
-    title: "Доставьте образец в лабораторию",
-  },
-];
-
 export const SuccessfulScreen = () => {
-  const { labAddressData, orderId, tubes } = useLoaderData<SuccessDataType>();
+  const { instruction, labAddressData, orderId, tubes } =
+    useLoaderData<SuccessDataType>();
+  const { logout } = useAuth();
 
   return (
     <Container p={0} pb={14}>
@@ -52,17 +40,26 @@ export const SuccessfulScreen = () => {
           Что делать дальше?
         </Heading>
         <Flex direction="column" gap={7} p={3.5}>
-          {stepsData.map((item, idx, arr) => (
-            <StepItem
-              {...item}
-              border={arr.length - 1 !== idx}
-              side={idx % 2 ? "right" : "left"}
-            />
-          ))}
+          <StepItem
+            border
+            description={instruction}
+            side={"right"}
+            step={1}
+            title={
+              "Храните образец в соответствии с правилами хранения, указанными в инструкции."
+            }
+          />
+          <StepItem
+            border={false}
+            side={"left"}
+            step={2}
+            title={"Доставьте образец в лабораторию."}
+          />
         </Flex>
       </Container>
       <ShdContainer
         bg="url('/location-img.svg') 110% -120% / 40% no-repeat, #fff"
+        mb={8}
         p={4}
       >
         {labAddressData ? (
@@ -93,6 +90,9 @@ export const SuccessfulScreen = () => {
           </>
         )}
       </ShdContainer>
+      <Button onClick={() => logout()} width="100%">
+        Вернуться на главную
+      </Button>
     </Container>
   );
 };

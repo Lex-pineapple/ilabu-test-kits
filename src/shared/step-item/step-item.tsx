@@ -4,11 +4,11 @@ import { AlertBox } from "#/views/instruction/components/alert-box";
 import { QuoteBox } from "#/views/instruction/components/quote-box";
 
 type StepItemProps = {
-  description: string;
   step: number;
   title: string;
   alert?: string;
   border?: boolean;
+  description?: string;
   footnote?: string;
   side?: "left" | "right";
 };
@@ -22,7 +22,7 @@ export const StepItem = ({
   step,
   title,
 }: StepItemProps) => (
-  <div>
+  <Container minH={150} p={0}>
     {step === 1 && footnote && <QuoteBox>{footnote}</QuoteBox>}
     <Container
       borderBottom={border ? "1px solid #00000033" : undefined}
@@ -63,17 +63,19 @@ export const StepItem = ({
         >
           {title}
         </Heading>
-        <Text
-          fontWeight="medium"
-          pr={side === "right" ? 50 : 0}
-          textIndent={side === "left" ? 10 : 0}
-          textStyle="sm"
-        >
-          {description}
-        </Text>
+        {description && (
+          <Text
+            fontWeight="medium"
+            pr={side === "right" ? 50 : 0}
+            textIndent={side === "left" ? 10 : 0}
+            textStyle="sm"
+          >
+            {description}
+          </Text>
+        )}
       </Container>
     </Container>
     {step !== 1 && footnote && <QuoteBox mb={10}>{footnote}</QuoteBox>}
     {alert && <AlertBox mb={10}>{alert}</AlertBox>}
-  </div>
+  </Container>
 );
