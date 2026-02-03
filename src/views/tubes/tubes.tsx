@@ -15,19 +15,11 @@ import {
 import { useTubes } from "#/views/tubes/use-tubes";
 import { ArrowRight } from "#assets/icons/arrow-right";
 import { QRIcon } from "#assets/icons/qr-icon";
+import { TUBE_COLORS } from "#constants/general";
 import { PATHS } from "#constants/paths";
 import { InputError } from "#shared/input-error";
 import { modal } from "#shared/modal";
 import { TitleCard } from "#shared/title-card";
-
-const TUBE_COLORS = {
-  blue: "синий",
-  green: "зеленый",
-  orange: "оранжевый",
-  red: "красный",
-  white: "белый",
-  yellow: "желтый",
-};
 
 export const Tubes = () => {
   const { linkLoading, linkTubes, tubeData, tubeError } = useTubes();
@@ -87,12 +79,14 @@ export const Tubes = () => {
                   <Text pb={2}>
                     {item.tube_name}. Цвет крышки:{" "}
                     {item.cap_color in TUBE_COLORS && (
-                      <Text as="span" color={item.cap_color} fontWeight={600}>
-                        {
-                          TUBE_COLORS[
-                            item.cap_color as keyof typeof TUBE_COLORS
-                          ]
-                        }
+                      <Text
+                        as="span"
+                        color={TUBE_COLORS[item.cap_color].fill}
+                        fontWeight={600}
+                        letterSpacing="2px"
+                        textShadow="0px 0px 11px #000;"
+                      >
+                        {TUBE_COLORS[item.cap_color].name}
                       </Text>
                     )}
                   </Text>

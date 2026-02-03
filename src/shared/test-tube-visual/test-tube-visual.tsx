@@ -1,5 +1,6 @@
 import { Container, Flex, Heading, Table, Text } from "@chakra-ui/react";
 
+import { TUBE_COLORS } from "#constants/general";
 import { ShdContainer } from "#shared/shd-container";
 
 type TestTubeVisualItemType = {
@@ -44,20 +45,27 @@ export const TestTubeVisual = ({ items }: TestTubeVisualProps) => (
           <Table.Row bg="transparent" key={item.cap_color}>
             <Table.Cell border="none" pl={0} w={124}>
               <Container
-                bg={item.cap_color}
+                bg={TUBE_COLORS[item.cap_color].fill}
                 borderRadius={10}
+                boxShadow="0 0 8px 3px #a6a3a3"
                 h="24px"
                 m={0}
                 p={0}
                 w="124px"
-              ></Container>
+              >
+                <Text
+                  color={TUBE_COLORS[item.cap_color].contrast}
+                  fontStyle="italic"
+                  fontWeight={600}
+                  textAlign="center"
+                >
+                  {TUBE_COLORS[item.cap_color].name}
+                </Text>
+              </Container>
             </Table.Cell>
             <Table.Cell border="none" pl={0}>
               <ShdContainer>
                 <Flex justifyContent="center" p="3px 0">
-                  {/* <Text display="inline-block" fontWeight="medium" mr="2px">
-                    {String.fromCharCode(65 + idx)}
-                  </Text> */}
                   <Text display="inline-block" fontWeight="medium">
                     {item.code}
                   </Text>
