@@ -69,11 +69,6 @@ export const useAuth = () => {
         getTokenExpireTime(data.access_token) ?? oneMinute * 9;
 
       setTimeout(loadUserFromStorage, tokenExpireTime - oneMinute);
-      if (pathname === "/") {
-        if (kitId) {
-          await navigateToPathOnStatus(kitId);
-        }
-      }
     }
     if (error) logout();
   };
