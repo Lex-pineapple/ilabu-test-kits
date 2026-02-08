@@ -53,7 +53,7 @@ export const SuccessfulScreen = () => {
             border={false}
             side={"left"}
             step={2}
-            title={"Доставьте образец в лабораторию."}
+            title={`Доставьте образец в лабораторию. ${labAddressData ? "Адрес и график работы пункта приемы указаны ниже." : "Наш курьер свяжется с вами."}`}
           />
         </Flex>
       </Container>
@@ -80,7 +80,7 @@ export const SuccessfulScreen = () => {
           </>
         ) : (
           <>
-            <Heading color="lab_green.900" maxW="70%" mb={4} size="sm">
+            <Heading color="lab_green.900" mb={4} size="sm">
               Информация о курьерской доставке Mylab
             </Heading>
             <Text>

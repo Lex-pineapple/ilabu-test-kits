@@ -6,7 +6,7 @@ import { PATHS } from "#constants/paths";
 import { HeaderWBg } from "#shared/header-w-bg";
 import { StepItem } from "#shared/step-item";
 import { TestTubeVisual } from "#shared/test-tube-visual";
-import type { InstructionType } from "#store/types/orders";
+import type { InstructionLoaderType } from "#store/types/orders";
 
 const TestTubeInfoData = [
   {
@@ -24,19 +24,25 @@ const TestTubeInfoData = [
 ];
 
 export const Instruction = () => {
-  const { context, steps, title } = useLoaderData<InstructionType>();
+  const { instruction, tubes } = useLoaderData<InstructionLoaderType>();
 
   return (
     <Flex flexDirection="column" pb={12}>
       <Container p={0}>
-        <HeaderWBg m=" 0 -14px" note={title}>
+        <HeaderWBg m=" 0 -14px" note={instruction.title}>
           Инструкция по применению
         </HeaderWBg>
         <Text fontWeight="medium" p="10px 0 27px" textStyle="sm">
           Внимательно прочитайте инструкцию перед началом осуществления
           процедуры самостоятельного взятия биоматериала.
         </Text>
-        <TestTubeVisual items={TestTubeInfoData} />
+        <TestTubeVisual
+          items={
+            tubes
+              ? tubes.map((item) => ({ ...item, code: "XXXXXXX" }))
+              : TestTubeInfoData
+          }
+        />
       </Container>
       <Heading
         fontWeight="bold"
@@ -45,12 +51,12 @@ export const Instruction = () => {
         size="md"
         textTransform="uppercase"
       >
-        {context}
+        {instruction.context}
       </Heading>
       <Container height="100%" p={0}>
         <Container p={0}>
           <Flex direction="column" gap={10}>
-            {steps.map((item, idx, arr) => (
+            {instruction.steps.map((item, idx, arr) => (
               <StepItem
                 {...item}
                 border={idx !== arr.length - 1}

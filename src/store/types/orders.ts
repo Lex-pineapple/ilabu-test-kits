@@ -1,5 +1,6 @@
 import type { GeneralResponseType } from "#store/types";
 import type { LabAddressesTransformedType } from "#store/types/labs";
+import type { TubeType } from "#store/types/tubes";
 
 export type AnalysesToLinkType = {
   analyses_ids: string[];
@@ -16,6 +17,11 @@ export type AnalysisItemFullType = {
   preparation: string[];
   price: string;
   title: string;
+};
+
+export type InstructionLoaderType = {
+  instruction: InstructionType;
+  tubes: null | TubeType[];
 };
 
 export type InstructionResponseType = {

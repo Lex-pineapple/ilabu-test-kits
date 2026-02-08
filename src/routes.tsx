@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import { AuthGuard } from "#/layouts/auth-guard";
 import { Layout } from "#/layouts/layout";
+import { ProtectedRoute } from "#/layouts/protected-route";
 import {
   appProductsLoader,
   HydrateFallback,
@@ -89,10 +90,14 @@ export const router = createBrowserRouter([
             loader: orderStatusLoader,
           },
         ],
-        element: <AuthGuard />,
+        element: <ProtectedRoute />,
       },
     ],
-    element: <Layout />,
+    element: (
+      <AuthGuard>
+        <Layout />
+      </AuthGuard>
+    ),
     HydrateFallback,
     path: PATHS.root,
   },

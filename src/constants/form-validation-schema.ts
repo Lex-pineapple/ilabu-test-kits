@@ -24,11 +24,29 @@ export const validationSchema = z
       }),
     ),
     email: z.email("Введите корректный e-mail"),
-    firstName: z.string().min(1, { error: "Имя не должно быть пустым" }),
+    firstName: z
+      .string()
+      .min(2, { error: "Имя не должно быть пустым" })
+      .max(20, { error: "Имя может содержать не больше 20 символов" })
+      .regex(/^[\s'А-яё-]+$/i, {
+        error: "Можно ввести только киррилицу, апостроф или тире",
+      }),
     gender: z.string().min(1, { error: "Выберите пол" }),
     labAdressId: z.optional(z.any()),
-    lastName: z.string().min(1, { error: "Фамилия не должна быть пустой" }),
-    middleName: z.string().min(1, { error: "Отчество не должно быть пустым" }),
+    lastName: z
+      .string()
+      .min(2, { error: "Фамилия не должна быть пустой" })
+      .max(20, { error: "Фамилия может содержать не больше 20 символов" })
+      .regex(/^[\s'А-яё-]+$/i, {
+        error: "Можно ввести только киррилицу, апостроф или тире",
+      }),
+    middleName: z
+      .string()
+      .min(2, { error: "Отчество не должно быть пустым" })
+      .max(20, { error: "Отчество может содержать не больше 20 символов" })
+      .regex(/^[\s'А-яё-]+$/i, {
+        error: "Можно ввести только киррилицу, апостроф или тире",
+      }),
   })
   .superRefine((val, ctx) => {
     if (

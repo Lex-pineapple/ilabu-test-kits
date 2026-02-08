@@ -27,8 +27,6 @@ export const ConfirmOrder = () => {
   const deliveryInfo = deliveryData.find(
     (item) => item.value === formData.delivery,
   )?.label;
-  const delivery =
-    deliveryInfo === "Courier" ? "Delivery by courier" : deliveryInfo;
 
   const onPayOrderClick = () => {
     onPayClick();
@@ -69,7 +67,12 @@ export const ConfirmOrder = () => {
             whiteSpace="nowrap"
           />
           <InfoCard
-            items={[{ data: "33.00 BYN", title: delivery }]}
+            items={[
+              {
+                data: formData.delivery === "courier" ? "33.00 BYN" : "0 BYN",
+                title: deliveryInfo,
+              },
+            ]}
             onOrderChange={() => dispatch(setFormState("orderDetails"))}
             title="Способ доставки"
             whiteSpace="nowrap"
