@@ -1,17 +1,12 @@
-import { useEffect } from "react";
-import { Navigate, Outlet } from "react-router";
+import { type PropsWithChildren, useEffect } from "react";
+import { useLocation } from "react-router";
 
 import { Spinner } from "#/components/spinner";
 import { useAuth } from "#/hooks/use-auth";
-import { PATHS } from "#constants/paths";
-import { useAppDispatch } from "#store/hooks";
-import {
-  setNotificationData,
-  setNotificationVisibility,
-} from "#store/slices/notification-slice";
+import { isUnauthorisedPath } from "#utils/is-unauthorised-path";
 
-export const AuthGuard = () => {
-  const dispatch = useAppDispatch();
+export const AuthGuard = ({ children }: PropsWithChildren) => {
+  const { pathname } = useLocation();
   const {
     accessToken,
     checkIsTokenExpired,
@@ -21,32 +16,20 @@ export const AuthGuard = () => {
   } = useAuth();
 
   useEffect(() => {
-    const isTokenExpired = checkIsTokenExpired(accessToken);
-    if (isTokenExpired) {
-      logout();
-    } else loadUserFromStorage();
-  }, []);
-
-  useEffect(() => {
-    if (!accessToken) {
-      dispatch(setNotificationVisibility(true));
-      dispatch(
-        setNotificationData({
-          description:
-            "Не авторизован. Пожалуйста, введите код набора чтобы продолжить.",
-          status: "error",
-        }),
-      );
+    const unauthPath = isUnauthorisedPath(pathname);
+    if (!unauthPath) {
+      const isTokenExpired = checkIsTokenExpired(accessToken);
+      if (isTokenExpired) {
+        logout();
+      } else {
+        loadUserFromStorage();
+      }
     }
-  }, [accessToken]);
+  }, []);
 
   if (isAuthorizing) {
     return <Spinner text="Авторизация" />;
   }
 
-  if (!accessToken) {
-    return <Navigate replace to={PATHS.root} />;
-  }
-
-  return <Outlet />;
+  return children;
 };

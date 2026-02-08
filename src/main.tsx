@@ -12,11 +12,11 @@ import store from "#store/store";
 import { system } from "#theme/index";
 
 createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Provider store={store}>
-      <ChakraProvider value={system}>
-        <App />
-      </ChakraProvider>
-    </Provider>
-  </StrictMode>,
+  // <StrictMode>
+  <Provider store={store}>
+    <ChakraProvider value={system}>
+      <App />
+    </ChakraProvider>
+  </Provider>,
+  // </StrictMode>,
 );
