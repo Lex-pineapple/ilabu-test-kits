@@ -92,12 +92,18 @@ export const AddressForm = ({ onClose, onFormSubmit }: AddressFormProps) => {
               </div>
             </Flex>
             <Flex gap={2}>
-              <Input id="floor" placeholder="Этаж" {...register("floor")} />
-              <Input
-                id="entryway"
-                placeholder="Подъезд"
-                {...register("entryway")}
-              />
+              <div>
+                <Input id="floor" placeholder="Этаж" {...register("floor")} />
+                <InputError message={errors.floor?.message} />
+              </div>
+              <div>
+                <Input
+                  id="entryway"
+                  placeholder="Подъезд"
+                  {...register("entryway")}
+                />
+                <InputError message={errors.entryway?.message} />
+              </div>
             </Flex>
             <div>
               <InputGroup startElement="+">
