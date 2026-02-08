@@ -59,7 +59,6 @@ export const useAuth = () => {
   };
 
   const getRefreshToken = async (refreshToken: string) => {
-    const kitId = localStorage.getItem("kit_id");
     const { data, error } = await updateRefreshToken({
       refresh_token: refreshToken,
     });
