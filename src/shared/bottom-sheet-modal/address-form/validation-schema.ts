@@ -18,8 +18,8 @@ export const validationSchema = z.object({
     .string()
     .min(3, { error: "Введите город доставки" })
     .max(20, { error: "Город доставки может содержать не больше 20 символов" })
-    .regex(/^[\sА-яё-]+$/i, {
-      error: "Можно ввести только киррилицу или тире",
+    .regex(/^[\s,.А-яё-]+$/i, {
+      error: "Можно ввести только киррилицу, тире запятую или точку",
     }),
   commentary: z.optional(z.string()),
   entryway: z.optional(
