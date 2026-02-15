@@ -29,8 +29,8 @@ export type InstructionResponseType = {
 };
 
 export type InstructionStepType = {
-  description: string;
-  step: 0;
+  description: string[];
+  step: string;
   title: string;
 };
 
@@ -121,7 +121,7 @@ export type PickupAddressType = {
 };
 
 export type SuccessDataType = {
-  instruction: string;
+  instruction: InstructionStepType[];
   labAddressData: LabAddressesTransformedType;
   orderId: string;
   tubes: OrderDetailsTubeType[];

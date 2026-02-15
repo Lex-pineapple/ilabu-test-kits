@@ -61,6 +61,7 @@ export const Instruction = () => {
                 {...item}
                 border={idx !== arr.length - 1}
                 side={idx % 2 ? "right" : "left"}
+                step={parseInt(item.step)}
               />
             ))}
           </Flex>

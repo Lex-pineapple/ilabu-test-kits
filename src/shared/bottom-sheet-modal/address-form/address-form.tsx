@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useHookFormMask } from "use-mask-input";
@@ -15,8 +16,12 @@ import {
 
 import { validationSchema } from "#shared/bottom-sheet-modal/address-form/validation-schema";
 import { InputError } from "#shared/input-error";
-import { useAppSelector } from "#store/hooks";
-import { getFormData } from "#store/slices/form-slice";
+import { useAppDispatch, useAppSelector } from "#store/hooks";
+import {
+  getDeliveryAddress,
+  getFormData,
+  setDeliveryAddress,
+} from "#store/slices/form-slice";
 
 export type AddressFormInputs = {
   apartment: string;
@@ -35,12 +40,14 @@ type AddressFormProps = {
 };
 
 export const AddressForm = ({ onClose, onFormSubmit }: AddressFormProps) => {
-  const addressFromStore = useAppSelector(getFormData).deliveryAddress;
+  const addressFromStore = useAppSelector(getDeliveryAddress);
+  const dispatch = useAppDispatch();
   const {
     formState: { errors, isDirty, isValid },
     getValues,
     handleSubmit,
     register,
+    reset,
   } = useForm<AddressFormInputs>({
     defaultValues: addressFromStore,
     mode: "onChange",
@@ -48,8 +55,13 @@ export const AddressForm = ({ onClose, onFormSubmit }: AddressFormProps) => {
   });
   const registerWithMask = useHookFormMask(register);
 
+  useEffect(() => {
+    reset(addressFromStore);
+  }, [addressFromStore, reset]);
+
   const onSubmit = handleSubmit((data) => {
     if (isValid) {
+      dispatch(setDeliveryAddress(data));
       onFormSubmit(data);
       onClose();
     }

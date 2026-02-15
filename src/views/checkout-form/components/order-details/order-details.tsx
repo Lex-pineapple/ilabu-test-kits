@@ -118,6 +118,7 @@ export const OrderDetails = () => {
                       setSelected={(value) => {
                         field.onChange(value);
                       }}
+                      title="Пол"
                       trigger={
                         <Button
                           bg="white"
@@ -158,6 +159,7 @@ export const OrderDetails = () => {
                       setSelected={(value) => {
                         field.onChange(value);
                       }}
+                      title="Выбор способа доставки"
                       trigger={
                         <Button
                           bg="white"
@@ -195,6 +197,7 @@ export const OrderDetails = () => {
                         setSelected={(value) => {
                           field.onChange(value);
                         }}
+                        title="Адрес лаборатории"
                         trigger={
                           <Button
                             bg="white"

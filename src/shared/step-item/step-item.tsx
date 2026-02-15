@@ -6,24 +6,39 @@ import { QuoteBox } from "#/views/instruction/components/quote-box";
 type StepItemProps = {
   step: number;
   title: string;
-  alert?: string;
   border?: boolean;
-  description?: string;
-  footnote?: string;
+  description?: string[];
   side?: "left" | "right";
 };
 
+const getStepP = (text: string) => {
+  if (text.includes("Внимание!"))
+    return (
+      <AlertBox mb={10} mt={10}>
+        {text}
+      </AlertBox>
+    );
+  if (text.includes("Примечание"))
+    return (
+      <QuoteBox mb={10} mt={10}>
+        {text}
+      </QuoteBox>
+    );
+  return (
+    <Text fontWeight="medium" pb={3} textIndent={10} textStyle="sm">
+      {text}
+    </Text>
+  );
+};
+
 export const StepItem = ({
-  alert,
   border,
   description,
-  footnote,
   side,
   step,
   title,
 }: StepItemProps) => (
   <Container minH={150} p={0}>
-    {step === 1 && footnote && <QuoteBox>{footnote}</QuoteBox>}
     <Container
       borderBottom={border ? "1px solid #00000033" : undefined}
       flexDirection={side === "left" ? "row-reverse" : "row"}
@@ -64,18 +79,16 @@ export const StepItem = ({
           {title}
         </Heading>
         {description && (
-          <Text
+          <Container
             fontWeight="medium"
+            p={0}
             pr={side === "right" ? 50 : 0}
-            textIndent={side === "left" ? 10 : 0}
             textStyle="sm"
           >
-            {description}
-          </Text>
+            {description.map((item) => getStepP(item))}
+          </Container>
         )}
       </Container>
     </Container>
-    {step !== 1 && footnote && <QuoteBox mb={10}>{footnote}</QuoteBox>}
-    {alert && <AlertBox mb={10}>{alert}</AlertBox>}
   </Container>
 );

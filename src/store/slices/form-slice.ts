@@ -50,6 +50,12 @@ export const formSlice = createSlice({
   initialState,
   name: "form",
   reducers: {
+    setDeliveryAddress: (
+      state,
+      { payload }: PayloadAction<AddressFormInputs>,
+    ) => {
+      state.formData.deliveryAddress = payload;
+    },
     setFormData: (state, { payload }: PayloadAction<userInfoType>) => {
       state.formData = payload;
     },
@@ -61,12 +67,15 @@ export const formSlice = createSlice({
     },
   },
   selectors: {
+    getDeliveryAddress: (state) => state.formData.deliveryAddress,
     getFormData: (state) => state.formData,
     getFormState: (state) => state.formState,
     getOtpError: (state) => state.hasOtpError,
   },
 });
 
-export const { setFormData, setFormState, setOtpError } = formSlice.actions;
-export const { getFormData, getFormState, getOtpError } = formSlice.selectors;
+export const { setDeliveryAddress, setFormData, setFormState, setOtpError } =
+  formSlice.actions;
+export const { getDeliveryAddress, getFormData, getFormState, getOtpError } =
+  formSlice.selectors;
 export default formSlice.reducer;

@@ -9,6 +9,7 @@ export type ListType = { value: string; icon?: JSX.Element; label?: string };
 type SelectButtonTypes = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   items: any[] | ListType[];
+  title: string;
   setSelected: (value: null | string) => void;
   selected?: null | string;
   trigger?: ReactNode;
@@ -21,13 +22,10 @@ export const SelectButton = ({
   items,
   selected,
   setSelected,
+  title,
   trigger,
 }: SelectButtonTypes) => (
-  <BottomSheet
-    primaryButton={"Применить"}
-    title={"Сортировка"}
-    trigger={trigger}
-  >
+  <BottomSheet primaryButton={"Применить"} title={title} trigger={trigger}>
     <RadioGroup.Root
       onValueChange={(e) => setSelected(e.value)}
       pb={7}

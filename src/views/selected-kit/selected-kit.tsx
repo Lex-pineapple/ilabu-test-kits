@@ -103,6 +103,7 @@ export const SelectedKit = () => {
             items={sortKeys}
             selected={sortType}
             setSelected={setSortType}
+            title="Сортировка"
             trigger={
               <Button bg="lab_green.900" border="none" p={0} variant="outline">
                 {sortType ? (
@@ -118,6 +119,7 @@ export const SelectedKit = () => {
           items={execLabList}
           selected={execLab}
           setSelected={setExecLab}
+          title="Исполнитель"
           trigger={
             <Button
               _disabled={{

@@ -19,9 +19,7 @@ export async function loader() {
     const response = await p.unwrap();
     const response2 = await p2.unwrap();
     const response3 = await p3.unwrap();
-    const instructionArray = response3.instructions[0].steps;
-    const instruction =
-      instructionArray[instructionArray.length - 1]?.description;
+    const instruction = response3.instructions[0].steps.slice(-2);
 
     const labId = response?.analyses?.[0].lab_id;
     const labAddressId = response.personal_data?.lab_address_id;

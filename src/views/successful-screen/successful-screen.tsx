@@ -40,21 +40,14 @@ export const SuccessfulScreen = () => {
           Что делать дальше?
         </Heading>
         <Flex direction="column" gap={7} p={3.5}>
-          <StepItem
-            border
-            description={instruction}
-            side={"right"}
-            step={1}
-            title={
-              "Храните образец в соответствии с правилами хранения, указанными в инструкции."
-            }
-          />
-          <StepItem
-            border={false}
-            side={"left"}
-            step={2}
-            title={`Доставьте образец в лабораторию. ${labAddressData ? "Адрес и график работы пункта приемы указаны ниже." : "Наш курьер свяжется с вами."}`}
-          />
+          {instruction.map((item, idx, arr) => (
+            <StepItem
+              {...item}
+              border={idx !== arr.length - 1}
+              side={idx % 2 ? "right" : "left"}
+              step={idx + 1}
+            />
+          ))}
         </Flex>
       </Container>
       <ShdContainer
