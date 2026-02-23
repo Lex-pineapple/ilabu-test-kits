@@ -1,14 +1,6 @@
 import { Link } from "react-router";
 
-import {
-  Button,
-  Container,
-  Flex,
-  Image,
-  Separator,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Button, Container, Flex, Image, Stack, Text } from "@chakra-ui/react";
 
 import { EmailIcon } from "#assets/icons/email-icon";
 import { PhoneIcon } from "#assets/icons/phone-icon";
