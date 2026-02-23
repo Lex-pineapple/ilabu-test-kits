@@ -4,6 +4,7 @@ import { bottomSheetModal } from "#shared/bottom-sheet-modal";
 export const LINKS = [
   { href: PATHS.availableKit, isAuth: false, title: "Все наборы" },
   { href: PATHS.faq, isAuth: false, title: "Часто задаваемые вопросы" },
+  { href: PATHS.paymentInfo, isAuth: false, title: "Доставка и оплата" },
   // { href: "", title: "Контакты" },
   {
     isAuth: true,

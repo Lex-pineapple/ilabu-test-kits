@@ -15,6 +15,7 @@ type FAQCollapsibleProps = {
 
 export const FAQCollapsible = ({
   content,
+  element,
   id,
   open,
   title,
@@ -54,21 +55,24 @@ export const FAQCollapsible = ({
       </Collapsible.Trigger>
       <Collapsible.Content>
         <Container p={2.5}>
-          <ShdContainer p={3}>
-            {Array.isArray(content) ? (
-              <List.Root as="ol" gap={5} pl={4}>
-                {content.map((item) => (
-                  <List.Item fontWeight="medium" pl={1} textStyle="sm">
-                    {item}
-                  </List.Item>
-                ))}
-              </List.Root>
-            ) : (
-              <Text fontWeight="medium" textStyle="sm">
-                {content}
-              </Text>
-            )}
-          </ShdContainer>
+          {content && (
+            <ShdContainer p={3}>
+              {Array.isArray(content) ? (
+                <List.Root as="ol" gap={5} pl={4}>
+                  {content.map((item) => (
+                    <List.Item fontWeight="medium" pl={1} textStyle="sm">
+                      {item}
+                    </List.Item>
+                  ))}
+                </List.Root>
+              ) : (
+                <Text fontWeight="medium" textStyle="sm">
+                  {content}
+                </Text>
+              )}
+            </ShdContainer>
+          )}
+          {element && <ShdContainer p={3}>{element}</ShdContainer>}
         </Container>
       </Collapsible.Content>
     </Collapsible.Root>

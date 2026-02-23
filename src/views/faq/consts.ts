@@ -1,7 +1,10 @@
+import type { ReactNode } from "react";
+
 export type FAQDataType = {
-  content: string | string[];
   id: string;
   title: string;
+  content?: string | string[];
+  element?: ReactNode;
 };
 
 export const FAQData: FAQDataType[] = [
@@ -30,7 +33,8 @@ export const FAQData: FAQDataType[] = [
     title: "Как отсканировать QR-код на устройстве Android?",
   },
   {
-    content: "LALALLALLALALALLALALL ALALLALALLALALALLALLALALLALLAL ALALLALALAL",
+    content:
+      "В случае, если приложение выдает ошибку, штрихкод пробирки не прошел валидацию, следовательно, сканируемая пробирка не подходит к выбранным вами исследованиям. Проверьте, что вы выбрали пробирку с нужным цветом крышки и повторите сканирование.",
     id: "qr-container-error",
     title:
       "Что делать, если при сканировании штрихкода на контейнере/пробирке приложение выдает ошибку?",
@@ -49,19 +53,38 @@ export const FAQData: FAQDataType[] = [
     title: "Как подготовиться к сбору анализа мочи?",
   },
   {
-    content: "wdefrgtyu67i8i9op;lokiujhygtrfew",
+    content:
+      "За полчаса до сбора материала запрещено есть, пить, жевать жвачку, чистить зубы, курить целоваться. Непосредственно перед процедурой прополощите рот теплой водой.",
     id: "saliva-collection",
     title: "Как подготовиться к сбору анализа слюны?",
   },
   {
-    content: "sqwdefrghnjmk",
+    content:
+      "За полчаса до сбора материала запрещено есть, пить, жевать жвачку, чистить зубы, курить целоваться. Непосредственно перед процедурой прополощите рот теплой водой.",
     id: "swab-cheek",
     title:
       "Как подготовиться к сбору буккального эпителия (мазок со внутренней стороны щеки)?",
   },
-  {
-    content: "sqdwefrgh",
-    id: "delivery",
-    title: "Какие пункты самостоятельной доставки работают?",
-  },
 ];
+
+export const LabsData = {
+  adressList: [
+    {
+      address: "г. Минск, ул. Семашко 12А",
+      workingHours: "6:00 - 17:00",
+    },
+    {
+      address: "г. Минск, ул. Алибегова, 28",
+      workingHours: "6:00 - 17:00",
+    },
+    {
+      address: "г. Минск, ул. Притыцкого, 17",
+      workingHours: "6:00 - 17:00",
+    },
+    {
+      address: "г. Минск, ул. Шафарнянская, 11",
+      workingHours: "6:00 - 17:00",
+    },
+  ],
+  name: 'ООО "ПрофЛабДиагностика"',
+};
