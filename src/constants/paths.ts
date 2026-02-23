@@ -7,6 +7,7 @@ export const PATHS = {
   orderError: "/order_error",
   orderPaid: "/order_paid",
   orderSuccess: "/order_success",
+  paymentInfo: "/payment-info",
   product: "/kits/:uid",
   root: "/",
   selectedKit: "/selected/:uid",

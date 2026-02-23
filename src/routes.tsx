@@ -20,6 +20,7 @@ import { Instruction } from "#/views/instruction";
 import { NotFound } from "#/views/not-found";
 import { OrderError } from "#/views/order-error";
 import { OrderPaid } from "#/views/order-paid";
+import { PaymentInfo } from "#/views/payment-info";
 import { ProductView } from "#/views/product-view";
 import { SelectedKit } from "#/views/selected-kit";
 import { SuccessfulScreen } from "#/views/successful-screen";
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         element: <FAQ />,
         path: PATHS.faq,
+      },
+      {
+        element: <PaymentInfo />,
+        path: PATHS.paymentInfo,
       },
       {
         element: <AllProducts />,
