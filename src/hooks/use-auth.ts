@@ -2,6 +2,8 @@ import { useLocation, useNavigate } from "react-router";
 
 import { allowedPathsMap } from "#constants/allowed-paths-map";
 import { PATHS } from "#constants/paths";
+import { bottomSheetModal } from "#shared/bottom-sheet-modal";
+import { modal } from "#shared/modal";
 import {
   useGetTokenMutation,
   useLazyVerifyTokenQuery,
@@ -133,6 +135,8 @@ export const useAuth = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("kit_id");
     localStorage.removeItem("refresh_token");
+    modal.removeAll();
+    bottomSheetModal.removeAll();
   };
 
   return {

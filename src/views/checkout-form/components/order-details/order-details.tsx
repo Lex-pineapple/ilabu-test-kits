@@ -263,6 +263,7 @@ export const OrderDetails = () => {
             <Button
               loading={isLoading}
               loadingText="Отправляем..."
+              textTransform="uppercase"
               type="submit"
               w="100%"
             >

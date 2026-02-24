@@ -56,7 +56,7 @@ export const Instruction = () => {
       <Container height="100%" p={0}>
         <Container p={0}>
           <Flex direction="column" gap={10}>
-            {instruction.steps.map((item, idx, arr) => (
+            {instruction.steps.slice(0, -2).map((item, idx, arr) => (
               <StepItem
                 {...item}
                 border={idx !== arr.length - 1}

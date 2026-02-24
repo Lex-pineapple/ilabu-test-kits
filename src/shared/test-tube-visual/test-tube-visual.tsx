@@ -1,4 +1,4 @@
-import { Container, Flex, Heading, Table, Text } from "@chakra-ui/react";
+import { Flex, Heading, Table, Text } from "@chakra-ui/react";
 
 import { TUBE_COLORS } from "#constants/general";
 import { ShdContainer } from "#shared/shd-container";
@@ -44,11 +44,13 @@ export const TestTubeVisual = ({ items }: TestTubeVisualProps) => (
         {items.map((item) => (
           <Table.Row bg="transparent" key={item.cap_color}>
             <Table.Cell border="none" pl={0} w={124}>
-              <Container
+              <Flex
+                alignItems={"center"}
                 bg={TUBE_COLORS[item.cap_color].fill}
                 borderRadius={10}
                 boxShadow="0 0 8px 3px #a6a3a3"
                 h="24px"
+                justifyContent={"center"}
                 m={0}
                 p={0}
                 w="124px"
@@ -61,7 +63,7 @@ export const TestTubeVisual = ({ items }: TestTubeVisualProps) => (
                 >
                   {TUBE_COLORS[item.cap_color].name}
                 </Text>
-              </Container>
+              </Flex>
             </Table.Cell>
             <Table.Cell border="none" pl={0}>
               <ShdContainer>
